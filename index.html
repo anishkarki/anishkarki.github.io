@@ -1,51 +1,835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anish Karki | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anish Karki | Database Administrator & Data Analytics Professional</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <style>
+    :root {
+      --primary-color: #0a192f;
+      --secondary-color: #64ffda;
+      --text-light: #ccd6f6;
+      --text-dark: #8892b0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .nav-link {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .nav-link:hover {
+      color: var(--secondary-color) !important;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary-color);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .btn-primary {
+      background-color: transparent;
+      border: 1px solid var(--secondary-color);
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: rgba(100, 255, 218, 0.1);
+      border: 1px solid var(--secondary-color);
+      color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .section {
+      padding: 6rem 0;
+    }
+    .footer {
+      background-color: var(--primary-color);
+      color: var(--text-dark);
+    }
+    .social-icon {
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+      color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    .card {
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    .badge {
+      transition: all 0.3s ease;
+    }
+    .badge:hover {
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+    }
+    .typed-cursor {
+      color: var(--secondary-color);
+    }
+    .cert-badge {
+      transition: all 0.3s ease;
+      max-width: 180px;
+      margin: 0 auto;
+    }
+    .cert-badge:hover {
+      transform: scale(1.05);
+    }
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 2px;
+      left: 0;
+      top: 0;
+      background-color: var(--text-dark);
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 30px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      left: -36px;
+      top: 6px;
+    }
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+      40% {transform: translateY(-30px) translateX(-50%);}
+      60% {transform: translateY(-15px) translateX(-50%);}
+    }
+    .skill-progress {
+      height: 10px;
+      border-radius: 5px;
+      background-color: #e9ecef;
+      margin-bottom: 10px;
+    }
+    .skill-progress-bar {
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--secondary-color), #38b2ac);
+      transition: width 1.5s ease-in-out;
+    }
+    .nav-blur {
+      backdrop-filter: blur(5px);
+      background-color: rgba(10, 25, 47, 0.85);
+    }
+    .project-card {
+      height: 100%;
+      background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .project-card .card-body {
+      z-index: 2;
+      position: relative;
+    }
+  </style>
 </head>
-<body class="bg-light font-sans">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Anish Karki</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
+<body class="font-sans">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top nav-blur navbar-dark py-3">
+    <div class="container">
+      <a class="navbar-brand text-white font-bold" href="#">
+        <span class="text-teal-300">A</span>nish <span class="text-teal-300">K</span>arki
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#experience">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#certifications">Certifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8 col-md-10" data-aos="fade-up" data-aos-duration="1000">
+          <p class="mb-3 text-md font-mono text-teal-300">Hi, my name is</p>
+          <h1 class="display-3 fw-bold mb-3">Anish Karki</h1>
+          <h2 class="display-5 text-light-blue mb-4 text-gray-400" id="typed-output"></h2>
+          <p class="lead mb-5 text-gray-400 max-w-lg">
+            Experienced database administrator and data analytics graduate with strong expertise in SQL,
+            Python, and data visualization. Passionate about extracting insights from data, optimizing data processing,
+            and leveraging machine learning for data-driven decision-making.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#contact" class="btn btn-primary btn-lg px-4">Get In Touch</a>
+            <a href="#" class="btn btn-outline-light btn-lg px-4">Download Resume</a>
+          </div>
         </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="d-flex align-items-center vh-100 bg-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    <h1 class="display-4 fw-bold">Database Administrator & Data Analytics Professional</h1>
-                    <p class="lead text-muted">Experienced database administrator and enthusiastic data analytics graduate with strong SQL, Python, and data visualization skills.</p>
-                    <p class="mt-3"><strong>Australia</strong><br>anish.karki618@gmail.com<br>0451165843<br><a href="https://linkedin.com/in/anish-karki-545a6a187" class="text-primary">LinkedIn Profile</a></p>
-                </div>
-                <div class="col-md-6 text-center">
-                    <img src="https://via.placeholder.com/400" alt="Anish Karki" class="img-fluid rounded-circle shadow-lg">
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="scroll-down">
+      <a href="#about" class="text-white">
+        <i class="fas fa-chevron-down fa-2x"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <h2 class="mb-5 display-5 fw-bold">About Me</h2>
+          <p class="lead mb-4">
+            I'm a passionate Database Administrator and Data Analytics Professional based in Australia. With expertise in SQL, database management, and data visualization, I specialize in turning complex data into actionable insights that drive business decisions.
+          </p>
+          <p class="mb-4">
+            Currently pursuing a Master of Information and Communication Technology at the University of Sunshine Coast, I blend theoretical knowledge with practical experience from my role as a Database Administrator at Cotiviti Technology, where I developed a centralized backup management system and implemented robust security measures.
+          </p>
+          <p class="mb-5">
+            I'm eager to work in data analysis and grow into data science, expanding my expertise in AI, big data, and advanced analytics to help organizations leverage their data assets for competitive advantages.
+          </p>
         </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <p class="mb-0">&copy; 2025 Anish Karki. All rights reserved.</p>
-    </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section">
+    <div class="container">
+      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Work Experience</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="timeline" data-aos="fade-up" data-aos-delay="100">
+            <div class="timeline-item">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between mb-2">
+                    <h3 class="h5 fw-bold">Database Administrator</h3>
+                    <span class="badge bg-primary">July 2021 - June 2023</span>
+                  </div>
+                  <h4 class="h6 text-muted mb-3">Cotiviti Technology, Kathmandu, Nepal</h4>
+                  <ul class="text-muted">
+                    <li>Developed a centralized backup management system for SQL Server, MySQL, and PostgreSQL, reducing storage costs, saving man-hours, and ensuring 99.99% data recovery reliability.</li>
+                    <li>Implemented role-based access control (RBAC) and user schema design to comply with enterprise security standards.</li>
+                    <li>Managed database patching and system upgrades for mission-critical databases, ensuring zero unplanned downtime.</li>
+                    <li>Optimized databases through strategic indexing, table partitioning, and query caching, improving application performance.</li>
+                    <li>Engineered a data pipeline transferring 2TB+ data from Oracle to Vertica using Apache Spark and Kafka.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Technical Skills</h2>
+      
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h3 class="h4 card-title mb-4">
+                <i class="fas fa-database me-2 text-primary"></i>Database Management
+              </h3>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>SQL Server</span>
+                  <span>95%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="95%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>PostgreSQL</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="90%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>MySQL/MariaDB</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Azure SQL Database</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Azure Cosmos DB</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h3 class="h4 card-title mb-4">
+                <i class="fas fa-chart-line me-2 text-primary"></i>Data Analytics & Visualization
+              </h3>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Power BI</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="90%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Python (Pandas, NumPy, Matplotlib)</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>SQL Analytics</span>
+                  <span>95%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="95%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Data Processing</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Apache Spark</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h3 class="h4 card-title mb-4">
+                <i class="fas fa-cloud me-2 text-primary"></i>Cloud & Big Data
+              </h3>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Azure Data Warehouse</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Azure Synapse Analytics</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Azure Databricks</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="75%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Cloud Security</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Virtual Machines</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="90%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h3 class="h4 card-title mb-4">
+                <i class="fas fa-robot me-2 text-primary"></i>Automation & Machine Learning
+              </h3>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Power Automate</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Power Apps</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Grafana Monitoring</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Regression Analysis</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="75%"></div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Predictive Analytics</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Featured Projects</h2>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="100">
+          <div class="card h-100 shadow-sm border-0 project-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-database fa-2x me-3 text-primary"></i>
+                <h3 class="h5 card-title fw-bold mb-0">Centralized Backup Management System</h3>
+              </div>
+              <p class="card-text text-muted">Automated database backups to enhance disaster recovery with 99.99% reliability. Reduced storage costs and maintenance hours while ensuring high data integrity.</p>
+              <div class="d-flex gap-2 mt-3 flex-wrap">
+                <span class="badge bg-secondary">SQL Server</span>
+                <span class="badge bg-secondary">MySQL</span>
+                <span class="badge bg-secondary">PostgreSQL</span>
+                <span class="badge bg-secondary">Automation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
+          <div class="card h-100 shadow-sm border-0 project-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-chart-bar fa-2x me-3 text-primary"></i>
+                <h3 class="h5 card-title fw-bold mb-0">Database Size Estimator</h3>
+              </div>
+              <p class="card-text text-muted">Developed a predictive analytics tool to forecast database growth and optimize storage allocation. Enabled proactive capacity planning and cost optimization.</p>
+              <div class="d-flex gap-2 mt-3 flex-wrap">
+                <span class="badge bg-secondary">Python</span>
+                <span class="badge bg-secondary">Predictive Analytics</span>
+                <span class="badge bg-secondary">SQL</span>
+                <span class="badge bg-secondary">Data Visualization</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="300">
+          <div class="card h-100 shadow-sm border-0 project-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-desktop fa-2x me-3 text-primary"></i>
+                <h3 class="h5 card-title fw-bold mb-0">Database & RHEL Monitoring System</h3>
+              </div>
+              <p class="card-text text-muted">Built a real-time monitoring system for databases and RHEL servers using Python and Grafana. Enabled proactive issue detection and system optimization.</p>
+              <div class="d-flex gap-2 mt-3 flex-wrap">
+                <span class="badge bg-secondary">Python</span>
+                <span class="badge bg-secondary">Grafana</span>
+                <span class="badge bg-secondary">RHEL</span>
+                <span class="badge bg-secondary">Monitoring</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="400">
+          <div class="card h-100 shadow-sm border-0 project-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-home fa-2x me-3 text-primary"></i>
+                <h3 class="h5 card-title fw-bold mb-0">Housing Price Allocator</h3>
+              </div>
+              <p class="card-text text-muted">Designed a machine learning model for housing price prediction using regression techniques. Applied feature engineering and data preprocessing for improved accuracy.</p>
+              <div class="d-flex gap-2 mt-3 flex-wrap">
+                <span class="badge bg-secondary">Python</span>
+                <span class="badge bg-secondary">Machine Learning</span>
+                <span class="badge bg-secondary">Regression</span>
+                <span class="badge bg-secondary">Feature Engineering</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="500">
+          <div class="card h-100 shadow-sm border-0 project-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-coffee fa-2x me-3 text-primary"></i>
+                <h3 class="h5 card-title fw-bold mb-0">Coffee Sales Analytics</h3>
+              </div>
+              <p class="card-text text-muted">Analyzed sales data trends, creating interactive visualizations using Python and Power BI. Provided actionable insights for inventory optimization and marketing strategies.</p>
+              <div class="d-flex gap-2 mt-3 flex-wrap">
+                <span class="badge bg-secondary">Power BI</span>
+                <span class="badge bg-secondary">Python</span>
+                <span class="badge bg-secondary">Data Analysis</span>
+                <span class="badge bg-secondary">Visualization</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="600">
+          <div class="card h-100 shadow-sm border-0 project-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-exchange-alt fa-2x me-3 text-primary"></i>
+                <h3 class="h5 card-title fw-bold mb-0">Data Pipeline: Oracle to Vertica</h3>
+              </div>
+              <p class="card-text text-muted">Engineered a data pipeline transferring 2TB+ data from Oracle to Vertica using Apache Spark and Kafka. Optimized for performance and data consistency.</p>
+              <div class="d-flex gap-2 mt-3 flex-wrap">
+                <span class="badge bg-secondary">Apache Spark</span>
+                <span class="badge bg-secondary">Kafka</span>
+                <span class="badge bg-secondary">Oracle</span>
+                <span class="badge bg-secondary">Vertica</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="section bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Certifications</h2>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="cert-badge mb-3">
+                <img src="./assets/azure-ai-fundamentals.png" alt="Azure AI Fundamentals" class="img-fluid">
+              </div>
+              <h3 class="h5 fw-bold">Microsoft Azure AI Fundamentals</h3>
+              <p class="text-muted">Azure Bot Services, Azure Machine Learning, Cognitive Services</p>
+              <a href="https://www.credly.com/badges/83d93096-b0fc-4908-b32f-c88a9973c12c/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2
+              <a href="https://www.credly.com/badges/83d93096-b0fc-4908-b32f-c88a9973c12c/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="cert-badge mb-3">
+                <img src="./assets/power-platform-fundamentals.png" alt="Power Platform Fundamentals" class="img-fluid">
+              </div>
+              <h3 class="h5 fw-bold">Microsoft Power Platform Fundamentals</h3>
+              <p class="text-muted">Automation, Power Apps, Power Automate, Power BI, Power Platform Core Components</p>
+              <a href="https://www.credly.com/badges/baa07914-10bf-4d39-9ffd-b1c9bb1bdac2/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="cert-badge mb-3">
+                <img src="./assets/security-compliance-identity.png" alt="Security, Compliance, and Identity Fundamentals" class="img-fluid">
+              </div>
+              <h3 class="h5 fw-bold">Microsoft Security, Compliance, and Identity Fundamentals</h3>
+              <p class="text-muted">Azure Active Directory, Cloud Security, Identity And Access Management</p>
+              <a href="https://www.credly.com/badges/d3acabf5-3778-464f-8836-1fca7f9ec23e/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="cert-badge mb-3">
+                <img src="./assets/python-certification.png" alt="Python Certification" class="img-fluid">
+              </div>
+              <h3 class="h5 fw-bold">Python Programming Certification</h3>
+              <p class="text-muted">Python, Data Analysis, Automation</p>
+              <a href="https://www.credly.com/badges/f4847346-10b4-46fa-b97e-47433f7d2220/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <div class="cert-badge mb-3">
+                <img src="./assets/azure-database-admin.png" alt="Azure Database Administrator" class="img-fluid">
+              </div>
+              <h3 class="h5 fw-bold">Azure Database Administrator</h3>
+              <p class="text-muted">Azure, Azure Cosmos DB, SQL Server, Data Management</p>
+              <a href="https://www.credly.com/badges/58621465-0bde-450a-9943-1f18c9a0423b" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <h2 class="mb-5 display-5 fw-bold">Get In Touch</h2>
+          <p class="lead mb-5">
+            I'm currently looking for new opportunities in data analytics and database administration. 
+            Whether you have a question or just want to say hello, I'll do my best to get back to you!
+          </p>
+          <div class="d-flex justify-content-center mb-5">
+            <a href="mailto:anish.karki@example.com" class="btn btn-primary btn-lg px-4 mx-2">
+              <i class="fas fa-envelope me-2"></i>Say Hello
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">
+            &copy; 2025 Anish Karki. All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-inline mb-0 text-center text-md-end">
+            <li class="list-inline-item">
+              <a href="https://linkedin.com/in/anishkarki" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin fa-lg"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://github.com/anishkarki" target="_blank" class="social-icon">
+                <i class="fab fa-github fa-lg"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://twitter.com/anishkarki" target="_blank" class="social-icon">
+                <i class="fab fa-twitter fa-lg"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="mailto:anish.karki@example.com" class="social-icon">
+                <i class="fas fa-envelope fa-lg"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- Typed.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    // Initialize AOS animation
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Activate the skill progress bars on scroll
+    const skillBars = document.querySelectorAll('.skill-progress-bar');
+    window.addEventListener('load', function() {
+      skillBars.forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width;
+      });
+    });
+
+    // Initialize Typed.js for the hero section
+    document.addEventListener('DOMContentLoaded', function() {
+      var typed = new Typed('#typed-output', {
+        strings: [
+          'Database Administrator',
+          'Data Analytics Professional',
+          'Azure Cloud Specialist',
+          'SQL Expert & Python Developer'
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Add active class to navigation based on scroll position
+    window.addEventListener('scroll', function() {
+      let scrollPosition = window.scrollY;
+      
+      document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          document.querySelectorAll('.nav-link').forEach(navLink => {
+            navLink.classList.remove('active');
+            if (navLink.getAttribute('href') === `#${sectionId}`) {
+              navLink.classList.add('active');
+            }
+          });
+        }
+      });
+
+      // Add backdrop blur to navbar on scroll
+      const navbar = document.querySelector('.navbar');
+      if (scrollPosition > 50) {
+        navbar.classList.add('shadow-sm');
+      } else {
+        navbar.classList.remove('shadow-sm');
+      }
+    });
+  </script>
 </body>
 </html>
