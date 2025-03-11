@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Database Engineer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-100">
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">My Portfolio</a>
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-database me-2"></i>DB Engineer
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#expertise">Expertise</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
@@ -28,17 +32,274 @@
     </nav>
     
     <!-- Hero Section -->
-    <section class="h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://source.unsplash.com/1600x900/?technology,developer')">
-        <div class="bg-black bg-opacity-50 p-10 rounded-lg">
-            <h1 class="text-white text-5xl font-bold">Welcome to My Portfolio</h1>
-            <p class="text-white text-lg mt-4">Showcasing my projects, skills, and experience in technology.</p>
-            <a href="#projects" class="mt-6 inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 transition">View Projects</a>
+    <section class="h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('/api/placeholder/1600/900')">
+        <div class="bg-black bg-opacity-70 p-10 rounded-lg">
+            <h1 class="text-white text-5xl font-bold mb-4">Database Engineering Excellence</h1>
+            <p class="text-white text-xl mb-6">Architecting high-performance, secure, and scalable database solutions</p>
+            <div class="flex flex-wrap justify-center gap-3 mb-6">
+                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">SQL Server</span>
+                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">MySQL</span>
+                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">Oracle</span>
+                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">Vertica</span>
+                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">AWS</span>
+            </div>
+            <a href="#expertise" class="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 transition">View Expertise</a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="text-4xl font-bold mb-4">About Me</h2>
+                    <p class="text-lg text-gray-700 mb-4">
+                        I'm a seasoned Database Engineer with extensive experience in designing, implementing, and optimizing database solutions across multiple platforms.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-4">
+                        My expertise spans from performance tuning and high availability architecture to cloud migration and security implementation, with a proven track record of delivering scalable solutions for enterprise environments.
+                    </p>
+                    <p class="text-lg text-gray-700">
+                        I'm passionate about data integrity, system reliability, and implementing best practices that drive business efficiency.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-gray-800 text-white p-6 rounded-lg h-100">
+                        <h3 class="text-2xl font-bold mb-4">Technical Proficiencies</h3>
+                        
+                        <div class="mb-4">
+                            <p class="mb-2 font-semibold">Database Systems</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">SQL Server</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">MySQL</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">PostgreSQL</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Oracle</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Vertica</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <p class="mb-2 font-semibold">Cloud Platforms</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">AWS RDS</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">AWS CloudWatch</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Azure SQL</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <p class="mb-2 font-semibold">Technologies & Tools</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Apache Spark</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Kafka</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Prometheus</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Nagios</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">PowerShell</span>
+                                <span class="bg-blue-600 px-2 py-1 rounded text-sm">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Expertise Section -->
+    <section id="expertise" class="py-16 bg-gray-100">
+        <div class="container">
+            <h2 class="text-4xl font-bold text-center mb-12">Core Expertise</h2>
+            
+            <div class="row g-4">
+                <!-- Expertise Item 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md h-100">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-shield-alt fa-3x"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Database Security & Management</h3>
+                        <p class="text-gray-700">
+                            Established enterprise-wide security protocols by managing user access controls, schema designs, and implementing role-based privileges across 50+ production databases, achieving SOC2 compliance requirements.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Expertise Item 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md h-100">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-tachometer-alt fa-3x"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Performance Optimization</h3>
+                        <p class="text-gray-700">
+                            Optimized critical SQL queries and database performance through strategic indexing, table partitioning, and query caching techniques, reducing average execution times by 65% and improving application response time.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Expertise Item 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md h-100">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-cloud fa-3x"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
+                        <p class="text-gray-700">
+                            Led successful cloud migration initiatives by transitioning 15+ on-premises databases to AWS RDS, achieving 30% cost reduction while maintaining performance and ensuring less than 2 hours of planned downtime.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Expertise Item 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md h-100">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-sync-alt fa-3x"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">High Availability Solutions</h3>
+                        <p class="text-gray-700">
+                            Implemented robust high availability and disaster recovery solutions with 99.99% uptime guarantee, including Always On Availability Groups, PostgreSQL synchronous replication, and MySQL clustering with automated failover.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Expertise Item 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md h-100">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-exchange-alt fa-3x"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">ETL & Data Pipelines</h3>
+                        <p class="text-gray-700">
+                            Architected scalable ETL data pipelines processing 2TB+ daily from Oracle to Vertica using Apache Spark and Kafka, enabling real-time analytics capabilities for business intelligence teams.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Expertise Item 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md h-100">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-robot fa-3x"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Automation & DevOps</h3>
+                        <p class="text-gray-700">
+                            Streamlined database operations through automation, integrating CI/CD pipelines and developing 50+ PowerShell/Python scripts that reduced manual DBA tasks by 75% and improved deployment reliability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-white">
+        <div class="container">
+            <h2 class="text-4xl font-bold text-center mb-12">Featured Projects</h2>
+            
+            <div class="row g-4">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <img src="/api/placeholder/600/400" class="card-img-top" alt="Project 1">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold text-xl mb-2">Centralized Backup System</h5>
+                            <p class="card-text">Designed and implemented a centralized backup management system for SQL Server, MySQL, and PostgreSQL databases, reducing backup storage costs by 40% while ensuring 99.9% data recovery reliability.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <img src="/api/placeholder/600/400" class="card-img-top" alt="Project 2">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold text-xl mb-2">Enterprise Monitoring Infrastructure</h5>
+                            <p class="card-text">Engineered comprehensive database monitoring infrastructure using AWS CloudWatch, Prometheus, and Nagios dashboards, reducing incident response time by 70% through proactive alerting and automated remediation.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <img src="/api/placeholder/600/400" class="card-img-top" alt="Project 3">
+                        <div class="card-body">
+                            <h5 class="card-title font-bold text-xl mb-2">Cross-Platform ETL Pipeline</h5>
+                            <p class="card-text">Architected scalable ETL data pipelines processing 2TB+ daily from Oracle to Vertica using Apache Spark and Kafka, enabling real-time analytics capabilities for business intelligence teams.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-800 text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
+                    <p class="text-lg mb-4">I'm available for consultations and opportunities related to database engineering, cloud migration, and data architecture.</p>
+                    
+                    <div class="mt-8">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-envelope text-blue-400 mr-3 text-xl"></i>
+                            <span>contact@dbexpert.com</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-phone text-blue-400 mr-3 text-xl"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-blue-400 mr-3 text-xl"></i>
+                            <span>San Francisco, CA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <a href="#" class="text-blue-400 hover:text-blue-300 mr-4 text-2xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-blue-400 hover:text-blue-300 mr-4 text-2xl"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-blue-400 hover:text-blue-300 mr-4 text-2xl"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <div class="bg-gray-700 p-6 rounded-lg">
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block mb-2">Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Your Name">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block mb-2">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="Your Email">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="subject" class="block mb-2">Subject</label>
+                                <input type="text" id="subject" class="form-control" placeholder="Subject">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="message" class="block mb-2">Message</label>
+                                <textarea id="message" class="form-control" rows="5" placeholder="Your Message"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary bg-blue-600 hover:bg-blue-700 border-0 px-4 py-2">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4">
-        <p>&copy; 2024 My Portfolio. All Rights Reserved.</p>
+        <div class="container">
+            <p>&copy; 2025 Database Engineering Portfolio. All Rights Reserved.</p>
+        </div>
     </footer>
     
 </body>
