@@ -1,0 +1,250 @@
+:root {
+    --primary-color: #0a192f; /* Keeping the primary dark blue */
+    --secondary-color: #ff7e5f; /* Changed to coral orange from teal */
+    --accent-color: #feb47b; /* Adding a peach accent color */
+    --text-light: #e6f1ff; /* Brighter white-blue for text */
+    --text-dark: #9ba9c9; /* Lighter blue-gray for secondary text */
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+  }
+  
+  .hero-section {
+    background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .nav-link:hover {
+    color: var(--secondary-color) !important;
+  }
+  
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  .btn-primary {
+    background-color: transparent;
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: rgba(255, 126, 95, 0.1);
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section {
+    padding: 6rem 0;
+  }
+  
+  .footer {
+    background-color: var(--primary-color);
+    color: var(--text-dark);
+  }
+  
+  .social-icon {
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    color: var(--secondary-color);
+    transform: translateY(-5px);
+  }
+  
+  .card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: none;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .badge {
+    transition: all 0.3s ease;
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  
+  .badge:hover {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .badge.bg-primary {
+    background-color: var(--secondary-color) !important;
+  }
+  
+  .badge.bg-secondary {
+    background-color: #edf2f7 !important;
+    color: #4a5568 !important;
+  }
+  
+  .typed-cursor {
+    color: var(--secondary-color);
+  }
+  
+  .cert-badge {
+    transition: all 0.3s ease;
+    max-width: 180px;
+    margin: 0 auto;
+  }
+  
+  .cert-badge:hover {
+    transform: scale(1.05);
+  }
+  
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    left: 0;
+    top: 0;
+    background-color: var(--text-dark);
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-bottom: 30px;
+  }
+  
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    left: -36px;
+    top: 6px;
+  }
+  
+  .scroll-down {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+    40% {transform: translateY(-30px) translateX(-50%);}
+    60% {transform: translateY(-15px) translateX(-50%);}
+  }
+  
+  .skill-progress {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+    margin-bottom: 10px;
+  }
+  
+  .skill-progress-bar {
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    transition: width 1.5s ease-in-out;
+  }
+  
+  .nav-blur {
+    backdrop-filter: blur(5px);
+    background-color: rgba(10, 25, 47, 0.85);
+  }
+  
+  .project-card {
+    height: 100%;
+    background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .project-card .card-body {
+    z-index: 2;
+    position: relative;
+  }
+  
+  /* Text color classes */
+  .text-teal-300 {
+    color: var(--secondary-color) !important;
+  }
+  
+  .text-primary {
+    color: var(--secondary-color) !important;
+  }
+  
+  .text-light-blue {
+    color: var(--text-light) !important;
+  }
+  
+  .text-gray-400 {
+    color: var(--text-dark) !important;
+  }
+  
+  /* Additional hover effects */
+  .btn-outline-light:hover {
+    color: var(--primary-color);
+    background-color: var(--text-light);
+  }
+  
+  .navbar-brand:hover .text-teal-300 {
+    color: var(--accent-color) !important;
+  }
+  
+  /* Card styling */
+  .card {
+    border-radius: 12px;
+  }
+  
+  .card-header {
+    background-color: transparent;
+    border-bottom: none;
+  }
+  
+  /* Timeline enhancements */
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+  
+  /* Add some accent colors to the certifications */
+  .cert-badge img {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+  }
+  
+  .cert-badge:hover img {
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
+  }

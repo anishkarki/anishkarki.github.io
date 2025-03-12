@@ -12,162 +12,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- AOS Animation Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <style>
-    :root {
-      --primary-color: #0a192f;
-      --secondary-color: #64ffda;
-      --text-light: #ccd6f6;
-      --text-dark: #8892b0;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .hero-section {
-      background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-    .nav-link {
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    .nav-link:hover {
-      color: var(--secondary-color) !important;
-    }
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: var(--secondary-color);
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after {
-      width: 100%;
-    }
-    .btn-primary {
-      background-color: transparent;
-      border: 1px solid var(--secondary-color);
-      color: var(--secondary-color);
-      transition: all 0.3s ease;
-    }
-    .btn-primary:hover {
-      background-color: rgba(100, 255, 218, 0.1);
-      border: 1px solid var(--secondary-color);
-      color: var(--secondary-color);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-    .section {
-      padding: 6rem 0;
-    }
-    .footer {
-      background-color: var(--primary-color);
-      color: var(--text-dark);
-    }
-    .social-icon {
-      color: var(--text-dark);
-      transition: all 0.3s ease;
-    }
-    .social-icon:hover {
-      color: var(--secondary-color);
-      transform: translateY(-5px);
-    }
-    .card {
-      transition: all 0.3s ease;
-      overflow: hidden;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-    .badge {
-      transition: all 0.3s ease;
-    }
-    .badge:hover {
-      background-color: var(--secondary-color);
-      color: var(--primary-color);
-    }
-    .typed-cursor {
-      color: var(--secondary-color);
-    }
-    .cert-badge {
-      transition: all 0.3s ease;
-      max-width: 180px;
-      margin: 0 auto;
-    }
-    .cert-badge:hover {
-      transform: scale(1.05);
-    }
-    .timeline {
-      position: relative;
-      padding-left: 30px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 2px;
-      left: 0;
-      top: 0;
-      background-color: var(--text-dark);
-    }
-    .timeline-item {
-      position: relative;
-      padding-bottom: 30px;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: var(--secondary-color);
-      left: -36px;
-      top: 6px;
-    }
-    .scroll-down {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
-      40% {transform: translateY(-30px) translateX(-50%);}
-      60% {transform: translateY(-15px) translateX(-50%);}
-    }
-    .skill-progress {
-      height: 10px;
-      border-radius: 5px;
-      background-color: #e9ecef;
-      margin-bottom: 10px;
-    }
-    .skill-progress-bar {
-      height: 100%;
-      border-radius: 5px;
-      background: linear-gradient(90deg, var(--secondary-color), #38b2ac);
-      transition: width 1.5s ease-in-out;
-    }
-    .nav-blur {
-      backdrop-filter: blur(5px);
-      background-color: rgba(10, 25, 47, 0.85);
-    }
-    .project-card {
-      height: 100%;
-      background: linear-gradient(145deg, #f8fafc, #f1f5f9);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-    .project-card .card-body {
-      z-index: 2;
-      position: relative;
-    }
-  </style>
+
+  <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body class="font-sans">
   <!-- Navbar -->
@@ -246,6 +93,67 @@
           <p class="mb-5">
             I'm eager to work in data analysis and grow into data science, expanding my expertise in AI, big data, and advanced analytics to help organizations leverage their data assets for competitive advantages.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="section bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Education</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="timeline" data-aos="fade-up" data-aos-delay="100">
+            <div class="timeline-item">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between mb-2">
+                    <h3 class="h5 fw-bold">Master of Information and Communication Technology</h3>
+                    <span class="badge bg-primary">2023 - Present</span>
+                  </div>
+                  <h4 class="h6 fw-bold mb-3" style="font-size: 1.1rem;">University of Sunshine Coast, Australia</h4>
+                  <p class="text-muted">Specializing in Data Analytics and Database Management with a focus on cloud technologies, AI integration, and business intelligence solutions.</p>
+                  <div class="mt-3">
+                    <h5 class="h6 fw-bold">Projects:</h5>
+                    <ul class="text-muted">
+                      <li>House Price Prediction using Regression</li>
+                      <li>Coffee Sales Analytics using PowerBI and Excel</li>
+                      <li>Research on "Usage of QML Classification Model in Comparison to Classical Classification Algorithm SVM"</li>
+                    </ul>
+                    <h5 class="h6 fw-bold">Research:</h5>
+                    <ul class="text-muted">
+                      <li>"Usage of QML Classification Model in Comparison to Classical Classification Algorithm SVM"</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between mb-2">
+                    <h3 class="h5 fw-bold">Bachelor of Computer Engineering</h3>
+                    <span class="badge bg-primary">2016 - 2020</span>
+                  </div>
+                  <h4 class="h6 fw-bold mb-3" style="font-size: 1.1rem;">Kathmandu University, Nepal</h4>
+                  <p class="text-muted">Core coursework in database systems, software engineering, data structures, and computer networks.</p>
+                  <div class="mt-3">
+                    <h5 class="h6 fw-bold">Academic Projects:</h5>
+                    <ul class="text-muted">
+                      <li>Facial Recognition System</li>
+                      <li>Music Management Application</li>
+                      <li>Library Management System</li>
+                      <li>Automatic Flappy Bird using Neural Networks and Genetic Algorithms</li>
+                      <li>Trading Prediction using Bayesian Neural Networks</li>
+                    </ul>
+                    <h5 class="h6 fw-bold mt-3">Internship:</h5>
+                    <p class="text-muted mb-0">Automation Engineering Intern at Cotiviti, focusing on process automation and optimization.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -622,8 +530,8 @@
     </div>
   </section>
 
-  <!-- Certifications Section -->
-  <section id="certifications" class="section bg-light">
+ <!-- Certifications Section -->
+ <section id="certifications" class="section bg-light">
     <div class="container">
       <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Certifications</h2>
       <div class="row g-4">
@@ -631,11 +539,14 @@
           <div class="card h-100 shadow-sm border-0 text-center">
             <div class="card-body">
               <div class="cert-badge mb-3">
-                <img src="./assets/azure-ai-fundamentals.png" alt="Azure AI Fundamentals" class="img-fluid">
+                <img src="./assets/azure-ai-fundamentals.png" alt="Azure AI Fundamentals" class="img-fluid" style="max-width: 120px;">
               </div>
               <h3 class="h5 fw-bold">Microsoft Azure AI Fundamentals</h3>
-              <p class="text-muted">Azure Bot Services, Azure Machine Learning, Cognitive Services</p>
-              <a href="https://www.credly.com/badges/83d93096-b0fc-4908-b32f-c88a9973c12c/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2
+              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
+                <span class="badge rounded-pill bg-light text-dark border">Azure Bot Services</span>
+                <span class="badge rounded-pill bg-light text-dark border">Azure Machine Learning</span>
+                <span class="badge rounded-pill bg-light text-dark border">Cognitive Services</span>
+              </div>
               <a href="https://www.credly.com/badges/83d93096-b0fc-4908-b32f-c88a9973c12c/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
             </div>
           </div>
@@ -644,10 +555,16 @@
           <div class="card h-100 shadow-sm border-0 text-center">
             <div class="card-body">
               <div class="cert-badge mb-3">
-                <img src="./assets/power-platform-fundamentals.png" alt="Power Platform Fundamentals" class="img-fluid">
+                <img src="./assets/powerplatform.png" alt="Power Platform Fundamentals" class="img-fluid" style="max-width: 120px;">
               </div>
               <h3 class="h5 fw-bold">Microsoft Power Platform Fundamentals</h3>
-              <p class="text-muted">Automation, Power Apps, Power Automate, Power BI, Power Platform Core Components</p>
+              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
+                <span class="badge rounded-pill bg-light text-dark border">Automation</span>
+                <span class="badge rounded-pill bg-light text-dark border">Power Apps</span>
+                <span class="badge rounded-pill bg-light text-dark border">Power Automate</span>
+                <span class="badge rounded-pill bg-light text-dark border">Power BI</span>
+                <span class="badge rounded-pill bg-light text-dark border">Power Platform</span>
+              </div>
               <a href="https://www.credly.com/badges/baa07914-10bf-4d39-9ffd-b1c9bb1bdac2/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
             </div>
           </div>
@@ -656,10 +573,14 @@
           <div class="card h-100 shadow-sm border-0 text-center">
             <div class="card-body">
               <div class="cert-badge mb-3">
-                <img src="./assets/security-compliance-identity.png" alt="Security, Compliance, and Identity Fundamentals" class="img-fluid">
+                <img src="./assets/security-compliance-security.png" alt="Security, Compliance, and Identity Fundamentals" class="img-fluid" style="max-width: 120px;">
               </div>
               <h3 class="h5 fw-bold">Microsoft Security, Compliance, and Identity Fundamentals</h3>
-              <p class="text-muted">Azure Active Directory, Cloud Security, Identity And Access Management</p>
+              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
+                <span class="badge rounded-pill bg-light text-dark border">Azure Active Directory</span>
+                <span class="badge rounded-pill bg-light text-dark border">Cloud Security</span>
+                <span class="badge rounded-pill bg-light text-dark border">Identity And Access Management</span>
+              </div>
               <a href="https://www.credly.com/badges/d3acabf5-3778-464f-8836-1fca7f9ec23e/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
             </div>
           </div>
@@ -668,10 +589,14 @@
           <div class="card h-100 shadow-sm border-0 text-center">
             <div class="card-body">
               <div class="cert-badge mb-3">
-                <img src="./assets/python-certification.png" alt="Python Certification" class="img-fluid">
+                <img src="./assets/it-python.png" alt="Python Certification" class="img-fluid" style="max-width: 120px;">
               </div>
-              <h3 class="h5 fw-bold">Python Programming Certification</h3>
-              <p class="text-muted">Python, Data Analysis, Automation</p>
+              <h3 class="h5 fw-bold">Pearson IT Specialist Python Certification</h3>
+              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
+                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                <span class="badge rounded-pill bg-light text-dark border">Data Analysis</span>
+                <span class="badge rounded-pill bg-light text-dark border">Automation</span>
+              </div>
               <a href="https://www.credly.com/badges/f4847346-10b4-46fa-b97e-47433f7d2220/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
             </div>
           </div>
@@ -680,10 +605,15 @@
           <div class="card h-100 shadow-sm border-0 text-center">
             <div class="card-body">
               <div class="cert-badge mb-3">
-                <img src="./assets/azure-database-admin.png" alt="Azure Database Administrator" class="img-fluid">
+                <img src="./assets/azure-data-fundamentals.png" alt="Azure Data Fundamentals" class="img-fluid" style="max-width: 120px;">
               </div>
-              <h3 class="h5 fw-bold">Azure Database Administrator</h3>
-              <p class="text-muted">Azure, Azure Cosmos DB, SQL Server, Data Management</p>
+              <h3 class="h5 fw-bold">Microsoft Azure Data Fundamentals</h3>
+              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
+                <span class="badge rounded-pill bg-light text-dark border">Azure</span>
+                <span class="badge rounded-pill bg-light text-dark border">Azure Cosmos DB</span>
+                <span class="badge rounded-pill bg-light text-dark border">SQL Server</span>
+                <span class="badge rounded-pill bg-light text-dark border">Data Management</span>
+              </div>
               <a href="https://www.credly.com/badges/58621465-0bde-450a-9943-1f18c9a0423b" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
             </div>
           </div>
@@ -755,6 +685,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <!-- Typed.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <script src="js/script.js"></script>
   
   <!-- Custom JavaScript -->
   <script>
