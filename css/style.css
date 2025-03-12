@@ -71,6 +71,16 @@
     transition: all 0.3s ease;
   }
   
+  .social-icons a {
+    color: #ffffff !important; /* Default white color */
+    transition: color 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+    color: var(--bs-secondary) !important; /* Bootstrap Secondary Color on hover */
+}
+
+
   .social-icon:hover {
     color: var(--secondary-color);
     transform: translateY(-5px);

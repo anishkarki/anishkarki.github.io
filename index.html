@@ -12,65 +12,44 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- AOS Animation Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
   <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body class="font-sans">
+
+    <div id="navbar-placeholder"></div>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top nav-blur navbar-dark py-3">
-    <div class="container">
-      <a class="navbar-brand text-white font-bold" href="#">
-        <span class="text-teal-300">A</span>nish <span class="text-teal-300">K</span>arki
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link px-3" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="#experience">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="#projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="#certifications">Certifications</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+
 
   <!-- Hero Section -->
-  <section class="hero-section text-white">
+  <section class="hero-section text-white vh-100 d-flex align-items-center bg-dark">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-8 col-md-10" data-aos="fade-up" data-aos-duration="1000">
-          <p class="mb-3 text-md font-mono text-teal-300">Hi, my name is</p>
-          <h1 class="display-3 fw-bold mb-3">Anish Karki</h1>
-          <h2 class="display-5 text-light-blue mb-4 text-gray-400" id="typed-output"></h2>
-          <p class="lead mb-5 text-gray-400 max-w-lg">
-            Experienced database administrator and data analytics graduate with strong expertise in SQL,
-            Python, and data visualization. Passionate about extracting insights from data, optimizing data processing,
-            and leveraging machine learning for data-driven decision-making.
-          </p>
-          <div class="d-flex flex-wrap gap-3">
-            <a href="#contact" class="btn btn-primary btn-lg px-4">Get In Touch</a>
-            <a href="#" class="btn btn-outline-light btn-lg px-4">Download Resume</a>
-          </div>
+        <div class="row align-items-center">
+            <div class="col-lg-8 col-md-10" data-aos="fade-up" data-aos-duration="1000">
+                <p class="mb-3 text-md font-mono text-teal-300">Hi, my name is</p>
+                <h1 class="display-3 fw-bold mb-3">Anish Karki</h1>
+                <h2 class="display-5 text-light-blue mb-4 text-gray-400" id="typed-output"></h2>
+                <p class="lead mb-5 text-gray-400 max-w-lg">
+                    Experienced database administrator and data analytics graduate with strong expertise in SQL,
+                    Python, and data visualization. Passionate about extracting insights from data, optimizing data processing,
+                    and leveraging machine learning for data-driven decision-making.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#contact" class="btn btn-primary btn-lg px-4">Get In Touch</a>
+                    <a href="#" class="btn btn-outline-light btn-lg px-4">Download Resume</a>
+                </div>
+                <div class="mt-4 d-flex gap-3 social-icons">
+                    <a href="https://github.com/anishkarki618" class="fs-2" target="_blank"><i class="bi bi-github"></i></a>
+                    <a href="https://linkedin.com/in/anish-karki-545a6a187" class="fs-2" target="_blank"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
+</section>
+
+
     <div class="scroll-down">
       <a href="#about" class="text-white">
         <i class="fas fa-chevron-down fa-2x"></i>
@@ -79,24 +58,51 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="section bg-light">
+  <section id="about" class="section bg-light py-5">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center" data-aos="fade-up">
-          <h2 class="mb-5 display-5 fw-bold">About Me</h2>
-          <p class="lead mb-4">
-            I'm a passionate Database Administrator and Data Analytics Professional based in Australia. With expertise in SQL, database management, and data visualization, I specialize in turning complex data into actionable insights that drive business decisions.
-          </p>
-          <p class="mb-4">
-            Currently pursuing a Master of Information and Communication Technology at the University of Sunshine Coast, I blend theoretical knowledge with practical experience from my role as a Database Administrator at Cotiviti Technology, where I developed a centralized backup management system and implemented robust security measures.
-          </p>
-          <p class="mb-5">
-            I'm eager to work in data analysis and grow into data science, expanding my expertise in AI, big data, and advanced analytics to help organizations leverage their data assets for competitive advantages.
-          </p>
+        <div class="row justify-content-center align-items-center text-center text-md-start">
+            <!-- Photo Column (Centered on mobile, Right on desktop) -->
+            <div class="col-lg-4 order-lg-2 mb-4 mb-lg-0 text-center" data-aos="fade-left">
+                <div class="profile-image-container mx-auto">
+                    <img src="assets/profilephoto.jpg" alt="Profile Photo" class="img-fluid rounded-circle border border-3 border-white shadow" style="width: 250px; height: 250px; object-fit: cover;">
+                </div>
+            </div>
+            
+            <!-- Content Column (Centered on mobile, Left on desktop) -->
+            <div class="col-lg-8 order-lg-1" data-aos="fade-right">
+                <h2 class="mb-5 display-5 fw-bold">About Me</h2>
+                <p class="lead mb-4">
+                    I'm a passionate Database Administrator and Data Analytics Professional based in Australia. With expertise in SQL, database management, and data visualization, I specialize in turning complex data into actionable insights that drive business decisions.
+                </p>
+                <p class="mb-4">
+                    Currently pursuing a Master of Information and Communication Technology at the University of Sunshine Coast, I blend theoretical knowledge with practical experience from my role as a Database Administrator at Cotiviti Technology, where I developed a centralized backup management system and implemented robust security measures.
+                </p>
+                <p class="mb-5">
+                    I'm eager to work in data analysis and grow into data science, expanding my expertise in AI, big data, and advanced analytics to help organizations leverage their data assets for competitive advantages.
+                </p>
+                
+                <!-- Contact Details -->
+                <div class="contact-details mb-4">
+                    <h3 class="mb-3">Connect With Me</h3>
+                    <ul class="list-unstyled contact-list">
+                        <li class="mb-2">
+                            <i class="bi bi-envelope-fill me-2"></i>
+                            <a href="mailto:anish.karki1.618@gmail.com">anish.karki1.618@gmail.com</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i>
+                            <a href="tel:+61451165843">+61 451165843</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-geo-alt-fill me-2"></i>
+                            Brisbane, Queensland, Australia
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
   <!-- Education Section -->
   <section id="education" class="section bg-light">
@@ -110,7 +116,7 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between mb-2">
                     <h3 class="h5 fw-bold">Master of Information and Communication Technology</h3>
-                    <span class="badge bg-primary">2023 - Present</span>
+                    <span class="badge">2023 - Present</span>
                   </div>
                   <h4 class="h6 fw-bold mb-3" style="font-size: 1.1rem;">University of Sunshine Coast, Australia</h4>
                   <p class="text-muted">Specializing in Data Analytics and Database Management with a focus on cloud technologies, AI integration, and business intelligence solutions.</p>
@@ -134,7 +140,7 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between mb-2">
                     <h3 class="h5 fw-bold">Bachelor of Computer Engineering</h3>
-                    <span class="badge bg-primary">2016 - 2020</span>
+                    <span class="badge">2016 - 2020</span>
                   </div>
                   <h4 class="h6 fw-bold mb-3" style="font-size: 1.1rem;">Kathmandu University, Nepal</h4>
                   <p class="text-muted">Core coursework in database systems, software engineering, data structures, and computer networks.</p>
@@ -171,7 +177,7 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between mb-2">
                     <h3 class="h5 fw-bold">Database Administrator</h3>
-                    <span class="badge bg-primary">July 2021 - June 2023</span>
+                    <span class="badge">July 2021 - June 2023</span>
                   </div>
                   <h4 class="h6 text-muted mb-3">Cotiviti Technology, Kathmandu, Nepal</h4>
                   <ul class="text-muted">
@@ -438,6 +444,7 @@
                 <span class="badge bg-secondary">PostgreSQL</span>
                 <span class="badge bg-secondary">Automation</span>
               </div>
+              <a href="centralized-backup.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
             </div>
           </div>
         </div>
@@ -455,6 +462,7 @@
                 <span class="badge bg-secondary">SQL</span>
                 <span class="badge bg-secondary">Data Visualization</span>
               </div>
+              <a href="databasesize.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
             </div>
           </div>
         </div>
@@ -472,6 +480,7 @@
                 <span class="badge bg-secondary">RHEL</span>
                 <span class="badge bg-secondary">Monitoring</span>
               </div>
+              <a href="montioring.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
             </div>
           </div>
         </div>
@@ -489,6 +498,7 @@
                 <span class="badge bg-secondary">Regression</span>
                 <span class="badge bg-secondary">Feature Engineering</span>
               </div>
+                <a href="housingprice.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
             </div>
           </div>
         </div>
@@ -506,6 +516,7 @@
                 <span class="badge bg-secondary">Data Analysis</span>
                 <span class="badge bg-secondary">Visualization</span>
               </div>
+                <a href="coffeesales.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
             </div>
           </div>
         </div>
@@ -523,6 +534,7 @@
                 <span class="badge bg-secondary">Oracle</span>
                 <span class="badge bg-secondary">Vertica</span>
               </div>
+                <a href="datapipeline.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
             </div>
           </div>
         </div>
@@ -642,42 +654,9 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 text-center text-md-start">
-          <p class="mb-0">
-            &copy; 2025 Anish Karki. All rights reserved.
-          </p>
-        </div>
-        <div class="col-md-6">
-          <ul class="list-inline mb-0 text-center text-md-end">
-            <li class="list-inline-item">
-              <a href="https://linkedin.com/in/anishkarki" target="_blank" class="social-icon">
-                <i class="fab fa-linkedin fa-lg"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://github.com/anishkarki" target="_blank" class="social-icon">
-                <i class="fab fa-github fa-lg"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://twitter.com/anishkarki" target="_blank" class="social-icon">
-                <i class="fab fa-twitter fa-lg"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="mailto:anish.karki@example.com" class="social-icon">
-                <i class="fas fa-envelope fa-lg"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+
+  <div id="footer-placeholder"></div>
+
 
   <!-- Bootstrap JS Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -695,7 +674,7 @@
       duration: 800,
       once: true
     });
-
+  
     // Activate the skill progress bars on scroll
     const skillBars = document.querySelectorAll('.skill-progress-bar');
     window.addEventListener('load', function() {
@@ -704,7 +683,7 @@
         bar.style.width = width;
       });
     });
-
+  
     // Initialize Typed.js for the hero section
     document.addEventListener('DOMContentLoaded', function() {
       var typed = new Typed('#typed-output', {
@@ -719,8 +698,58 @@
         backDelay: 2000,
         loop: true
       });
+      
+      // Handle navbar collapse - Move inside DOMContentLoaded to ensure elements exist
+      setupNavbarCollapse();
     });
-
+  
+    // Function to set up navbar collapse behavior
+    function setupNavbarCollapse() {
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      
+      // Skip if elements don't exist
+      if (!navbarToggler || !navbarCollapse) {
+        console.warn('Navbar elements not found');
+        return;
+      }
+      
+      // Use Bootstrap's collapse API directly
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+      });
+      
+      // Close navbar when clicking outside
+      document.addEventListener('click', function(event) {
+        if (navbarCollapse.classList.contains('show') && 
+            !navbarToggler.contains(event.target) && 
+            !navbarCollapse.contains(event.target)) {
+          bsCollapse.hide();
+        }
+      });
+      
+      // Close navbar when scrolling
+      let scrollTimeout;
+      window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+          if (navbarCollapse.classList.contains('show')) {
+            bsCollapse.hide();
+          }
+        }, 150); // Small delay to avoid performance issues
+      });
+      
+      // Close navbar when clicking a nav-link
+      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (navbarCollapse.classList.contains('show')) {
+            bsCollapse.hide();
+          }
+        });
+      });
+    }
+  
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -734,7 +763,7 @@
         }
       });
     });
-
+  
     // Add active class to navigation based on scroll position
     window.addEventListener('scroll', function() {
       let scrollPosition = window.scrollY;
@@ -753,13 +782,15 @@
           });
         }
       });
-
+  
       // Add backdrop blur to navbar on scroll
       const navbar = document.querySelector('.navbar');
-      if (scrollPosition > 50) {
-        navbar.classList.add('shadow-sm');
-      } else {
-        navbar.classList.remove('shadow-sm');
+      if (navbar) {
+        if (scrollPosition > 50) {
+          navbar.classList.add('shadow-sm');
+        } else {
+          navbar.classList.remove('shadow-sm');
+        }
       }
     });
   </script>
