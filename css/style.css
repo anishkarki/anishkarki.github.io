@@ -12,23 +12,27 @@ body {
 }
 
 .hero-section {
-  background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.hero-section {
   padding-top: 80px; /* Adjust for navbar height */
   min-height: 100vh;
   display: flex;
   align-items: center;
+  position: relative; /* Ensures scroll icon positioning works properly */
+  padding-bottom: 60px; /* Extra space for scroll-down icon */
 }
 
-@media (max-width: 991px) { /* Fix for mobile screens */
+.scroll-down {
+  position: absolute;
+  bottom: 0px; /* Adjust spacing from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 5s infinite;
+}
+
+@media (max-width: 991px) { /* Mobile Fix */
   .hero-section {
       padding-top: 100px; /* Increase padding for fixed navbar */
       text-align: center;
+      padding-bottom: 80px; /* More space for scroll-down icon */
   }
   .hero-section .d-flex {
       justify-content: center;
@@ -37,6 +41,7 @@ body {
       justify-content: center;
   }
 }
+
 
 
 .nav-link {
