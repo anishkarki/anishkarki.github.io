@@ -40,7 +40,7 @@
               <div class="d-inline-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-2">
                 <span class="badge bg-success me-2 text-black">Completed</span>
                 <i class="bi bi-calendar-check me-2 text-black"></i>
-                <span class="text-black">2023</span>
+                <span class="text-black">2020</span>
               </div>
             </div>
           </div>
@@ -117,10 +117,9 @@
         <div class="col-12" data-aos="fade-up">
           <h2 class="h3 mb-4">Project Description</h2>
           <p>
-            At Cotiviti Technology, I recognized a critical operational challenge in managing storage allocation across our extensive database ecosystem. With over 330 production database systems totaling approximately 9 petabytes of data, we frequently encountered system failures due to unexpected storage exhaustion, resulting in service disruptions and emergency resource allocation.
+            At Cotiviti Technology, with over 330 production database systems totaling approximately 9 petabytes of data, we frequently encountered system failures due to unexpected storage exhaustion resulting in business failure. To solve this problem, I implemented LSTM (Neural Networks) to proactively predict the weekly size of database and adjust the adjust requirements as needed.
           </p>
           <p>
-            To address this challenge, I designed and implemented an intelligent database size estimation system using machine learning techniques, specifically Long Short-Term Memory (LSTM) neural networks, to predict future storage requirements and enable proactive capacity planning.
           </p>
         </div>
       </div>
@@ -197,81 +196,11 @@
             <div class="card-header bg-light py-3">
               <h4 class="h5 mb-0">Data Collection Framework</h4>
             </div>
-            <div class="card-body">
-              <p>
-                I designed a robust data collection framework that continuously gathered storage metrics from diverse database systems including Oracle, SQL Server, Vertica, and various data warehouses. The system tracked historical growth patterns, seasonal trends, and anomalies.
-              </p>
-              <div class="bg-light p-3 rounded">
-                <pre class="mb-0"><code>import pandas as pd
-import numpy as np
-from sqlalchemy import create_engine
-import pymysql
-import cx_Oracle
-import pyodbc
-import vertica_python
-
-class DataCollector:
-    def __init__(self, config):
-        self.config = config
-        self.connections = self._initialize_connections()
-        
-    def _initialize_connections(self):
-        connections = {}
-        for db_type, db_configs in self.config.items():
-            connections[db_type] = []
-            for db_config in db_configs:
-                if db_type == 'oracle':
-                    conn = self._connect_oracle(db_config)
-                elif db_type == 'sqlserver':
-                    conn = self._connect_sqlserver(db_config)
-                elif db_type == 'vertica':
-                    conn = self._connect_vertica(db_config)
-                # Add other database types as needed
-                connections[db_type].append((db_config['name'], conn))
-        return connections</code></pre>
-              </div>
-            </div>
           </div>
           
           <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-light py-3">
               <h4 class="h5 mb-0">LSTM Model Implementation</h4>
-            </div>
-            <div class="card-body">
-              <p>
-                The heart of the system was a Long Short-Term Memory (LSTM) neural network model that analyzed historical growth patterns to predict future storage requirements. I implemented the model using TensorFlow and Keras, optimizing for accuracy in time-series forecasting.
-              </p>
-              <div class="bg-light p-3 rounded">
-                <pre class="mb-0"><code>import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM, Dropout
-from tensorflow.keras.callbacks import EarlyStopping
-from sklearn.preprocessing import MinMaxScaler
-
-def build_lstm_model(X_train, y_train, X_val, y_val):
-    # Define the LSTM model architecture
-    model = Sequential()
-    model.add(LSTM(units=50, return_sequences=True, 
-                input_shape=(X_train.shape[1], X_train.shape[2])))
-    model.add(Dropout(0.2))
-    model.add(LSTM(units=50, return_sequences=False))
-    model.add(Dropout(0.2))
-    model.add(Dense(units=25))
-    model.add(Dense(units=1))
-    
-    # Compile the model
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    
-    # Train the model with early stopping
-    early_stop = EarlyStopping(monitor='val_loss', patience=10, 
-                              restore_best_weights=True)
-    
-    history = model.fit(X_train, y_train, epochs=100, batch_size=32,
-                       validation_data=(X_val, y_val),
-                       callbacks=[early_stop], verbose=1)
-    
-    return model, history</code></pre>
-              </div>
             </div>
           </div>
           
@@ -279,108 +208,11 @@ def build_lstm_model(X_train, y_train, X_val, y_val):
             <div class="card-header bg-light py-3">
               <h4 class="h5 mb-0">Predictive Analytics Engine</h4>
             </div>
-            <div class="card-body">
-              <p>
-                I developed a robust predictive analytics engine that processed the LSTM model outputs and generated actionable insights. The system provided forecasts at different time horizons (7-day, 30-day, 90-day) with confidence intervals, enabling tiered response planning.
-              </p>
-              <div class="bg-light p-3 rounded">
-                <pre class="mb-0"><code>def generate_forecasts(model, database_data, scaler, forecast_days=[7, 30, 90]):
-    """
-    Generate storage forecasts for multiple time horizons
-    """
-    forecasts = {}
-    
-    for days in forecast_days:
-        # Prepare input data (last 60 days of data)
-        input_data = database_data[-60:].copy()
-        
-        # Generate predictions for each day in the forecast period
-        forecast_values = []
-        current_input = input_data.values.reshape(1, input_data.shape[0], input_data.shape[1])
-        
-        for _ in range(days):
-            # Predict the next day
-            next_day_scaled = model.predict(current_input)
-            next_day = scaler.inverse_transform(next_day_scaled)[0][0]
-            forecast_values.append(next_day)
-            
-            # Update input for next prediction
-            # (Drop oldest day, add prediction as newest day)
-            new_input = np.append(current_input[0, 1:, :], 
-                                [[next_day_scaled[0][0]]], axis=0)
-            current_input = new_input.reshape(1, input_data.shape[0], input_data.shape[1])
-        
-        # Calculate confidence intervals (can be adjusted based on model uncertainty)
-        lower_bound = [val * 0.95 for val in forecast_values]  # 5% below prediction
-        upper_bound = [val * 1.05 for val in forecast_values]  # 5% above prediction
-        
-        forecasts[f'{days}_day'] = {
-            'values': forecast_values,
-            'lower_bound': lower_bound,
-            'upper_bound': upper_bound,
-            'exhaustion_risk': calculate_exhaustion_risk(forecast_values, 
-                                                        current_capacity,
-                                                        days)
-        }
-    
-    return forecasts</code></pre>
-              </div>
-            </div>
           </div>
           
           <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-light py-3">
               <h4 class="h5 mb-0">Alerting and Workflow Integration</h4>
-            </div>
-            <div class="card-body">
-              <p>
-                To ensure timely response to predicted storage needs, I implemented an automated alerting system integrated with our existing workflow tools. This system triggered alerts at configurable thresholds and automatically generated provisioning requests when necessary.
-              </p>
-              <div class="bg-light p-3 rounded">
-                <pre class="mb-0"><code>def trigger_alerts(database_name, server_name, forecast_data, thresholds):
-    """
-    Generate alerts based on forecast data and defined thresholds
-    """
-    alerts = []
-    
-    # Check if any forecast period exceeds warning threshold
-    for period, data in forecast_data.items():
-        days = int(period.split('_')[0])
-        max_forecast = max(data['values'])
-        capacity_pct = (max_forecast / current_capacity) * 100
-        
-        if capacity_pct >= thresholds['critical']:
-            severity = 'CRITICAL'
-            action = 'immediate_provision'
-        elif capacity_pct >= thresholds['warning']:
-            severity = 'WARNING'
-            action = 'plan_provision'
-        elif capacity_pct >= thresholds['notice']:
-            severity = 'NOTICE'
-            action = 'monitor'
-        else:
-            continue  # No alert needed
-            
-        alert = {
-            'database': database_name,
-            'server': server_name,
-            'forecast_period': period,
-            'current_usage': current_usage,
-            'max_forecast': max_forecast,
-            'capacity_pct': capacity_pct,
-            'severity': severity,
-            'action': action,
-            'timestamp': datetime.now()
-        }
-        
-        alerts.append(alert)
-        
-        # Create JIRA ticket for critical and warning alerts
-        if severity in ['CRITICAL', 'WARNING']:
-            create_jira_ticket(alert)
-            
-    return alerts</code></pre>
-              </div>
             </div>
           </div>
         </div>
@@ -429,36 +261,6 @@ def build_lstm_model(X_train, y_train, X_val, y_val):
                   <h5 class="fw-bold">Ticket Reduction</h5>
                   <p class="text-muted">Decrease in emergency storage allocation tickets</p>
                 </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mt-4">
-            <h4 class="mb-3">Key Benefits</h4>
-            <div class="row">
-              <div class="col-md-6">
-                <ul class="list-group list-group-flush mb-4">
-                  <li class="list-group-item border-0 ps-0">
-                    <i class="bi bi-graph-up text-success me-2"></i>
-                    <strong>Proactive Capacity Planning:</strong> Shifted from reactive to proactive approach for storage management
-                  </li>
-                  <li class="list-group-item border-0 ps-0">
-                    <i class="bi bi-shield-check text-success me-2"></i>
-                    <strong>Improved System Reliability:</strong> Drastically reduced unplanned outages due to storage issues
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <ul class="list-group list-group-flush mb-4">
-                  <li class="list-group-item border-0 ps-0">
-                    <i class="bi bi-cash-coin text-success me-2"></i>
-                    <strong>Cost Optimization:</strong> More efficient resource allocation and reduced emergency provisioning
-                  </li>
-                  <li class="list-group-item border-0 ps-0">
-                    <i class="bi bi-people text-success me-2"></i>
-                    <strong>Reduced Operational Overhead:</strong> DBA team could focus on value-added tasks rather than emergency response
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
