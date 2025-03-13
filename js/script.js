@@ -134,3 +134,5 @@ function updateNavbarStyle(scrollPosition) {
     navbar.classList.toggle('shadow-sm', scrollPosition > 50);
   }
 }
+
+
