@@ -39,29 +39,117 @@ body {
 }
 
 
-.nav-link {
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-link:hover {
-  color: var(--secondary-color) !important;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--secondary-color);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
+  /* Navbar styling */
+  .navbar {
+    transition: all 0.3s ease;
+  }
+  
+  .nav-blur {
+    backdrop-filter: blur(10px);
+    background-color: rgba(10, 25, 47, 0.7); /* Using primary color with opacity */
+  }
+  
+  .navbar-scrolled {
+    background-color: rgba(10, 25, 47, 0.95); /* Using primary color with higher opacity */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .text-teal-300 {
+    color: var(--secondary-color); /* Using secondary color for highlighting */
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    color: var(--text-light) !important;
+  }
+  
+  .nav-link {
+    color: var(--text-dark) !important;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  .nav-link:hover, .nav-link.active {
+    color: var(--secondary-color) !important;
+  }
+  
+  /* Active link indicator */
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: var(--secondary-color);
+  }
+  
+  /* Toggler icon styling */
+  .navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+  
+  /* Transformation for toggler icon */
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background-image: none;
+  }
+  
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before,
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-light);
+    top: 50%;
+    left: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  .navbar-toggler .navbar-toggler-icon {
+    position: relative;
+  }
+  
+  /* Accent hover effect for nav links */
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-color);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  
+  .nav-link:hover::before {
+    width: 50%;
+    opacity: 1;
+  }
 
 .btn-primary {
   background-color: transparent;

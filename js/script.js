@@ -1,21 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Initialize all functions
   loadComponents();
   initializeAOS();
   initializeSkillBars();
   initializeTypedJS();
-  setupNavbarCollapse();
+  setupNavbar();
   enableSmoothScrolling();
-  trackActiveNavLinks();
 });
 
 // Function to load navbar and footer components
-function loadComponent(id, file) {
-  fetch(file)
-    .then(response => response.text())
-    .then(data => document.getElementById(id).innerHTML = data)
-    .catch(error => console.error(`Error loading ${file}:`, error));
-}
-
 function loadComponents() {
   const components = [
     { id: "navbar-placeholder", file: "components/navbar.html" },
@@ -23,116 +16,146 @@ function loadComponents() {
     { id: "project-navbar-placeholder", file: "components/project-navbar.html" }
   ];
 
-  components.forEach(comp => loadComponent(comp.id, comp.file));
+  components.forEach(comp => {
+    const element = document.getElementById(comp.id);
+    if (element) {
+      fetch(comp.file)
+        .then(response => response.text())
+        .then(data => element.innerHTML = data)
+        .then(() => {
+          // Initialize navbar functionality after navbar is loaded
+          if (comp.id === "navbar-placeholder") {
+            setupNavbar();
+          }
+        })
+        .catch(error => console.error(`Error loading ${comp.file}:`, error));
+    }
+  });
 }
 
 // Initialize AOS animation
 function initializeAOS() {
-  AOS.init({ duration: 800, once: true });
+  if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 800, once: true });
+  }
 }
 
 // Activate skill progress bars on scroll
 function initializeSkillBars() {
   const skillBars = document.querySelectorAll('.skill-progress-bar');
-  window.addEventListener('load', function () {
+  if (skillBars.length) {
     skillBars.forEach(bar => {
       const width = bar.getAttribute('data-width');
       bar.style.width = width;
     });
-  });
+  }
 }
 
 // Initialize Typed.js for dynamic text in the hero section
 function initializeTypedJS() {
-  new Typed('#typed-output', {
-    strings: [
-      'Database Administrator',
-      'Data Analytics Professional',
-      'Azure Cloud Specialist',
-      'SQL Expert & Python Developer'
-    ],
-    typeSpeed: 50,
-    backSpeed: 30,
-    backDelay: 2000,
-    loop: true
-  });
-}
-
-// Handle navbar collapse behavior
-function setupNavbarCollapse() {
-  const navbarToggler = document.querySelector(".navbar-toggler");
-  const navbarCollapse = document.querySelector(".navbar-collapse");
-
-  if (!navbarToggler || !navbarCollapse) return;
-
-  // Close navbar when clicking outside
-  document.addEventListener("click", function (event) {
-    if (!navbarToggler.contains(event.target) && !navbarCollapse.contains(event.target)) {
-      closeNavbar();
-    }
-  });
-
-  // Close navbar on scroll
-  window.addEventListener("scroll", closeNavbar);
-
-  // Toggle navbar when clicking the toggler button
-  navbarToggler.addEventListener("click", function (event) {
-    event.stopPropagation(); // Prevent immediate closure
-  });
-
-  function closeNavbar() {
-    if (navbarCollapse.classList.contains("show")) {
-      navbarToggler.click();
-    }
+  const typedElement = document.getElementById('typed-output');
+  if (typedElement && typeof Typed !== 'undefined') {
+    new Typed('#typed-output', {
+      strings: [
+        'Database Administrator',
+        'Data Analytics Professional',
+        'Azure Cloud Specialist',
+        'SQL Expert & Python Developer'
+      ],
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 2000,
+      loop: true
+    });
   }
 }
 
-// Smooth scrolling for navigation links
+// Setup all navbar related functionality
+function setupNavbar() {
+  const navbar = document.querySelector('.navbar');
+  const navbarToggler = document.querySelector('.navbar-toggler');
+  const navbarCollapse = document.getElementById('navbarNav');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  if (!navbar || !navbarToggler || !navbarCollapse) return;
+  
+  // Change navbar style on scroll
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      navbar.classList.add('navbar-scrolled', 'shadow-sm');
+    } else {
+      navbar.classList.remove('navbar-scrolled', 'shadow-sm');
+    }
+    
+    // Update active nav link
+    updateActiveNavLink(navLinks);
+  });
+  
+  // Collapse navbar when clicking on a nav link
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+      if (bsCollapse && window.innerWidth < 992) {
+        bsCollapse.hide();
+      }
+    });
+  });
+  
+  // Collapse navbar when clicking outside
+  document.addEventListener('click', function(event) {
+    const isNavbarCollapse = navbarCollapse.contains(event.target);
+    const isNavbarToggler = navbarToggler.contains(event.target);
+    
+    if (!isNavbarCollapse && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+      const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+      if (bsCollapse) {
+        bsCollapse.hide();
+      }
+    }
+  });
+  
+  // Initial active state
+  updateActiveNavLink(navLinks);
+}
+
+// Update active navigation link based on scroll position
+function updateActiveNavLink(navLinks) {
+  if (!navLinks.length) return;
+  
+  const sections = document.querySelectorAll('section[id]');
+  const scrollPosition = window.pageYOffset + 100; // Offset for fixed navbar
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    const sectionId = section.getAttribute('id');
+    
+    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${sectionId}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}
+
+// Enable smooth scrolling for anchor links
 function enableSmoothScrolling() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 70,
-          behavior: 'smooth'
-        });
+      const href = this.getAttribute('href');
+      if (href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
       }
     });
   });
 }
-
-// Add active class to navigation based on scroll position
-function trackActiveNavLinks() {
-  window.addEventListener('scroll', function () {
-    const scrollPosition = window.scrollY;
-
-    document.querySelectorAll('section').forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        document.querySelectorAll('.nav-link').forEach(navLink => {
-          navLink.classList.remove('active');
-          if (navLink.getAttribute('href') === `#${sectionId}`) {
-            navLink.classList.add('active');
-          }
-        });
-      }
-    });
-
-    updateNavbarStyle(scrollPosition);
-  });
-}
-
-// Add backdrop blur to navbar on scroll
-function updateNavbarStyle(scrollPosition) {
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    navbar.classList.toggle('shadow-sm', scrollPosition > 50);
-  }
-}
-
-
