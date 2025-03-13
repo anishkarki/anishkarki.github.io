@@ -11,33 +11,6 @@ body {
   color: #333;
 }
 
-.hero-section {
-  background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.hero-section {
-  padding-top: 80px; /* Adjust for navbar height */
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-@media (max-width: 991px) { /* Fix for mobile screens */
-  .hero-section {
-      padding-top: 100px; /* Increase padding for fixed navbar */
-      text-align: center;
-  }
-  .hero-section .d-flex {
-      justify-content: center;
-  }
-  .social-icons {
-      justify-content: center;
-  }
-}
-
 
   /* Navbar styling */
   .navbar {
@@ -373,3 +346,6 @@ body {
 .cross-icon::after {
   transform: rotate(-45deg);
 }
+
+
+
