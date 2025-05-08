@@ -1,128 +1,151 @@
 :root {
   --primary-color: #0a192f;
+  --primary-color-rgb: 10, 25, 47; /* Added for convenience */
   --secondary-color: #ff7e5f;
   --accent-color: #feb47b;
   --text-light: #e6f1ff;
   --text-dark: #9ba9c9;
+
+  /* Responsive Font Sizes (Base for mobile, adjust as needed) */
+  --font-size-base: 1rem; /* Typically 16px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-xs: 0.75rem; /* 12px */
+
+  --h1-font-size-mobile: 2.25rem;
+  --h2-font-size-mobile: 1.75rem;
+  --h3-font-size-mobile: 1.375rem;
+  --h4-font-size-mobile: 1.125rem;
+  --h5-font-size-mobile: 1rem;
+  --h6-font-size-mobile: 0.875rem;
+
+  --lead-font-size-mobile: 1rem;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   color: #333;
+  font-size: var(--font-size-base); /* Base font size for the body */
+  line-height: 1.6; /* Improved default line height */
+  padding-top: 70px; /* Assuming fixed navbar height of approx 70px. Adjust if navbar height changes. */
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 
+/* --- Global Heading Adjustments for Mobile First --- */
+h1, .display-1, .display-2, .display-3 { font-size: var(--h1-font-size-mobile); }
+h2, .display-4, .display-5 { font-size: var(--h2-font-size-mobile); }
+h3, .display-6 { font-size: var(--h3-font-size-mobile); }
+h4 { font-size: var(--h4-font-size-mobile); }
+h5 { font-size: var(--h5-font-size-mobile); }
+h6 { font-size: var(--h6-font-size-mobile); }
 
-  /* Navbar styling */
-  .navbar {
-    transition: all 0.3s ease;
-  }
-  
-  .nav-blur {
-    backdrop-filter: blur(10px);
-    background-color: rgba(10, 25, 47, 0.7); /* Using primary color with opacity */
-  }
-  
-  .navbar-scrolled {
-    background-color: rgba(10, 25, 47, 0.95); /* Using primary color with higher opacity */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .text-teal-300 {
-    color: var(--secondary-color); /* Using secondary color for highlighting */
-  }
-  
-  .font-bold {
-    font-weight: 700;
-  }
-  
-  .navbar-brand {
-    font-size: 1.5rem;
-    letter-spacing: 0.5px;
-    color: var(--text-light) !important;
-  }
-  
-  .nav-link {
-    color: var(--text-dark) !important;
-    transition: color 0.3s ease;
-    font-weight: 500;
-    position: relative;
-  }
-  
-  .nav-link:hover, .nav-link.active {
-    color: var(--secondary-color) !important;
-  }
-  
-  /* Active link indicator */
-  .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 2px;
-    background-color: var(--secondary-color);
-  }
-  
-  /* Toggler icon styling */
-  .navbar-toggler {
-    border: none;
-    padding: 0.25rem 0.5rem;
-    outline: none;
-    box-shadow: none;
-  }
-  
-  .navbar-toggler:focus {
-    box-shadow: none;
-  }
-  
-  /* Transformation for toggler icon */
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-    background-image: none;
-  }
-  
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before,
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
-    content: '';
-    position: absolute;
-    width: 24px;
-    height: 2px;
-    background-color: var(--text-light);
-    top: 50%;
-    left: 50%;
-    transition: transform 0.3s ease;
-  }
-  
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-  
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
-  
-  .navbar-toggler .navbar-toggler-icon {
-    position: relative;
-  }
-  
-  /* Accent hover effect for nav links */
-  .nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background-color: var(--accent-color);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateX(-50%);
-  }
-  
-  .nav-link:hover::before {
-    width: 50%;
-    opacity: 1;
-  }
+.lead { font-size: var(--lead-font-size-mobile); }
+
+/* --- Navbar styling --- */
+.navbar {
+  transition: all 0.3s ease;
+  /* If navbar is fixed, ensure basic fixed props are here or in HTML class */
+  /* position: fixed; top: 0; left: 0; width: 100%; z-index: 1030; */
+}
+
+.nav-blur {
+  backdrop-filter: blur(5px); /* Using the latter definition from your original file */
+  background-color: rgba(var(--primary-color-rgb), 0.85);
+}
+
+.navbar-scrolled {
+  background-color: rgba(var(--primary-color-rgb), 0.95);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.text-teal-300 { /* This is a Tailwind-like class, keep if used */
+  color: var(--secondary-color) !important; /* Added !important from original */
+}
+
+.font-bold { /* General utility class */
+  font-weight: 700;
+}
+
+.navbar-brand {
+  font-size: 1.25rem; /* Slightly smaller for mobile */
+  letter-spacing: 0.5px;
+  color: var(--text-light) !important;
+  font-weight: 700; /* Applied .font-bold directly */
+}
+
+.nav-link {
+  color: var(--text-dark) !important;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  font-size: 0.9rem; /* Base for mobile */
+  padding: 0.6rem 0.5rem; /* Adjust padding */
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--secondary-color) !important;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Closer for smaller font */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 2px;
+  background-color: var(--secondary-color);
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem 0.5rem;
+  outline: none;
+  box-shadow: none;
+}
+.navbar-toggler:focus { box-shadow: none; }
+
+.navbar-toggler .navbar-toggler-icon { position: relative; }
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon { background-image: none; }
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before,
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+  content: '';
+  position: absolute;
+  width: 22px; /* Slightly smaller for mobile toggler context */
+  height: 2px;
+  background-color: var(--text-light);
+  top: 50%;
+  left: 50%;
+  transition: transform 0.3s ease;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+.nav-link::before { /* Accent hover effect */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background-color: var(--accent-color);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+.nav-link:hover::before { width: 50%; opacity: 1; }
+
+
+/* --- Buttons --- */
+.btn { /* Base button style for responsive padding/font size */
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+.btn-lg { /* Responsive .btn-lg */
+    font-size: 1rem;
+    padding: 0.65rem 1.25rem;
+}
 
 .btn-primary {
   background-color: transparent;
@@ -130,222 +153,233 @@ body {
   color: var(--secondary-color);
   transition: all 0.3s ease;
 }
-
 .btn-primary:hover {
   background-color: rgba(255, 126, 95, 0.1);
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* --- Section Padding --- */
 .section {
-  padding: 6rem 0;
+  padding: 3rem 0; /* Reduced base padding for mobile */
 }
 
+/* --- Footer --- */
 .footer {
   background-color: var(--primary-color);
   color: var(--text-dark);
+  padding: 2rem 1rem; /* Padding for mobile */
+  font-size: var(--font-size-sm);
+  text-align: center; /* Center content on mobile */
+}
+.footer .list-inline-item {
+    margin-bottom: 0.5rem; /* Space when icons stack/wrap */
+}
+.footer .social-icon i {
+    font-size: 1.3rem; /* Adjust icon size for mobile */
 }
 
-.social-icons a {
-  color: #ffffff !important;
-  transition: color 0.3s ease-in-out;
-}
 
-.social-icons a:hover {
-  color: var(--bs-secondary) !important;
-}
-
-.social-icon {
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  color: var(--secondary-color);
-  transform: translateY(-5px);
-}
-
+/* --- Cards --- */
 .card {
   transition: all 0.3s ease;
   overflow: hidden;
   border: none;
   border-radius: 12px;
+  /* background-color: var(--primary-color-lightened, var(--primary-color)); Remove if project-card is used */
 }
-
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
+.card .card-body { /* Base card body padding */
+    padding: 1rem;
+}
+.card h3, .card .h5 { font-size: var(--h5-font-size-mobile); margin-bottom: 0.5rem;} /* Target common heading levels in cards */
+.card h4, .card .h6 { font-size: var(--h6-font-size-mobile); margin-bottom: 0.5rem;}
+.card p, .card ul, .card .card-text { font-size: var(--font-size-sm); }
+.card ul { padding-left: 1.25rem; margin-bottom: 0.5rem; }
 
+
+/* --- Badges --- */
 .badge {
   transition: all 0.3s ease;
   background-color: #e9ecef;
   color: #495057;
+  font-size: var(--font-size-xs); /* Smaller badges on mobile */
+  padding: 0.3em 0.5em; /* Adjust padding */
 }
-
 .badge:hover, .badge.bg-primary {
   background-color: var(--secondary-color) !important;
   color: white;
 }
-
 .badge.bg-secondary {
   background-color: #edf2f7 !important;
   color: #4a5568 !important;
 }
 
-.typed-cursor {
-  color: var(--secondary-color);
-}
-
-.cert-badge {
-  transition: all 0.3s ease;
-  max-width: 180px;
-  margin: 0 auto;
-}
-
-.cert-badge:hover {
-  transform: scale(1.05);
-}
-
-.cert-badge img {
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-  transition: all 0.3s ease;
-}
-
-.cert-badge:hover img {
-  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
-}
-
+/* --- Timeline --- */
 .timeline {
   position: relative;
-  padding-left: 30px;
+  padding-left: 25px; /* Adjusted for mobile */
+  margin-left: 10px;
 }
+.timeline::before { content: ''; position: absolute; height: 100%; width: 2px; left: 0; top: 0; background-color: var(--text-dark); }
+.timeline-item { position: relative; padding-bottom: 20px; } /* Reduced padding */
+.timeline-item::before { content: ''; position: absolute; width: 10px; height: 10px; border-radius: 50%; background-color: var(--secondary-color); left: -30px; /* Adjusted */ top: 10px; border: 2px solid var(--primary-color); } /* Align with text, added border */
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline .card .d-flex.justify-content-between { flex-direction: column; align-items: flex-start; } /* Stack title/badge */
+.timeline .card .d-flex.justify-content-between .badge { margin-top: 0.25rem; }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 2px;
-  left: 0;
-  top: 0;
-  background-color: var(--text-dark);
-}
 
-.timeline-item {
-  position: relative;
-  padding-bottom: 30px;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: var(--secondary-color);
-  left: -36px;
-  top: 6px;
-}
-
-.timeline-item:last-child {
-  padding-bottom: 0;
-}
-
-.scroll-down {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: bounce 2s infinite;
-}
+/* --- Scroll Down --- */
+.scroll-down { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; }
+.scroll-down i { font-size: 1.5rem; } /* Adjust icon size */
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-  40% { transform: translateY(-30px) translateX(-50%); }
-  60% { transform: translateY(-15px) translateX(-50%); }
+  40% { transform: translateY(-20px) translateX(-50%); } /* Reduced bounce */
+  60% { transform: translateY(-10px) translateX(-50%); }
 }
 
-.skill-progress {
-  height: 10px;
-  border-radius: 5px;
-  background-color: #e9ecef;
-  margin-bottom: 10px;
-}
+/* --- Skills Progress --- */
+.skill-progress { height: 8px; border-radius: 5px; background-color: #e9ecef; margin-bottom: 0.75rem; }
+.skill-progress-bar { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--secondary-color), var(--accent-color)); transition: width 1.5s ease-in-out; }
+.skills .d-flex.justify-content-between span { font-size: var(--font-size-sm); } /* Text for skill percentage */
 
-.skill-progress-bar {
-  height: 100%;
-  border-radius: 5px;
-  background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-  transition: width 1.5s ease-in-out;
-}
 
-.nav-blur {
-  backdrop-filter: blur(5px);
-  background-color: rgba(10, 25, 47, 0.85);
-}
-
+/* --- Project Card Specifics (if needed beyond .card) --- */
 .project-card {
   height: 100%;
-  background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+  background: linear-gradient(145deg, #f8fafc, #f1f5f9); /* This is a light background */
   border-radius: 20px;
   overflow: hidden;
+  display: flex; /* Added for flex-grow on card-text */
+  flex-direction: column;
 }
-
 .project-card .card-body {
   z-index: 2;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allows card-text to grow and push button down */
 }
-
-/* Text color classes */
-.text-teal-300, .text-primary {
-  color: var(--secondary-color) !important;
+.project-card .card-text {
+    flex-grow: 1;
+    margin-bottom: 1rem; /* Space before button */
 }
-
-.text-light-blue {
-  color: var(--text-light) !important;
+.project-card .btn {
+    margin-top: auto; /* Pushes button to the bottom */
 }
+/* Text inside .project-card will use body default #333 if not overridden */
+.project-card .text-primary { color: var(--secondary-color) !important; } /* If you use this class inside */
 
-.text-gray-400 {
-  color: var(--text-dark) !important;
-}
+/* --- Certification Badges --- */
+.cert-badge { transition: all 0.3s ease; max-width: 120px; margin: 0.5rem auto; } /* Smaller max-width for mobile */
+.cert-badge:hover { transform: scale(1.05); }
+.cert-badge img { filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); transition: all 0.3s ease; width: 100%; }
+.cert-badge:hover img { filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15)); }
+#certifications .card .badge { font-size: var(--font-size-xs); } /* Smaller skill badges */
 
-/* Additional hover effects */
+
+/* --- Text color classes (from original) --- */
+/* .text-teal-300, .text-primary are already handled if .text-teal-300 is defined */
+.text-light-blue { color: var(--text-light) !important; } /* Typically used on dark backgrounds */
+.text-gray-400 { color: var(--text-dark) !important; } /* Typically used on dark backgrounds */
+
+
+/* --- Additional hover effects (from original) --- */
 .btn-outline-light:hover {
   color: var(--primary-color);
   background-color: var(--text-light);
 }
-
-.navbar-brand:hover .text-teal-300 {
+.navbar-brand:hover .text-teal-300 { /* .text-teal-300 is var(--secondary-color) */
   color: var(--accent-color) !important;
 }
 
-/* Navbar menu button transformation */
-.navbar-toggler-icon {
-  transition: transform 0.3s ease-in-out;
+/* --- Navbar menu button transformation (from original) --- */
+.navbar-toggler-icon { transition: transform 0.3s ease-in-out; } /* For Bootstrap's own icon if it were transforming */
+
+/* --- Custom Cross Icon (from original, ensure it's used if default toggler is hidden) --- */
+.cross-icon { transform: rotate(45deg); background-image: none !important; width: 24px; height: 24px; position: relative; }
+.cross-icon::before, .cross-icon::after { content: ""; position: absolute; width: 24px; height: 3px; background-color: white; /* Ensure this contrasts with navbar bg */ }
+.cross-icon::before { transform: rotate(45deg); } /* These rotations are relative to the parent's 45deg */
+.cross-icon::after { transform: rotate(-45deg); }
+
+
+/* ==========================================================================
+   Medium Screens and Up (md - 768px and up)
+   ========================================================================== */
+@media (min-width: 768px) {
+  body {
+    /* Optionally increase base font size for tablets if desired */
+    /* font-size: 1.05rem; */
+  }
+
+  h1, .display-1, .display-2, .display-3 { font-size: calc(var(--h1-font-size-mobile) * 1.25); } /* Scale up */
+  h2, .display-4, .display-5 { font-size: calc(var(--h2-font-size-mobile) * 1.2); }
+  h3, .display-6 { font-size: calc(var(--h3-font-size-mobile) * 1.15); }
+  h4 { font-size: calc(var(--h4-font-size-mobile) * 1.1); }
+  /* h5 and h6 can often remain same or use Bootstrap defaults */
+
+  .lead { font-size: 1.125rem; } /* Bootstrap's default .lead on larger screens is 1.25rem */
+
+  .navbar-brand { font-size: 1.5rem; /* Original size */ }
+  .nav-link { font-size: 1rem; padding: 0.5rem 1rem; } /* Original size & Bootstrap default padding */
+  .nav-link.active::after { width: 20px; bottom: -5px; } /* Original */
+
+  .section { padding: 4.5rem 0; } /* Slightly increase padding */
+
+  .footer { padding: 2.5rem 1rem; font-size: 0.9rem; text-align: left; }
+  .footer .text-md-start { text-align: left !important; }
+  .footer .text-md-end { text-align: right !important; }
+  .footer .list-inline-item { margin-bottom: 0; }
+  .footer .social-icon i { font-size: 1.4rem; }
+
+
+  .btn { font-size: 1rem; padding: 0.6rem 1.2rem; }
+  .btn-lg { font-size: 1.125rem; padding: 0.75rem 1.5rem; } /* Bootstrap default for .btn-lg */
+
+  .card .card-body { padding: 1.25rem; } /* Bootstrap default */
+  .card h3, .card .h5 { font-size: 1.25rem; } /* Bootstrap default for h5 */
+  .card h4, .card .h6 { font-size: 1rem; } /* Bootstrap default for h6 */
+  .card p, .card ul, .card .card-text { font-size: 1rem; }
+
+  .badge { font-size: 0.875rem; /* Bootstrap default */ padding: 0.35em 0.65em; }
+
+  .timeline { padding-left: 30px; margin-left: 0; } /* Original */
+  .timeline-item::before { width: 12px; height: 12px; left: -36px; top: 6px; } /* Original */
+  .timeline .card .d-flex.justify-content-between { flex-direction: row; align-items: center; }
+  .timeline .card .d-flex.justify-content-between .badge { margin-top: 0; }
+
+
+  .scroll-down { bottom: 30px; }
+  .scroll-down i { font-size: 1.75rem; }
+
+  .cert-badge { max-width: 150px; }
 }
 
-.cross-icon {
-  transform: rotate(45deg);
-  background-image: none !important;
-  width: 24px;
-  height: 24px;
-  position: relative;
+/* ==========================================================================
+   Large Screens and Up (lg - 992px and up)
+   ========================================================================== */
+@media (min-width: 992px) {
+  /* Restore Bootstrap's display heading sizes or your preferred larger sizes */
+  .display-3 { font-size: 4.5rem; } /* Bootstrap default */
+  .display-5 { font-size: 3rem; }   /* Bootstrap default */
+  /* Add others if used: .display-1, .display-2, .display-4, .display-6 */
+  h1 { font-size: 2.5rem * 1.5; } /* Example scaling */
+  h2 { font-size: 2rem * 1.4 ; }
+  h3 { font-size: 1.75rem * 1.3; }
+
+  .lead { font-size: 1.25rem; } /* Bootstrap default */
+
+  .section { padding: 6rem 0; /* Original padding */ }
+
+  .footer { padding: 3rem 1rem; }
+  .footer .social-icon i { font-size: 1.5rem; }
+
+
+  .cert-badge { max-width: 180px; /* Original size */ }
+
+  .scroll-down { bottom: 40px; } /* Original */
 }
-
-.cross-icon::before, .cross-icon::after {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 3px;
-  background-color: white;
-}
-
-.cross-icon::before {
-  transform: rotate(45deg);
-}
-
-.cross-icon::after {
-  transform: rotate(-45deg);
-}
-
-
-
