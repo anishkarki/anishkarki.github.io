@@ -69,7 +69,7 @@ h6 { font-size: var(--h6-font-size-mobile); }
 
 .nav-blur {
   backdrop-filter: blur(5px); /* Using the latter definition from your original file */
-  background-color: rgba(var(--primary-color-rgb), 0.85);
+  background-color: rgba(var(--primary-color-rgb), 0.95);
 }
 
 .navbar-scrolled {
