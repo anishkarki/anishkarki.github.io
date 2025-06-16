@@ -1,0 +1,146 @@
+# Migration of SQL Server On-Premise to Azure
+---
+## Types of system in AZURE
+1. VM for SQL Server (IaaS)
+2. Azure SQL Database (SaaS)
+3. Azure SQL Managed Instance (PaaS)
+
+## Pricing Models.
+* General Purpose: vCore pricing
+* Large scale: Hyperscale storage.
+* Serverless Tiers: Scaling resouces, like elastic pool. DTUs
+
+
+### MYSQL/MariaDB: Fully managed database server. Single and Service
+>Adjust vCores, Storage and backup retention. 
+
+### Azure Database for PostgreSQL: 
+> High Availability, automatic backups, maintenance and service patches\
+> Elastic Resource scaling, security monitoring
+* Types: Single server, flexible server (vertical scaling) and hyperscale deployments (citus /horizontal scaling).
+
+---
+# Azure on VM:
+&rarr; BYOL and Pay as you go.
+
+1. **A-series**: low-vol developement or test databases. 
+2. **B-Series**: Like A-series workloads with the ability to brust perfromance temporarily.
+3. **D-Series**: Faster processor
+4. **E-Series**: Memory optimised for in-memory analytics
+5. **F-Series**: web server and gaming application
+6. **H-Series**: Scientific research and data modeling
+
+## High Availability
+### 1. Availability Zones
+&rarr; Deploy VM in region close to customers.
+&rarr; AZ within regions are different physical locations.
+
+### 2. Availability Sets
+&rarr; Availability set are located within the same location but in different servers still might sare resource like cooler and all.
+
+### Always on Availability Groups
+* Group tow or more sql server instance together, one is "primary replication" and all other are "secondary replicas".
+* Txn are first commited to primary replica and synchronously or asynchronously to secondary replicas.
+* Secondary can be primary.
+---
+## Geo-Redundant Storage
+* Store full and diff backup in Geo-redundant storage (GRS) copies. Synchronously three times in single physical location in primary region, then async to a single physical location in a secondary region. within secondary region, data copied synchronusly thre additional times. 
+* RA-GRS: remote are read-only access.
+* can backup all of the VMs.
+
+# Deploying a SQL server VM from marketplace. 
+&rarr; subscription
+&rarr; resource group
+&rarr; Names, regions, availability options.
+&rarr; Azure spot instance (not consumed by others can pull)
+&rarr; 3389 Default port, OS disk types. Encryption settings, Azure AD, patch orchestration options (automatic by os), Additional extention and custom data. 
+&rarr; Choose the SQL server settings and storage configurations. 
+
+>Virtual machine: the actual hardware and SQL virtual machine is the actual sql server. 
+---
+# Migration Options
+* Backup and Restore (should do the user seperately)
+* Detach and attach data and log files
+* ship a hard drive using azure import/export service
+* add VM to always on availability group then induce a failover. 
+
+## Migration helper
+* Data migration assistant: Create report on migration issues. 
+* Azure migrate tool: access current situation and plan migration and modernization
+* Azure data migration service (ADMS): Azure to azure, azure to cloud.
+
+# <span style="color: skyblue;">The azure database platform as a service (Paas)</span>
+##service tier
+* DTU-based purchasing model: compute, storage and I/O (basic, standard and premium)
+* vCore purchasing model: compute and storage
+    * general purpose: Azure blob storage
+    * Business critical: SSD storage, read-only database replica for querying and reporting
+    * Hyper scale: billed for storage used, 4TB max for general and 100TB for business critical.
+
+* vCore service tiers:
+    * General-purpose provisioned compute tier:billed per hour, preallocate specific number
+    * General-purpose serverless compute tier: max and min vcore, pilled per second (autopause)
+
+---
+Benefits of Azure SQL db
+* automatic backups.
+    * full: week
+    * diff: 12 hrs
+    * txn log backups: 5-10 mins.
+* Replication: four read-only replicas can be added to single or pooled azure sql db. (configure to auto-failover group. without requiring to connect to new end-point in app)
+
+>hyperscale can't be changed
+(ZRS AND LRS) in backup setup.
+> for elastic: dynamic server storage and dynamic serverless compute is not available. Only vcore and DTU pricing model
+
+# Sql managed instance:
+* Supports Sql Agent, cross-database queries, distributed transactions, and common language runtime [CLR] like a VM
+* Store up to 100 individual database on a single managed instance.
+* backup, auto security, HA. 
+GEN5
+---
+
+### SQL DATA SYNC (Hybrid environment)
+&rarr; Start by designating an Azure SQL Database as the SYNC HUB in the manged tab of the azure portal
+* Hub and Spoke model. Hub and member ( for conflict resolution)
+
+Sync can be bi-directional. 
+(must have PK, no identity columns, can't use hypens)
+
+
+# Authentication and Authorisation:
+---
+* can sync with windows server AD
+
+## Security Principal and securables
+* Groups and users.
+* Objects in the database using schema.
+>what prinicipal can do in securables
+
+### Permissions
+* Control and execute. Grant, revoke and deny.
+
+```SQL
+create ROLE DataAnalyst;
+grant select, insert on SCHEMA::Sales to DataAnalyst;
+Alter role DataAnalyst ADD Member Max;
+Deny insert to schema::sales to max;
+```
+
+#### Policy of Least Privilege: roles.
+### Built-in db roles:
+* db_datareader:
+* db_datawriter:
+* db_ddladmin: create and modify database objects
+* db_access admin: grant permission
+* db_denydatareader and db_denydatawriter:
+* db_backupoperator: sql server, VM and managed instance to allow backup activities. (automatics)
+* dbmanager and loginmanager: can delete and create db and login respectively.  Loginmanager and Dbmanager are two roles specific to Azure SQL Database.
+
+
+## Assign a DB admin to a person. 
+CREATE USER [<username>@yourdomain.com] FROM EXTERNAL PROVIDER;\
+ALTER ROLE db_datareader ADD MEMBER [<username>@yourdomain.com];
+
+>sp_set_database_firewall_rule
+
