@@ -426,4 +426,77 @@ h6 { font-size: var(--h6-font-size-mobile); }
   .cert-badge { max-width: 180px; /* Original size */ }
 
   .scroll-down { bottom: 40px; } /* Original */
+}/* ========================================================================
+   Retro 80s AI Theme Overrides
+   ======================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --primary-color: #110022;
+  --primary-color-rgb: 17, 0, 34;
+  --secondary-color: #ff3bd6;
+  --accent-color: #00ffee;
+  --text-light: #f4f4f4;
+  --text-altdark: #98e1ff;
+  --text-dark: #00ffcc;
+}
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  background: radial-gradient(circle at center, #200041 0%, #000 100%);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--secondary-color);
+}
+
+a, .nav-link, .btn-primary {
+  color: var(--accent-color);
+}
+
+a:hover, .nav-link:hover {
+  color: var(--secondary-color);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridScroll 30s linear infinite;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,0,255,0.08) 0,
+    rgba(255,0,255,0.08) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: scanMove 10s linear infinite;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+@keyframes gridScroll {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 1000px, 1000px 0; }
+}
+
+@keyframes scanMove {
+  from { background-position: 0 0; }
+  to { background-position: 0 200px; }
 }
