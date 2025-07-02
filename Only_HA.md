@@ -1,15 +1,13 @@
-# Only HA and DR solutions in SQL SERVER [High Availability]
+# Only HA and DR Solutions in SQL Server [High Availability]
+
 ## Replication for HA
-Publications, distributor, subscriptions
+Replication components: publications, distributor, and subscriptions.
 
-Publisher-Distributor Architecture:
-
-1. Snapshot Publication: Send the snapshot of published data to subscribers at scheduled intervals.
-2. The Transactional: Publisher streams transactions to subscribers after they receive an initial snapshot of the published data.
-3. Peer-to-peer: Multi-master replication. The publisher streams txn to all the peers in topology. All the peers can read and write changes and changes are propagated to all the nodes. 
-4. Merge Publication: update the published data independently after the subscribers receive an initial snapshot of the published data. Changes are merged periodically. Compact edition can only subscribe to merge. There should always be the publisher. Non-realtime.
-
-
-
+### Publisher-Distributor Architecture
+1. **Snapshot Publication** – Sends a snapshot of the published data to subscribers at scheduled intervals.
+2. **Transactional Publication** – Streams transactions to subscribers after they receive an initial snapshot.
+3. **Peer-to-Peer Replication** – Multi-master replication where all peers can read and write changes, which are propagated to all nodes.
+4. **Merge Publication** – Subscribers update the data independently after receiving the initial snapshot. Changes are merged periodically. Compact Edition can only subscribe to merge. There should always be a publisher; this approach is not real-time.
 
 ## Log Shipping
+
