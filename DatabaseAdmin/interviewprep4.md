@@ -1,4 +1,4 @@
-# All Scenario Based
+# All Scenario Based [Interview Prep]
 ### 1. A critical production database is perfroming slowly during clinical hours. How do you diagnose and fix it without disrupign services?
 * Its clinical hour so you can't disrupt the database or service.
 

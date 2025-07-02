@@ -1,4 +1,4 @@
-# The modern SQL Server DBA - HandBook
+# The modern SQL Server DBA - HandBook [Interview Prep]
 In the age of LLM where you can buy memory on cheap price, the deciding factors for capable employee has drastically changed. Unlike the technical requirements, it has been necessary to analyse the phychological and behavioural traits of a person.
 * Stress Innoculation and Cognitive performance under stress: Reaction and approach during the production-down scenario.
 * Root cause analysis and systematic thinking:

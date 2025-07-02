@@ -1,4 +1,4 @@
-# Backups
+# Backups [SQL Server]
 ## Backup encryption
 * use the certificate or asymmetric keys to protect data
 ```SQL

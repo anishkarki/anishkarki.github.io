@@ -1,0 +1,68 @@
+[
+  {
+    "title": "DP-300: Optimisation and Automation of Azure",
+    "file": "DP-300-2.md",
+    "category": "Azure"
+  },
+  {
+    "title": "Migration of SQL Server On-Premise to Azure",
+    "file": "DP-300_1.md",
+    "category": "Azure"
+  },
+  {
+    "title": "Mail is vital",
+    "file": "DatabaseAdmin/AllaboutAvailabiilty.md",
+    "category": "SQL Server"
+  },
+  {
+    "title": "The modern SQL Server DBA - HandBook",
+    "file": "DatabaseAdmin/Interviewprep1.md",
+    "category": "Interview Prep"
+  },
+  {
+    "title": "Queries",
+    "file": "DatabaseAdmin/Queries.md",
+    "category": "SQL Server"
+  },
+  {
+    "title": "Simulation",
+    "file": "DatabaseAdmin/SimulatingPlanchange.md",
+    "category": "SQL Server"
+  },
+  {
+    "title": "Backups",
+    "file": "DatabaseAdmin/backupsinfo.md",
+    "category": "SQL Server"
+  },
+  {
+    "title": "SQL Server architecture",
+    "file": "DatabaseAdmin/interviewprep2.md",
+    "category": "Interview Prep"
+  },
+  {
+    "title": "Day 3",
+    "file": "DatabaseAdmin/interviewprep3.md",
+    "category": "Interview Prep"
+  },
+  {
+    "title": "All Scenario Based",
+    "file": "DatabaseAdmin/interviewprep4.md",
+    "category": "Interview Prep"
+  },
+  {
+    "title": "Installing Always on Availability Group in Docker",
+    "file": "DatabaseAdmin/setup_ag_docker.md",
+    "category": "SQL Server"
+  },
+  {
+    "title": "High Availability and Disaster Recovery",
+    "file": "Dp-300-3.md",
+    "category": "High Availability"
+  },
+  {
+    "title": "Only HA and DR solutions in SQL SERVER",
+    "file": "Only_HA.md",
+    "category": "High Availability"
+  }
+]
+

@@ -1,3 +1,4 @@
+# Queries [SQL Server]
 ```SQL
 -- CROSS APPLY: Correlated Join
 select e.EmpID, e.EmpName, string_agg(p.ProjectName,', ') as Projects

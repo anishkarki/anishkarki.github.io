@@ -1,4 +1,4 @@
-# Installing Always on Availability Group in Docker
+# Installing Always on Availability Group in Docker [SQL Server]
 ```bash
 apt install pacemaker crmsh resource-agents mssql-tools unixodbc-dev
 
