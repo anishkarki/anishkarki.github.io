@@ -427,3 +427,25 @@ h6 { font-size: var(--h6-font-size-mobile); }
 
   .scroll-down { bottom: 40px; } /* Original */
 }
+
+/* ------- Blog Content ------- */
+#content {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+#content img {
+  max-width: 100%;
+  height: auto;
+}
+#content pre {
+  overflow-x: auto;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+}
+#content h1, #content h2, #content h3,
+#content h4, #content h5, #content h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
