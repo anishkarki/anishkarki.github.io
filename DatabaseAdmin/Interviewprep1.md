@@ -14,7 +14,7 @@ In the age of LLM where you can buy memory on cheap price, the deciding factors 
 ### ADR: It uses 
 * ```Persistent Version Store (PVS)``` Maintains the version store directly in the user database: tracks row level changes, access previous version of data.
 * Logical Revert: Instant revert using the PVS.
-* sLog: A secondary in-memoery log stream that stores log records for non-versioned operations. Only process these small operations quickly in redo and undo. 
+* sLog: A secondary in-memory log stream that stores log records for non-versioned operations. Only process these small operations quickly in redo and undo. 
 ## Interview Preperation
 ### 1. Describe troubleshooting a slow-running query reported by a user:
     * Try reproducing the issue
@@ -574,4 +574,5 @@ VALUES
 * Audit current state, implement basic monitoring, setup alerts if not. Check for the replication status, architecture. I believe understanding business is vital for DBA. Need to know what is critical and what is not. need to figure out which system needs load and which are free ones.
 * 60: Automated backups, index/stat maintencance, baseline metrics, Automated backups integrity and verification
 * 90: DR test plan, optimise high-cost queries, implement security and performance policy. 
+
 

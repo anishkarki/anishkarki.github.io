@@ -95,7 +95,7 @@ DBCC PAGE (2, 1, 8, 3);
     * limited scope.
     * No query rewrites, server config, non-index tuning
 
-### In-memoery OLTP objects.
+### In-memory OLTP objects.
 * Hekaton are tables (memory-optimized tables) and stored procedures ( natively compiled stored procedures) that reside in RAM and are optimised for OLTP workloads.
     * Speed, no locks, natively compiled procedure reduce CPU cycles.
     * memory footprint, limited feature set, persistent overhead, migration complexity. no tempdb.
@@ -146,7 +146,7 @@ DBCC PAGE (2, 1, 8, 3);
 * Foundation first: wait stats, execution plan, indexing basics, I/O principles.
 * Practical application: Show them and engage them instead of doing alone. Shadow them.
 * SSMS (exection plan, activity monitor), query store, XE
-* Methodology is key: Identify bottlenect then identify the query then analyze plan then propose soluitoin, test and implement.
+* Methodology is key: Identify bottleneck then identify the query then analyze plan then propose solution, test and implement.
 * Let them know that its hard to see a drastic change in any query at once unless they are completely unoptimised. Small changes group to make the whole system exteremly fast.
 * Asking questions.
 * Reputable online communities
@@ -191,7 +191,7 @@ DBCC PAGE (2, 1, 8, 3);
     * upgrade test and restore production alike with masking.
     * upgrade compatibility
     * capture workload: query store.
-    * monitor and analyze: XE and performance conter to identify queries that bebefit from IQP features or confirm no regression. look for change in memeory grant
+    * monitor and analyze: XE and performance conter to identify queries that bebefit from IQP features or confirm no regression. look for change in memory grant
 
 2. Phase 2: Controlled Rollout - Staging/ pre-production
     * staging env
@@ -199,5 +199,5 @@ DBCC PAGE (2, 1, 8, 3);
     * feature flagging: database scoped config options that can be toggled
 3. Phase 3: procution implementation:
     * gradual rollout: if the application supports (microservices) subset rollout.
-    * agressive montior and feedback look.
+    * agressive monitor and feedback look.
     
