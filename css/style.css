@@ -505,27 +505,33 @@ h6 { font-size: var(--h6-font-size-mobile); }
 /* --- DNA Background Animation --- */
 body {
   background-color: #f9fafb;
+  --accent-color: rgba(100, 149, 237, 0.15); /* soft cornflower blue */
+  --secondary-color: rgba(70, 130, 180, 0.05); /* subtle steel blue */
 }
+
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.15;
-  background-size: 200% 200%;
+  opacity: 0.07;
+  background-size: 100% 300%;
   background-image:
-    radial-gradient(circle at 25% 50%, var(--accent-color) 0%, transparent 25%),
-    radial-gradient(circle at 75% 50%, var(--accent-color) 0%, transparent 25%),
-    repeating-linear-gradient(45deg, var(--secondary-color) 0 2px, transparent 2px 40px),
-    repeating-linear-gradient(-45deg, var(--secondary-color) 0 2px, transparent 2px 40px);
-  animation: dna-move 30s linear infinite;
+    radial-gradient(ellipse 40% 100% at 25% 0%, var(--accent-color) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 100% at 75% 100%, var(--accent-color) 0%, transparent 60%),
+    repeating-linear-gradient(45deg, var(--secondary-color) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(-45deg, var(--secondary-color) 0 1px, transparent 1px 40px);
+  animation: dnaFloat 120s linear infinite;
 }
-@keyframes dna-move {
-  0% { background-position: 0 0, 0 0, 0 0, 0 0; }
-  100% { background-position: 0 100%, 0 -100%, 100% 0, -100% 0; }
+
+@keyframes dnaFloat {
+  0% {
+    background-position: 0 0, 0 100%, 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 300%, 0 -300%, 100% 100%, -100% -100%;
+  }
 }
+
 
