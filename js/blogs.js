@@ -11,9 +11,59 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Azure'
     },
     {
-      title: 'Only HA and DR solutions in SQL SERVER',
+      title: 'High Availability and Disaster Recovery',
+      file: 'Dp-300-3.md',
+      category: 'High Availability'
+    },
+    {
+      title: 'Only HA and DR solutions in SQL Server',
       file: 'Only_HA.md',
+      category: 'High Availability'
+    },
+    {
+      title: 'The modern SQL Server DBA - HandBook',
+      file: 'DatabaseAdmin/Interviewprep1.md',
       category: 'SQL Server'
+    },
+    {
+      title: 'Mail is vital',
+      file: 'DatabaseAdmin/AllaboutAvailabiilty.md',
+      category: 'SQL Server'
+    },
+    {
+      title: 'SQL Server architecture',
+      file: 'DatabaseAdmin/interviewprep2.md',
+      category: 'SQL Server'
+    },
+    {
+      title: 'Interview Prep Day 3 - SQL Server',
+      file: 'DatabaseAdmin/interviewprep3.md',
+      category: 'SQL Server'
+    },
+    {
+      title: 'All Scenario Based',
+      file: 'DatabaseAdmin/interviewprep4.md',
+      category: 'SQL Server'
+    },
+    {
+      title: 'Database Backups',
+      file: 'DatabaseAdmin/backupsinfo.md',
+      category: 'Backup'
+    },
+    {
+      title: 'Query Examples',
+      file: 'DatabaseAdmin/Queries.md',
+      category: 'Queries'
+    },
+    {
+      title: 'Plan Change Simulation',
+      file: 'DatabaseAdmin/SimulatingPlanchange.md',
+      category: 'SQL Server'
+    },
+    {
+      title: 'Installing Always on Availability Group in Docker',
+      file: 'DatabaseAdmin/setup_ag_docker.md',
+      category: 'Docker'
     }
   ];
 
