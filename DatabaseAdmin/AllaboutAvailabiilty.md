@@ -1,4 +1,4 @@
-# Mail is vital
+# Mail is vital [SQL Server]
 * Enable database mail.
 1. Setup database mail
 2. Create the mail profile

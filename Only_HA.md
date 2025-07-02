@@ -1,4 +1,4 @@
-# Only HA and DR solutions in SQL SERVER
+# Only HA and DR solutions in SQL SERVER [High Availability]
 ## Replication for HA
 Publications, distributor, subscriptions
 

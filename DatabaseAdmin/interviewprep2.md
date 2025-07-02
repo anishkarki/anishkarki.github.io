@@ -1,4 +1,4 @@
-# SQL Server architecture
+# SQL Server architecture [Interview Prep]
 ### SQL server storage architcture (pages, extent, allocation units)
 * Pages: Smallest unit 8KB
     * data page: Store data row for table (heap and clustered). 96 bytes header, a row offset array at the end.

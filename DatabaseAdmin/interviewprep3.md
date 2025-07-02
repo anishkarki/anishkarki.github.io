@@ -1,4 +1,4 @@
-## Day 3
+## Day 3 [Interview Prep]
 ### 1.  Cardinality estimation of SQL server
 * Optimizer predicts the number of rows that will be returned by each operation in a query plan. Generated from sampled column values only.
 * it uses statistics (histograms, density vectors) Deciding between the hash and a nested loops join.
