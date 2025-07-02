@@ -1,5 +1,5 @@
 # All Scenario Based [Interview Prep]
-### 1. A critical production database is perfroming slowly during clinical hours. How do you diagnose and fix it without disrupign services?
+### 1. A critical production database is performing slowly during clinical hours. How do you diagnose and fix it without disrupting services?
 * Its clinical hour so you can't disrupt the database or service.
 
 |Steps|SQL SERVER| POSTGRES|
@@ -8,7 +8,7 @@ Verification: Identify the expensive query current and historical |```sys.dm_exe
 Diagnosis | check for the index fragmentation, wait-time, plan history if the query store is enabled, missing indexes, analyse the query plans | Check for fragmentation, wait-time, plan history, analyze the query plan. 
 Short term fixes | kill the blocking or resource consuming query, use query hints like OPTION RECOMPILE, USE sp_create_plan_guide | kill blocking query pg_cancel_backend(), pg_terminate_backend(), set work_mem (careful), create index concurrently, analyze table.
 Long Term | Offload reporting to replica monitor replciation lag or log shipping | check pg_is_in_recovery()
-Long Term| analyze index and stats, optimize indexs (fragmentations), resource close montior, bottlenect, Server configuration and application tuning. like maxdop or cost thresthold memeory | Adjust workload pattern, app interactions, match config, tune shared_buffers, work-Mem, WAL settings. pgBouncer, Copy for loads.
+Long Term| analyze index and stats, optimize indexes (fragmentations), resource close monitor, bottleneck, Server configuration and application tuning. like maxdop or cost threshold memory | Adjust workload pattern, app interactions, match config, tune shared_buffers, work-Mem, WAL settings. pgBouncer, Copy for loads.
 
 ### 2. The ministry introduced new privacy compliance rules. How would you assess and enforce changes across all databases?
 1. Check for data discovery and classifciation
@@ -50,7 +50,7 @@ ORDER BY TableName, ColumnName;
 #### Create the database encryption
 1. create master key and certificate in the masterdb.
 2. Create the backup certifcate 
-3. create the user database encruption key in user db with server certificate
+3. create the user database encryption key in user db with server certificate
 4. Alter db set encryption on. 
     * Create a master key in master DB
     ```SQL
@@ -85,7 +85,7 @@ ORDER BY TableName, ColumnName;
     GO
     ```
 #### Column level encryption
-> * Use the SSMS alwyas encrupted wizard and choose the master key configuration select between the deterministic and randomized option. and generate powershell or finish.
+> * Use the SSMS always encrypted wizard and choose the master key configuration select between the deterministic and randomized option. and generate powershell or finish.
 > * User with unmask permission can ssee the data
 
 #### Row level encrypt
@@ -120,7 +120,7 @@ GO
 * RBAC across roles and enable auditing for all access and DDL changes.
 * rotate key securely. 
 
-#### Aduit (server and db): tacks who accessed what data and any schema modifications.
+#### Audit (server and db): tacks who accessed what data and any schema modifications.
 ```SQL
 USE master;
 CREATE SERVER AUDIT AW_Server_Audit
