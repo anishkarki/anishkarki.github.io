@@ -469,3 +469,63 @@ h6 { font-size: var(--h6-font-size-mobile); }
   margin-top: 1.5rem;
   margin-bottom: 1rem;
 }
+/* --- Markdown Formatting --- */
+.markdown-body {
+  background-color: rgba(255,255,255,0.8);
+  color: var(--text-dark);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  color: var(--secondary-color);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid var(--border-color-hacker);
+  padding: 0.5rem 1rem;
+}
+.markdown-body ul,
+.markdown-body ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+/* --- DNA Background Animation --- */
+body {
+  background-color: #f9fafb;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.15;
+  background-size: 200% 200%;
+  background-image:
+    radial-gradient(circle at 25% 50%, var(--accent-color) 0%, transparent 25%),
+    radial-gradient(circle at 75% 50%, var(--accent-color) 0%, transparent 25%),
+    repeating-linear-gradient(45deg, var(--secondary-color) 0 2px, transparent 2px 40px),
+    repeating-linear-gradient(-45deg, var(--secondary-color) 0 2px, transparent 2px 40px);
+  animation: dna-move 30s linear infinite;
+}
+@keyframes dna-move {
+  0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 0 100%, 0 -100%, 100% 0, -100% 0; }
+}
+
