@@ -175,3 +175,4 @@ GO
 * Always on AG for SQL server or streaming replication for postgresql within each region. 
 * Use async replication to the central DR site.
 * Appropriate quorum with witness server to prevent split-brain. 
+
