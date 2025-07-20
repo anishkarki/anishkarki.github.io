@@ -1,6 +1,6 @@
 [
   {
-    "title": "DP-300: Optimisation and Automation of Azure",
+    "title": "DP-300: Optimization and Automation of Azure",
     "file": "DP-300-2.md",
     "category": "Azure"
   },
@@ -10,7 +10,7 @@
     "category": "Azure"
   },
   {
-    "title": "Mail is vital",
+    "title": "Mail is Vital",
     "file": "DatabaseAdmin/AllaboutAvailabiilty.md",
     "category": "SQL Server"
   },
@@ -50,7 +50,7 @@
     "category": "Interview Prep"
   },
   {
-    "title": "Installing Always on Availability Group in Docker",
+    "title": "Installing Always On Availability Group in Docker",
     "file": "DatabaseAdmin/setup_ag_docker.md",
     "category": "SQL Server"
   },
@@ -60,9 +60,13 @@
     "category": "High Availability"
   },
   {
-    "title": "Only HA and DR solutions in SQL SERVER",
+    "title": "Automation with Airflow, Spark and Datalake",
+    "file": "FabricAnalytics/day1.md",
+    "category": "General"
+  },
+  {
+    "title": "Only HA and DR Solutions in SQL Server",
     "file": "Only_HA.md",
     "category": "High Availability"
   }
 ]
-

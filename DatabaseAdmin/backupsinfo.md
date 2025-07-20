@@ -69,3 +69,4 @@ SELECT *
 FROM sys.dm_exec_requests 
 WHERE command LIKE 'BACKUP%';
 ```
+
