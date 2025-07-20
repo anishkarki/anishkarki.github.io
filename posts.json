@@ -1,72 +1,107 @@
 [
   {
-    "title": "DP-300: Optimization and Automation of Azure",
-    "file": "DP-300-2.md",
+    "title": "DP-300-2.md",
+    "file": "Posts/DP-300-2.md",
     "category": "Azure"
   },
   {
-    "title": "Migration of SQL Server On-Premise to Azure",
-    "file": "DP-300_1.md",
+    "title": "DP-300_1.md",
+    "file": "Posts/DP-300_1.md",
     "category": "Azure"
   },
   {
-    "title": "Mail is Vital",
-    "file": "DatabaseAdmin/AllaboutAvailabiilty.md",
+    "title": "AllaboutAvailabiilty.md",
+    "file": "Posts/DatabaseAdmin/AllaboutAvailabiilty.md",
     "category": "SQL Server"
   },
   {
-    "title": "The modern SQL Server DBA - HandBook",
-    "file": "DatabaseAdmin/Interviewprep1.md",
+    "title": "Interviewprep1.md",
+    "file": "Posts/DatabaseAdmin/Interviewprep1.md",
     "category": "Interview Prep"
   },
   {
-    "title": "Queries",
-    "file": "DatabaseAdmin/Queries.md",
+    "title": "Queries.md",
+    "file": "Posts/DatabaseAdmin/Queries.md",
     "category": "SQL Server"
   },
   {
-    "title": "Simulation",
-    "file": "DatabaseAdmin/SimulatingPlanchange.md",
+    "title": "SimulatingPlanchange.md",
+    "file": "Posts/DatabaseAdmin/SimulatingPlanchange.md",
     "category": "SQL Server"
   },
   {
-    "title": "Backups",
-    "file": "DatabaseAdmin/backupsinfo.md",
+    "title": "backupsinfo.md",
+    "file": "Posts/DatabaseAdmin/backupsinfo.md",
     "category": "SQL Server"
   },
   {
-    "title": "SQL Server architecture",
-    "file": "DatabaseAdmin/interviewprep2.md",
+    "title": "interviewprep2.md",
+    "file": "Posts/DatabaseAdmin/interviewprep2.md",
     "category": "Interview Prep"
   },
   {
-    "title": "Day 3",
-    "file": "DatabaseAdmin/interviewprep3.md",
+    "title": "interviewprep3.md",
+    "file": "Posts/DatabaseAdmin/interviewprep3.md",
     "category": "Interview Prep"
   },
   {
-    "title": "All Scenario Based",
-    "file": "DatabaseAdmin/interviewprep4.md",
+    "title": "interviewprep4.md",
+    "file": "Posts/DatabaseAdmin/interviewprep4.md",
     "category": "Interview Prep"
   },
   {
-    "title": "Installing Always On Availability Group in Docker",
-    "file": "DatabaseAdmin/setup_ag_docker.md",
+    "title": "setup_ag_docker.md",
+    "file": "Posts/DatabaseAdmin/setup_ag_docker.md",
     "category": "SQL Server"
   },
   {
-    "title": "High Availability and Disaster Recovery",
-    "file": "Dp-300-3.md",
+    "title": "Dp-300-3.md",
+    "file": "Posts/Dp-300-3.md",
     "category": "High Availability"
   },
   {
-    "title": "Automation with Airflow, Spark and Datalake",
-    "file": "FabricAnalytics/day1.md",
+    "title": "day1.md",
+    "file": "Posts/FabricAnalytics/day1.md",
     "category": "General"
   },
   {
-    "title": "Only HA and DR Solutions in SQL Server",
-    "file": "Only_HA.md",
+    "title": "day2.md",
+    "file": "Posts/FabricAnalytics/day2.md",
+    "category": "General"
+  },
+  {
+    "title": "day3.md",
+    "file": "Posts/FabricAnalytics/day3.md",
+    "category": "General"
+  },
+  {
+    "title": "User_domain_plicy.md",
+    "file": "Posts/NetworkingCloud/User_domain_plicy.md",
+    "category": "General"
+  },
+  {
+    "title": "VCNwithinternetconnection.md",
+    "file": "Posts/NetworkingCloud/VCNwithinternetconnection.md",
+    "category": "General"
+  },
+  {
+    "title": "Only_HA.md",
+    "file": "Posts/Only_HA.md",
     "category": "High Availability"
+  },
+  {
+    "title": "cheetsheet.md",
+    "file": "Posts/sparkpandas/cheetsheet.md",
+    "category": "General"
+  },
+  {
+    "title": "commonerrors.md",
+    "file": "Posts/sparkpandas/commonerrors.md",
+    "category": "General"
+  },
+  {
+    "title": "intro.md",
+    "file": "Posts/sparkpandas/intro.md",
+    "category": "General"
   }
 ]

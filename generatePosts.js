@@ -24,13 +24,6 @@ function parseFile(file) {
   if (tagMatch) {
     category = tagMatch[1].trim();
   }
-  for (const line of lines) {
-    const m = line.match(/^#+\s*(.+)/);
-    if (m) {
-      title = m[1].replace(/\s*\[.*?\]\s*$/, '').trim();
-      break;
-    }
-  }
   return { title, file: file.replace(/^\.\//, ''), category };
 }
 
