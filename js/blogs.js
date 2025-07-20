@@ -1,66 +1,58 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   fetch('posts.json')
-    .then(res => res.json())
-    .then(posts => renderPosts(posts));
-});
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(posts => {
+      const blogListDiv = document.getElementById('blog-list');
+      const ul = document.createElement('ul');
 
-function renderPosts(posts) {
-  const params = new URLSearchParams(window.location.search);
-  const postFile = params.get('post');
-  const content = document.getElementById('content');
+      function createListItem(post) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = post.file;
+        a.textContent = post.title;
+        li.appendChild(a);
+        return li;
+      }
 
-  if (postFile) {
-    const post = posts.find(p => p.file === postFile);
-    if (post) {
-      const heading = document.createElement('h2');
-      heading.className = 'mb-4';
-      heading.textContent = post.title;
-      content.appendChild(heading);
-    }
-    fetch(postFile)
-      .then(res => res.text())
-      .then(md => {
-        const article = document.createElement('div');
-        article.innerHTML = marked.parse(md);
-        content.appendChild(article);
-      });
-    return;
-  }
+      function buildNestedList(data, parentUl) {
+        const folders = {};
 
-  // Group posts by category
-  const categories = {};
-  posts.forEach(p => {
-    if (!categories[p.category]) {
-      categories[p.category] = [];
-    }
-    categories[p.category].push(p);
-  });
+        data.forEach(post => {
+          const parts = post.file.split('/');
+          if (parts.length > 1) {
+            const folderName = parts[0];
+            if (!folders[folderName]) {
+              folders[folderName] = [];
+            }
+            folders[folderName].push({
+              title: post.title,
+              file: parts.slice(1).join('/') // Path relative to the folder
+            });
+          } else {
+            parentUl.appendChild(createListItem(post));
+          }
+        });
 
-  Object.keys(categories).forEach(cat => {
-    const section = document.createElement('section');
-    section.className = 'mb-5';
+        for (const folderName in folders) {
+          const folderLi = document.createElement('li');
+          folderLi.textContent = folderName + '/';
+          const subUl = document.createElement('ul');
+          buildNestedList(folders[folderName], subUl); // Recursively build sub-folders
+          folderLi.appendChild(subUl);
+          parentUl.appendChild(folderLi);
+        }
+      }
 
-    const header = document.createElement('h3');
-    header.className = 'mb-3';
-    header.textContent = cat;
-    section.appendChild(header);
-
-    const list = document.createElement('ul');
-    list.className = 'list-group';
-
-    categories[cat].forEach(post => {
-      const item = document.createElement('li');
-      item.className = 'list-group-item';
-
-      const link = document.createElement('a');
-      link.href = `blog.html?post=${encodeURIComponent(post.file)}`;
-      link.textContent = post.title;
-
-      item.appendChild(link);
-      list.appendChild(item);
+      buildNestedList(posts, ul);
+      blogListDiv.appendChild(ul);
+    })
+    .catch(error => {
+      console.error('Error fetching or parsing posts.json:', error);
+      document.getElementById('blog-list').textContent = 'Could not load blog posts.';
     });
-
-    section.appendChild(list);
-    content.appendChild(section);
-  });
-}
+});
