@@ -7,14 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
       return response.json();
     })
     .then(posts => {
-      const blogListDiv = document.getElementById('blog-list');
+      const blogListDiv = document.getElementById('blog-list'); // Ensure this div exists in your HTML
       const ul = document.createElement('ul');
 
       function createListItem(post) {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = post.file;
-        a.textContent = post.title;
+        // Since generatePosts.js now sets post.title to the filename,
+        // this line will correctly use the filename as the link text.
+        a.textContent = post.title; 
         li.appendChild(a);
         return li;
       }
@@ -29,10 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!folders[folderName]) {
               folders[folderName] = [];
             }
-            folders[folderName].push({
-              title: post.title,
-              file: parts.slice(1).join('/') // Path relative to the folder
-            });
+            // Pass the original post object, which now has filename in `title`
+            folders[folderName].push(post); 
+            // Also update the file path for nested structure if needed
+            post.file = parts.slice(1).join('/'); 
+
           } else {
             parentUl.appendChild(createListItem(post));
           }
@@ -53,6 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => {
       console.error('Error fetching or parsing posts.json:', error);
-      document.getElementById('blog-list').textContent = 'Could not load blog posts.';
+      document.getElementById('blog-list').textContent = 'Could not load blog posts. Make sure posts.json is generated.';
     });
 });
