@@ -1,106 +1,106 @@
 [
   {
-    "title": "DP-300-2.md",
-    "file": "Posts/DP-300-2.md",
-    "category": "Azure"
-  },
-  {
-    "title": "DP-300_1.md",
-    "file": "Posts/DP-300_1.md",
-    "category": "Azure"
-  },
-  {
-    "title": "AllaboutAvailabiilty.md",
+    "title": "AllaboutAvailabiilty",
     "file": "Posts/DatabaseAdmin/AllaboutAvailabiilty.md",
     "category": "SQL Server"
   },
   {
-    "title": "Interviewprep1.md",
-    "file": "Posts/DatabaseAdmin/Interviewprep1.md",
-    "category": "Interview Prep"
-  },
-  {
-    "title": "Queries.md",
-    "file": "Posts/DatabaseAdmin/Queries.md",
-    "category": "SQL Server"
-  },
-  {
-    "title": "SimulatingPlanchange.md",
-    "file": "Posts/DatabaseAdmin/SimulatingPlanchange.md",
-    "category": "SQL Server"
-  },
-  {
-    "title": "backupsinfo.md",
+    "title": "backupsinfo",
     "file": "Posts/DatabaseAdmin/backupsinfo.md",
     "category": "SQL Server"
   },
   {
-    "title": "interviewprep2.md",
+    "title": "Interviewprep1",
+    "file": "Posts/DatabaseAdmin/Interviewprep1.md",
+    "category": "Interview Prep"
+  },
+  {
+    "title": "interviewprep2",
     "file": "Posts/DatabaseAdmin/interviewprep2.md",
     "category": "Interview Prep"
   },
   {
-    "title": "interviewprep3.md",
+    "title": "interviewprep3",
     "file": "Posts/DatabaseAdmin/interviewprep3.md",
     "category": "Interview Prep"
   },
   {
-    "title": "interviewprep4.md",
+    "title": "interviewprep4",
     "file": "Posts/DatabaseAdmin/interviewprep4.md",
     "category": "Interview Prep"
   },
   {
-    "title": "setup_ag_docker.md",
+    "title": "Queries",
+    "file": "Posts/DatabaseAdmin/Queries.md",
+    "category": "SQL Server"
+  },
+  {
+    "title": "setup_ag_docker",
     "file": "Posts/DatabaseAdmin/setup_ag_docker.md",
     "category": "SQL Server"
   },
   {
-    "title": "Dp-300-3.md",
+    "title": "SimulatingPlanchange",
+    "file": "Posts/DatabaseAdmin/SimulatingPlanchange.md",
+    "category": "SQL Server"
+  },
+  {
+    "title": "DP-300_1",
+    "file": "Posts/DP-300_1.md",
+    "category": "Azure"
+  },
+  {
+    "title": "DP-300-2",
+    "file": "Posts/DP-300-2.md",
+    "category": "Azure"
+  },
+  {
+    "title": "Dp-300-3",
     "file": "Posts/Dp-300-3.md",
     "category": "High Availability"
   },
   {
-    "title": "day1.md",
+    "title": "day1",
     "file": "Posts/FabricAnalytics/day1.md",
     "category": "General"
   },
   {
-    "title": "day2.md",
+    "title": "day2",
     "file": "Posts/FabricAnalytics/day2.md",
     "category": "General"
   },
   {
-    "title": "day3.md",
+    "title": "day3",
     "file": "Posts/FabricAnalytics/day3.md",
     "category": "General"
   },
   {
-    "title": "User_domain_plicy.md",
+    "title": "User_domain_plicy",
     "file": "Posts/NetworkingCloud/User_domain_plicy.md",
     "category": "General"
   },
   {
-    "title": "VCNwithinternetconnection.md",
+    "title": "VCNwithinternetconnection",
     "file": "Posts/NetworkingCloud/VCNwithinternetconnection.md",
     "category": "General"
   },
   {
-    "title": "Only_HA.md",
+    "title": "Only_HA",
     "file": "Posts/Only_HA.md",
     "category": "High Availability"
   },
   {
-    "title": "cheetsheet.md",
+    "title": "cheetsheet",
     "file": "Posts/sparkpandas/cheetsheet.md",
     "category": "General"
   },
   {
-    "title": "commonerrors.md",
+    "title": "commonerrors",
     "file": "Posts/sparkpandas/commonerrors.md",
     "category": "General"
   },
   {
-    "title": "intro.md",
+    "title": "intro",
     "file": "Posts/sparkpandas/intro.md",
     "category": "General"
   }
