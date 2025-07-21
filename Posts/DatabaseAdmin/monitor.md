@@ -35,3 +35,6 @@ Most targets process data asynchronously, which means that the event data is wri
 2. Fabirc realtime analytics.
 
 ## Explore query performance insight
+
+# The sql VM resource provider
+# Azure monitor
