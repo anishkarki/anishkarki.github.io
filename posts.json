@@ -1,8 +1,48 @@
 [
   {
+    "title": "04-Optimise_Query_Performance",
+    "file": "Posts/DatabaseAdmin/04-Optimise_Query_Performance.md",
+    "category": "General"
+  },
+  {
+    "title": "05-Automatethedatabase",
+    "file": "Posts/DatabaseAdmin/05-Automatethedatabase.md",
+    "category": "General"
+  },
+  {
+    "title": "05-AzureAutomate",
+    "file": "Posts/DatabaseAdmin/05-AzureAutomate.md",
+    "category": "General"
+  },
+  {
+    "title": "05-logicapps",
+    "file": "Posts/DatabaseAdmin/05-logicapps.md",
+    "category": "General"
+  },
+  {
+    "title": "05-MainageAgentjob",
+    "file": "Posts/DatabaseAdmin/05-MainageAgentjob.md",
+    "category": "General"
+  },
+  {
+    "title": "05-monitor-automated-taks",
+    "file": "Posts/DatabaseAdmin/05-monitor-automated-taks.md",
+    "category": "General"
+  },
+  {
     "title": "AllaboutAvailabiilty",
     "file": "Posts/DatabaseAdmin/AllaboutAvailabiilty.md",
     "category": "SQL Server"
+  },
+  {
+    "title": "allmigrationmethods",
+    "file": "Posts/DatabaseAdmin/allmigrationmethods.md",
+    "category": "General"
+  },
+  {
+    "title": "06-HADR",
+    "file": "Posts/DatabaseAdmin/AvailabilityHADR/06-HADR.md",
+    "category": "General"
   },
   {
     "title": "backupsinfo",
@@ -28,6 +68,16 @@
     "title": "interviewprep4",
     "file": "Posts/DatabaseAdmin/interviewprep4.md",
     "category": "Interview Prep"
+  },
+  {
+    "title": "monitor",
+    "file": "Posts/DatabaseAdmin/monitor.md",
+    "category": "General"
+  },
+  {
+    "title": "Optimize_the_db",
+    "file": "Posts/DatabaseAdmin/Optimize_the_db.md",
+    "category": "General"
   },
   {
     "title": "Queries",
@@ -72,6 +122,11 @@
   {
     "title": "day3",
     "file": "Posts/FabricAnalytics/day3.md",
+    "category": "General"
+  },
+  {
+    "title": "VCNsetup",
+    "file": "Posts/Networking/VCNsetup.md",
     "category": "General"
   },
   {

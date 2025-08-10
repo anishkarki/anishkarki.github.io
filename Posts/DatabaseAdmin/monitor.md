@@ -36,5 +36,6 @@ Most targets process data asynchronously, which means that the event data is wri
 
 ## Explore query performance insight
 
-# The sql VM resource provider
-# Azure monitor
+### The sql VM resource provider
+### Azure monitor
+

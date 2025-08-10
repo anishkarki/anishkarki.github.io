@@ -1,7 +1,7 @@
 [
   {
     "title": "04-Optimise_Query_Performance",
-    "file": "Posts/DatabaseAdmin/04-Optimise_Query_Performance.md",
+    "file": "./Posts/DatabaseAdmin/04-Optimise_Query_Performance.md",
     "category": "General"
   },
   {
@@ -96,7 +96,7 @@
   },
   {
     "title": "DP-300_1",
-    "file": "Posts/DP-300_1.md",
+    "file": "./Posts/DP-300_1.md",
     "category": "Azure"
   },
   {

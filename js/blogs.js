@@ -1,61 +1,68 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+  createParticles();
+
   fetch('posts.json')
     .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       return response.json();
     })
     .then(posts => {
-      const blogListDiv = document.getElementById('blog-list'); // Ensure this div exists in your HTML
-      const ul = document.createElement('ul');
-
-      function createListItem(post) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = post.file;
-        // Since generatePosts.js now sets post.title to the filename,
-        // this line will correctly use the filename as the link text.
-        a.textContent = post.title; 
-        li.appendChild(a);
-        return li;
-      }
-
-      function buildNestedList(data, parentUl) {
-        const folders = {};
-
-        data.forEach(post => {
-          const parts = post.file.split('/');
-          if (parts.length > 1) {
-            const folderName = parts[0];
-            if (!folders[folderName]) {
-              folders[folderName] = [];
-            }
-            // Pass the original post object, which now has filename in `title`
-            folders[folderName].push(post); 
-            // Also update the file path for nested structure if needed
-            post.file = parts.slice(1).join('/'); 
-
-          } else {
-            parentUl.appendChild(createListItem(post));
-          }
-        });
-
-        for (const folderName in folders) {
-          const folderLi = document.createElement('li');
-          folderLi.textContent = folderName + '/';
-          const subUl = document.createElement('ul');
-          buildNestedList(folders[folderName], subUl); // Recursively build sub-folders
-          folderLi.appendChild(subUl);
-          parentUl.appendChild(folderLi);
-        }
-      }
-
-      buildNestedList(posts, ul);
-      blogListDiv.appendChild(ul);
+      const blogListDiv = document.getElementById('blog-list');
+      blogListDiv.classList.remove('loading');
+      blogListDiv.innerHTML = '';
+      const rootUl = document.createElement('ul');
+      buildPostTree(posts, rootUl);
+      blogListDiv.appendChild(rootUl);
     })
     .catch(error => {
       console.error('Error fetching or parsing posts.json:', error);
-      document.getElementById('blog-list').textContent = 'Could not load blog posts. Make sure posts.json is generated.';
+      document.getElementById('blog-list').innerHTML = `
+        <div class="error">
+          <i class="fas fa-exclamation-triangle"></i><br>
+          Could not load blog posts. Make sure posts.json is valid.
+        </div>`;
     });
+
+  function buildPostTree(posts, parentUl) {
+    const tree = {};
+
+    posts.forEach(post => {
+      const pathParts = post.file.split('/');
+      let current = tree;
+
+      for (let i = 0; i < pathParts.length; i++) {
+        const part = pathParts[i];
+        if (!current[part]) {
+          current[part] = (i === pathParts.length - 1) ? post : {};
+        }
+        current = current[part];
+      }
+    });
+
+    generateTreeDOM(tree, parentUl);
+  }
+
+  function generateTreeDOM(tree, parentUl) {
+    Object.entries(tree).forEach(([name, node]) => {
+      const li = document.createElement('li');
+
+      if (typeof node === 'object' && !node.title) {
+        const folderSpan = document.createElement('span');
+        folderSpan.textContent = name;
+        li.appendChild(folderSpan);
+
+        const nestedUl = document.createElement('ul');
+        generateTreeDOM(node, nestedUl);
+        li.appendChild(nestedUl);
+      } else {
+        const link = document.createElement('a');
+        link.href = `post.html?file=${encodeURIComponent(node.file)}`;
+        link.textContent = node.title || name.replace(/\.md$/, '');
+        link.target = '_blank';
+        li.appendChild(link);
+      }
+
+      parentUl.appendChild(li);
+    });
+  }
 });

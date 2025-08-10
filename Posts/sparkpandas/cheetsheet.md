@@ -66,3 +66,6 @@ df = pd.read_csv('path/to/file.csv')
 | **Join on Expressions**  | *Not applicable*                                                       | `df1.join(df2, df1.col1 == df2.col2, 'inner')`                           | Use for non-equal column names                                              |
 
 
+## Plotly Syntax
+|figure|syntax|
+|---|---|
