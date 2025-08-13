@@ -10,7 +10,7 @@
     "author": "Anish Karki",
     "featured": true,
     "readTime": "8 min read",
-    "file": "./posts/SQL_Server_Perfromance.md"
+    "file": "Posts/SQL_Server_Perfromance.md"
   },
   {
     "id": 2,
@@ -23,7 +23,7 @@
     "author": "Anish Karki",
     "featured": true,
     "readTime": "12 min read",
-    "file": "./posts/azure-sql-migration-guide.md"
+    "file": "Posts/azure-sql-migration-guide.md"
   },
   {
     "id": 3,
@@ -36,7 +36,7 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "10 min read",
-    "file": "./posts/python-backup-verification.md"
+    "file": "Posts/python-backup-verification.md"
   },
   {
     "id": 4,
@@ -49,7 +49,7 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "15 min read",
-    "file": "./posts/sql-server-alwayson-setup.md"
+    "file": "Posts/sql-server-alwayson-setup.md"
   },
   {
     "id": 5,
@@ -62,7 +62,7 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "11 min read",
-    "file": "posts/power-bi-dashboard-design.md"
+    "file": "Posts/power-bi-dashboard-design.md"
   },
   {
     "id": 6,
@@ -75,7 +75,7 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "9 min read",
-    "file": "posts/cloud-database-security.md"
+    "file": "Posts/cloud-database-security.md"
   },
   {
     "id": 7,
@@ -88,7 +88,7 @@
     "author": "Anish Karki",
     "featured": true,
     "readTime": "13 min read",
-    "file": "posts/ml-database-performance.md"
+    "file": "Posts/ml-database-performance.md"
   },
   {
     "id": 8,
@@ -101,7 +101,7 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "7 min read",
-    "file": "posts/docker-database-development.md"
+    "file": "Posts/docker-database-development.md"
   },
   {
     "id": 9,
@@ -114,7 +114,7 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "14 min read",
-    "file": "posts/zero-downtime-deployments.md"
+    "file": "Posts/zero-downtime-deployments.md"
   },
   {
     "id": 10,
@@ -127,7 +127,7 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "16 min read",
-    "file": "posts/advanced-tsql-techniques.md"
+    "file": "Posts/advanced-tsql-techniques.md"
   },
   {
     "id": 11,
@@ -140,7 +140,7 @@
     "author": "Anish Karki",
     "featured": true,
     "readTime": "18 min read",
-    "file": "posts/kafka-sql-server-pipeline.md"
+    "file": "Posts/kafka-sql-server-pipeline.md"
   },
   {
     "id": 12,
@@ -153,6 +153,6 @@
     "author": "Anish Karki",
     "featured": false,
     "readTime": "20 min read",
-    "file": "posts/multi-cloud-database-strategy.md"
+    "file": "Posts/multi-cloud-database-strategy.md"
   }
 ]
