@@ -3,151 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anish Karki | Database Administrator & Data Analytics Professional</title>
+  <title>Anish Karki | SQL Database Administrator | Cloud Migration | Azure Certified</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- AOS Animation Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-  <link rel="stylesheet" href="css/style.css">
-
-
-</head>
-<body class="font-sans">
   
-    <section class="hero-section text-white vh-100 d-flex align-items-center">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <!-- Particle System -->
+  <div class="particle-system" id="particleSystem"></div>
+
+  <!-- Neural Network Background -->
+  <div class="neural-network" id="neuralNetwork"></div>
+
+  <!-- Enhanced Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8 col-md-10" data-aos="fade-up" data-aos-duration="1000">
-                <p class="mb-3 text-md font-mono text-teal-300">Hi, my name is</p>
-                <h1 class="display-3 fw-bold mb-3">Anish Karki</h1>
-                <h2 class="display-5 text-light-blue mb-4 text-gray-400" id="typed-output"></h2>
-                <p class="lead mb-5 text-gray-400 max-w-lg">
-                    Database Administrator and Data Analytics graduate. Open to work as data engineer or data analyst. Trying to shift career into core machine learning/ AI engineer.</p>
-                <p class="lead mb-5 text-gray-400 max-w-lg">
-                  Skills: SQL, Python, Excel, PowerBI, Business Intelligence. 
-                </p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="#contact" class="btn btn-primary btn-lg px-4">Get In Touch</a>
-                    <a href="assets/SCI701_1168934_Task_1B_Anish_Karki_Resume.pdf" download="SCI701_1168934_Anish_Karki_Resume.pdf" class="btn btn-outline-light btn-lg px-4">Download Resume</a>
-                </div>
-                <div class="mt-4 d-flex gap-3 social-icons">
-                    <a href="https://github.com/anishkarki" class="fs-2" target="_blank"><i class="bi bi-github"></i></a>
-                    <a href="https://www.linkedin.com/in/anish-karki-545a4a187/" class="fs-2" target="_blank"><i class="bi bi-linkedin"></i></a>
-                </div>
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div data-aos="fade-up" data-aos-duration="1000">
+            <p class="hero-greeting">Hi, my name is</p>
+            <h1 class="hero-title">Anish Karki</h1>
+            <h2 class="hero-subtitle">
+              <span class="typing-effect" id="typingText">SQL Database Administrator</span>
+            </h2>
+            <p class="hero-description">
+              Results-driven Senior SQL Database Administrator with 7+ years of experience managing enterprise-scale, mission-critical SQL Server environments. Delivered 99.99% uptime for databases supporting 24/7 retail and healthcare operations processing over $2B annually.
+            </p>
+            <div class="hero-buttons">
+              <a href="#contact" class="quantum-btn">Get In Touch</a>
+              <a href="assets/SCI701_1168934_Anish_Karki_Resume.pdf" download="Anish_Karki_Resume.pdf" class="quantum-btn quantum-btn-outline">Download Resume</a>
             </div>
+            <div class="social-links">
+              <a href="https://github.com/anishkarki" target="_blank" class="social-link">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/anish-karki-dba/" target="_blank" class="social-link">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+
+    <!-- DNA Helix -->
+    <div class="dna-helix">
+      <div class="dna-strand" id="dnaStrand"></div>
+    </div>
+
+    <!-- Scroll Down Indicator -->
     <div class="scroll-down">
-      <a href="#about" class="text-white">
-        <i class="fas fa-chevron-down fa-2x"></i>
+      <a href="#about" class="scroll-link">
+        <i class="fas fa-chevron-down"></i>
       </a>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="section bg-light py-5">
+  <section id="about" class="section">
     <div class="container">
-        <div class="row justify-content-center align-items-center text-center text-md-start">
+      <h2 class="section-title" data-aos="fade-up">About Me</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-8" data-aos="fade-right">
+          <div class="quantum-card">
+            <p class="lead mb-4">
+              I'm a passionate Senior SQL Database Administrator and Cloud Migration Specialist based in Australia. With deep understanding of enterprise database management, I can turn complex data challenges into scalable, high-performance solutions.
+            </p>
+            <p class="mb-4">
+              I am currently completing my Master of Information and Communication Technology at the University of Sunshine Coast, graduating in June 2025. I have extensive practical experience from my roles as a Database Administrator at multinational enterprises, where I managed mission-critical databases with approximately 9 petabytes of data.
+            </p>
+            <p class="mb-4">
+              I'm passionate about database optimization, cloud migration, and helping organizations achieve 99.99% uptime while reducing costs through strategic automation and performance tuning.
+            </p>
             
-            <div class="col-lg-4 order-lg-2 mb-4 mb-lg-0 text-center" data-aos="fade-left">
-                <div class="profile-image-container mx-auto">
-                    <img src="assets/profilephoto.jpg" alt="Profile Photo" class="img-fluid rounded-circle border border-3 border-white shadow" style="width: 250px; height: 250px; object-fit: cover;">
-                </div>
+            <!-- Contact Details -->
+            <div class="contact-details mb-4">
+              <h3 class="mb-3">Connect With Me</h3>
+              <ul class="list-unstyled contact-list">
+                <li class="mb-2">
+                  <i class="bi bi-envelope-fill me-2"></i>
+                  <a href="mailto:anish.karki1.618@outlook.com">anish.karki1.618@outlook.com</a>
+                </li>
+                <li class="mb-2">
+                  <i class="bi bi-telephone-fill me-2"></i>
+                  <a href="tel:+61451165843">+61 451165843</a>
+                </li>
+                <li class="mb-2">
+                  <i class="bi bi-geo-alt-fill me-2"></i>
+                  Craigieburn, 3060 VIC, Australia
+                </li>
+              </ul>
             </div>
-            
-           
-            <div class="col-lg-8 order-lg-1" data-aos="fade-right">
-                <h2 class="mb-5 display-5 fw-bold">About Me</h2>
-                <p class="lead mb-4">
-                    I'm a passionate Database Administrator and Data Analytics Professional based in Australia. With deep understanding of data analytics methods, I can turn data into insighful summary.
-                </p>
-                <p class="mb-4">
-                    I am currently doing Master of Information and Communication Technology at the University of Sunshine Coast, I have theoretical knowledge along practical experience from my role as a Database Administrator at multinational enterprise, Cotiviti Technology, where I managed 200+ databases with approximately 9 petabytes of data gaining expertise in sql tuning, etl pipeline, data migration and so on.
-                </p>
-                <p class="mb-5">
-                    I'm eager to work in data analysis and grow into data science, expanding my expertise in AI, big data, and advanced analytics.
-                </p>
-                
-                <!-- Contact Details -->
-                <div class="contact-details mb-4">
-                    <h3 class="mb-3">Connect With Me</h3>
-                    <ul class="list-unstyled contact-list">
-                        <li class="mb-2">
-                            <i class="bi bi-envelope-fill me-2"></i>
-                            <a href="mailto:anish.karki1.618@gmail.com">anish.karki1.618@gmail.com</a>
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-telephone-fill me-2"></i>
-                            <a href="tel:+61451165843">+61 451165843</a>
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-geo-alt-fill me-2"></i>
-                            Brisbane, Queensland, Australia
-                        </li>
-                    </ul>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="col-lg-4" data-aos="fade-left">
+          <div class="profile-image-container">
+            <img src="assets/profilephoto.jpg" alt="Profile Photo" class="profile-image">
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
   <!-- Education Section -->
   <section id="education" class="section bg-light">
     <div class="container">
-      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Education</h2>
+      <h2 class="section-title" data-aos="fade-up">Education</h2>
       <div class="row justify-content-center">
         <div class="col-lg-8">
-          <div class="timeline" data-aos="fade-up" data-aos-delay="100">
+          <div class="quantum-timeline" data-aos="fade-up" data-aos-delay="100">
             <div class="timeline-item">
-              <div class="card shadow-sm border-0">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between mb-2">
-                    <h3 class="h5 fw-bold">Master of Information and Communication Technology</h3>
-                    <span class="badge">2023 - Present</span>
-                  </div>
-                  <h4 class="h6 fw-bold mb-3" style="font-size: 1.1rem;">University of Sunshine Coast, Australia</h4>
-                  <p class="text-muted">Specializing in Data Analytics, database management and machine learning.</p>
-                  <div class="mt-3">
-                    <h5 class="h6 fw-bold">Projects:</h5>
-                    <ul class="text-muted">
-                      <li>House Price Prediction using Regression</li>
-                      <li>Coffee Sales Analytics using PowerBI and Excel</li>
-                    </ul>
-                    <h5 class="h6 fw-bold">Research:</h5>
-                    <ul class="text-muted">
-                      <li>"Explainable AI for Medical Diagnosis: A Systematic Analysis"</li>
-                    </ul>
-                  </div>
+              <div class="quantum-card">
+                <div class="timeline-header">
+                  <h3>Master of Information and Communication Technology</h3>
+                  <span class="timeline-badge">2023 - June 2025</span>
+                </div>
+                <h4 class="timeline-institution">University of Sunshine Coast, Queensland, Australia</h4>
+                <p class="timeline-description">Specializing in Data Analytics, database management and machine learning.</p>
+                <div class="timeline-details">
+                  <h5>Projects:</h5>
+                  <ul>
+                    <li>House Price Prediction using Regression</li>
+                    <li>Coffee Sales Analytics using PowerBI and Excel</li>
+                    <li>Greyhound UK Race Data Scraping & Database Design</li>
+                  </ul>
+                  <h5>Research:</h5>
+                  <ul>
+                    <li>"Explainable AI for Medical Diagnosis: A Systematic Analysis"</li>
+                  </ul>
                 </div>
               </div>
             </div>
+            
             <div class="timeline-item">
-              <div class="card shadow-sm border-0">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between mb-2">
-                    <h3 class="h5 fw-bold">Bachelor of Computer Science</h3>
-                    <span class="badge">2016 - 2020</span>
-                  </div>
-                  <h4 class="h6 fw-bold mb-3" style="font-size: 1.1rem;">Kathmandu University, Nepal</h4>
-                  <p class="text-muted">Core coursework in DBMS, machine learning, artificial intelligence, software engineering, data structures, computer architecture and computer networks.</p>
-                  <div class="mt-3">
-                    <h5 class="h6 fw-bold">Academic Projects:</h5>
-                    <ul class="text-muted">
-                      <li>Facial Recognition System (python, opencv, tensorflow)</li>
-                      <li>Music Management Application (django python)</li>
-                      <li>Library Management System (c++)</li>
-                      <li>Automatic Flappy Bird using Neural Networks and Genetic Algorithms (python, tensorflow, pygame)</li>
-                      <li>Trading Prediction using Deep Neural Networks(core python)</li>
-                    </ul>
-                    <h5 class="h6 fw-bold mt-3">Internship:</h5>
-                    <p class="text-muted mb-0">Automation Engineering Intern at Cotiviti, focusing on process automation and optimization. Project: Automated disaster recovery system for vertica databases</p>
-                  </div>
+              <div class="quantum-card">
+                <div class="timeline-header">
+                  <h3>Bachelor of Science in Computer Science</h3>
+                  <span class="timeline-badge">2016 - September 2018</span>
+                </div>
+                <h4 class="timeline-institution">Kathmandu University, Nepal</h4>
+                <p class="timeline-description">Core coursework in DBMS, machine learning, artificial intelligence, software engineering, data structures, computer architecture and computer networks.</p>
+                <div class="timeline-details">
+                  <h5>Academic Projects:</h5>
+                  <ul>
+                    <li>Facial Recognition System (python, opencv, tensorflow)</li>
+                    <li>Music Management Application (django python)</li>
+                    <li>Library Management System (c++)</li>
+                    <li>Automatic Flappy Bird using Neural Networks and Genetic Algorithms (python, tensorflow, pygame)</li>
+                    <li>Trading Prediction using Deep Neural Networks(core python)</li>
+                  </ul>
+                  <h5>Internship:</h5>
+                  <p>Automation Engineering Intern at Cotiviti, focusing on process automation and optimization. Project: Automated disaster recovery system for vertica databases</p>
                 </div>
               </div>
             </div>
@@ -157,285 +182,289 @@
     </div>
   </section>
 
+  <!-- Experience Section -->
   <section id="experience" class="section">
     <div class="container">
-      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Work Experience</h2>
+      <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
       <div class="row justify-content-center">
         <div class="col-lg-8">
-          <div class="timeline" data-aos="fade-up" data-aos-delay="100">
-  
-            <!-- New Work Experience: Founder & SEO Specialist -->
+          <div class="quantum-timeline" data-aos="fade-up" data-aos-delay="200">
+            
+            <!-- Data and Database Engineer -->
             <div class="timeline-item">
-              <div class="card shadow-sm border-0">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between mb-2">
-                    <h3 class="h5 fw-bold">FOUNDER (SEO SPECIALIST)</h3>
-                    <span class="badge">2024 – PRESENT</span>
-                  </div>
-                  <h4 class="h6 text-muted mb-3">A&S TECHNOLOGY (SOLO TRADER)</h4>
-                  <ul class="text-muted">
-                    <li>Static website using HTML, CSS, JS. Development of websites for small businesses using WIX and Wordpress.</li>
-                    <li>Website SEO optimisation and performance boost.</li>
-                    <li>Meta and Google Marketing, and analytics with business coversion growth by more than 50%.</li>
-                    <li>Keyword research, content analysis and optimisation, Ads optimisation and weekly reports.</li>
-                  </ul>
+              <div class="quantum-card">
+                <div class="timeline-header">
+                  <h3>Data and Database Engineer</h3>
+                  <span class="timeline-badge">September 2023 – Present</span>
                 </div>
+                <h4 class="timeline-institution">A&S Technology, QLD, Australia</h4>
+                <ul class="timeline-list">
+                  <li>Helped small businesses transition from small-scale to medium-scale operations by setting up digital platforms and integrating cloud-based systems.</li>
+                  <li>Designed and deployed Azure and AWS cloud-ready databases with secure access, automated backups, and high availability.</li>
+                  <li>Built and maintained SSIS packages and SSAS models to deliver robust ETL workflows and advanced analytics.</li>
+                  <li>Developed and automated Power BI dashboards to provide real-time operational and executive insights.</li>
+                  <li>Achieved 60% improvement in SQL query performance through indexing strategies, execution plan tuning, and schema optimisation.</li>
+                </ul>
               </div>
             </div>
-  
-            <!-- Existing Work Experience: Database Administrator -->
+
+            <!-- Database Administrator -->
             <div class="timeline-item">
-              <div class="card shadow-sm border-0">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between mb-2">
-                    <h3 class="h5 fw-bold">Database Administrator</h3>
-                    <span class="badge">July 2018 - June 2023</span>
-                  </div>
-                  <h4 class="h6 text-muted mb-3">Cotiviti Technology, Kathmandu, Nepal</h4>
-                  <ul class="text-muted">
-                    <li>Performed daily DBA duties, including database backups, patching, deployment, tuning, schema management, data management, storage management, and user management, smoothly handling over 100+ production-critical databases.</li>
-                    <li>Developed a centralised backup management system for SQL Server, MySQL, Vertica, Oracle, and PostgreSQL, reducing storage costs, saving person-hours, and ensuring 99.99% data recovery reliability.</li>
-                    <li>Implemented role-based access control (RBAC) and user schema design to comply with enterprise security standards and compliance requirements.</li>
-                    <li>Managed database patching and system upgrades for 100+ mission-critical databases, ensuring zero unplanned downtime.</li>
-                    <li>Optimised databases through strategic indexing, table partitioning, and query caching, improving application performance by approximately 10%.</li>
-                    <li>Transitioned the production databases into the AWS cloud and supported the AWS database operational processes.</li>
-                    <li>Performed a large-scale PostgreSQL database upgrade, working directly with AWS vendors with minimal downtime.</li>
-                    <li>Engineered a data pipeline transferring 2TB+ data daily from Oracle to Vertica using Apache Spark and Kafka.</li>
-                    <li>Worked in a cross-cultural environment, directly collaborating with offshore teams (India and USA).</li>
-                    <li>Supported and helped onboard junior members, training them and working as a team lead.</li>
-                  </ul>
+              <div class="quantum-card">
+                <div class="timeline-header">
+                  <h3>Database Administrator</h3>
+                  <span class="timeline-badge">July 2020 - June 2023</span>
                 </div>
+                <h4 class="timeline-institution">Cotiviti Technology, USA (Remote)</h4>
+                <ul class="timeline-list">
+                  <li>Administered 10+ large SQL Server OLTP databases processing $2B+ in annual transactions with 99.99% uptime across critical business platforms.</li>
+                  <li>Optimized high-throughput SQL environments via SQL Profiler, execution plan analysis, and index tuning, achieving 5–20% performance gains.</li>
+                  <li>Implemented horizontal partitioning and optimized table design for improved query performance in high-concurrency OLTP workloads.</li>
+                  <li>Resolved parameter sniffing and plan instability using plan guides, parameterization strategies, and advanced diagnostics.</li>
+                  <li>Designed and maintained clustered/non-clustered indexes for transaction-heavy systems, reducing I/O bottlenecks.</li>
+                  <li>Developed and deployed SSIS/SSAS-based ETL pipelines for seamless data integration across cross-platform systems, enabling real-time reporting and analytics.</li>
+                  <li>Automated backups, disaster recovery, and performed zero-downtime SQL Server upgrades to support 24/7 wagering operations and ensure data integrity.</li>
+                  <li>Collaborated across regions (US, India, Nepal) to onboard 5+ team members, lead knowledge-sharing sessions, and provide technical guidance on database operations and troubleshooting.</li>
+                </ul>
               </div>
             </div>
-  
+
+            <!-- Associate Database Administrator -->
+            <div class="timeline-item">
+              <div class="quantum-card">
+                <div class="timeline-header">
+                  <h3>Associate Database Administrator</h3>
+                  <span class="timeline-badge">July 2018 - July 2020</span>
+                </div>
+                <h4 class="timeline-institution">Cotiviti Technology, Nepal</h4>
+                <ul class="timeline-list">
+                  <li>Resolved 50+ daily incident tickets through ServiceNow and JIRA ranging from complex deadlocks to routine schema modifications and user account provisioning across development, QA, and production environments.</li>
+                  <li>Diagnosed critical bottlenecks in high-transaction systems via SQL Profiler for 200+ clients.</li>
+                  <li>Improved OLTP speed through strategic clustered and non-clustered index optimization.</li>
+                  <li>Automated backup and recovery for multi-terabyte SQL Server databases.</li>
+                  <li>Executed zero unplanned downtime SQL Server upgrades from 2012 to 2019 in enterprise environments.</li>
+                </ul>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
   </section>
-  
 
   <!-- Skills Section -->
   <section id="skills" class="section bg-light">
     <div class="container">
-      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Technical Skills</h2>
-      
+      <h2 class="section-title" data-aos="fade-up">Core Technical Skills</h2>
       <div class="row g-4">
-        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="card h-100 shadow-sm border-0">
-            <div class="card-body">
-              <h3 class="h4 card-title mb-4">
-                <i class="fas fa-database me-2 text-primary"></i>Database Management
-              </h3>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>SQL Server</span>
-                  <span>95%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="95%"></div>
-                </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="quantum-card">
+            <h3 class="skill-category-title">
+              <i class="fas fa-database me-3"></i>SQL Server Administration
+            </h3>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>SQL Server (2008R2–2022)</span>
+                <span>95%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>PostgreSQL</span>
-                  <span>90%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="90%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="95%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>MySQL/MariaDB</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Clustering & AlwaysOn</span>
+                <span>90%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Azure SQL Database</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Azure Cosmos DB</span>
-                  <span>80%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Log Shipping & Replication</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Performance Tuning</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="95%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Index Design & DMVs</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="card h-100 shadow-sm border-0">
-            <div class="card-body">
-              <h3 class="h4 card-title mb-4">
-                <i class="fas fa-chart-line me-2 text-primary"></i>Data Analytics & Visualization
-              </h3>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Power BI</span>
-                  <span>90%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="90%"></div>
-                </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="quantum-card">
+            <h3 class="skill-category-title">
+              <i class="fas fa-chart-line me-3"></i>Business Intelligence & Analytics
+            </h3>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>SSIS Package Development</span>
+                <span>90%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Python (Pandas, NumPy, Matplotlib)</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>SQL Analytics</span>
-                  <span>95%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="95%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>SSRS & SSAS</span>
+                <span>85%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Data Processing</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Apache Spark</span>
-                  <span>80%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Power BI Reporting</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Data Processing</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>ETL Workflows</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="card h-100 shadow-sm border-0">
-            <div class="card-body">
-              <h3 class="h4 card-title mb-4">
-                <i class="fas fa-cloud me-2 text-primary"></i>Cloud & Big Data
-              </h3>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Azure Data Warehouse</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="quantum-card">
+            <h3 class="skill-category-title">
+              <i class="fas fa-cloud me-3"></i>Cloud & Hybrid Platforms
+            </h3>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Azure SQL Database</span>
+                <span>90%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Azure Synapse Analytics</span>
-                  <span>80%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Azure Databricks</span>
-                  <span>75%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="75%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>AWS RDS/Aurora</span>
+                <span>85%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Cloud Security</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Virtual Machines</span>
-                  <span>90%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="90%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Hybrid Migrations</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Cloud Security</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>PostgreSQL</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="80%"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-          <div class="card h-100 shadow-sm border-0">
-            <div class="card-body">
-              <h3 class="h4 card-title mb-4">
-                <i class="fas fa-robot me-2 text-primary"></i>Automation & Machine Learning
-              </h3>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Power Automate</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="quantum-card">
+            <h3 class="skill-category-title">
+              <i class="fas fa-robot me-3"></i>Automation & Tools
+            </h3>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>PowerShell & Python</span>
+                <span>85%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Power Apps</span>
-                  <span>80%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Grafana Monitoring</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="85%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Azure DevOps & Jenkins</span>
+                <span>80%</span>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Regression Analysis</span>
-                  <span>75%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="75%"></div>
-                </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="80%"></div>
               </div>
-              <div class="mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                  <span>Predictive Analytics</span>
-                  <span>80%</span>
-                </div>
-                <div class="skill-progress">
-                  <div class="skill-progress-bar" style="width: 0%" data-width="80%"></div>
-                </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Terraform & CI/CD</span>
+                <span>75%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="75%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>Monitoring Tools</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90%"></div>
+              </div>
+            </div>
+            <div class="skill-quantum">
+              <div class="skill-label">
+                <span>ITIL Framework</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85%"></div>
               </div>
             </div>
           </div>
@@ -447,248 +476,285 @@
   <!-- Projects Section -->
   <section id="projects" class="section">
     <div class="container">
-      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Featured Projects</h2>
-      <div class="row g-4">
-        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="100">
-          <div class="card h-100 shadow-sm border-0 project-card">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-database fa-2x me-3 text-primary"></i>
-                <h3 class="h5 card-title fw-bold mb-0">Centralized Backup Management System</h3>
-              </div>
-              <p class="card-text text-muted">Database backup manager for databases like Oracle, SQL Server, Vertica, PostgreSQL, MySQL</p>
-              <div class="d-flex gap-2 mt-3 flex-wrap">
-                <span class="badge bg-secondary">SQL Server</span>
-                <span class="badge bg-secondary">MySQL</span>
-                <span class="badge bg-secondary">PostgreSQL</span>
-                <span class="badge bg-secondary">Automation</span>
-              </div>
-              <a href="centralized-backup.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
-            </div>
+      <h2 class="section-title" data-aos="fade-up">Key Projects</h2>
+      <div class="projects-grid">
+        
+        <div class="project-card" data-aos="flip-left" data-aos-delay="100">
+          <div class="project-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <h3 class="project-title">Centralized Backup Management System</h3>
+          <p class="project-description">
+            An enterprise-grade solution for automating and monitoring database backups across 200+ databases, reducing verification time by 85%.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">SQL</span>
+            <span class="project-tag">Multithreading</span>
+            <span class="project-tag">Scheduling</span>
+          </div>
+          <div class="project-links">
+            <a href="centralized-backup.html" class="project-link">View Details</a>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
-          <div class="card h-100 shadow-sm border-0 project-card">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-chart-bar fa-2x me-3 text-primary"></i>
-                <h3 class="h5 card-title fw-bold mb-0">Database Size Estimator</h3>
-              </div>
-              <p class="card-text text-muted">LSTM and ARIMA based time series database size predictor.</p>
-              <div class="d-flex gap-2 mt-3 flex-wrap">
-                <span class="badge bg-secondary">Python</span>
-                <span class="badge bg-secondary">Predictive Analytics</span>
-                <span class="badge bg-secondary">SQL</span>
-                <span class="badge bg-secondary">Data Visualization</span>
-              </div>
-              <a href="databasesize.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
-            </div>
+
+        <div class="project-card" data-aos="flip-left" data-aos-delay="200">
+          <div class="project-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="project-title">Database Size Estimator</h3>
+          <p class="project-description">
+            AI-powered solution using LSTM neural networks for predicting storage requirements across 330+ database systems with 80% accuracy.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">LSTM</span>
+            <span class="project-tag">Neural Networks</span>
+            <span class="project-tag">Data Collection</span>
+          </div>
+          <div class="project-links">
+            <a href="databasesize.html" class="project-link">View Details</a>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="300">
-          <div class="card h-100 shadow-sm border-0 project-card">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-desktop fa-2x me-3 text-primary"></i>
-                <h3 class="h5 card-title fw-bold mb-0">Database & RHEL Monitoring System</h3>
-              </div>
-              <p class="card-text text-muted">Built a real-time monitoring system for databases and RHEL servers using Python, Grafana, Fast API and plotly-dash.</p>
-              <div class="d-flex gap-2 mt-3 flex-wrap">
-                <span class="badge bg-secondary">Python</span>
-                <span class="badge bg-secondary">Grafana</span>
-                <span class="badge bg-secondary">RHEL</span>
-                <span class="badge bg-secondary">Monitoring</span>
-              </div>
-              <a href="montioring.html" class="btn btn-sm btn-outline-primary mt-2">No details for this one. Try other</a>
-            </div>
+
+        <div class="project-card" data-aos="flip-left" data-aos-delay="300">
+          <div class="project-icon">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <h3 class="project-title">Oracle to Vertica Data Pipeline</h3>
+          <p class="project-description">
+            ETL data pipeline to transfer more than 2TB data from Oracle to Vertica everyday using PySpark and Apache Kafka.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Oracle</span>
+            <span class="project-tag">Vertica</span>
+            <span class="project-tag">PySpark</span>
+            <span class="project-tag">Apache Kafka</span>
+          </div>
+          <div class="project-links">
+            <a href="datapipeline.html" class="project-link">View Details</a>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="400">
-          <div class="card h-100 shadow-sm border-0 project-card">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-home fa-2x me-3 text-primary"></i>
-                <h3 class="h5 card-title fw-bold mb-0">Housing Price Allocator</h3>
-              </div>
-              <p class="card-text text-muted">House price prediction using various regression algorithms.</p>
-              <div class="d-flex gap-2 mt-3 flex-wrap">
-                <span class="badge bg-secondary">Python</span>
-                <span class="badge bg-secondary">Machine Learning</span>
-                <span class="badge bg-secondary">Regression</span>
-                <span class="badge bg-secondary">Feature Engineering</span>
-              </div>
-                <a href="housingprice.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
-            </div>
+
+        <div class="project-card" data-aos="flip-left" data-aos-delay="400">
+          <div class="project-icon">
+            <i class="fas fa-home"></i>
+          </div>
+          <h3 class="project-title">Housing Price Predictor</h3>
+          <p class="project-description">
+            House price prediction using various regression algorithms and machine learning techniques with feature engineering.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Machine Learning</span>
+            <span class="project-tag">Regression</span>
+            <span class="project-tag">Feature Engineering</span>
+          </div>
+          <div class="project-links">
+            <a href="housingprice.html" class="project-link">View Details</a>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="500">
-          <div class="card h-100 shadow-sm border-0 project-card">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-coffee fa-2x me-3 text-primary"></i>
-                <h3 class="h5 card-title fw-bold mb-0">Coffee Sales Analytics</h3>
-              </div>
-              <p class="card-text text-muted">Sales Data analysis using Excel and PowerBI. Insights and recommendations.</p>
-              <div class="d-flex gap-2 mt-3 flex-wrap">
-                <span class="badge bg-secondary">Power BI</span>
-                <span class="badge bg-secondary">Python</span>
-                <span class="badge bg-secondary">Data Analysis</span>
-                <span class="badge bg-secondary">Visualization</span>
-              </div>
-                <a href="coffeesales.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
-            </div>
+
+        <div class="project-card" data-aos="flip-left" data-aos-delay="500">
+          <div class="project-icon">
+            <i class="fas fa-coffee"></i>
+          </div>
+          <h3 class="project-title">Coffee Sales Analytics</h3>
+          <p class="project-description">
+            Data preprocessing, cleaning performed on sales data and data visualization dashboard created using Excel and PowerBI.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Excel</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">DAX</span>
+            <span class="project-tag">PowerBI</span>
+          </div>
+          <div class="project-links">
+            <a href="coffeesales.html" class="project-link">View Details</a>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="600">
-          <div class="card h-100 shadow-sm border-0 project-card">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-exchange-alt fa-2x me-3 text-primary"></i>
-                <h3 class="h5 card-title fw-bold mb-0">Data Pipeline: Oracle to Vertica</h3>
-              </div>
-              <p class="card-text text-muted">Confluent and Apache spark powerered datapipeline create to increase the data transfer between cross-platform databases performance and data consistency reducing cost of enterprise tool.</p>
-              <div class="d-flex gap-2 mt-3 flex-wrap">
-                <span class="badge bg-secondary">Apache Spark</span>
-                <span class="badge bg-secondary">Kafka</span>
-                <span class="badge bg-secondary">Oracle</span>
-                <span class="badge bg-secondary">Vertica</span>
-              </div>
-                <a href="datapipeline.html" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
-            </div>
+
+        <div class="project-card" data-aos="flip-left" data-aos-delay="600">
+          <div class="project-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <h3 class="project-title">Greyhound UK Race Data Scraping & Database Design</h3>
+          <p class="project-description">
+            Developed a web scraper and high-performance database for greyhound race results and betting analytics.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Web Scraping</span>
+            <span class="project-tag">Database Design</span>
+            <span class="project-tag">Analytics</span>
+          </div>
+          <div class="project-links">
+            <span class="project-badge">UniSC Project</span>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
- <section id="certifications" class="section bg-light">
+  <!-- Certifications Section -->
+  <section id="certifications" class="section bg-light">
     <div class="container">
-      <h2 class="text-center mb-5 display-5 fw-bold" data-aos="fade-up">Certifications</h2>
+      <h2 class="section-title" data-aos="fade-up">Certifications</h2>
       <div class="row g-4">
+        
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-          <div class="card h-100 shadow-sm border-0 text-center">
-            <div class="card-body">
-              <div class="cert-badge mb-3">
-                <img src="./assets/azure-ai-fundamentals.png" alt="Azure AI Fundamentals" class="img-fluid" style="max-width: 120px;">
-              </div>
-              <h3 class="h5 fw-bold">Microsoft Azure AI Fundamentals</h3>
-              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-                <span class="badge rounded-pill bg-light text-dark border">Azure Bot Services</span>
-                <span class="badge rounded-pill bg-light text-dark border">Azure Machine Learning</span>
-                <span class="badge rounded-pill bg-light text-dark border">Cognitive Services</span>
-              </div>
-              <a href="https://www.credly.com/badges/83d93096-b0fc-4908-b32f-c88a9973c12c/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+          <div class="quantum-card text-center">
+            <div class="cert-badge">
+              <img src="./assets/azure-ai-fundamentals.png" alt="Azure Database Administrator Associate" class="cert-image">
+            </div>
+            <h3 class="cert-title">Microsoft Azure Database Administrator Associate (DP-300)</h3>
+            <p class="cert-year">2025</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Azure SQL</span>
+              <span class="cert-skill">Database Administration</span>
+              <span class="cert-skill">Performance Tuning</span>
             </div>
           </div>
         </div>
+
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-          <div class="card h-100 shadow-sm border-0 text-center">
-            <div class="card-body">
-              <div class="cert-badge mb-3">
-                <img src="./assets/powerplatform.png" alt="Power Platform Fundamentals" class="img-fluid" style="max-width: 120px;">
-              </div>
-              <h3 class="h5 fw-bold">Microsoft Power Platform Fundamentals</h3>
-              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-                <span class="badge rounded-pill bg-light text-dark border">Automation</span>
-                <span class="badge rounded-pill bg-light text-dark border">Power Apps</span>
-                <span class="badge rounded-pill bg-light text-dark border">Power Automate</span>
-                <span class="badge rounded-pill bg-light text-dark border">Power BI</span>
-                <span class="badge rounded-pill bg-light text-dark border">Power Platform</span>
-              </div>
-              <a href="https://www.credly.com/badges/baa07914-10bf-4d39-9ffd-b1c9bb1bdac2/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+          <div class="quantum-card text-center">
+            <div class="cert-badge">
+              <img src="./assets/azure-data-fundamentals.png" alt="Azure Data Fundamentals" class="cert-image">
             </div>
+            <h3 class="cert-title">Microsoft Azure Data Fundamentals (DP-900)</h3>
+            <p class="cert-year">2024</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Azure</span>
+              <span class="cert-skill">Data Management</span>
+              <span class="cert-skill">Cloud Services</span>
+            </div>
+            <a href="https://www.credly.com/badges/58621465-0bde-450a-9943-1f18c9a0423b" target="_blank" class="cert-link">View Credential</a>
           </div>
         </div>
+
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-          <div class="card h-100 shadow-sm border-0 text-center">
-            <div class="card-body">
-              <div class="cert-badge mb-3">
-                <img src="./assets/security-compliance-security.png" alt="Security, Compliance, and Identity Fundamentals" class="img-fluid" style="max-width: 120px;">
-              </div>
-              <h3 class="h5 fw-bold">Microsoft Security, Compliance, and Identity Fundamentals</h3>
-              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-                <span class="badge rounded-pill bg-light text-dark border">Azure Active Directory</span>
-                <span class="badge rounded-pill bg-light text-dark border">Cloud Security</span>
-                <span class="badge rounded-pill bg-light text-dark border">Identity And Access Management</span>
-              </div>
-              <a href="https://www.credly.com/badges/d3acabf5-3778-464f-8836-1fca7f9ec23e/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+          <div class="quantum-card text-center">
+            <div class="cert-badge">
+              <img src="./assets/security-compliance-security.png" alt="Security, Compliance, and Identity Fundamentals" class="cert-image">
             </div>
+            <h3 class="cert-title">Microsoft Security, Compliance, and Identity Fundamentals (SC-900)</h3>
+            <p class="cert-year">2023</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Azure Active Directory</span>
+              <span class="cert-skill">Cloud Security</span>
+              <span class="cert-skill">Identity Management</span>
+            </div>
+            <a href="https://www.credly.com/badges/d3acabf5-3778-464f-8836-1fca7f9ec23e" target="_blank" class="cert-link">View Credential</a>
           </div>
         </div>
+
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-          <div class="card h-100 shadow-sm border-0 text-center">
-            <div class="card-body">
-              <div class="cert-badge mb-3">
-                <img src="./assets/it-python.png" alt="Python Certification" class="img-fluid" style="max-width: 120px;">
-              </div>
-              <h3 class="h5 fw-bold">Pearson IT Specialist Python Certification</h3>
-              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-                <span class="badge rounded-pill bg-light text-dark border">Python</span>
-                <span class="badge rounded-pill bg-light text-dark border">Data Analysis</span>
-                <span class="badge rounded-pill bg-light text-dark border">Automation</span>
-              </div>
-              <a href="https://www.credly.com/badges/f4847346-10b4-46fa-b97e-47433f7d2220/linked_in_profile" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+          <div class="quantum-card text-center">
+            <div class="cert-badge">
+              <img src="./assets/powerplatform.png" alt="Power Platform Fundamentals" class="cert-image">
             </div>
+            <h3 class="cert-title">Microsoft Power Platform Fundamentals (PL-900)</h3>
+            <p class="cert-year">2024</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Power Apps</span>
+              <span class="cert-skill">Power Automate</span>
+              <span class="cert-skill">Power BI</span>
+            </div>
+            <a href="https://www.credly.com/badges/baa07914-10bf-4d39-9ffd-b1c9bb1bdac2" target="_blank" class="cert-link">View Credential</a>
           </div>
         </div>
+
         <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
-          <div class="card h-100 shadow-sm border-0 text-center">
-            <div class="card-body">
-              <div class="cert-badge mb-3">
-                <img src="./assets/azure-data-fundamentals.png" alt="Azure Data Fundamentals" class="img-fluid" style="max-width: 120px;">
-              </div>
-              <h3 class="h5 fw-bold">Microsoft Azure Data Fundamentals</h3>
-              <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-                <span class="badge rounded-pill bg-light text-dark border">Azure</span>
-                <span class="badge rounded-pill bg-light text-dark border">Azure Cosmos DB</span>
-                <span class="badge rounded-pill bg-light text-dark border">SQL Server</span>
-                <span class="badge rounded-pill bg-light text-dark border">Data Management</span>
-              </div>
-              <a href="https://www.credly.com/badges/58621465-0bde-450a-9943-1f18c9a0423b" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Credential</a>
+          <div class="quantum-card text-center">
+            <div class="cert-badge">
+              <img src="./assets/it-python.png" alt="Python Certification" class="cert-image">
             </div>
+            <h3 class="cert-title">Python Fundamentals by PearsonVue</h3>
+            <p class="cert-year">2024</p>
+            <div class="cert-skills">
+              <span class="cert-skill">Python</span>
+              <span class="cert-skill">Data Analysis</span>
+              <span class="cert-skill">Automation</span>
+            </div>
+            <a href="https://www.credly.com/badges/f4847346-10b4-46fa-b97e-47433f7d2220" target="_blank" class="cert-link">View Credential</a>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact" class="section">
     <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
       <div class="row justify-content-center">
-        <div class="col-lg-8 text-center" data-aos="fade-up">
-          <h2 class="mb-5 display-5 fw-bold">Get In Touch</h2>
-          <p class="lead mb-5">
-            I'm currently looking for new opportunities in data analytics and database administration. 
-            Whether you have a question or just want to say hello, I'll do my best to get back to you!
-          </p>
-          <div class="contact-details mb-4">
-            <h3 class="mb-3">Connect With Me</h3>
-            <ul class="list-unstyled contact-list">
-                <li class="mb-2">
-                    <i class="bi bi-envelope-fill me-2"></i>
-                    <a href="mailto:anish.karki1.618@gmail.com">anish.karki1.618@gmail.com</a>
-                </li>
-                <li class="mb-2">
-                    <i class="bi bi-telephone-fill me-2"></i>
-                    <a href="tel:+61451165843">+61 451165843</a>
-                </li>
-                <li class="mb-2">
-                    <i class="bi bi-geo-alt-fill me-2"></i>
-                    Brisbane, Queensland, Australia
-                </li>
-            </ul>
-        </div>
-          <div class="d-flex justify-content-center mb-5">
-            <a href="mailto:anish.karki@example.com" class="btn btn-primary btn-lg px-4 mx-2">
-              <i class="fas fa-envelope me-2"></i>Say Hello
-            </a>
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+          <div class="quantum-card text-center">
+            <p class="contact-intro">
+              I'm currently looking for new opportunities in database administration, cloud migration, and data engineering. 
+              Whether you have a question or just want to say hello, I'll do my best to get back to you!
+            </p>
+            
+            <div class="contact-grid">
+              <a href="mailto:anish.karki1.618@outlook.com" class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-info">
+                  <strong>Email</strong><br>
+                  anish.karki1.618@outlook.com
+                </div>
+              </a>
+              
+              <a href="tel:+61451165843" class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-info">
+                  <strong>Phone</strong><br>
+                  +61 451165843
+                </div>
+              </a>
+              
+              <a href="https://www.linkedin.com/in/anish-karki-dba/" target="_blank" class="contact-item">
+                <div class="contact-icon">
+                  <i class="fab fa-linkedin"></i>
+                </div>
+                <div class="contact-info">
+                  <strong>LinkedIn</strong><br>
+                  anish-karki-dba
+                </div>
+              </a>
+              
+              <div class="contact-item location-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-info">
+                  <strong>Location</strong><br>
+                  Craigieburn, 3060 VIC, Australia
+                </div>
+              </div>
+            </div>
+            
+            <div class="contact-cta">
+              <a href="mailto:anish.karki1.618@outlook.com" class="quantum-btn">
+                <i class="fas fa-envelope me-2"></i>Say Hello
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <div id="footer-placeholder"></div>
+
   <!-- Bootstrap JS Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <!-- AOS Animation Library -->
@@ -696,11 +762,7 @@
   <!-- Typed.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
-  <script src="js/script.js"></script>
-  
   <!-- Custom JavaScript -->
-  <script>
-
-  </script>
+  <script src="js/script.js"></script>
 </body>
 </html>

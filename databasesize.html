@@ -3,299 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anish Karki | Database Administrator & Data Analytics Professional</title>
+  <title>Database Size Estimator | Anish Karki</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- AOS Animation Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-  <link rel="stylesheet" href="css/style.css">
-
-</head>
-<body class="font-sans">
-
-    <div id="project-navbar-placeholder"></div>
-
-    <!-- Header with project title and breadcrumbs -->
-    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 py-5">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-8">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-2">
-                  <li class="breadcrumb-item"><a href="index.html" class="text-black">Home</a></li>
-                  <li class="breadcrumb-item"><a href="index.html#projects" class="text-black">Projects</a></li>
-                  <li class="breadcrumb-item active text-black" aria-current="page">Database Size Estimator</li>
-                </ol>
-              </nav>
-              <h1 class="display-4 fw-bold mb-2 text-black">Database Size Estimator</h1>
-              <p class="lead mb-0 text-black">AI-powered solution for predicting storage requirements across heterogeneous database environments</p>
-            </div>
-            <div class="col-lg-4 text-end d-none d-lg-block">
-              <div class="d-inline-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-2">
-                <span class="badge bg-success me-2 text-black">Completed</span>
-                <i class="bi bi-calendar-check me-2 text-black"></i>
-                <span class="text-black">2020</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
   
-  <!-- Project Details Section -->
-  <section class="py-5">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <!-- Particle System -->
+  <div class="particle-system" id="particleSystem"></div>
+
+  <!-- Neural Network Background -->
+  <div class="neural-network" id="neuralNetwork"></div>
+
+  <!-- Navbar -->
+  <div id="project-navbar-placeholder"></div>
+
+  <!-- Project Hero Section -->
+  <section class="project-hero-section">
     <div class="container">
-      <div class="row">
-        <!-- Project Image -->
-        <div class="col-lg-8 mb-4" data-aos="fade-up">
-          <img src="assets/databasesizeestimator.png" alt="Database Size Estimator Dashboard" class="img-fluid rounded shadow-sm">
-        </div>
-        
-        <!-- Project Quick Info -->
-        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h3 class="card-title h4 mb-4">Project Overview</h3>
-              <ul class="list-unstyled">
-                <li class="mb-3">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-code-square text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Technologies</h6>
-                      <p class="mb-0">Python, LSTM Neural Networks, SQL, Data Collection</p>
-                    </div>
-                  </div>
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div data-aos="fade-up" data-aos-duration="1000">
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home me-1"></i>Home
+                  </a>
                 </li>
-                <li class="mb-3">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-building text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Client</h6>
-                      <p class="mb-0">Cotiviti Technology</p>
-                    </div>
-                  </div>
+                <li class="breadcrumb-item">
+                  <a href="index.html#projects" class="breadcrumb-link">Projects</a>
                 </li>
-                <li class="mb-3">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-calendar2-check text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Duration</h6>
-                      <p class="mb-0">4 months</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-person-workspace text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Role</h6>
-                      <p class="mb-0">ML Engineer & Database Specialist</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Project Description -->
-      <div class="row mt-2">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Project Description</h2>
-          <p>
-            At Cotiviti Technology, with over 330 production database systems totaling approximately 9 petabytes of data, we frequently encountered system failures due to unexpected storage exhaustion resulting in business failure. To solve this problem, I implemented LSTM (Neural Networks) to proactively predict the weekly size of database and adjust the adjust requirements as needed.
-          </p>
-          <p>
-          </p>
-        </div>
-      </div>
-      
-      <!-- Challenges and Solutions -->
-      <div class="row mt-4">
-        <div class="col-lg-6 mb-4" data-aos="fade-up">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h3 class="card-title h4 mb-3">Challenges</h3>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Unpredictable database growth patterns across heterogeneous systems
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Frequent system outages due to unexpected storage exhaustion
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Managing over 330 database instances across multiple platforms
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  High volume of emergency JIRA tickets for storage allocation
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Reactive approach to capacity management causing business disruptions
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h3 class="card-title h4 mb-3">Solutions</h3>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Centralized data collection system for monitoring all database instances
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  LSTM neural network model for time-series forecasting of storage usage
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Automated alerting system for proactive capacity planning
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Integrated workflow with storage provisioning systems
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Predictive analytics dashboard for visualization and trend analysis
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Technical Implementation -->
-      <div class="row mt-4">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Technical Implementation</h2>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">Data Collection Framework</h4>
-            </div>
-          </div>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">LSTM Model Implementation</h4>
-            </div>
-          </div>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">Predictive Analytics Engine</h4>
-            </div>
-          </div>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">Alerting and Workflow Integration</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Results and Benefits -->
-      <div class="row mt-4 mb-5">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Results and Impact</h2>
-          
-          <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">80%</div>
-                  <h5 class="fw-bold">Prediction Accuracy</h5>
-                  <p class="text-muted">High accuracy in forecasting database storage requirements</p>
-                </div>
-              </div>
-            </div>
+                <li class="breadcrumb-item active">Database Size Estimator</li>
+              </ol>
+            </nav>
             
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">80%</div>
-                  <h5 class="fw-bold">Failure Reduction</h5>
-                  <p class="text-muted">Decrease in database system failures due to storage exhaustion</p>
-                </div>
+            <div class="project-header">
+              <div class="project-icon-large">
+                <i class="fas fa-brain"></i>
               </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">9 PB</div>
-                  <h5 class="fw-bold">Data Managed</h5>
-                  <p class="text-muted">Total volume of data across 330+ database systems</p>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">70%</div>
-                  <h5 class="fw-bold">Ticket Reduction</h5>
-                  <p class="text-muted">Decrease in emergency storage allocation tickets</p>
+              <div class="project-info">
+                <h1 class="project-title">Database Size Estimator</h1>
+                <p class="project-subtitle">
+                  AI-powered solution using LSTM neural networks to predict storage requirements across 330+ database systems managing 9+ petabytes of data with 80% accuracy.
+                </p>
+                <div class="project-badges">
+                  <span class="project-badge success">
+                    <i class="fas fa-check-circle me-1"></i>Completed
+                  </span>
+                  <span class="project-badge date">
+                    <i class="fas fa-calendar me-1"></i>2020
+                  </span>
+                  <span class="project-badge company">
+                    <i class="fas fa-building me-1"></i>Cotiviti Technology
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Related Projects Section -->
-      <div class="row mt-5">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Other Projects</h2>
-          <div class="row">
-            
-            <!-- Project 2 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card border-0 shadow-sm h-100">
-                <img src="assets/centralisedbackup.png" class="card-img-top" alt="Centralized Backup System">
-                <div class="card-body">
-                  <h5 class="card-title">Centralized Backup Management System</h5>
-                  <p class="card-text">An enterprise-grade solution for automating and monitoring database backups.</p>
-                  <a href="centralized-backup.html" class="btn btn-outline-primary btn-sm">View Project</a>
-                </div>
-              </div>
+        <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+          <div class="project-stats">
+            <div class="stat-item">
+              <div class="stat-number">80%</div>
+              <div class="stat-label">Prediction Accuracy</div>
             </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Call to Action -->
-      <div class="row mt-5" data-aos="fade-up">
-        <div class="col-12 text-center">
-          <div class="card border-0 bg-primary text-white shadow">
-            <div class="card-body py-5">
-              <h3 class="mb-3">Interested in working together?</h3>
-              <p class="mb-4">Let's discuss how I can help with your data management and analytics needs</p>
-              <a href="#contact" class="btn btn-light btn-lg">Get In Touch</a>
+            <div class="stat-item">
+              <div class="stat-number">9PB</div>
+              <div class="stat-label">Data Managed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">330+</div>
+              <div class="stat-label">Database Systems</div>
             </div>
           </div>
         </div>
@@ -303,143 +99,1249 @@
     </div>
   </section>
 
+  <!-- Project Details Section -->
+  <section class="project-details-section">
+    <div class="container">
+      <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+          <!-- Project Image -->
+          <div class="project-image-container" data-aos="fade-up">
+            <img src="assets/databasesizeestimator.png" alt="Database Size Estimator Dashboard" class="project-image">
+            <div class="image-overlay">
+              <div class="overlay-content">
+                <i class="fas fa-expand-alt"></i>
+                <span>View Full Image</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Description -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-info-circle me-2"></i>Project Overview
+            </h2>
+            <div class="section-content">
+              <p class="lead">
+                At Cotiviti Technology, with over 330 production database systems totaling approximately 9 petabytes of data, we frequently encountered system failures due to unexpected storage exhaustion resulting in business disruptions and financial losses.
+              </p>
+              <p>
+                To solve this critical problem, I implemented an AI-powered solution using LSTM (Long Short-Term Memory) neural networks to proactively predict weekly database storage growth patterns and automatically adjust capacity requirements, transforming our reactive approach into a predictive, intelligent system.
+              </p>
+            </div>
+          </div>
+
+          <!-- Technical Architecture -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-cogs me-2"></i>Technical Architecture
+            </h2>
+            <div class="section-content">
+              <div class="architecture-diagram">
+                <div class="arch-component" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="component-icon">
+                    <i class="fas fa-database"></i>
+                  </div>
+                  <div class="component-info">
+                    <h4>Data Collection</h4>
+                    <p>Automated monitoring across 330+ database systems</p>
+                  </div>
+                </div>
+                <div class="arch-arrow">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="arch-component" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="component-icon">
+                    <i class="fas fa-brain"></i>
+                  </div>
+                  <div class="component-info">
+                    <h4>LSTM Model</h4>
+                    <p>Neural network for time-series prediction</p>
+                  </div>
+                </div>
+                <div class="arch-arrow">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="arch-component" data-aos="zoom-in" data-aos-delay="300">
+                  <div class="component-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="component-info">
+                    <h4>Prediction Engine</h4>
+                    <p>Intelligent capacity forecasting and alerting</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Features -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-star me-2"></i>Key Features
+            </h2>
+            <div class="section-content">
+              <div class="features-grid">
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                  <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                  </div>
+                  <h4>Automated Data Collection</h4>
+                  <p>Real-time monitoring system gathering storage metrics from 330+ database instances across multiple platforms.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                  <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                  </div>
+                  <h4>LSTM Neural Networks</h4>
+                  <p>Deep learning models trained on historical data to predict future storage requirements with 80% accuracy.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                  <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                  </div>
+                  <h4>Proactive Alerting</h4>
+                  <p>Intelligent notification system preventing storage exhaustion before it impacts business operations.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="400">
+                  <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                  </div>
+                  <h4>Predictive Analytics</h4>
+                  <p>Advanced analytics dashboard providing insights into growth trends and capacity planning recommendations.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Implementation Details -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-code me-2"></i>Implementation Details
+            </h2>
+            <div class="section-content">
+              <div class="implementation-tabs">
+                <nav class="nav nav-tabs implementation-nav" id="implementationTabs">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dataCollection">Data Collection</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#modelDesign">LSTM Model</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#prediction">Prediction Engine</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#integration">Integration</button>
+                </nav>
+                <div class="tab-content implementation-content">
+                  <div class="tab-pane active" id="dataCollection">
+                    <h4>Automated Data Collection Framework</h4>
+                    <p>Developed a comprehensive data collection system to monitor storage metrics across all database platforms:</p>
+                    <ul>
+                      <li>Real-time collection of database size, growth rate, and usage patterns</li>
+                      <li>Multi-platform support for SQL Server, Oracle, MySQL, and PostgreSQL</li>
+                      <li>Centralized data warehouse for historical analysis and model training</li>
+                      <li>Data quality validation and anomaly detection mechanisms</li>
+                      <li>Scalable architecture handling 330+ concurrent database connections</li>
+                    </ul>
+                    <div class="code-preview">
+                      <pre><code class="language-python"># Data collection pipeline
+def collect_database_metrics():
+    for db in database_instances:
+        metrics = get_storage_metrics(db)
+        validate_data_quality(metrics)
+        store_in_warehouse(metrics, timestamp)</code></pre>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="modelDesign">
+                    <h4>LSTM Neural Network Architecture</h4>
+                    <p>Designed and implemented sophisticated LSTM models for time-series forecasting:</p>
+                    <ul>
+                      <li>Multi-layer LSTM architecture with dropout regularization</li>
+                      <li>Feature engineering including seasonal patterns and business cycles</li>
+                      <li>Model training with historical data spanning multiple years</li>
+                      <li>Cross-validation and hyperparameter optimization</li>
+                      <li>Ensemble methods combining multiple model predictions</li>
+                    </ul>
+                  </div>
+                  <div class="tab-pane" id="prediction">
+                    <h4>Intelligent Prediction Engine</h4>
+                    <p>Built sophisticated prediction and alerting system for proactive capacity management:</p>
+                    <ul>
+                      <li>Weekly storage growth predictions with confidence intervals</li>
+                      <li>Dynamic threshold adjustments based on business criticality</li>
+                      <li>Multi-horizon forecasting (1-week to 3-month predictions)</li>
+                      <li>Risk assessment and prioritization algorithms</li>
+                      <li>Integration with automated provisioning systems</li>
+                    </ul>
+                  </div>
+                  <div class="tab-pane" id="integration">
+                    <h4>System Integration & Workflow</h4>
+                    <p>Seamless integration with existing infrastructure and operational workflows:</p>
+                    <ul>
+                      <li>API integration with JIRA for automated ticket creation</li>
+                      <li>Email and Slack notifications for critical alerts</li>
+                      <li>Dashboard integration with Grafana for real-time monitoring</li>
+                      <li>Automated storage provisioning workflows</li>
+                      <li>Performance monitoring and model retraining pipelines</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="project-sidebar">
+            <!-- Project Info -->
+            <div class="sidebar-card" data-aos="fade-left">
+              <h3 class="sidebar-title">
+                <i class="fas fa-info-circle me-2"></i>Project Information
+              </h3>
+              <div class="info-list">
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Technologies</strong>
+                    <span>Python, LSTM, TensorFlow, SQL, Data Analytics</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-building"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Company</strong>
+                    <span>Cotiviti Technology</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-calendar"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Duration</strong>
+                    <span>4 Months</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Role</strong>
+                    <span>ML Engineer & Database Specialist</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Challenges & Solutions -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="100">
+              <h3 class="sidebar-title">
+                <i class="fas fa-lightbulb me-2"></i>Key Challenges
+              </h3>
+              <div class="challenge-list">
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Scale Management</strong>
+                    <p>Managing 330+ database instances across multiple platforms simultaneously</p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Business Impact</strong>
+                    <p>Preventing costly system failures and business disruptions</p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-brain"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Prediction Complexity</strong>
+                    <p>Modeling complex, non-linear storage growth patterns</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technologies Used -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="200">
+              <h3 class="sidebar-title">
+                <i class="fas fa-tools me-2"></i>Technologies Used
+              </h3>
+              <div class="tech-stack">
+                <div class="tech-item">
+                  <i class="fab fa-python"></i>
+                  <span>Python</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-brain"></i>
+                  <span>LSTM</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-database"></i>
+                  <span>SQL Server</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-chart-line"></i>
+                  <span>TensorFlow</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-cogs"></i>
+                  <span>Data Analytics</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-bell"></i>
+                  <span>Alerting Systems</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Related Projects -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="300">
+              <h3 class="sidebar-title">
+                <i class="fas fa-project-diagram me-2"></i>Related Projects
+              </h3>
+              <div class="related-projects">
+                <a href="centralized-backup.html" class="related-project">
+                  <div class="related-icon">
+                    <i class="fas fa-database"></i>
+                  </div>
+                  <div class="related-content">
+                    <h5>Centralized Backup System</h5>
+                    <p>Enterprise backup management across 200+ databases</p>
+                  </div>
+                </a>
+                <a href="datapipeline.html" class="related-project">
+                  <div class="related-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                  </div>
+                  <div class="related-content">
+                    <h5>ETL Data Pipeline</h5>
+                    <p>Oracle to Vertica data transfer automation</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="row mt-5">
+        <div class="col-12" data-aos="fade-up">
+          <div class="results-section">
+            <h2 class="section-title text-center mb-5">
+              <i class="fas fa-trophy me-2"></i>Project Results & Impact
+            </h2>
+            <div class="results-grid">
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="result-icon">
+                  <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="result-number">80%</div>
+                <div class="result-label">Prediction Accuracy</div>
+                <div class="result-description">
+                  High accuracy in forecasting database storage requirements across all systems
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="result-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="result-number">80%</div>
+                <div class="result-label">Failure Reduction</div>
+                <div class="result-description">
+                  Dramatic decrease in system failures due to storage exhaustion
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="result-icon">
+                  <i class="fas fa-database"></i>
+                </div>
+                <div class="result-number">9PB</div>
+                <div class="result-label">Data Managed</div>
+                <div class="result-description">
+                  Total volume of data managed across 330+ database systems
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="result-icon">
+                  <i class="fas fa-ticket-alt"></i>
+                </div>
+                <div class="result-number">70%</div>
+                <div class="result-label">Ticket Reduction</div>
+                <div class="result-description">
+                  Reduction in emergency storage allocation tickets and manual interventions
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="project-cta-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <div class="cta-card">
+            <div class="cta-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="cta-title">Need AI-powered database solutions?</h3>
+            <p class="cta-description">
+              Let's discuss how I can help implement intelligent predictive analytics and machine learning solutions for your database infrastructure and capacity planning needs.
+            </p>
+            <div class="cta-buttons">
+              <a href="index.html#contact" class="quantum-btn">
+                <i class="fas fa-envelope me-2"></i>Get In Touch
+              </a>
+              <a href="index.html#projects" class="quantum-btn quantum-btn-outline">
+                <i class="fas fa-project-diagram me-2"></i>View More Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <div id="footer-placeholder"></div>
 
-
-  <!-- Bootstrap JS Bundle with Popper -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- AOS Animation Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <!-- Typed.js Library -->
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  
+  <style>
+    /* Project-specific styles */
+    .project-hero-section {
+      min-height: 80vh;
+      background: var(--quantum-gradient);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 0 4rem;
+    }
+
+    .breadcrumb {
+      background: none;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+
+    .breadcrumb-link {
+      color: var(--cosmic-gray);
+      text-decoration: none;
+      transition: var(--transition-normal);
+    }
+
+    .breadcrumb-link:hover {
+      color: var(--neutron-cyan);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--neutron-cyan);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .project-icon-large {
+      width: 80px;
+      height: 80px;
+      background: var(--plasma-gradient);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--quantum-blue);
+      flex-shrink: 0;
+    }
+
+    .project-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--stellar-white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .project-subtitle {
+      font-size: 1.2rem;
+      color: var(--cosmic-gray);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .project-badges {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .project-badge {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    .project-badge.success {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--photon-green);
+      border: 1px solid var(--photon-green);
+    }
+
+    .project-badge.date {
+      background: rgba(45, 212, 191, 0.2);
+      color: var(--neutron-cyan);
+      border: 1px solid var(--neutron-cyan);
+    }
+
+    .project-badge.company {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--electron-violet);
+      border: 1px solid var(--electron-violet);
+    }
+
+    .project-stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      background: rgba(26, 27, 58, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: var(--transition-normal);
+    }
+
+    .stat-item:hover {
+      border-color: var(--neutron-cyan);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(45, 212, 191, 0.3);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--plasma-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--cosmic-gray);
+      font-weight: 600;
+    }
+
+    .project-details-section {
+      padding: 4rem 0;
+      background: rgba(26, 27, 58, 0.1);
+    }
+
+    .project-image-container {
+      position: relative;
+      margin-bottom: 3rem;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(26, 27, 58, 0.4);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+    }
+
+    .project-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--transition-normal);
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 14, 39, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition-normal);
+      cursor: pointer;
+    }
+
+    .project-image-container:hover .image-overlay {
+      opacity: 1;
+    }
+
+    .project-image-container:hover .project-image {
+      transform: scale(1.05);
+    }
+
+    .overlay-content {
+      text-align: center;
+      color: var(--stellar-white);
+    }
+
+    .overlay-content i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--neutron-cyan);
+    }
+
+    .project-section {
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--neutron-cyan);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-content {
+      background: rgba(26, 27, 58, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .architecture-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .arch-component {
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      background: rgba(45, 212, 191, 0.1);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      border-radius: 12px;
+      padding: 2rem 1rem;
+      transition: var(--transition-normal);
+    }
+
+    .arch-component:hover {
+      transform: translateY(-5px);
+      border-color: var(--neutron-cyan);
+    }
+
+    .component-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--plasma-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      color: var(--quantum-blue);
+    }
+
+    .component-info h4 {
+      color: var(--neutron-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .component-info p {
+      color: var(--cosmic-gray);
+      margin: 0;
+    }
+
+    .arch-arrow {
+      font-size: 1.5rem;
+      color: var(--neutron-cyan);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: rgba(45, 212, 191, 0.05);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition-normal);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--neutron-cyan);
+      background: rgba(45, 212, 191, 0.1);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--plasma-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      color: var(--quantum-blue);
+    }
+
+    .feature-card h4 {
+      color: var(--neutron-cyan);
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: var(--cosmic-gray);
+      margin: 0;
+    }
+
+    .implementation-nav .nav-link {
+      background: rgba(26, 27, 58, 0.6);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      color: var(--cosmic-gray);
+      border-radius: 8px 8px 0 0;
+      margin-right: 0.5rem;
+      transition: var(--transition-normal);
+    }
+
+    .implementation-nav .nav-link.active,
+    .implementation-nav .nav-link:hover {
+      background: var(--neutron-cyan);
+      color: var(--quantum-blue);
+      border-color: var(--neutron-cyan);
+    }
+
+    .implementation-content {
+      background: rgba(45, 212, 191, 0.05);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 0 12px 12px 12px;
+      padding: 2rem;
+      margin-top: -1px;
+    }
+
+    .code-preview {
+      background: rgba(10, 14, 39, 0.8);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      overflow-x: auto;
+    }
+
+    .code-preview code {
+      color: var(--stellar-white);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .project-sidebar {
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-card {
+      background: rgba(26, 27, 58, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: var(--transition-normal);
+    }
+
+    .sidebar-card:hover {
+      border-color: var(--neutron-cyan);
+      box-shadow: 0 8px 32px rgba(45, 212, 191, 0.2);
+    }
+
+    .sidebar-title {
+      color: var(--neutron-cyan);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(45, 212, 191, 0.05);
+      border-radius: 8px;
+    }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--plasma-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--quantum-blue);
+      flex-shrink: 0;
+    }
+
+    .info-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-content strong {
+      color: var(--neutron-cyan);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-content span {
+      color: var(--cosmic-gray);
+    }
+
+    .challenge-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .challenge-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+    }
+
+    .challenge-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(245, 158, 11, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--proton-orange);
+      flex-shrink: 0;
+    }
+
+    .challenge-text strong {
+      color: var(--proton-orange);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .challenge-text p {
+      color: var(--cosmic-gray);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .tech-stack {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .tech-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem;
+      background: rgba(45, 212, 191, 0.1);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 8px;
+      color: var(--cosmic-gray);
+      transition: var(--transition-normal);
+    }
+
+    .tech-item:hover {
+      background: rgba(45, 212, 191, 0.2);
+      border-color: var(--neutron-cyan);
+      color: var(--neutron-cyan);
+    }
+
+    .tech-item i {
+      font-size: 1.2rem;
+      color: var(--neutron-cyan);
+    }
+
+    .related-projects {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .related-project {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(45, 212, 191, 0.05);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-normal);
+    }
+
+    .related-project:hover {
+      background: rgba(45, 212, 191, 0.1);
+      border-color: var(--neutron-cyan);
+      transform: translateX(5px);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .related-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--plasma-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--quantum-blue);
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+
+    .related-content h5 {
+      color: var(--neutron-cyan);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .related-content p {
+      color: var(--cosmic-gray);
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .results-section {
+      background: rgba(26, 27, 58, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .result-card {
+      text-align: center;
+      background: rgba(45, 212, 191, 0.05);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: var(--transition-normal);
+    }
+
+    .result-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      border-color: var(--neutron-cyan);
+      box-shadow: 0 15px 40px rgba(45, 212, 191, 0.3);
+    }
+
+    .result-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--plasma-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.8rem;
+      color: var(--quantum-blue);
+    }
+
+    .result-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--plasma-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-label {
+      font-size: 1.1rem;
+      color: var(--neutron-cyan);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .result-description {
+      color: var(--cosmic-gray);
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    .project-cta-section {
+      padding: 4rem 0;
+      background: rgba(26, 27, 58, 0.2);
+    }
+
+    .cta-card {
+      background: rgba(26, 27, 58, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--stellar-gradient);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .cta-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--plasma-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: var(--quantum-blue);
+      animation: ctaPulse 3s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .cta-title {
+      color: var(--neutron-cyan);
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-description {
+      color: var(--cosmic-gray);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .project-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .project-icon-large {
+        align-self: center;
+      }
+
+      .architecture-diagram {
+        flex-direction: column;
+      }
+
+      .arch-arrow {
+        transform: rotate(90deg);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tech-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .project-sidebar {
+        position: static;
+        margin-top: 2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .quantum-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-number,
+      .result-number {
+        font-size: 2rem;
+      }
+
+      .project-hero-section {
+        padding: 6rem 0 3rem;
+      }
+
+      .section-content {
+        padding: 1.5rem;
+      }
+
+      .cta-card {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
 
   <script src="js/script.js"></script>
-  
-  <!-- Custom JavaScript -->
+
   <script>
-    // Initialize AOS animation
+    // Initialize AOS
     AOS.init({
       duration: 800,
       once: true
     });
-  
-    // Activate the skill progress bars on scroll
-    const skillBars = document.querySelectorAll('.skill-progress-bar');
-    window.addEventListener('load', function() {
-      skillBars.forEach(bar => {
-        const width = bar.getAttribute('data-width');
-        bar.style.width = width;
-      });
-    });
-  
-    // Initialize Typed.js for the hero section
-    document.addEventListener('DOMContentLoaded', function() {
-      var typed = new Typed('#typed-output', {
-        strings: [
-          'Database Administrator',
-          'Data Analytics Professional',
-          'Azure Cloud Specialist',
-          'SQL Expert & Python Developer'
-        ],
-        typeSpeed: 50,
-        backSpeed: 30,
-        backDelay: 2000,
-        loop: true
-      });
-      
-      // Handle navbar collapse - Move inside DOMContentLoaded to ensure elements exist
-      setupNavbarCollapse();
-    });
-  
-    // Function to set up navbar collapse behavior
-    function setupNavbarCollapse() {
-      const navbarToggler = document.querySelector('.navbar-toggler');
-      const navbarCollapse = document.querySelector('.navbar-collapse');
-      
-      // Skip if elements don't exist
-      if (!navbarToggler || !navbarCollapse) {
-        console.warn('Navbar elements not found');
-        return;
-      }
-      
-      // Use Bootstrap's collapse API directly
-      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-        toggle: false
-      });
-      
-      // Close navbar when clicking outside
-      document.addEventListener('click', function(event) {
-        if (navbarCollapse.classList.contains('show') && 
-            !navbarToggler.contains(event.target) && 
-            !navbarCollapse.contains(event.target)) {
-          bsCollapse.hide();
-        }
-      });
-      
-      // Close navbar when scrolling
-      let scrollTimeout;
-      window.addEventListener('scroll', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(function() {
-          if (navbarCollapse.classList.contains('show')) {
-            bsCollapse.hide();
-          }
-        }, 150); // Small delay to avoid performance issues
-      });
-      
-      // Close navbar when clicking a nav-link
-      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          if (navbarCollapse.classList.contains('show')) {
-            bsCollapse.hide();
-          }
-        });
-      });
-    }
-  
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 70,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  
-    // Add active class to navigation based on scroll position
+
+    // Scroll progress indicator
     window.addEventListener('scroll', function() {
-      let scrollPosition = window.scrollY;
-      
-      document.querySelectorAll('section').forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          document.querySelectorAll('.nav-link').forEach(navLink => {
-            navLink.classList.remove('active');
-            if (navLink.getAttribute('href') === `#${sectionId}`) {
-              navLink.classList.add('active');
-            }
-          });
-        }
-      });
-  
-      // Add backdrop blur to navbar on scroll
-      const navbar = document.querySelector('.navbar');
-      if (navbar) {
-        if (scrollPosition > 50) {
-          navbar.classList.add('shadow-sm');
-        } else {
-          navbar.classList.remove('shadow-sm');
-        }
+      const scrollProgress = document.querySelector('.scroll-progress');
+      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      scrollProgress.style.width = scrollPercent + '%';
+    });
+
+    // Particle system
+    function createParticles() {
+      const particleSystem = document.getElementById('particleSystem');
+      const particleCount = 50;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'quantum-particle';
+        particle.style.width = Math.random() * 4 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particleSystem.appendChild(particle);
       }
+    }
+
+    // Neural network
+    function createNeuralNetwork() {
+      const network = document.getElementById('neuralNetwork');
+      const neuronCount = 20;
+      const synapseCount = 15;
+
+      // Create neurons
+      for (let i = 0; i < neuronCount; i++) {
+        const neuron = document.createElement('div');
+        neuron.className = 'neuron';
+        neuron.style.left = Math.random() * 100 + '%';
+        neuron.style.top = Math.random() * 100 + '%';
+        neuron.style.animationDelay = Math.random() * 3 + 's';
+        network.appendChild(neuron);
+      }
+
+      // Create synapses
+      for (let i = 0; i < synapseCount; i++) {
+        const synapse = document.createElement('div');
+        synapse.className = 'synapse';
+        synapse.style.left = Math.random() * 100 + '%';
+        synapse.style.top = Math.random() * 100 + '%';
+        synapse.style.width = Math.random() * 200 + 50 + 'px';
+        synapse.style.animationDelay = Math.random() * 2 + 's';
+        network.appendChild(synapse);
+      }
+    }
+
+    // Initialize effects
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      createNeuralNetwork();
     });
   </script>
 </body>

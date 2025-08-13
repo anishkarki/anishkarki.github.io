@@ -1,162 +1,158 @@
 [
   {
-    "title": "04-Optimise_Query_Performance",
-    "file": "Posts/DatabaseAdmin/04-Optimise_Query_Performance.md",
-    "category": "General"
+    "id": 1,
+    "title": "Optimizing SQL Server Performance: Advanced Indexing Strategies",
+    "excerpt": "Dive deep into advanced indexing techniques that can dramatically improve your SQL Server performance. Learn about covering indexes, filtered indexes, and when to use them effectively in high-transaction environments.",
+    "content": "In this comprehensive guide, we'll explore advanced indexing strategies that can significantly boost your SQL Server performance. From understanding index internals to implementing covering indexes and filtered indexes, this article covers everything you need to know to optimize your database queries for enterprise-scale applications.",
+    "category": "performance",
+    "tags": ["SQL Server", "Performance", "Indexing", "Database Optimization", "Enterprise"],
+    "date": "2024-12-15T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "8 min read",
+    "file": "posts/SQL_Server_Perfromance.md"
   },
   {
-    "title": "05-Automatethedatabase",
-    "file": "Posts/DatabaseAdmin/05-Automatethedatabase.md",
-    "category": "General"
+    "id": 2,
+    "title": "Azure SQL Database Migration: Best Practices and Common Pitfalls",
+    "excerpt": "A comprehensive guide to migrating your on-premises SQL Server databases to Azure SQL Database, including migration strategies, common challenges, and how to overcome them effectively.",
+    "content": "Migrating to Azure SQL Database can be complex and challenging. This article provides a step-by-step approach to ensure a smooth migration process, covering assessment tools, migration strategies, performance optimization, and post-migration best practices for enterprise environments.",
+    "category": "cloud",
+    "tags": ["Azure", "Cloud Migration", "SQL Database", "Azure SQL", "Migration Strategy"],
+    "date": "2024-12-10T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "12 min read",
+    "file": "posts/azure-sql-migration-guide.md"
   },
   {
-    "title": "05-AzureAutomate",
-    "file": "Posts/DatabaseAdmin/05-AzureAutomate.md",
-    "category": "General"
+    "id": 3,
+    "title": "Automating Database Backup Verification with Python",
+    "excerpt": "Learn how to build a robust Python script to automatically verify your database backups and ensure data integrity across your enterprise environment with real-world examples.",
+    "content": "Database backup verification is crucial for any enterprise environment. This tutorial shows you how to create a comprehensive Python-based automation system that can verify backups across multiple servers, providing detailed reports, alerts, and ensuring your disaster recovery strategy is bulletproof.",
+    "category": "automation",
+    "tags": ["Python", "Automation", "Backup", "Database Administration", "Scripting"],
+    "date": "2024-12-05T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "10 min read",
+    "file": "posts/python-backup-verification.md"
   },
   {
-    "title": "05-logicapps",
-    "file": "Posts/DatabaseAdmin/05-logicapps.md",
-    "category": "General"
+    "id": 4,
+    "title": "High Availability Setup: SQL Server AlwaysOn Availability Groups",
+    "excerpt": "Master the setup and configuration of SQL Server AlwaysOn Availability Groups for enterprise-level high availability and disaster recovery. Complete with troubleshooting tips.",
+    "content": "AlwaysOn Availability Groups provide enterprise-grade high availability and disaster recovery capabilities for SQL Server. This detailed guide walks through the complete setup process, from prerequisites and network configuration to testing failover scenarios and ongoing maintenance.",
+    "category": "database",
+    "tags": ["SQL Server", "High Availability", "AlwaysOn", "Disaster Recovery", "Clustering"],
+    "date": "2024-11-28T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "15 min read",
+    "file": "posts/sql-server-alwayson-setup.md"
   },
   {
-    "title": "05-MainageAgentjob",
-    "file": "Posts/DatabaseAdmin/05-MainageAgentjob.md",
-    "category": "General"
+    "id": 5,
+    "title": "Power BI Dashboard Design: From Raw Data to Business Insights",
+    "excerpt": "Transform raw data into compelling visualizations with advanced Power BI techniques. Learn dashboard design principles that drive business decisions and user adoption.",
+    "content": "Creating effective Power BI dashboards requires more than just connecting to data sources. This comprehensive article covers design principles, DAX optimization techniques, performance considerations, and user experience best practices for building dashboards that truly inform and inspire business action.",
+    "category": "analytics",
+    "tags": ["Power BI", "Data Visualization", "DAX", "Business Intelligence", "Dashboard Design"],
+    "date": "2024-11-20T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "11 min read",
+    "file": "posts/power-bi-dashboard-design.md"
   },
   {
-    "title": "05-monitor-automated-taks",
-    "file": "Posts/DatabaseAdmin/05-monitor-automated-taks.md",
-    "category": "General"
+    "id": 6,
+    "title": "Database Security Best Practices in the Cloud Era",
+    "excerpt": "Essential security measures for protecting your databases in cloud environments, including encryption strategies, access controls, and continuous monitoring approaches.",
+    "content": "Cloud database security requires a comprehensive, multi-layered approach. This guide covers encryption at rest and in transit, identity and access management, network security, threat detection, and continuous monitoring strategies specifically designed for cloud database environments.",
+    "category": "database",
+    "tags": ["Security", "Cloud", "Database", "Best Practices", "Encryption"],
+    "date": "2024-11-15T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "9 min read",
+    "file": "posts/cloud-database-security.md"
   },
   {
-    "title": "AllaboutAvailabiilty",
-    "file": "Posts/DatabaseAdmin/AllaboutAvailabiilty.md",
-    "category": "SQL Server"
+    "id": 7,
+    "title": "Machine Learning with SQL: Predicting Database Performance Issues",
+    "excerpt": "Explore how to use machine learning techniques to predict and prevent database performance issues before they impact your users. Practical examples included.",
+    "content": "Learn how to implement machine learning models that can predict database performance issues before they occur. This article covers data collection strategies, feature engineering, model selection, and practical implementation using SQL Server Machine Learning Services and Python.",
+    "category": "analytics",
+    "tags": ["Machine Learning", "SQL Server", "Performance", "Predictive Analytics", "Python"],
+    "date": "2024-11-08T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "13 min read",
+    "file": "posts/ml-database-performance.md"
   },
   {
-    "title": "allmigrationmethods",
-    "file": "Posts/DatabaseAdmin/allmigrationmethods.md",
-    "category": "General"
+    "id": 8,
+    "title": "Docker Containers for Database Development: Best Practices",
+    "excerpt": "Streamline your database development workflow using Docker containers. Learn how to create consistent development environments and automate testing processes.",
+    "content": "Docker containers can revolutionize database development by providing consistent, reproducible environments. This guide covers containerizing SQL Server, managing data persistence, automated testing strategies, and integrating containers into your development pipeline.",
+    "category": "automation",
+    "tags": ["Docker", "Containers", "Database Development", "DevOps", "SQL Server"],
+    "date": "2024-10-30T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "7 min read",
+    "file": "posts/docker-database-development.md"
   },
   {
-    "title": "06-HADR",
-    "file": "Posts/DatabaseAdmin/AvailabilityHADR/06-HADR.md",
-    "category": "General"
+    "id": 9,
+    "title": "Zero-Downtime Database Deployments: Strategies and Tools",
+    "excerpt": "Achieve zero-downtime database deployments using modern techniques. Learn about blue-green deployments, feature flags, and rollback strategies for mission-critical systems.",
+    "content": "Zero-downtime deployments are essential for mission-critical database systems. This comprehensive guide covers blue-green deployment strategies, database versioning, feature flags, automated rollback procedures, and monitoring techniques to ensure seamless database updates without service interruption.",
+    "category": "database",
+    "tags": ["Deployment", "Zero-Downtime", "DevOps", "Database", "Blue-Green"],
+    "date": "2024-10-22T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "14 min read",
+    "file": "posts/zero-downtime-deployments.md"
   },
   {
-    "title": "backupsinfo",
-    "file": "Posts/DatabaseAdmin/backupsinfo.md",
-    "category": "SQL Server"
+    "id": 10,
+    "title": "Advanced T-SQL Techniques for Performance Optimization",
+    "excerpt": "Master advanced T-SQL techniques that can dramatically improve query performance. From window functions to query hints, unlock the full potential of SQL Server.",
+    "content": "Advanced T-SQL techniques can significantly improve query performance and code maintainability. This deep-dive article covers window functions, common table expressions, query hints, execution plan analysis, and advanced join techniques with real-world performance comparisons.",
+    "category": "performance",
+    "tags": ["T-SQL", "Performance", "Query Optimization", "SQL Server", "Advanced"],
+    "date": "2024-10-15T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "16 min read",
+    "file": "posts/advanced-tsql-techniques.md"
   },
   {
-    "title": "Interviewprep1",
-    "file": "Posts/DatabaseAdmin/Interviewprep1.md",
-    "category": "Interview Prep"
+    "id": 11,
+    "title": "Building Real-time Data Pipelines with Apache Kafka and SQL Server",
+    "excerpt": "Learn how to build scalable, real-time data pipelines that connect SQL Server with Apache Kafka for high-throughput data processing and analytics.",
+    "content": "Real-time data processing is crucial for modern applications. This tutorial demonstrates how to build robust data pipelines using Apache Kafka with SQL Server, covering message serialization, error handling, exactly-once processing, and monitoring strategies for production environments.",
+    "category": "automation",
+    "tags": ["Apache Kafka", "Data Pipeline", "SQL Server", "Real-time", "Streaming"],
+    "date": "2024-10-08T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "18 min read",
+    "file": "posts/kafka-sql-server-pipeline.md"
   },
   {
-    "title": "interviewprep2",
-    "file": "Posts/DatabaseAdmin/interviewprep2.md",
-    "category": "Interview Prep"
-  },
-  {
-    "title": "interviewprep3",
-    "file": "Posts/DatabaseAdmin/interviewprep3.md",
-    "category": "Interview Prep"
-  },
-  {
-    "title": "interviewprep4",
-    "file": "Posts/DatabaseAdmin/interviewprep4.md",
-    "category": "Interview Prep"
-  },
-  {
-    "title": "monitor",
-    "file": "Posts/DatabaseAdmin/monitor.md",
-    "category": "General"
-  },
-  {
-    "title": "Optimize_the_db",
-    "file": "Posts/DatabaseAdmin/Optimize_the_db.md",
-    "category": "General"
-  },
-  {
-    "title": "Queries",
-    "file": "Posts/DatabaseAdmin/Queries.md",
-    "category": "SQL Server"
-  },
-  {
-    "title": "setup_ag_docker",
-    "file": "Posts/DatabaseAdmin/setup_ag_docker.md",
-    "category": "SQL Server"
-  },
-  {
-    "title": "SimulatingPlanchange",
-    "file": "Posts/DatabaseAdmin/SimulatingPlanchange.md",
-    "category": "SQL Server"
-  },
-  {
-    "title": "DP-300_1",
-    "file": "Posts/DP-300_1.md",
-    "category": "Azure"
-  },
-  {
-    "title": "DP-300-2",
-    "file": "Posts/DP-300-2.md",
-    "category": "Azure"
-  },
-  {
-    "title": "Dp-300-3",
-    "file": "Posts/Dp-300-3.md",
-    "category": "High Availability"
-  },
-  {
-    "title": "day1",
-    "file": "Posts/FabricAnalytics/day1.md",
-    "category": "General"
-  },
-  {
-    "title": "day2",
-    "file": "Posts/FabricAnalytics/day2.md",
-    "category": "General"
-  },
-  {
-    "title": "day3",
-    "file": "Posts/FabricAnalytics/day3.md",
-    "category": "General"
-  },
-  {
-    "title": "VCNsetup",
-    "file": "Posts/Networking/VCNsetup.md",
-    "category": "General"
-  },
-  {
-    "title": "User_domain_plicy",
-    "file": "Posts/NetworkingCloud/User_domain_plicy.md",
-    "category": "General"
-  },
-  {
-    "title": "VCNwithinternetconnection",
-    "file": "Posts/NetworkingCloud/VCNwithinternetconnection.md",
-    "category": "General"
-  },
-  {
-    "title": "Only_HA",
-    "file": "Posts/Only_HA.md",
-    "category": "High Availability"
-  },
-  {
-    "title": "cheetsheet",
-    "file": "Posts/sparkpandas/cheetsheet.md",
-    "category": "General"
-  },
-  {
-    "title": "commonerrors",
-    "file": "Posts/sparkpandas/commonerrors.md",
-    "category": "General"
-  },
-  {
-    "title": "intro",
-    "file": "Posts/sparkpandas/intro.md",
-    "category": "General"
+    "id": 12,
+    "title": "Multi-Cloud Database Strategy: AWS, Azure, and Google Cloud",
+    "excerpt": "Navigate the complexities of multi-cloud database deployments. Compare services, learn migration strategies, and understand when to use each cloud provider's database offerings.",
+    "content": "Multi-cloud strategies are becoming increasingly important for enterprise resilience and cost optimization. This comprehensive comparison covers database services across AWS, Azure, and Google Cloud, including migration strategies, cost analysis, and architectural considerations for each platform.",
+    "category": "cloud",
+    "tags": ["Multi-Cloud", "AWS", "Azure", "Google Cloud", "Database Strategy"],
+    "date": "2024-09-28T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": false,
+    "readTime": "20 min read",
+    "file": "posts/multi-cloud-database-strategy.md"
   }
 ]

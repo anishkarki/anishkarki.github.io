@@ -3,301 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anish Karki | Database Administrator & Data Analytics Professional</title>
+  <title>Centralized Backup Management System | Anish Karki</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- AOS Animation Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-  <link rel="stylesheet" href="css/style.css">
-
-</head>
-<body class="font-sans">
-
-    <div id="project-navbar-placeholder"></div>
-
-    <!-- Header with project title and breadcrumbs -->
-    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 py-5">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-8">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-2">
-                  <li class="breadcrumb-item"><a href="index.html" class="text-black">Home</a></li>
-                  <li class="breadcrumb-item"><a href="index.html#projects" class="text-black">Projects</a></li>
-                  <li class="breadcrumb-item active text-black" aria-current="page">Centralized Backup System</li>
-                </ol>
-              </nav>
-              <h1 class="display-4 fw-bold mb-2 text-black">Centralized Backup Management System</h1>
-              <p class="lead mb-0 text-black">An enterprise-grade solution for automating and monitoring database backups</p>
-            </div>
-            <div class="col-lg-4 text-end d-none d-lg-block">
-              <div class="d-inline-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-2">
-                <span class="badge bg-success me-2 text-black">Completed</span>
-                <i class="bi bi-calendar-check me-2 text-black"></i>
-                <span class="text-black">2019</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
   
-  <!-- Project Details Section -->
-  <section class="py-5">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/projectcss.css">
+</head>
+
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <!-- Particle System -->
+  <div class="particle-system" id="particleSystem"></div>
+
+  <!-- Neural Network Background -->
+  <div class="neural-network" id="neuralNetwork"></div>
+
+  <!-- Navbar -->
+  <div id="project-navbar-placeholder"></div>
+
+  <!-- Project Hero Section -->
+  <section class="project-hero-section">
     <div class="container">
-      <div class="row">
-        <!-- Project Image -->
-        <div class="col-lg-8 mb-4" data-aos="fade-up">
-          <img src="assets/centralisedbackup.png" alt="Centralized Backup System Dashboard" class="img-fluid rounded shadow-sm">
-        </div>
-        
-        <!-- Project Quick Info -->
-        <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h3 class="card-title h4 mb-4">Project Overview</h3>
-              <ul class="list-unstyled">
-                <li class="mb-3">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-code-square text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Technologies</h6>
-                      <p class="mb-0">Python, SQL, Multithreading, Scheduling</p>
-                    </div>
-                  </div>
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div data-aos="fade-up" data-aos-duration="1000">
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home me-1"></i>Home
+                  </a>
                 </li>
-                <li class="mb-3">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-building text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Client</h6>
-                      <p class="mb-0">Cotiviti Technology</p>
-                    </div>
-                  </div>
+                <li class="breadcrumb-item">
+                  <a href="index.html#projects" class="breadcrumb-link">Projects</a>
                 </li>
-                <li class="mb-3">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-calendar2-check text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Duration</h6>
-                      <p class="mb-0">3 months</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <i class="bi bi-person-workspace text-primary fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6 class="fw-bold mb-1">Role</h6>
-                      <p class="mb-0">Lead Developer & Architect</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Project Description -->
-      <div class="row mt-2">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Project Description</h2>
-          <p>
-            As a database administrator at Cotiviti Technology, I was responsible for managing backups of more than 200+ databases. Although there were cron job with scrips running in place, it was hard to monitor the issue going into each database servers.
-          </p>
-          <p>
-            To address these challenges, I developed a Centralized Backup Management System using Python, providing a comprehensive running all the jobs from central server, managing all the logs and status and creating easier analytics with a centralised dashboard.
-          </p>
-        </div>
-      </div>
-      
-      <!-- Challenges and Solutions -->
-      <div class="row mt-4">
-        <div class="col-lg-6 mb-4" data-aos="fade-up">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h3 class="card-title h4 mb-3">Challenges</h3>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Inconsistent backup verification across multiple servers
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Delayed detection of backup failures
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Inefficient resource allocation causing extended backup windows
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Limited visibility across the backup ecosystem
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-exclamation-triangle text-warning me-2"></i>
-                  Complex scheduling requirements for different databases
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h3 class="card-title h4 mb-3">Solutions</h3>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Python monitoring engine for continuous tracking of backup status
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Automated email alerts for immediate notification of failures
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Multi-threaded execution framework for parallel processing
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Centralized dashboard for real-time visibility
-                </li>
-                <li class="list-group-item border-0 ps-0">
-                  <i class="bi bi-check2-circle text-success me-2"></i>
-                  Flexible scheduling system using Python's scheduler library
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Technical Implementation -->
-      <div class="row mt-4">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Technical Implementation</h2>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">Python Monitoring Engine</h4>
-            </div>
-          </div>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">Dynamic SQL Script Generation</h4>
-            </div>
-          </div>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">Multi-threading Implementation</h4>
-            </div>
-          </div>
-          
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-light py-3">
-              <h4 class="h5 mb-0">Failure Notification System</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Results and Benefits -->
-      <div class="row mt-4 mb-5">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Results and Impact</h2>
-          
-          <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">85%</div>
-                  <h5 class="fw-bold">Time Reduction</h5>
-                  <p class="text-muted">Less time spent on backup verification and management</p>
-                </div>
-              </div>
-            </div>
+                <li class="breadcrumb-item active">Centralized Backup System</li>
+              </ol>
+            </nav>
             
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">60%</div>
-                  <h5 class="fw-bold">Faster Backups</h5>
-                  <p class="text-muted">Decrease in backup window duration through parallel processing</p>
-                </div>
+            <div class="project-header">
+              <div class="project-icon-large">
+                <i class="fas fa-database"></i>
               </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">100%</div>
-                  <h5 class="fw-bold">Visibility</h5>
-                  <p class="text-muted">Complete transparency into backup status across all systems</p>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="card border-0 shadow-sm text-center h-100">
-                <div class="card-body py-4">
-                  <div class="display-4 text-primary mb-3">30%</div>
-                  <h5 class="fw-bold">Storage Savings</h5>
-                  <p class="text-muted">Reduction in storage requirements through optimized scheduling</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Related Projects Section -->
-      <div class="row mt-5">
-        <div class="col-12" data-aos="fade-up">
-          <h2 class="h3 mb-4">Other Projects</h2>
-          <div class="row">
-            
-            <!-- Project 2 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card border-0 shadow-sm h-100">
-                <img src="assets/project-placeholder-2.jpg" class="card-img-top" alt="Project Image">
-                <div class="card-body">
-                  <h5 class="card-title">Database Performance Tuning</h5>
-                  <p class="card-text">Optimized database performance by 40% through indexing, query rewriting, and schema improvements.</p>
-                  <a href="#" class="btn btn-outline-primary btn-sm">View Project</a>
+              <div class="project-info">
+                <h1 class="project-title">Centralized Backup Management System</h1>
+                <p class="project-subtitle">
+                  An enterprise-grade solution for automating and monitoring database backups across 200+ databases
+                </p>
+                <div class="project-badges">
+                  <span class="project-badge success">
+                    <i class="fas fa-check-circle me-1"></i>Completed
+                  </span>
+                  <span class="project-badge date">
+                    <i class="fas fa-calendar me-1"></i>2019
+                  </span>
+                  <span class="project-badge company">
+                    <i class="fas fa-building me-1"></i>Cotiviti Technology
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Call to Action -->
-      <div class="row mt-5" data-aos="fade-up">
-        <div class="col-12 text-center">
-          <div class="card border-0 bg-primary text-white shadow">
-            <div class="card-body py-5">
-              <h3 class="mb-3">Interested in working together?</h3>
-              <p class="mb-4">Let's discuss how I can help with your data management and analytics needs</p>
-              <a href="#contact" class="btn btn-light btn-lg">Get In Touch</a>
+        <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+          <div class="project-stats">
+            <div class="stat-item">
+              <div class="stat-number">200+</div>
+              <div class="stat-label">Databases Managed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">85%</div>
+              <div class="stat-label">Time Reduction</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">60%</div>
+              <div class="stat-label">Faster Backups</div>
             </div>
           </div>
         </div>
@@ -305,21 +100,429 @@
     </div>
   </section>
 
+  <!-- Project Details Section -->
+  <section class="project-details-section">
+    <div class="container">
+      <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+          <!-- Project Image -->
+          <div class="project-image-container" data-aos="fade-up">
+            <img src="assets/centralisedbackup.png" alt="Centralized Backup System Dashboard" class="project-image">
+            <div class="image-overlay">
+              <div class="overlay-content">
+                <i class="fas fa-expand-alt"></i>
+                <span>View Full Image</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Description -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-info-circle me-2"></i>Project Overview
+            </h2>
+            <div class="section-content">
+              <p class="lead">
+                As a database administrator at Cotiviti Technology, I was responsible for managing backups of more than 200+ databases. Although there were cron jobs with scripts running in place, it was difficult to monitor issues across each database server individually.
+              </p>
+              <p>
+                To address these challenges, I developed a Centralized Backup Management System using Python, providing a comprehensive solution for running all jobs from a central server, managing all logs and status, and creating easier analytics with a centralized dashboard.
+              </p>
+            </div>
+          </div>
+
+          <!-- Technical Architecture -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-cogs me-2"></i>Technical Architecture
+            </h2>
+            <div class="section-content">
+              <div class="architecture-diagram">
+                <div class="arch-component" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="component-icon">
+                    <i class="fab fa-python"></i>
+                  </div>
+                  <div class="component-info">
+                    <h4>Python Engine</h4>
+                    <p>Core monitoring and orchestration system</p>
+                  </div>
+                </div>
+                <div class="arch-arrow">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="arch-component" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="component-icon">
+                    <i class="fas fa-database"></i>
+                  </div>
+                  <div class="component-info">
+                    <h4>Database Layer</h4>
+                    <p>SQL Server instances across multiple environments</p>
+                  </div>
+                </div>
+                <div class="arch-arrow">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="arch-component" data-aos="zoom-in" data-aos-delay="300">
+                  <div class="component-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="component-info">
+                    <h4>Dashboard</h4>
+                    <p>Real-time monitoring and analytics interface</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Features -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-star me-2"></i>Key Features
+            </h2>
+            <div class="section-content">
+              <div class="features-grid">
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                  <div class="feature-icon">
+                    <i class="fas fa-eye"></i>
+                  </div>
+                  <h4>Centralized Monitoring</h4>
+                  <p>Real-time monitoring of all backup operations from a single dashboard with instant status updates.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                  <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                  </div>
+                  <h4>Automated Execution</h4>
+                  <p>Intelligent scheduling and parallel execution of backup jobs across multiple database servers.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                  <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                  </div>
+                  <h4>Smart Alerting</h4>
+                  <p>Proactive email notifications for failures, delays, and performance anomalies with detailed diagnostics.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="400">
+                  <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <h4>Performance Analytics</h4>
+                  <p>Comprehensive reporting and analytics for backup performance trends and optimization opportunities.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Implementation Details -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-code me-2"></i>Implementation Details
+            </h2>
+            <div class="section-content">
+              <div class="implementation-tabs">
+                <nav class="nav nav-tabs implementation-nav" id="implementationTabs">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#monitoring">Monitoring Engine</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#scheduling">Job Scheduling</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#alerting">Alert System</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reporting">Reporting</button>
+                </nav>
+                <div class="tab-content implementation-content">
+                  <div class="tab-pane active" id="monitoring">
+                    <h4>Python Monitoring Engine</h4>
+                    <p>Built a robust monitoring system using Python that continuously tracks backup job status across all database servers:</p>
+                    <ul>
+                      <li>Multi-threaded execution for parallel monitoring of multiple servers</li>
+                      <li>Real-time status updates with database connection pooling</li>
+                      <li>Automatic retry mechanisms for transient failures</li>
+                      <li>Performance metrics collection and trend analysis</li>
+                    </ul>
+                    <div class="code-preview">
+                      <pre><code class="language-python"># Core monitoring loop
+def monitor_backup_jobs():
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(check_server_status, server) 
+                  for server in active_servers]
+        results = [future.result() for future in futures]
+    return aggregate_results(results)</code></pre>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="scheduling">
+                    <h4>Intelligent Job Scheduling</h4>
+                    <p>Developed a sophisticated scheduling system that optimizes backup execution:</p>
+                    <ul>
+                      <li>Priority-based job queuing with resource allocation</li>
+                      <li>Dependency management between related backup jobs</li>
+                      <li>Load balancing across database servers</li>
+                      <li>Dynamic rescheduling for failed or delayed jobs</li>
+                    </ul>
+                  </div>
+                  <div class="tab-pane" id="alerting">
+                    <h4>Smart Alert System</h4>
+                    <p>Implemented an intelligent alerting mechanism that reduces noise while ensuring critical issues are escalated:</p>
+                    <ul>
+                      <li>Configurable alert thresholds per database and server</li>
+                      <li>Email notifications with detailed failure analysis</li>
+                      <li>Alert aggregation to prevent notification spam</li>
+                      <li>Integration with existing ticketing systems</li>
+                    </ul>
+                  </div>
+                  <div class="tab-pane" id="reporting">
+                    <h4>Comprehensive Reporting</h4>
+                    <p>Created detailed reporting capabilities for management visibility and performance optimization:</p>
+                    <ul>
+                      <li>Daily, weekly, and monthly backup status reports</li>
+                      <li>Performance trend analysis and capacity planning</li>
+                      <li>SLA compliance tracking and reporting</li>
+                      <li>Historical data retention and archiving</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="project-sidebar">
+            <!-- Project Info -->
+            <div class="sidebar-card" data-aos="fade-left">
+              <h3 class="sidebar-title">
+                <i class="fas fa-info-circle me-2"></i>Project Information
+              </h3>
+              <div class="info-list">
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Technologies</strong>
+                    <span>Python, SQL Server, Multithreading, Scheduling</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-building"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Company</strong>
+                    <span>Cotiviti Technology</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-calendar"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Duration</strong>
+                    <span>3 months</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Role</strong>
+                    <span>Lead Developer & Architect</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Challenges & Solutions -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="100">
+              <h3 class="sidebar-title">
+                <i class="fas fa-lightbulb me-2"></i>Key Challenges
+              </h3>
+              <div class="challenge-list">
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Scale Management</strong>
+                    <p>Monitoring 200+ databases across multiple servers simultaneously</p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Time Optimization</strong>
+                    <p>Reducing backup windows while maintaining data integrity</p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-eye"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Visibility</strong>
+                    <p>Providing real-time insights across distributed systems</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technologies Used -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="200">
+              <h3 class="sidebar-title">
+                <i class="fas fa-tools me-2"></i>Technologies Used
+              </h3>
+              <div class="tech-stack">
+                <div class="tech-item">
+                  <i class="fab fa-python"></i>
+                  <span>Python</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-database"></i>
+                  <span>SQL Server</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-cogs"></i>
+                  <span>Threading</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-clock"></i>
+                  <span>Scheduling</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>SMTP</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-chart-line"></i>
+                  <span>Analytics</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Related Projects -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="300">
+              <h3 class="sidebar-title">
+                <i class="fas fa-project-diagram me-2"></i>Related Projects
+              </h3>
+              <div class="related-projects">
+                <a href="databasesize.html" class="related-project">
+                  <div class="related-icon">
+                    <i class="fas fa-brain"></i>
+                  </div>
+                  <div class="related-content">
+                    <h5>Database Size Estimator</h5>
+                    <p>AI-powered storage prediction using LSTM neural networks</p>
+                  </div>
+                </a>
+                <a href="datapipeline.html" class="related-project">
+                  <div class="related-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                  </div>
+                  <div class="related-content">
+                    <h5>ETL Data Pipeline</h5>
+                    <p>Oracle to Vertica data transfer automation</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="row mt-5">
+        <div class="col-12" data-aos="fade-up">
+          <div class="results-section">
+            <h2 class="section-title text-center mb-5">
+              <i class="fas fa-trophy me-2"></i>Project Results & Impact
+            </h2>
+            <div class="results-grid">
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="result-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="result-number">85%</div>
+                <div class="result-label">Time Reduction</div>
+                <div class="result-description">
+                  Reduced time spent on backup verification and management through automation
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="result-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div class="result-number">60%</div>
+                <div class="result-label">Faster Backups</div>
+                <div class="result-description">
+                  Decrease in backup window duration through parallel processing optimization
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="result-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <div class="result-number">100%</div>
+                <div class="result-label">Complete Visibility</div>
+                <div class="result-description">
+                  Full transparency into backup status across all database systems
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="result-icon">
+                  <i class="fas fa-save"></i>
+                </div>
+                <div class="result-number">30%</div>
+                <div class="result-label">Storage Savings</div>
+                <div class="result-description">
+                  Reduction in storage requirements through optimized scheduling and cleanup
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="project-cta-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <div class="cta-card">
+            <div class="cta-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="cta-title">Interested in working together?</h3>
+            <p class="cta-description">
+              Let's discuss how I can help optimize your database operations and build enterprise-scale automation solutions for your organization.
+            </p>
+            <div class="cta-buttons">
+              <a href="index.html#contact" class="quantum-btn">
+                <i class="fas fa-envelope me-2"></i>Get In Touch
+              </a>
+              <a href="index.html#projects" class="quantum-btn quantum-btn-outline">
+                <i class="fas fa-project-diagram me-2"></i>View More Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <div id="footer-placeholder"></div>
 
-
-  <!-- Bootstrap JS Bundle with Popper -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- AOS Animation Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <!-- Typed.js Library -->
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
   <script src="js/script.js"></script>
-  
-  <!-- Custom JavaScript -->
-  <script>
 
-  </script>
+  <style>
+    /* Project-specific styles */
+  </style>
 </body>
 </html>
