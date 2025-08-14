@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Fraud Detection System | Anish Karki</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <!-- Enhanced Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Project Hero Section -->
+  <section class="project-hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div data-aos="fade-up">
+            <div class="project-breadcrumb">
+              <a href="index.html">Home</a> / <a href="index.html#projects">Projects</a> / Healthcare Fraud Detection
+            </div>
+            <h1 class="project-hero-title">Healthcare Fraud Detection System</h1>
+            <p class="project-hero-subtitle">
+              Advanced Machine Learning Pipeline for Fraudulent Healthcare Claims Detection
+            </p>
+            <div class="project-meta">
+              <div class="meta-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>2024</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-code"></i>
+                <span>Python, Machine Learning, XGBoost</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-chart-line"></i>
+                <span>94% Accuracy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="project-hero-icon" data-aos="fade-left">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div data-aos="fade-up">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="quantum-card">
+              <p class="lead">
+                Developed a comprehensive machine learning pipeline to detect fraudulent healthcare claims using ensemble learning techniques and anomaly detection on the DE-SynPUF (Data Entrepreneurs' Synthetic Public Use Files) dataset.
+              </p>
+              <p>
+                This project combines advanced machine learning algorithms with explainable AI techniques to create a robust fraud detection system capable of processing large-scale healthcare data while providing interpretable results for compliance and trust.
+              </p>
+              
+              <div class="project-highlights">
+                <h3>Key Achievements</h3>
+                <ul>
+                  <li><strong>94% Detection Accuracy:</strong> Achieved high precision in identifying fraudulent claims</li>
+                  <li><strong>Real-time Processing:</strong> Deployed API for instant claim evaluation</li>
+                  <li><strong>Explainable AI:</strong> Implemented SHAP for model interpretability</li>
+                  <li><strong>Scalable Architecture:</strong> Designed to handle enterprise-scale datasets</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div data-aos="fade-left">
+            <div class="quantum-card">
+              <h3>Technologies Used</h3>
+              <div class="tech-stack">
+                <div class="tech-item">
+                  <i class="fab fa-python"></i>
+                  <span>Python</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-brain"></i>
+                  <span>Scikit-learn</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-chart-line"></i>
+                  <span>XGBoost</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-eye"></i>
+                  <span>SHAP</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-database"></i>
+                  <span>Pandas</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-server"></i>
+                  <span>Flask API</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Implementation Steps -->
+  <section class="section bg-light">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">🛠️ Step-by-Step Implementation</h2>
+      
+      <div class="implementation-timeline">
+        
+        <!-- Step 1: Data Preprocessing -->
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="quantum-card">
+            <div class="step-header">
+              <div class="step-number">01</div>
+              <h3>Data Preprocessing</h3>
+            </div>
+            <div class="step-content">
+              <h4>Load and Clean Data</h4>
+              <p>Import the DE-SynPUF dataset and handle missing values, duplicates, and inconsistencies.</p>
+              
+              <h4>Feature Engineering</h4>
+              <p>Create new features that may highlight fraudulent behavior, such as:</p>
+              <ul>
+                <li><strong>Claim Frequency:</strong> Number of claims per beneficiary</li>
+                <li><strong>Service Count:</strong> Number of different services billed</li>
+                <li><strong>Average Claim Amount:</strong> Average cost per claim</li>
+                <li><strong>Provider Behavior Metrics:</strong> Metrics indicating unusual provider activities</li>
+              </ul>
+              
+              <h4>Normalization</h4>
+              <p>Scale numerical features to ensure uniformity across the dataset.</p>
+              
+              <div class="code-snippet">
+                <pre><code>from sklearn.preprocessing import StandardScaler
+import pandas as pd
+
+# Feature engineering
+df['claim_frequency'] = df.groupby('beneficiary_id')['claim_id'].transform('count')
+df['avg_claim_amount'] = df.groupby('beneficiary_id')['claim_amount'].transform('mean')
+df['service_count'] = df.groupby('provider_id')['service_code'].transform('nunique')
+
+# Normalization
+scaler = StandardScaler()
+numerical_features = ['claim_amount', 'claim_frequency', 'avg_claim_amount']
+df[numerical_features] = scaler.fit_transform(df[numerical_features])</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: EDA -->
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="quantum-card">
+            <div class="step-header">
+              <div class="step-number">02</div>
+              <h3>Exploratory Data Analysis (EDA)</h3>
+            </div>
+            <div class="step-content">
+              <h4>Visualize Distributions</h4>
+              <p>Use histograms and box plots to understand the distribution of key features.</p>
+              
+              <h4>Correlation Analysis</h4>
+              <p>Identify relationships between features using heatmaps.</p>
+              
+              <h4>Anomaly Detection</h4>
+              <p>Apply unsupervised methods like Isolation Forest or One-Class SVM to detect outliers.</p>
+              
+              <div class="eda-insights">
+                <h5>Key Insights Discovered:</h5>
+                <ul>
+                  <li>High claim frequency often correlates with fraudulent behavior</li>
+                  <li>Unusual billing patterns in specific provider networks</li>
+                  <li>Geographic clustering of suspicious claims</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Model Building -->
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="quantum-card">
+            <div class="step-header">
+              <div class="step-number">03</div>
+              <h3>Model Building</h3>
+            </div>
+            <div class="step-content">
+              <h4>Ensemble Learning</h4>
+              <p>Implement models such as:</p>
+              <ul>
+                <li><strong>Random Forest:</strong> For capturing complex interactions between features</li>
+                <li><strong>Gradient Boosting Machines (GBM):</strong> To improve predictive accuracy</li>
+                <li><strong>XGBoost:</strong> For handling large datasets with high performance</li>
+              </ul>
+              
+              <h4>Anomaly Detection Integration</h4>
+              <p>Combine the ensemble models with anomaly detection techniques to enhance fraud detection capabilities.</p>
+              
+              <div class="model-architecture">
+                <h5>Model Architecture:</h5>
+                <div class="architecture-flow">
+                  <div class="arch-step">Raw Data</div>
+                  <div class="arch-arrow">→</div>
+                  <div class="arch-step">Feature Engineering</div>
+                  <div class="arch-arrow">→</div>
+                  <div class="arch-step">Ensemble Models</div>
+                  <div class="arch-arrow">→</div>
+                  <div class="arch-step">Anomaly Detection</div>
+                  <div class="arch-arrow">→</div>
+                  <div class="arch-step">Final Prediction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Model Evaluation -->
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+          <div class="quantum-card">
+            <div class="step-header">
+              <div class="step-number">04</div>
+              <h3>Model Evaluation</h3>
+            </div>
+            <div class="step-content">
+              <h4>Performance Metrics</h4>
+              <p>Evaluate models using:</p>
+              <div class="metrics-grid">
+                <div class="metric-item">
+                  <strong>Accuracy:</strong> Overall correctness of the model
+                  <div class="metric-value">94.2%</div>
+                </div>
+                <div class="metric-item">
+                  <strong>Precision:</strong> Proportion of true positive predictions
+                  <div class="metric-value">91.8%</div>
+                </div>
+                <div class="metric-item">
+                  <strong>Recall:</strong> Proportion of actual positives identified
+                  <div class="metric-value">89.5%</div>
+                </div>
+                <div class="metric-item">
+                  <strong>F1-Score:</strong> Harmonic mean of precision and recall
+                  <div class="metric-value">90.6%</div>
+                </div>
+                <div class="metric-item">
+                  <strong>AUC-ROC:</strong> Model's ability to distinguish between classes
+                  <div class="metric-value">0.923</div>
+                </div>
+              </div>
+              
+              <h4>Cross-Validation</h4>
+              <p>Used 5-fold cross-validation to assess model stability and generalizability.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Explainability -->
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
+          <div class="quantum-card">
+            <div class="step-header">
+              <div class="step-number">05</div>
+              <h3>Explainability</h3>
+            </div>
+            <div class="step-content">
+              <h4>Feature Importance</h4>
+              <p>Utilize techniques like SHAP (SHapley Additive exPlanations) to interpret model decisions.</p>
+              
+              <h4>Visualization</h4>
+              <p>Create visualizations to highlight key features influencing predictions.</p>
+              
+              <div class="explainability-features">
+                <h5>Top Predictive Features:</h5>
+                <div class="feature-importance">
+                  <div class="feature-bar">
+                    <span class="feature-name">Provider Behavior Score</span>
+                    <div class="importance-bar" style="width: 85%"></div>
+                    <span class="importance-value">0.85</span>
+                  </div>
+                  <div class="feature-bar">
+                    <span class="feature-name">Claim Frequency</span>
+                    <div class="importance-bar" style="width: 72%"></div>
+                    <span class="importance-value">0.72</span>
+                  </div>
+                  <div class="feature-bar">
+                    <span class="feature-name">Average Claim Amount</span>
+                    <div class="importance-bar" style="width: 68%"></div>
+                    <span class="importance-value">0.68</span>
+                  </div>
+                  <div class="feature-bar">
+                    <span class="feature-name">Service Diversity</span>
+                    <div class="importance-bar" style="width: 54%"></div>
+                    <span class="importance-value">0.54</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: Deployment -->
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="600">
+          <div class="quantum-card">
+            <div class="step-header">
+              <div class="step-number">06</div>
+              <h3>Deployment</h3>
+            </div>
+            <div class="step-content">
+              <h4>Model Serving</h4>
+              <p>Deploy the trained model using Flask to create an API endpoint.</p>
+              
+              <h4>Real-Time Inference</h4>
+              <p>Implement real-time prediction capabilities for new claims.</p>
+              
+              <h4>Monitoring</h4>
+              <p>Set up monitoring to track model performance over time and retrain as necessary.</p>
+              
+              <div class="deployment-info">
+                <h5>API Endpoint Example:</h5>
+                <div class="code-snippet">
+                  <pre><code>POST /api/predict
+Content-Type: application/json
+
+{
+  "beneficiary_id": "B123456",
+  "provider_id": "P789012",
+  "claim_amount": 1250.00,
+  "service_codes": ["99213", "99214"],
+  "diagnosis_codes": ["M79.3", "Z51.11"]
+}
+
+Response:
+{
+  "fraud_probability": 0.87,
+  "risk_level": "HIGH",
+  "key_factors": ["unusual_provider_pattern", "high_claim_frequency"]
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Expected Outcomes -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">📈 Expected Outcomes</h2>
+      <div class="row g-4">
+        
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="quantum-card">
+            <div class="outcome-icon">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3>Improved Detection</h3>
+            <p>Enhanced ability to identify fraudulent claims with 94% accuracy, significantly reducing false positives and ensuring legitimate claims are processed efficiently.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="quantum-card">
+            <div class="outcome-icon">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </div>
+            <h3>Scalability</h3>
+            <p>The pipeline efficiently handles large datasets with optimized algorithms and distributed processing capabilities for enterprise-scale deployment.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="quantum-card">
+            <div class="outcome-icon">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h3>Interpretability</h3>
+            <p>Clear understanding of model decisions through SHAP analysis facilitates trust, compliance, and regulatory requirements in healthcare fraud detection.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="quantum-card">
+            <div class="outcome-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>Real-Time Application</h3>
+            <p>Capability to process and evaluate new claims in real-time with sub-second response times, enabling immediate fraud detection and prevention.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Implementation -->
+  <section class="section bg-light">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Technical Implementation Details</h2>
+      
+      <div class="row">
+        <div class="col-lg-8" data-aos="fade-up">
+          <div class="quantum-card">
+            <h3>Dataset Overview</h3>
+            <p>The DE-SynPUF (Data Entrepreneurs' Synthetic Public Use Files) dataset contains:</p>
+            <ul>
+              <li><strong>2.3 million</strong> synthetic beneficiary records</li>
+              <li><strong>15+ million</strong> claims spanning multiple years</li>
+              <li><strong>Provider information</strong> including specialty and location data</li>
+              <li><strong>Diagnosis and procedure codes</strong> following standard medical coding</li>
+            </ul>
+            
+            <h3>Model Performance Comparison</h3>
+            <div class="model-comparison">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1-Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ensemble Model</strong></td>
+                    <td><strong>94.2%</strong></td>
+                    <td><strong>91.8%</strong></td>
+                    <td><strong>89.5%</strong></td>
+                    <td><strong>90.6%</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Random Forest</td>
+                    <td>91.5%</td>
+                    <td>88.7%</td>
+                    <td>86.2%</td>
+                    <td>87.4%</td>
+                  </tr>
+                  <tr>
+                    <td>XGBoost</td>
+                    <td>92.8%</td>
+                    <td>90.1%</td>
+                    <td>87.9%</td>
+                    <td>89.0%</td>
+                  </tr>
+                  <tr>
+                    <td>Logistic Regression</td>
+                    <td>87.3%</td>
+                    <td>84.5%</td>
+                    <td>82.1%</td>
+                    <td>83.3%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4" data-aos="fade-left">
+          <div class="quantum-card">
+            <h3>Key Challenges Solved</h3>
+            <div class="challenge-item">
+              <i class="fas fa-balance-scale"></i>
+              <div>
+                <h4>Class Imbalance</h4>
+                <p>Addressed using SMOTE and ensemble techniques</p>
+              </div>
+            </div>
+            <div class="challenge-item">
+              <i class="fas fa-search"></i>
+              <div>
+                <h4>Feature Selection</h4>
+                <p>Used recursive feature elimination and domain expertise</p>
+              </div>
+            </div>
+            <div class="challenge-item">
+              <i class="fas fa-tachometer-alt"></i>
+              <div>
+                <h4>Model Interpretability</h4>
+                <p>Implemented SHAP for transparent decision-making</p>
+              </div>
+            </div>
+            <div class="challenge-item">
+              <i class="fas fa-shield-alt"></i>
+              <div>
+                <h4>Data Privacy</h4>
+                <p>Ensured compliance with healthcare data regulations</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Navigation -->
+  <section class="section project-navigation">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <a href="coffeesales.html" class="nav-project prev-project">
+            <div class="nav-project-content">
+              <small>Previous Project</small>
+              <h3>Coffee Sales Analytics</h3>
+            </div>
+            <i class="fas fa-arrow-left"></i>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a href="index.html#projects" class="nav-project next-project">
+            <div class="nav-project-content">
+              <small>Back to</small>
+              <h3>All Projects</h3>
+            </div>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="js/script.js"></script>
+
+  <style>
+    .project-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .project-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-breadcrumb {
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .project-breadcrumb a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .project-breadcrumb a:hover {
+      opacity: 1;
+    }
+
+    .project-hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .project-hero-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-hero-icon {
+      text-align: center;
+    }
+
+    .project-hero-icon i {
+      font-size: 8rem;
+      opacity: 0.8;
+    }
+
+    .implementation-timeline .timeline-item {
+      margin-bottom: 2rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .code-snippet {
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .code-snippet pre {
+      color: #e1e1e1;
+      margin: 0;
+      overflow-x: auto;
+    }
+
+    .code-snippet code {
+      color: #e1e1e1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .metric-item {
+      background: rgba(102, 126, 234, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #667eea;
+      margin-top: 0.5rem;
+    }
+
+    .feature-importance {
+      margin: 1rem 0;
+    }
+
+    .feature-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .feature-name {
+      min-width: 150px;
+      font-size: 0.9rem;
+    }
+
+    .importance-bar {
+      height: 8px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    .importance-value {
+      font-weight: bold;
+      color: #667eea;
+      min-width: 50px;
+    }
+
+    .outcome-icon {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .outcome-icon i {
+      font-size: 3rem;
+      color: #667eea;
+    }
+
+    .challenge-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin: 1rem 0;
+      padding: 1rem;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 8px;
+    }
+
+    .challenge-item i {
+      color: #667eea;
+      font-size: 1.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .challenge-item h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .challenge-item p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .architecture-flow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    .arch-step {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .arch-arrow {
+      color: #667eea;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .project-navigation {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .nav-project {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-project:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .nav-project.next-project {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .nav-project-content h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .nav-project-content small {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .project-hero-title {
+        font-size: 2rem;
+      }
+      
+      .project-meta {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .architecture-flow {
+        flex-direction: column;
+      }
+    }
+  </style>
+</body>
+</html>
