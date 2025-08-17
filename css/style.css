@@ -1,4 +1,4 @@
-:root-alt {
+:root {
   /* Scientific Color Palette */
   --quantum-blue: #0A0E27;
   --plasma-purple: #1A1B3A;
@@ -42,7 +42,7 @@
   --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-:root {
+:root-alt {
   /* Night Sky Color Palette - Darkest sky with milky way */
   --quantum-blue: #000000;
   --plasma-purple: #0A0A0A;
