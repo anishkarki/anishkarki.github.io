@@ -154,5 +154,19 @@
     "featured": false,
     "readTime": "20 min read",
     "file": "Posts/multi-cloud-database-strategy.md"
-  }
+  },
+  {
+  "id": 13,
+  "title": "Unlocking European Lifestyle Insights with Microsoft Fabric Analytics",
+  "excerpt": "Discover how Microsoft Fabric can be used to analyze key European lifestyle metrics including population, life satisfaction, Power BI adoption, and renewable energy share, providing actionable insights for policy and business.",
+  "content": "Microsoft Fabric offers a unified analytics platform to tackle complex data challenges. This blog post demonstrates how we can use its capabilities, from data ingestion to advanced analytics, to create a comprehensive data model and Power BI reports exploring the dynamics between population, life satisfaction, and key sustainability indicators like renewable energy share across Europe.",
+  "category": "Data Analytics",
+  "tags": ["Microsoft Fabric", "Power BI", "Data Analytics", "European Demographics", "Renewable Energy", "Population"],
+  "date": "2025-08-19T00:00:00Z",
+  "author": "Anish Karki",
+  "featured": true,
+  "readTime": "12 min read",
+  "file": "Posts/European_Lifestyle_Analytics_Fabric.md"
+}
+  
 ]
