@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Database Migration | Anish Karki</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/projectcss.css">
+</head>
+
+<body>
+    <div class="scroll-indicator">
+        <div class="scroll-progress"></div>
+    </div>
+
+    <div class="particle-system" id="particleSystem"></div>
+
+    <div class="neural-network" id="neuralNetwork"></div>
+
+    <div id="project-navbar-placeholder"></div>
+
+    <section class="project-hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div data-aos="fade-up" data-aos-duration="1000">
+                        <nav aria-label="breadcrumb" class="mb-4">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html" class="breadcrumb-link">
+                                        <i class="fas fa-home me-1"></i>Home
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="index.html#projects" class="breadcrumb-link">Projects</a>
+                                </li>
+                                <li class="breadcrumb-item active">Enterprise Database Migration & Automation</li>
+                            </ol>
+                        </nav>
+
+                        <div class="project-header">
+                            <div class="project-icon-large">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="project-info">
+                                <h1 class="project-title">Enterprise Database Migration & Automation</h1>
+                                <p class="project-subtitle">
+                                    Built a Python validation framework to automate migration verification for 50+ databases, cutting post-migration check time from 1 day to 30 minutes by using an NLTK-based engine to differentiate pre/post-migration command outputs.
+                                </p>
+                                <div class="project-badges">
+                                    <span class="project-badge success">
+                                        <i class="fas fa-check-circle me-1"></i>Enterprise Project
+                                    </span>
+                                    <span class="project-badge date">
+                                        <i class="fas fa-calendar me-1"></i>2023
+                                    </span>
+                                    <span class="project-badge company">
+                                        <i class="fas fa-building me-1"></i>Cotiviti
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Databases Migrated</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Time Reduction</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">30 min</div>
+                            <div class="stat-label">Validation Time</div>
+                        </div>
+                         <div class="stat-item">
+                            <div class="stat-number">Python</div>
+                            <div class="stat-label">Automation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-details-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="project-image-container" data-aos="fade-up">
+                        <img src="assets/database-migration.webp" alt="Enterprise Database Migration Automation" class="project-image">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand-alt"></i>
+                                <span>View Full Diagram</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted text-center mt-2 mb-4">Automated validation framework for large-scale database migrations</p>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-info-circle me-2"></i>Project Overview
+                        </h2>
+                        <div class="section-content">
+                            <p class="lead">
+                                This project addressed the critical challenge of validating large-scale database migrations from Oracle and SQL Server to PostgreSQL within an enterprise environment. The manual validation process was time-consuming, error-prone, and required an entire day of specialist work per migration.
+                            </p>
+                            <p>
+                                To solve this, I designed and built an end-to-end automation framework in Python. The solution securely connects to source and target database servers, executes a series of pre-defined validation commands (e.g., row counts, schema checks, configuration settings), and intelligently compares the outputs using a custom Natural Language Toolkit (NLTK) engine. This framework reduced the validation lifecycle for over 50 databases from a full day to under 30 minutes, ensuring accuracy and freeing up significant specialist resources.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-cogs me-2"></i>Automation Framework Architecture
+                        </h2>
+                        <div class="section-content">
+                            <div class="architecture-diagram">
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="100">
+                                    <div class="component-icon"><i class="fas fa-server"></i></div>
+                                    <div class="component-info">
+                                        <h4>Source DB</h4>
+                                        <p>Oracle (RAC) / SQL Server</p>
+                                    </div>
+                                </div>
+                                <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="200">
+                                    <div class="component-icon"><i class="fab fa-python"></i></div>
+                                    <div class="component-info">
+                                        <h4>Python Framework</h4>
+                                        <p>Executes Pre/Post Checks</p>
+                                    </div>
+                                </div>
+                                <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="300">
+                                    <div class="component-icon"><i class="fas fa-robot"></i></div>
+                                    <div class="component-info">
+                                        <h4>NLTK Diff Engine</h4>
+                                        <p>Compares Command Outputs</p>
+                                    </div>
+                                </div>
+                                 <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="400">
+                                    <div class="component-icon"><i class="fas fa-file-alt"></i></div>
+                                    <div class="component-info">
+                                        <h4>Validation Report</h4>
+                                        <p>Generates Automated Summary</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-star me-2"></i>Key Features
+                        </h2>
+                        <div class="section-content">
+                            <div class="features-grid">
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                                    <div class="feature-icon"><i class="fas fa-check-double"></i></div>
+                                    <h4>Automated Validation</h4>
+                                    <p>End-to-end automation of pre- and post-migration checks, eliminating manual intervention and human error.</p>
+                                </div>
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                                    <div class="feature-icon"><i class="fas fa-language"></i></div>
+                                    <h4>NLP Diff Engine</h4>
+                                    <p>Utilized NLTK to intelligently parse and compare command outputs, ignoring irrelevant changes like timestamps or UUIDs.</p>
+                                </div>
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                                    <div class="feature-icon"><i class="fas fa-link"></i></div>
+                                    <h4>Multi-DB Support</h4>
+                                    <p>SQLAlchemy core allowed for a single, unified codebase to connect and interact with Oracle, SQL Server, and PostgreSQL.</p>
+                                </div>
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="400">
+                                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                                    <h4>Secure Remote Execution</h4>
+                                    <p>Used the Paramiko library for secure SSH connections to Linux servers, ensuring commands were executed safely in a firewalled environment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-code me-2"></i>Implementation Details
+                        </h2>
+                        <div class="section-content">
+                            <div class="implementation-tabs">
+                                <nav class="nav nav-tabs implementation-nav" id="implementationTabs">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#validationLogic">Validation Logic</button>
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nlpEngine">NLP Diff Engine</button>
+                                </nav>
+                                <div class="tab-content implementation-content">
+                                    <div class="tab-pane active" id="validationLogic">
+                                        <h4>Automated Validation Workflow</h4>
+                                        <p>The framework orchestrated the entire validation process through a configuration-driven workflow:</p>
+                                        <ul>
+                                            <li><strong>Connect:</strong> Established secure connections to source and target database hosts using SQLAlchemy and Paramiko.</li>
+                                            <li><strong>Pre-Check:</strong> Executed a suite of commands on the source database to establish a baseline state.</li>
+                                            <li><strong>Post-Check:</strong> After the migration, executed the identical command suite on the new target database.</li>
+                                            <li><strong>Compare & Report:</strong> Fed the pre- and post-check outputs into the NLP engine for comparison and generated a final validation summary.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="nlpEngine">
+                                        <h4>Intelligent Output Comparison</h4>
+                                        <p>A key innovation was using NLP to prevent false negatives. Standard text comparison fails when outputs contain dynamic data (timestamps, PIDs, etc.). The NLTK-based engine was trained to identify and ignore these differences.</p>
+                                        <ul>
+                                            <li>Tokenized and tagged parts of speech in the command output strings.</li>
+                                            <li>Identified patterns corresponding to dates, times, and system-generated IDs.</li>
+                                            <li>Masked these dynamic tokens before performing the final comparison.</li>
+                                            <li>This ensured that only meaningful, structural differences between the pre- and post-migration states were flagged.</li>
+                                        </ul>
+                                         <div class="code-preview">
+                                            <pre><code class="language-python"># Conceptual snippet for the NLP comparison engine
+import nltk
+
+class NlpComparer:
+    def ignore_dynamic_tokens(self, text):
+        # Logic to find and mask timestamps, UUIDs, etc.
+        processed_text = text.replace("Sep 02 2025 01:26:51", "TIMESTAMP")
+        return processed_text
+
+    def compare_outputs(self, output1, output2):
+        clean1 = self.ignore_dynamic_tokens(output1)
+        clean2 = self.ignore_dynamic_tokens(output2)
+        
+        if clean1 == clean2:
+            return "Validation Successful"
+        else:
+            return "Discrepancy Found"</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="project-sidebar">
+                        <div class="sidebar-card" data-aos="fade-left">
+                            <h3 class="sidebar-title">
+                                <i class="fas fa-info-circle me-2"></i>Technical Specifications
+                            </h3>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-code"></i></div>
+                                    <div class="info-content"><strong>Core Tech</strong><span>Python, NLTK, SQLAlchemy, Paramiko</span></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-database"></i></div>
+                                    <div class="info-content"><strong>Databases</strong><span>Oracle (RAC), SQL Server, PostgreSQL</span></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fab fa-linux"></i></div>
+                                    <div class="info-content"><strong>Environment</strong><span>Linux</span></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-user-cog"></i></div>
+                                    <div class="info-content"><strong>Role</strong><span>Automation & Database Engineer</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card" data-aos="fade-left" data-aos-delay="200">
+                            <h3 class="sidebar-title">
+                                <i class="fas fa-tools me-2"></i>Technology Stack
+                            </h3>
+                            <div class="tech-stack">
+                                <div class="tech-item"><i class="fab fa-python"></i><span>Python</span></div>
+                                <div class="tech-item"><i class="fas fa-book"></i><span>NLTK</span></div>
+                                <div class="tech-item"><i class="fas fa-cogs"></i><span>SQLAlchemy</span></div>
+                                <div class="tech-item"><i class="fas fa-terminal"></i><span>Paramiko</span></div>
+                                <div class="tech-item"><i class="fas fa-server"></i><span>SQL Server</span></div>
+                                <div class="tech-item"><i class="fas fa-database"></i><span>Oracle & PostgreSQL</span></div>
+                                <div class="tech-item"><i class="fab fa-linux"></i><span>Linux</span></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12" data-aos="fade-up">
+                    <div class="results-section">
+                        <h2 class="section-title text-center mb-5">
+                            <i class="fas fa-trophy me-2"></i>Project Results & Impact
+                        </h2>
+                        <div class="results-grid">
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="result-icon"><i class="fas fa-stopwatch"></i></div>
+                                <div class="result-number">95%</div>
+                                <div class="result-label">Time Reduction</div>
+                                <div class="result-description">Cut post-migration validation time from 1 day to just 30 minutes.</div>
+                            </div>
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="result-icon"><i class="fas fa-server"></i></div>
+                                <div class="result-number">50+</div>
+                                <div class="result-label">Databases Validated</div>
+                                <div class="result-description">Successfully deployed across the entire enterprise migration program.</div>
+                            </div>
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="300">
+                                <div class="result-icon"><i class="fas fa-robot"></i></div>
+                                <div class="result-number">100%</div>
+                                <div class="result-label">Automation</div>
+                                <div class="result-description">Completely eliminated the need for manual checks and verifications.</div>
+                            </div>
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="400">
+                                <div class="result-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="result-number">Higher</div>
+                                <div class="result-label">Accuracy</div>
+                                <div class="result-description">NLP engine significantly reduced false positives from irrelevant data changes.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="fade-up">
+                    <div class="cta-card">
+                        <div class="cta-icon"><i class="fas fa-cogs"></i></div>
+                        <h3 class="cta-title">Need to automate enterprise workflows?</h3>
+                        <p class="cta-description">
+                           Let's discuss how I can help build custom automation frameworks, streamline complex IT processes like database migrations, and leverage Python to drive efficiency and accuracy in your organization.
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="index.html#contact" class="quantum-btn">
+                                <i class="fas fa-envelope me-2"></i>Get In Touch
+                            </a>
+                            <a href="index.html#projects" class="quantum-btn quantum-btn-outline">
+                                <i class="fas fa-project-diagram me-2"></i>View More Projects
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

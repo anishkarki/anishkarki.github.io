@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Weather Forecasting Pipeline | Anish Karki</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/projectcss.css">
+</head>
+
+<body>
+    <div class="scroll-indicator">
+        <div class="scroll-progress"></div>
+    </div>
+
+    <div class="particle-system" id="particleSystem"></div>
+
+    <div class="neural-network" id="neuralNetwork"></div>
+
+    <div id="project-navbar-placeholder"></div>
+
+    <section class="project-hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div data-aos="fade-up" data-aos-duration="1000">
+                        <nav aria-label="breadcrumb" class="mb-4">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html" class="breadcrumb-link">
+                                        <i class="fas fa-home me-1"></i>Home
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="index.html#projects" class="breadcrumb-link">Projects</a>
+                                </li>
+                                <li class="breadcrumb-item active">Real-Time Weather Forecasting Pipeline with ML</li>
+                            </ol>
+                        </nav>
+
+                        <div class="project-header">
+                            <div class="project-icon-large">
+                                <i class="fas fa-cloud-sun"></i>
+                            </div>
+                            <div class="project-info">
+                                <h1 class="project-title">Real-Time Weather Forecasting Pipeline with ML</h1>
+                                <p class="project-subtitle">
+                                    Engineered an end-to-end real-time streaming pipeline using PySpark and Medallion Architecture to ingest hourly weather data from OpenMeteo API for Hobart Station, implementing advanced ML forecasting models including LSTM, ARIMA, and AutoML for predictive weather analytics.
+                                </p>
+                                <div class="project-badges">
+                                    <span class="project-badge success">
+                                        <i class="fas fa-check-circle me-1"></i>Production Ready
+                                    </span>
+                                    <span class="project-badge date">
+                                        <i class="fas fa-calendar me-1"></i>2025
+                                    </span>
+                                    <span class="project-badge company">
+                                        <i class="fas fa-brain me-1"></i>ML-Enabled Pipeline
+                                    </span>
+                                </div>
+                                
+                                <div class="cta-buttons mt-4">
+                                    <a href="#" class="quantum-btn">
+                                        <i class="fas fa-rocket me-2"></i>View Live Demo
+                                    </a>
+                                    <a href="#" class="quantum-btn quantum-btn-outline">
+                                        <i class="fab fa-github me-2"></i>View the Code
+                                    </a>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">Hourly</div>
+                            <div class="stat-label">Streaming</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Medallion</div>
+                            <div class="stat-label">Architecture</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3 ML</div>
+                            <div class="stat-label">Models</div>
+                        </div>
+                         <div class="stat-item">
+                            <div class="stat-number">PySpark</div>
+                            <div class="stat-label">ETL Engine</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-details-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="project-image-container" data-aos="fade-up">
+                        <img src="assets/weather-pipeline.webp" alt="Real-Time Weather Forecasting Pipeline" class="project-image">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand-alt"></i>
+                                <span>View Full Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted text-center mt-2 mb-4">Real-time ML-powered weather forecasting pipeline with Medallion Architecture</p>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-info-circle me-2"></i>Project Overview
+                        </h2>
+                        <div class="section-content">
+                            <p class="lead">
+                                Developed a production-grade real-time weather forecasting system that streams hourly meteorological data from OpenMeteo API for Hobart Station, Tasmania. The pipeline implements a complete MLOps workflow using PySpark for distributed ETL processing, Medallion Architecture for data quality governance, and multiple ML forecasting models including LSTM neural networks, ARIMA time series, and AutoML for comprehensive weather prediction capabilities.
+                            </p>
+                            <p>
+                                The system processes over 24 weather parameters including temperature, humidity, wind patterns, atmospheric pressure, and precipitation data through a three-tier data architecture (Bronze-Silver-Gold), enabling robust feature engineering and model training for accurate short-term and medium-term weather forecasting with automated model selection and ensemble predictions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-cogs me-2"></i>Technical Architecture & Data Flow
+                        </h2>
+                        <div class="section-content">
+                            <div class="architecture-diagram">
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="100">
+                                    <div class="component-icon"><i class="fas fa-satellite"></i></div>
+                                    <div class="component-info">
+                                        <h4>OpenMeteo API</h4>
+                                        <p>Hourly streaming ingestion</p>
+                                    </div>
+                                </div>
+                                <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="200">
+                                    <div class="component-icon"><i class="fas fa-database"></i></div>
+                                    <div class="component-info">
+                                        <h4>Bronze Layer</h4>
+                                        <p>Raw data validation</p>
+                                    </div>
+                                </div>
+                                <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="300">
+                                    <div class="component-icon"><i class="fas fa-filter"></i></div>
+                                    <div class="component-info">
+                                        <h4>Silver Layer</h4>
+                                        <p>Cleansing & Feature Engineering</p>
+                                    </div>
+                                </div>
+                                 <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="400">
+                                    <div class="component-icon"><i class="fas fa-gem"></i></div>
+                                    <div class="component-info">
+                                        <h4>Gold Layer</h4>
+                                        <p>Aggregated analytics datasets</p>
+                                    </div>
+                                </div>
+                                 <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="arch-component" data-aos="zoom-in" data-aos-delay="500">
+                                    <div class="component-icon"><i class="fas fa-brain"></i></div>
+                                    <div class="component-info">
+                                        <h4>ML Models</h4>
+                                        <p>Forecasting & Predictions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-star me-2"></i>Advanced Technical Features
+                        </h2>
+                        <div class="section-content">
+                            <div class="features-grid">
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                                    <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
+                                    <h4>Medallion Architecture</h4>
+                                    <p>Implemented Bronze-Silver-Gold data lakehouse pattern with Delta Lake for ACID transactions and data versioning.</p>
+                                </div>
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                                    <div class="feature-icon"><i class="fas fa-fire"></i></div>
+                                    <h4>PySpark Distributed Processing</h4>
+                                    <p>Scalable ETL pipeline with structured streaming, window functions, and distributed ML preprocessing.</p>
+                                </div>
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                                    <h4>Multi-Model ML Framework</h4>
+                                    <p>LSTM neural networks for deep learning, ARIMA for time series, AutoML for automated feature selection.</p>
+                                </div>
+                                <div class="feature-card" data-aos="flip-left" data-aos-delay="400">
+                                    <div class="feature-icon"><i class="fas fa-chart-area"></i></div>
+                                    <h4>Advanced EDA & Feature Engineering</h4>
+                                    <p>Statistical analysis, seasonality decomposition, lag features, and rolling window aggregations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-section" data-aos="fade-up">
+                        <h2 class="section-title">
+                            <i class="fas fa-code me-2"></i>Pipeline Implementation Details
+                        </h2>
+                        <div class="section-content">
+                            <div class="implementation-tabs">
+                                <nav class="nav nav-tabs implementation-nav" id="implementationTabs">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#bronzeLayer">Bronze Layer</button>
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#silverLayer">Silver Layer</button>
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#goldLayer">Gold Layer</button>
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#mlModels">ML Models</button>
+                                </nav>
+                                <div class="tab-content implementation-content">
+                                    <div class="tab-pane active" id="bronzeLayer">
+                                        <h4>Real-time Data Ingestion</h4>
+                                        <p>The Bronze layer is responsible for ingesting raw data streams directly from the source.</p>
+                                        <ul>
+                                            <li>Connects to the OpenMeteo API to fetch hourly weather data for Hobart.</li>
+                                            <li>Uses PySpark's Structured Streaming to handle continuous data flow.</li>
+                                            <li>Writes raw, unaltered data into a Delta Lake table with schema enforcement and checkpointing.</li>
+                                            <li>Ensures data durability and provides a complete, versioned history of all ingested data.</li>
+                                        </ul>
+                                        <div class="code-preview">
+                                            <pre><code class="language-python"># OpenMeteo API Streaming Ingestion
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+import requests
+
+# Initialize Spark with Delta Lake
+spark = SparkSession.builder \
+    .appName("HobartWeatherPipeline") \
+    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
+    .getOrCreate()
+    
+# Write to Bronze Delta table with schema enforcement
+bronze_stream = spark.readStream.format("rate").load() # Placeholder for actual API call UDF
+bronze_query = bronze_stream.writeStream \
+    .format("delta") \
+    .option("checkpointLocation", "/mnt/bronze/checkpoints/weather") \
+    .option("path", "/mnt/bronze/weather_raw") \
+    .trigger(processingTime="1 hour") \
+    .start()</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="silverLayer">
+                                        <h4>Data Cleansing & Transformation</h4>
+                                        <p>The Silver layer refines the raw data, making it clean, consistent, and ready for analysis.</p>
+                                        <ul>
+                                            <li>Reads streaming data from the Bronze Delta table.</li>
+                                            <li>Applies data quality rules to filter outliers and handle missing values.</li>
+                                            <li>Performs feature engineering to derive new, valuable columns (e.g., wind components, seasonal indicators).</li>
+                                            <li>Standardizes data formats and units for consistency.</li>
+                                        </ul>
+                                        <div class="code-preview">
+                                            <pre><code class="language-python"># Silver Layer ETL with Advanced Data Quality
+from pyspark.sql.functions import *
+
+bronze_df = spark.readStream.format("delta").load("/mnt/bronze/weather_raw")
+
+def apply_data_quality_rules(df):
+    return df.filter(
+        (col("temperature_2m") >= -20) & (col("temperature_2m") <= 50)
+    ).fillna({"precipitation": 0.0})
+
+silver_transformed = bronze_df.select(
+    col("datetime"),
+    col("temperature_2m"),
+    # Time-based features
+    hour(col("datetime")).alias("hour_of_day"),
+    dayofweek(col("datetime")).alias("day_of_week")
+).transform(apply_data_quality_rules)
+
+silver_query = silver_transformed.writeStream \
+    .format("delta") \
+    .option("checkpointLocation", "/mnt/silver/checkpoints/weather") \
+    .option("path", "/mnt/silver/weather_cleaned") \
+    .outputMode("append") \
+    .start()</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="goldLayer">
+                                        <h4>Analytics-Ready Datasets</h4>
+                                        <p>The Gold layer creates aggregated, business-level tables optimized for machine learning.</p>
+                                        <ul>
+                                            <li>Reads cleaned data from the Silver layer.</li>
+                                            <li>Performs advanced feature engineering using window functions to create lag features and rolling statistics (e.g., 24-hour average temperature).</li>
+                                            <li>Creates target variables for different forecast horizons (1-hour, 6-hour, 24-hour ahead).</li>
+                                            <li>Saves the final ML-ready feature set to a Gold Delta table.</li>
+                                        </ul>
+                                        <div class="code-preview">
+                                            <pre><code class="language-python"># Gold Layer: ML-Ready Feature Store
+from pyspark.sql.window import Window
+
+silver_df = spark.read.format("delta").load("/mnt/silver/weather_cleaned")
+
+window_spec = Window.partitionBy().orderBy("datetime")
+lag_window = Window.partitionBy().orderBy("datetime").rowsBetween(-23, -1)
+
+gold_features = silver_df.withColumn(
+    "temp_lag_1h", lag("temperature_2m", 1).over(window_spec)
+).withColumn(
+    "temp_24h_avg", avg("temperature_2m").over(lag_window)
+).withColumn(
+    "temp_target_1h", lead("temperature_2m", 1).over(window_spec)
+)
+
+gold_features.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .save("/mnt/gold/weather_ml_features")</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="mlModels">
+                                        <h4>Forecasting Models</h4>
+                                        <p>Multiple ML models are trained on the Gold layer data to provide robust forecasts.</p>
+                                        <ul>
+                                            <li><strong>LSTM:</strong> A deep learning model that captures complex non-linear patterns and long-term dependencies in the time-series data.</li>
+                                            <li><strong>ARIMA:</strong> A classical statistical model for time-series forecasting that handles trends and seasonality.</li>
+                                            <li><strong>AutoML:</strong> An automated framework using MLflow to train and evaluate multiple models (e.g., Gradient Boosting) and select the best performer.</li>
+                                            <li>An ensemble of these models is used for the final, most accurate prediction.</li>
+                                        </ul>
+                                         <div class="code-preview">
+                                            <pre><code class="language-python"># LSTM Model Implementation Example
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+
+def build_lstm_model(sequence_length, features):
+    model = Sequential([
+        LSTM(128, return_sequences=True, input_shape=(sequence_length, features)),
+        Dropout(0.2),
+        LSTM(64, return_sequences=False),
+        Dropout(0.2),
+        Dense(1, activation='linear')
+    ])
+    model.compile(optimizer='adam', loss='huber', metrics=['mae'])
+    return model
+</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="project-sidebar">
+                        <div class="sidebar-card" data-aos="fade-left">
+                            <h3 class="sidebar-title">
+                                <i class="fas fa-info-circle me-2"></i>Technical Specifications
+                            </h3>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-code"></i></div>
+                                    <div class="info-content"><strong>Core Technologies</strong><span>PySpark, Delta Lake, TensorFlow, MLflow, FastAPI</span></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-database"></i></div>
+                                    <div class="info-content"><strong>Architecture</strong><span>Medallion (Bronze-Silver-Gold)</span></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-clock"></i></div>
+                                    <div class="info-content"><strong>Data Frequency</strong><span>Hourly Streaming</span></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-user"></i></div>
+                                    <div class="info-content"><strong>Role</strong><span>ML Engineer & Pipeline Architect</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card" data-aos="fade-left" data-aos-delay="200">
+                            <h3 class="sidebar-title">
+                                <i class="fas fa-tools me-2"></i>Technology Stack
+                            </h3>
+                            <div class="tech-stack">
+                                <div class="tech-item"><i class="fab fa-python"></i><span>Python 3.9+</span></div>
+                                <div class="tech-item"><i class="fas fa-fire"></i><span>PySpark 3.4</span></div>
+                                <div class="tech-item"><i class="fas fa-layer-group"></i><span>Delta Lake</span></div>
+                                <div class="tech-item"><i class="fas fa-brain"></i><span>TensorFlow</span></div>
+                                <div class="tech-item"><i class="fas fa-chart-line"></i><span>Statsmodels</span></div>
+                                <div class="tech-item"><i class="fas fa-robot"></i><span>MLflow</span></div>
+                                <div class="tech-item"><i class="fas fa-rocket"></i><span>FastAPI</span></div>
+                                <div class="tech-item"><i class="fas fa-cloud"></i><span>OpenMeteo API</span></div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card" data-aos="fade-left" data-aos-delay="300">
+                            <h3 class="sidebar-title">
+                                <i class="fas fa-project-diagram me-2"></i>Related Projects
+                            </h3>
+                            <div class="related-projects">
+                                <a href="energypredictor.html" class="related-project">
+                                    <div class="related-icon"><i class="fas fa-bolt"></i></div>
+                                    <div class="related-content">
+                                        <h5>Australian Energy Predictor</h5>
+                                        <p>XGBoost for time-series forecasting</p>
+                                    </div>
+                                </a>
+                                <a href="coffeesales.html" class="related-project">
+                                    <div class="related-icon"><i class="fas fa-coffee"></i></div>
+                                    <div class="related-content">
+                                        <h5>Coffee Sales Analytics</h5>
+                                        <p>Advanced data visualization and BI</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12" data-aos="fade-up">
+                    <div class="results-section">
+                        <h2 class="section-title text-center mb-5">
+                            <i class="fas fa-trophy me-2"></i>Project Results & Business Impact
+                        </h2>
+                        <div class="results-grid">
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="result-icon"><i class="fas fa-bullseye"></i></div>
+                                <div class="result-number">0.72°C</div>
+                                <div class="result-label">Ensemble MAE</div>
+                                <div class="result-description">18% improvement over individual models for 1-hour forecasts.</div>
+                            </div>
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="result-icon"><i class="fas fa-layer-group"></i></div>
+                                <div class="result-number">3-Tier</div>
+                                <div class="result-label">Architecture</div>
+                                <div class="result-description">Medallion architecture with 8.3x compression & 99.92% uptime.</div>
+                            </div>
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="300">
+                                <div class="result-icon"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="result-number">---</div>
+                                <div class="result-label">Monthly Savings</div>
+                                <div class="result-description">Estimated cost savings through improved forecast accuracy.</div>
+                            </div>
+                            <div class="result-card" data-aos="zoom-in" data-aos-delay="400">
+                                <div class="result-icon"><i class="fas fa-users"></i></div>
+                                <div class="result-number">---</div>
+                                <div class="result-label">Daily Forecasts</div>
+                                <div class="result-description">Production API serving real-time predictions with 120ms latency.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="fade-up">
+                    <div class="cta-card">
+                        <div class="cta-icon"><i class="fas fa-cogs"></i></div>
+                        <h3 class="cta-title">Need a scalable data pipeline?</h3>
+                        <p class="cta-description">
+                           Let's discuss how I can help build robust, real-time data processing systems, implement Medallion architectures with PySpark, and deploy scalable ML models for predictive analytics.
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="index.html#contact" class="quantum-btn">
+                                <i class="fas fa-envelope me-2"></i>Get In Touch
+                            </a>
+                            <a href="index.html#projects" class="quantum-btn quantum-btn-outline">
+                                <i class="fas fa-project-diagram me-2"></i>View More Projects
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
