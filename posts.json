@@ -5,7 +5,13 @@
     "excerpt": "Dive deep into advanced indexing techniques that can dramatically improve your SQL Server performance. Learn about covering indexes, filtered indexes, and when to use them effectively in high-transaction environments.",
     "content": "In this comprehensive guide, we'll explore advanced indexing strategies that can significantly boost your SQL Server performance. From understanding index internals to implementing covering indexes and filtered indexes, this article covers everything you need to know to optimize your database queries for enterprise-scale applications.",
     "category": "performance",
-    "tags": ["SQL Server", "Performance", "Indexing", "Database Optimization", "Enterprise"],
+    "tags": [
+      "SQL Server",
+      "Performance",
+      "Indexing",
+      "Database Optimization",
+      "Enterprise"
+    ],
     "date": "2024-12-15T00:00:00Z",
     "author": "Anish Karki",
     "featured": true,
@@ -18,7 +24,13 @@
     "excerpt": "A comprehensive guide to migrating your on-premises SQL Server databases to Azure SQL Database, including migration strategies, common challenges, and how to overcome them effectively.",
     "content": "Migrating to Azure SQL Database can be complex and challenging. This article provides a step-by-step approach to ensure a smooth migration process, covering assessment tools, migration strategies, performance optimization, and post-migration best practices for enterprise environments.",
     "category": "cloud",
-    "tags": ["Azure", "Cloud Migration", "SQL Database", "Azure SQL", "Migration Strategy"],
+    "tags": [
+      "Azure",
+      "Cloud Migration",
+      "SQL Database",
+      "Azure SQL",
+      "Migration Strategy"
+    ],
     "date": "2024-12-10T00:00:00Z",
     "author": "Anish Karki",
     "featured": true,
@@ -31,7 +43,13 @@
     "excerpt": "Learn how to build a robust Python script to automatically verify your database backups and ensure data integrity across your enterprise environment with real-world examples.",
     "content": "Database backup verification is crucial for any enterprise environment. This tutorial shows you how to create a comprehensive Python-based automation system that can verify backups across multiple servers, providing detailed reports, alerts, and ensuring your disaster recovery strategy is bulletproof.",
     "category": "automation",
-    "tags": ["Python", "Automation", "Backup", "Database Administration", "Scripting"],
+    "tags": [
+      "Python",
+      "Automation",
+      "Backup",
+      "Database Administration",
+      "Scripting"
+    ],
     "date": "2024-12-05T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -44,7 +62,13 @@
     "excerpt": "Master the setup and configuration of SQL Server AlwaysOn Availability Groups for enterprise-level high availability and disaster recovery. Complete with troubleshooting tips.",
     "content": "AlwaysOn Availability Groups provide enterprise-grade high availability and disaster recovery capabilities for SQL Server. This detailed guide walks through the complete setup process, from prerequisites and network configuration to testing failover scenarios and ongoing maintenance.",
     "category": "database",
-    "tags": ["SQL Server", "High Availability", "AlwaysOn", "Disaster Recovery", "Clustering"],
+    "tags": [
+      "SQL Server",
+      "High Availability",
+      "AlwaysOn",
+      "Disaster Recovery",
+      "Clustering"
+    ],
     "date": "2024-11-28T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -57,7 +81,13 @@
     "excerpt": "Transform raw data into compelling visualizations with advanced Power BI techniques. Learn dashboard design principles that drive business decisions and user adoption.",
     "content": "Creating effective Power BI dashboards requires more than just connecting to data sources. This comprehensive article covers design principles, DAX optimization techniques, performance considerations, and user experience best practices for building dashboards that truly inform and inspire business action.",
     "category": "analytics",
-    "tags": ["Power BI", "Data Visualization", "DAX", "Business Intelligence", "Dashboard Design"],
+    "tags": [
+      "Power BI",
+      "Data Visualization",
+      "DAX",
+      "Business Intelligence",
+      "Dashboard Design"
+    ],
     "date": "2024-11-20T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -70,7 +100,13 @@
     "excerpt": "Essential security measures for protecting your databases in cloud environments, including encryption strategies, access controls, and continuous monitoring approaches.",
     "content": "Cloud database security requires a comprehensive, multi-layered approach. This guide covers encryption at rest and in transit, identity and access management, network security, threat detection, and continuous monitoring strategies specifically designed for cloud database environments.",
     "category": "database",
-    "tags": ["Security", "Cloud", "Database", "Best Practices", "Encryption"],
+    "tags": [
+      "Security",
+      "Cloud",
+      "Database",
+      "Best Practices",
+      "Encryption"
+    ],
     "date": "2024-11-15T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -83,7 +119,13 @@
     "excerpt": "Explore how to use machine learning techniques to predict and prevent database performance issues before they impact your users. Practical examples included.",
     "content": "Learn how to implement machine learning models that can predict database performance issues before they occur. This article covers data collection strategies, feature engineering, model selection, and practical implementation using SQL Server Machine Learning Services and Python.",
     "category": "analytics",
-    "tags": ["Machine Learning", "SQL Server", "Performance", "Predictive Analytics", "Python"],
+    "tags": [
+      "Machine Learning",
+      "SQL Server",
+      "Performance",
+      "Predictive Analytics",
+      "Python"
+    ],
     "date": "2024-11-08T00:00:00Z",
     "author": "Anish Karki",
     "featured": true,
@@ -96,7 +138,13 @@
     "excerpt": "Streamline your database development workflow using Docker containers. Learn how to create consistent development environments and automate testing processes.",
     "content": "Docker containers can revolutionize database development by providing consistent, reproducible environments. This guide covers containerizing SQL Server, managing data persistence, automated testing strategies, and integrating containers into your development pipeline.",
     "category": "automation",
-    "tags": ["Docker", "Containers", "Database Development", "DevOps", "SQL Server"],
+    "tags": [
+      "Docker",
+      "Containers",
+      "Database Development",
+      "DevOps",
+      "SQL Server"
+    ],
     "date": "2024-10-30T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -109,7 +157,13 @@
     "excerpt": "Achieve zero-downtime database deployments using modern techniques. Learn about blue-green deployments, feature flags, and rollback strategies for mission-critical systems.",
     "content": "Zero-downtime deployments are essential for mission-critical database systems. This comprehensive guide covers blue-green deployment strategies, database versioning, feature flags, automated rollback procedures, and monitoring techniques to ensure seamless database updates without service interruption.",
     "category": "database",
-    "tags": ["Deployment", "Zero-Downtime", "DevOps", "Database", "Blue-Green"],
+    "tags": [
+      "Deployment",
+      "Zero-Downtime",
+      "DevOps",
+      "Database",
+      "Blue-Green"
+    ],
     "date": "2024-10-22T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -122,7 +176,13 @@
     "excerpt": "Master advanced T-SQL techniques that can dramatically improve query performance. From window functions to query hints, unlock the full potential of SQL Server.",
     "content": "Advanced T-SQL techniques can significantly improve query performance and code maintainability. This deep-dive article covers window functions, common table expressions, query hints, execution plan analysis, and advanced join techniques with real-world performance comparisons.",
     "category": "performance",
-    "tags": ["T-SQL", "Performance", "Query Optimization", "SQL Server", "Advanced"],
+    "tags": [
+      "T-SQL",
+      "Performance",
+      "Query Optimization",
+      "SQL Server",
+      "Advanced"
+    ],
     "date": "2024-10-15T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -135,7 +195,13 @@
     "excerpt": "Learn how to build scalable, real-time data pipelines that connect SQL Server with Apache Kafka for high-throughput data processing and analytics.",
     "content": "Real-time data processing is crucial for modern applications. This tutorial demonstrates how to build robust data pipelines using Apache Kafka with SQL Server, covering message serialization, error handling, exactly-once processing, and monitoring strategies for production environments.",
     "category": "automation",
-    "tags": ["Apache Kafka", "Data Pipeline", "SQL Server", "Real-time", "Streaming"],
+    "tags": [
+      "Apache Kafka",
+      "Data Pipeline",
+      "SQL Server",
+      "Real-time",
+      "Streaming"
+    ],
     "date": "2024-10-08T00:00:00Z",
     "author": "Anish Karki",
     "featured": true,
@@ -148,7 +214,13 @@
     "excerpt": "Navigate the complexities of multi-cloud database deployments. Compare services, learn migration strategies, and understand when to use each cloud provider's database offerings.",
     "content": "Multi-cloud strategies are becoming increasingly important for enterprise resilience and cost optimization. This comprehensive comparison covers database services across AWS, Azure, and Google Cloud, including migration strategies, cost analysis, and architectural considerations for each platform.",
     "category": "cloud",
-    "tags": ["Multi-Cloud", "AWS", "Azure", "Google Cloud", "Database Strategy"],
+    "tags": [
+      "Multi-Cloud",
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "Database Strategy"
+    ],
     "date": "2024-09-28T00:00:00Z",
     "author": "Anish Karki",
     "featured": false,
@@ -156,17 +228,44 @@
     "file": "Posts/multi-cloud-database-strategy.md"
   },
   {
-  "id": 13,
-  "title": "Unlocking European Lifestyle Insights with Microsoft Fabric Analytics",
-  "excerpt": "Discover how Microsoft Fabric can be used to analyze key European lifestyle metrics including population, life satisfaction, Power BI adoption, and renewable energy share, providing actionable insights for policy and business.",
-  "content": "Microsoft Fabric offers a unified analytics platform to tackle complex data challenges. This blog post demonstrates how we can use its capabilities, from data ingestion to advanced analytics, to create a comprehensive data model and Power BI reports exploring the dynamics between population, life satisfaction, and key sustainability indicators like renewable energy share across Europe.",
-  "category": "Data Analytics",
-  "tags": ["Microsoft Fabric", "Power BI", "Data Analytics", "European Demographics", "Renewable Energy", "Population"],
-  "date": "2025-08-19T00:00:00Z",
-  "author": "Anish Karki",
-  "featured": true,
-  "readTime": "12 min read",
-  "file": "Posts/European_Lifestyle_Analytics_Fabric.md"
-}
-  
+    "id": 13,
+    "title": "Unlocking European Lifestyle Insights with Microsoft Fabric Analytics",
+    "excerpt": "Discover how Microsoft Fabric can be used to analyze key European lifestyle metrics including population, life satisfaction, Power BI adoption, and renewable energy share, providing actionable insights for policy and business.",
+    "content": "Microsoft Fabric offers a unified analytics platform to tackle complex data challenges. This blog post demonstrates how we can use its capabilities, from data ingestion to advanced analytics, to create a comprehensive data model and Power BI reports exploring the dynamics between population, life satisfaction, and key sustainability indicators like renewable energy share across Europe.",
+    "category": "Data Analytics",
+    "tags": [
+      "Microsoft Fabric",
+      "Power BI",
+      "Data Analytics",
+      "European Demographics",
+      "Renewable Energy",
+      "Population"
+    ],
+    "date": "2025-08-19T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "12 min read",
+    "file": "Posts/European_Lifestyle_Analytics_Fabric.md"
+  },
+  {
+    "id": 14,
+    "title": "Wildfire & Temperature Analytics with Microsoft Fabric and Python",
+    "excerpt": "Learn how Microsoft Fabric and Python can be used to analyze rising global temperatures, wildfire occurrences, and their correlations—helping researchers, policymakers, and emergency services prepare for climate-driven risks.",
+    "content": "Microsoft Fabric provides a powerful, unified analytics platform to process and analyze climate and environmental datasets. This post demonstrates how Fabric can be used with Python for data ingestion, transformation, and advanced analytics. Using open climate datasets, we analyze global temperature trends, map wildfire occurrences, and explore predictive modeling to assess fire risks.\n\nWe will:\n- Ingest temperature anomaly and wildfire occurrence datasets into Fabric Lakehouse.\n- Use PySpark in Fabric Notebooks for large-scale cleaning and aggregation.\n- Apply Python libraries (pandas, scikit-learn, matplotlib) for trend analysis, time-series forecasting, and geospatial risk mapping.\n- Publish dashboards in Power BI showing correlations between temperature rise, drought severity, and wildfire frequency.\n\nThe combination of Fabric’s scalability with Python’s analytical flexibility enables powerful end-to-end climate risk intelligence workflows.",
+    "category": "Climate Analytics",
+    "tags": [
+      "Microsoft Fabric",
+      "Python",
+      "Wildfire Analytics",
+      "Climate Change",
+      "Temperature Trends",
+      "Geospatial Analysis",
+      "Power BI"
+    ],
+    "date": "2025-08-25T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "14 min read",
+    "file": "Posts/Temperature_Wildfire_Analytics_Fabric.md"
+  }
 ]
