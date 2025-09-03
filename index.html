@@ -202,6 +202,7 @@
   </section>
 
   <!-- Experience Section -->
+  <!-- Experience Section -->
   <section id="experience" class="section">
     <div class="container">
       <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
@@ -209,25 +210,21 @@
         <div class="col-lg-8">
           <div class="quantum-timeline" data-aos="fade-up" data-aos-delay="200">
 
-            <!-- Data and Database Engineer -->
+            <!-- Data Engineer -->
             <div class="timeline-item">
               <div class="quantum-card">
                 <div class="timeline-header">
-                  <h3>Data and Database Engineer</h3>
-                  <span class="timeline-badge">September 2023 – Present</span>
+                  <h3>Data Engineer</h3>
+                  <span class="timeline-badge">February 2024 – Present</span>
                 </div>
-                <h4 class="timeline-institution">A&S Technology, QLD, Australia</h4>
+                <h4 class="timeline-institution">A&S Technology, Brisbane, QLD</h4>
                 <ul class="timeline-list">
-                  <li>Helped small businesses transition from small-scale to medium-scale operations by setting up
-                    digital platforms and integrating cloud-based systems.</li>
-                  <li>Designed and deployed Azure and AWS cloud-ready databases with secure access, automated backups,
-                    and high availability.</li>
-                  <li>Built and maintained SSIS packages and SSAS models to deliver robust ETL workflows and advanced
-                    analytics.</li>
-                  <li>Developed and automated Power BI dashboards to provide real-time operational and executive
-                    insights.</li>
-                  <li>Achieved 60% improvement in SQL query performance through indexing strategies, execution plan
-                    tuning, and schema optimisation.</li>
+                  <li>Designs and coordinates multi-source data integration projects, developing scalable ELT pipelines
+                    using SQL and Python to improve data processing efficiency by 25%.</li>
+                  <li>Develops and maintains data models in Snowflake and SQL Server to support near real-time
+                    analytics, achieving 99.9% uptime.</li>
+                  <li>Prepares BI-ready datasets and governed reporting layers to provide client-facing interfaces and
+                    actionable insights through Power BI.</li>
                 </ul>
               </div>
             </div>
@@ -237,26 +234,33 @@
               <div class="quantum-card">
                 <div class="timeline-header">
                   <h3>Database Administrator</h3>
-                  <span class="timeline-badge">July 2020 - June 2023</span>
+                  <span class="timeline-badge">June 2020 – June 2023</span>
                 </div>
                 <h4 class="timeline-institution">Cotiviti Technology, USA (Remote)</h4>
                 <ul class="timeline-list">
-                  <li>Administered 10+ large SQL Server OLTP databases processing $2B+ in annual transactions with
-                    99.99% uptime across critical business platforms.</li>
-                  <li>Optimized high-throughput SQL environments via SQL Profiler, execution plan analysis, and index
-                    tuning, achieving 5–20% performance gains.</li>
-                  <li>Implemented horizontal partitioning and optimized table design for improved query performance in
-                    high-concurrency OLTP workloads.</li>
-                  <li>Resolved parameter sniffing and plan instability using plan guides, parameterization strategies,
-                    and advanced diagnostics.</li>
-                  <li>Designed and maintained clustered/non-clustered indexes for transaction-heavy systems, reducing
-                    I/O bottlenecks.</li>
-                  <li>Developed and deployed SSIS/SSAS-based ETL pipelines for seamless data integration across
-                    cross-platform systems, enabling real-time reporting and analytics.</li>
-                  <li>Automated backups, disaster recovery, and performed zero-downtime SQL Server upgrades to support
-                    24/7 wagering operations and ensure data integrity.</li>
-                  <li>Collaborated across regions (US, India, Nepal) to onboard 5+ team members, lead knowledge-sharing
-                    sessions, and provide technical guidance on database operations and troubleshooting.</li>
+                  <li>Managed a 9 petabyte SQL Server data warehouse serving as the foundational repository for
+                    de-identified US healthcare claims and clinical data, engineered for high-concurrency analytical
+                    workloads with strict HIPAA and HITRUST compliance, achieving 99.9% uptime over three years.</li>
+                  <li>Designed and implemented deterministic and probabilistic record linkage logic in T-SQL using
+                    weighted matching algorithms (Levenshtein distance, SOUNDEX) and cryptographic hashing (SHA-256) to
+                    link patient records across 12+ source systems, enabling longitudinal cohort studies while
+                    preserving privacy and minimizing re-identification risk.</li>
+                  <li>Architected a multi-layered data warehouse model (staging, ODS, EDW, DM) with aggregated fact
+                    tables and indexed, schema-bound views acting as materialized views to precompute and persist
+                    high-cost aggregations (e.g., patient-level utilization, chronic disease prevalence), improving
+                    query performance by up to 70% for common query patterns.</li>
+                  <li>Developed and optimized SSIS ETL pipelines with incremental change data capture (CDC) and
+                    late-arriving dimension handling, feeding a Kimball-style dimensional model. Built SSAS tabular
+                    models to deliver pre-aggregated, role-based semantic layers for cohort identification, risk
+                    stratification, and outcome measurement.</li>
+                  <li>Enforced data quality and integrity through automated validation rules (e.g., referential
+                    integrity, null rate thresholds, value distribution checks) embedded in SSIS and SQL Server Agent
+                    jobs, reducing data defects by 30% and increasing trust in research outputs. Integrated findings
+                    into metadata documentation using Microsoft Purview.</li>
+                  <li>Secured sensitive data using Delphix for masked virtual copies, Imperva for real-time activity
+                    monitoring, and OCI Data Safe for classification and labeling, ensuring that only de-identified,
+                    access-controlled datasets were available in analytical environments. All linkage keys and PII were
+                    isolated in secure schemas with RBAC enforcement.</li>
                 </ul>
               </div>
             </div>
@@ -266,18 +270,17 @@
               <div class="quantum-card">
                 <div class="timeline-header">
                   <h3>Associate Database Administrator</h3>
-                  <span class="timeline-badge">July 2018 - July 2020</span>
+                  <span class="timeline-badge">June 2018 – June 2020</span>
                 </div>
                 <h4 class="timeline-institution">Cotiviti Technology, Nepal</h4>
                 <ul class="timeline-list">
-                  <li>Resolved 50+ daily incident tickets through ServiceNow and JIRA ranging from complex deadlocks to
-                    routine schema modifications and user account provisioning across development, QA, and production
-                    environments.</li>
-                  <li>Diagnosed critical bottlenecks in high-transaction systems via SQL Profiler for 200+ clients.</li>
-                  <li>Improved OLTP speed through strategic clustered and non-clustered index optimization.</li>
-                  <li>Automated backup and recovery for multi-terabyte SQL Server databases.</li>
-                  <li>Executed zero unplanned downtime SQL Server upgrades from 2012 to 2019 in enterprise environments.
-                  </li>
+                  <li>Contributed to the maintenance and daily operations of a large-scale SQL Server data warehouse,
+                    ensuring data integrity and availability.</li>
+                  <li>Assisted in the development and troubleshooting of SSIS packages for routine data loading and
+                    transformation tasks.</li>
+                  <li>Performed routine database administration including backups, recovery drills, patching, and user
+                    access management in a 24/7 operational environment.</li>
+                  <li>Assisted senior administrators in performance tuning and troubleshooting of database systems.</li>
                 </ul>
               </div>
             </div>
