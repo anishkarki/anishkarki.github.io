@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queensland Health Data Assessment | Anish Karki</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  
+  <!-- Custom CSS (assumed) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/projectcss.css">
+
+  <style>
+    /* Additional inline styles for this project */
+    .project-hero-section {
+      background: linear-gradient(135deg, #003d7a 0%, #005a9e 100%);
+      color: white;
+    }
+    .stat-number { font-weight: 700; color: #003d7a; }
+    .result-number { color: #003d7a; font-weight: 700; }
+    .breadcrumb-link { color: #005a9e; }
+    .breadcrumb-item.active { color: white; }
+    .tech-item i { color: #003d7a; }
+    .related-project { border-left: 3px solid #003d7a; }
+  </style>
+</head>
+
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <!-- Particle System -->
+  <div class="particle-system" id="particleSystem"></div>
+
+  <!-- Neural Network Background -->
+  <div class="neural-network" id="neuralNetwork"></div>
+
+  <!-- Navbar Placeholder -->
+  <div id="project-navbar-placeholder"></div>
+
+  <!-- Project Hero Section -->
+  <section class="project-hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div data-aos="fade-up" data-aos-duration="1000">
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home me-1"></i>Home
+                  </a>
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="index.html#projects" class="breadcrumb-link">Projects</a>
+                </li>
+                <li class="breadcrumb-item active">Queensland Health Data Assessment</li>
+              </ol>
+            </nav>
+            
+            <div class="project-header">
+              <div class="project-icon-large">
+                <i class="fas fa-hospital"></i>
+              </div>
+              <div class="project-info">
+                <h1 class="project-title">Queensland Health Data Maturity Assessment</h1>
+                <p class="project-subtitle">
+                  Comprehensive evaluation of Queensland Health's data management practices using the DAMA-DMBOK framework, identifying critical gaps in data storage, master data, and warehousing, and proposing AI-generated policies for strategic improvement.
+                </p>
+                <div class="project-badges">
+                  <span class="project-badge success">
+                    <i class="fas fa-check-circle me-1"></i>Completed
+                  </span>
+                  <span class="project-badge date">
+                    <i class="fas fa-calendar me-1"></i>Oct 2023
+                  </span>
+                  <span class="project-badge company">
+                    <i class="fas fa-graduation-cap me-1"></i>University of Sunshine Coast
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+          <div class="project-stats">
+            <div class="stat-item">
+              <div class="stat-number">11</div>
+              <div class="stat-label">Knowledge Areas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">4</div>
+              <div class="stat-label">Critical Gaps Found</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">4</div>
+              <div class="stat-label">AI-Generated Policies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Details Section -->
+  <section class="project-details-section">
+    <div class="container">
+      <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+          <!-- Project Image -->
+          <div class="project-image-container" data-aos="fade-up">
+            <img src="assets/qh-maturity-chart.webp" alt="Queensland Health Data Maturity Assessment Chart" class="project-image">
+            <div class="image-overlay">
+              <div class="overlay-content">
+                <i class="fas fa-expand-alt"></i>
+                <span>View Full Chart</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-muted text-center mt-2 mb-4">DAMA-DMBOK Maturity Assessment for Queensland Health</p>
+
+          <!-- Project Description -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-info-circle me-2"></i>Project Overview
+            </h2>
+            <div class="section-content">
+              <p class="lead">
+                Conducted a comprehensive data maturity assessment of Queensland Health (QH), Australia’s largest public healthcare provider, using the DAMA-DMBOK framework across 11 knowledge areas. Identified critical gaps in data storage, master data, and warehousing, and proposed strategic improvements through AI-generated policies.
+              </p>
+              <p>
+                This academic project evaluates QH’s data governance maturity, highlights risks from inconsistent data practices, and delivers actionable recommendations to enhance data quality, interoperability, and strategic decision-making in a high-stakes healthcare environment.
+              </p>
+            </div>
+          </div>
+
+          <!-- Maturity Assessment -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-chart-bar me-2"></i>Data Maturity Assessment
+            </h2>
+            <div class="section-content">
+              <p>Assessment of 11 DAMA-DMBOK knowledge areas:</p>
+              <ul>
+                <li><strong>Data Governance:</strong> Level 4 (Managed) – Strong policies and legal framework</li>
+                <li><strong>Data Quality:</strong> Level 5 (Optimized) – Robust monitoring and quality assurance</li>
+                <li><strong>Data Security:</strong> Level 4 (Managed) – Clear access controls and compliance</li>
+                <li><strong>Data Storage & Operations:</strong> Level 2 (In Process) – No defined standards</li>
+                <li><strong>Reference & Master Data:</strong> Level 0 (No Capability) – No policy exists</li>
+                <li><strong>Data Warehousing:</strong> Level 3 (Defined) – Business intelligence in place but no warehousing strategy</li>
+              </ul>
+              <p class="mt-3">The assessment revealed that while QH excels in governance and security, foundational areas like storage and master data are underdeveloped, posing risks to data consistency and operational resilience.</p>
+            </div>
+          </div>
+
+          <!-- Key Findings -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-exclamation-triangle me-2"></i>Key Findings & Risks
+            </h2>
+            <div class="section-content">
+              <div class="features-grid">
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                  <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                  </div>
+                  <h4>No Master Data Policy</h4>
+                  <p>Level 0 maturity in reference and master data increases risk of inconsistencies across departments and systems.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                  <div class="feature-icon">
+                    <i class="fas fa-server"></i>
+                  </div>
+                  <h4>Ad Hoc Storage Practices</h4>
+                  <p>Lack of defined data storage standards threatens data integrity and long-term scalability.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                  <div class="feature-icon">
+                    <i class="fas fa-warehouse"></i>
+                  </div>
+                  <h4>No Data Warehousing Strategy</h4>
+                  <p>Missing formal data warehousing guidelines limit advanced analytics and reporting capabilities.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="400">
+                  <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                  </div>
+                  <h4>Need for Continuous Improvement</h4>
+                  <p>Several domains lack mechanisms for ongoing review and optimization.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI-Generated Policies -->
+          <div class="project-section" data-aos="fade-up">
+            <h2 class="section-title">
+              <i class="fas fa-robot me-2"></i>AI-Generated Policy Recommendations
+            </h2>
+            <div class="section-content">
+              <p>Proposed four AI-enhanced policies to address critical gaps:</p>
+              <div class="implementation-tabs">
+                <nav class="nav nav-tabs implementation-nav" id="policyTabs">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#masterData">Master Data</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#storagePolicy">Storage</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#warehousing">Warehousing</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#optimization">Optimization</button>
+                </nav>
+                <div class="tab-content implementation-content">
+                  <div class="tab-pane active" id="masterData">
+                    <h4>Master & Reference Data Management Policy</h4>
+                    <ul>
+                      <li>Establishes data stewardship and classification standards</li>
+                      <li>Defines governance mechanisms for accuracy and consistency</li>
+                      <li>Ensures secure access and lifecycle management</li>
+                    </ul>
+                  </div>
+                  <div class="tab-pane" id="storagePolicy">
+                    <h4>Queensland Health Data Storage Policy</h4>
+                    <ul>
+                      <li>Data classification by sensitivity and criticality</li>
+                      <li>Encryption at rest and access controls</li>
+                      <li>Backup, recovery, and retention standards</li>
+                    </ul>
+                  </div>
+                  <div class="tab-pane" id="warehousing">
+                    <h4>Data Warehousing Management Policy</h4>
+                    <ul>
+                      <li>Standardized architecture and integration</li>
+                      <li>Strict access control and security compliance</li>
+                      <li>Regular maintenance and audit protocols</li>
+                    </ul>
+                  </div>
+                  <div class="tab-pane" id="optimization">
+                    <h4>Data Management Optimization Policy</h4>
+                    <ul>
+                      <li>Framework for continuous improvement</li>
+                      <li>Performance metrics and staff training</li>
+                      <li>Adoption of advanced data technologies</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="project-sidebar">
+            <!-- Project Info -->
+            <div class="sidebar-card" data-aos="fade-left">
+              <h3 class="sidebar-title">
+                <i class="fas fa-info-circle me-2"></i>Project Information
+              </h3>
+              <div class="info-list">
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-university"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Institution</strong>
+                    <span>University of Sunshine Coast</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-book"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Course</strong>
+                    <span>ICT701 Managing Data</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-calendar"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Submission</strong>
+                    <span>October 20, 2023</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="info-content">
+                    <strong>Role</strong>
+                    <span>Data Analyst & Policy Designer</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Download Links -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="100">
+              <h3 class="sidebar-title">
+                <i class="fas fa-download me-2"></i>Project Resources
+              </h3>
+              <div class="challenge-list">
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Full Report</strong>
+                    <p><a href="assets/qld-health-data-assessment.pdf" download="QH_Data_Maturity_Assessment.pdf" class="text-decoration-none">Download complete assessment</a></p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-file-alt"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>AI-Generated Policies</strong>
+                    <p><a href="assets/ai-generated-policies.pdf" download="QH_AI_Policies.pdf" class="text-decoration-none">Download policy suite</a></p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="challenge-text">
+                    <strong>Maturity Chart</strong>
+                    <p>Visual assessment using DAMA-DMBOK framework</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technologies Used -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="200">
+              <h3 class="sidebar-title">
+                <i class="fas fa-tools me-2"></i>Frameworks & Tools
+              </h3>
+              <div class="tech-stack">
+                <div class="tech-item">
+                  <i class="fas fa-database"></i>
+                  <span>DAMA-DMBOK</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-chart-pie"></i>
+                  <span>Data Maturity Model</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-robot"></i>
+                  <span>Generative AI</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-gavel"></i>
+                  <span>QH Policies</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-users"></i>
+                  <span>Stakeholder Analysis</span>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-file-alt"></i>
+                  <span>Gap Analysis</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Related Projects -->
+            <div class="sidebar-card" data-aos="fade-left" data-aos-delay="300">
+              <h3 class="sidebar-title">
+                <i class="fas fa-project-diagram me-2"></i>Related Projects
+              </h3>
+              <div class="related-projects">
+                <a href="energy-consumption.html" class="related-project">
+                  <div class="related-icon">
+                    <i class="fas fa-bolt"></i>
+                  </div>
+                  <div class="related-content">
+                    <h5>Australian Energy Predictor</h5>
+                    <p>XGBoost forecasting for utility planning</p>
+                  </div>
+                </a>
+                <a href="healthcare-fraud.html" class="related-project">
+                  <div class="related-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div class="related-content">
+                    <h5>Healthcare Fraud Detection</h5>
+                    <p>ML pipeline with 94% accuracy</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="row mt-5">
+        <div class="col-12" data-aos="fade-up">
+          <div class="results-section">
+            <h2 class="section-title text-center mb-5">
+              <i class="fas fa-trophy me-2"></i>Conclusions & Impact
+            </h2>
+            <div class="results-grid">
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="result-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="result-number">11</div>
+                <div class="result-label">Knowledge Areas</div>
+                <div class="result-description">
+                  Comprehensive assessment using DAMA-DMBOK framework
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="result-icon">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="result-number">4</div>
+                <div class="result-label">Critical Gaps</div>
+                <div class="result-description">
+                  Identified in storage, master data, warehousing, and improvement
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="result-icon">
+                  <i class="fas fa-robot"></i>
+                </div>
+                <div class="result-number">4</div>
+                <div class="result-label">AI Policies</div>
+                <div class="result-description">
+                  Generated to close gaps and modernize data governance
+                </div>
+              </div>
+              <div class="result-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="result-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="result-number">HD</div>
+                <div class="result-label">Academic Grade</div>
+                <div class="result-description">
+                  Recognized for depth, analysis, and innovation
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="project-cta-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <div class="cta-card">
+            <div class="cta-icon">
+              <i class="fas fa-hospital"></i>
+            </div>
+            <h3 class="cta-title">Need data governance expertise?</h3>
+            <p class="cta-description">
+              Let's discuss how I can help assess your organization's data maturity, identify critical gaps, and develop strategic policies using frameworks like DAMA-DMBOK and AI-driven insights.
+            </p>
+            <div class="cta-buttons">
+              <a href="index.html#contact" class="quantum-btn">
+                <i class="fas fa-envelope me-2"></i>Get In Touch
+              </a>
+              <a href="index.html#projects" class="quantum-btn quantum-btn-outline">
+                <i class="fas fa-project-diagram me-2"></i>View More Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+
+  <script>
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+  </script>
+</body>
+</html>
