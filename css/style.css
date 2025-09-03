@@ -33,9 +33,10 @@
   --pi: 3.14159;
   
   /* Responsive Font Sizes */
-  --font-size-base: 1rem;
-  --font-size-sm: 0.875rem;
-  --font-size-xs: 0.75rem;
+  --base-font-size: 0.92rem; /* Reduced from 1rem */
+  --base-line-height: 1.45; /* Reduced from 1.6 for tighter text */
+  --base-spacing: 0.75rem; /* Reduced from 1rem for less whitespace */
+  --container-max-width: 1100px; /* Slightly narrower container */
   
   /* Transitions */
   --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -52,7 +53,8 @@
 }
 
 html {
-  font-size: var(--font-size-base);
+  font-size: 95%;
+  line-height: var(--base-line-height);
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--neutron-cyan) var(--quantum-blue);
@@ -458,7 +460,7 @@ body::before {
 
 /* Section Styling */
 .section {
-  padding: 6rem 0;
+  padding: calc(var(--base-spacing) * 3) 0; /* Reduced from 4 */
   position: relative;
 }
 
@@ -509,7 +511,7 @@ body::before {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(58, 110, 165, 0.15);
   border-radius: 20px;
-  padding: 2rem;
+  padding: calc(var(--base-spacing) * 0.75); /* Reduced from 1rem */
   transition: var(--transition-slow);
   position: relative;
   overflow: hidden;
@@ -1278,5 +1280,198 @@ body::before {
   
   .footer-tech-stack span {
     margin: 0 !important;
+  }
+}
+
+:root {
+  /* Compact sizing variables */
+  --base-font-size: 0.92rem; /* Reduced from 1rem */
+  --base-line-height: 1.45; /* Reduced from 1.6 for tighter text */
+  --base-spacing: 0.75rem; /* Reduced from 1rem for less whitespace */
+  --container-max-width: 1100px; /* Slightly narrower container */
+  
+  /* All other color variables remain the same */
+  /* ... */
+}
+
+/* Base Typography Adjustments */
+html {
+  font-size: 95%; /* Overall reduction from 100% */
+  line-height: var(--base-line-height);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: calc(var(--base-spacing) * 0.3); /* Less space below headings */
+  line-height: 1.1;
+}
+
+/* Section Padding Reduction */
+.section {
+  padding: calc(var(--base-spacing) * 3) 0; /* Reduced from 4 */
+}
+
+/* Card Compact Design */
+.card {
+  padding: calc(var(--base-spacing) * 0.75); /* Reduced from 1rem */
+  border-radius: 6px; /* Slightly less rounded */
+}
+
+/* Timeline Compact Design */
+.timeline {
+  padding-left: 1.75rem; /* Reduced from 2.5rem */
+}
+
+.timeline-item {
+  margin-bottom: 1.75rem; /* Reduced from 2.5rem */
+}
+
+.timeline-header {
+  gap: 0.3rem; /* Reduced spacing between header elements */
+}
+
+/* Skills Section Compact Design */
+.skill-bar {
+  height: 6px; /* Reduced from 8px */
+}
+
+.skill-progress {
+  height: 6px; /* Reduced from 8px */
+}
+
+.skill-item {
+  margin-bottom: 0.7rem; /* Reduced from 1rem */
+}
+
+/* Projects Grid Compact Design */
+.projects-grid {
+  gap: 1.2rem; /* Reduced from 2rem */
+  margin-top: 2rem; /* Reduced from 3rem */
+}
+
+.project-card {
+  padding: 1rem; /* Reduced from 1.5rem */
+}
+
+.project-title {
+  font-size: 1.1rem; /* Reduced from 1.25rem */
+  margin-bottom: 0.5rem; /* Reduced from 0.75rem */
+}
+
+.project-description {
+  margin-bottom: 0.75rem; /* Reduced from 1.25rem */
+  font-size: 0.9rem; /* Reduced from default */
+}
+
+.project-tags {
+  gap: 0.3rem; /* Reduced from 0.5rem */
+}
+
+.project-tag {
+  padding: 0.15rem 0.5rem; /* Reduced from 0.25rem 0.75rem */
+  font-size: 0.75rem; /* Reduced from 0.85rem */
+}
+
+/* Contact Section Compact Design */
+.contact-grid {
+  gap: 0.75rem; /* Reduced from 1.5rem */
+}
+
+.contact-item {
+  padding: 0.75rem; /* Reduced from 1.5rem */
+}
+
+.contact-info {
+  font-size: 0.9rem; /* Slightly smaller contact info */
+}
+
+/* Navigation Compact Design */
+.nav-link {
+  padding: 0.5rem 0.8rem !important; /* Reduced from 0.8rem 1.2rem */
+}
+
+/* Hero Section Compact Design */
+
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem); /* Slightly smaller */
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 2rem); /* Slightly smaller */
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+}
+
+.hero-description {
+  font-size: 0.95rem; /* Slightly smaller */
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+}
+
+.hero-buttons {
+  gap: 0.75rem; /* Reduced from 1rem */
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+}
+
+/* Button Compact Design */
+.btn {
+  padding: 0.5rem 1rem; /* Reduced from 0.75rem 1.5rem */
+  font-size: 0.95rem; /* Slightly smaller */
+}
+
+.quantum-btn {
+  padding: 0.6rem 1.2rem; /* Reduced from 1rem 2rem */
+  font-size: 0.95rem; /* Slightly smaller */
+}
+
+/* List Items Compact Design */
+ul, ol {
+  margin-bottom: var(--base-spacing);
+}
+
+li {
+  margin-bottom: calc(var(--base-spacing) * 0.3); /* Less space between list items */
+}
+
+/* Table Compact Design */
+table {
+  font-size: 0.92rem;
+}
+
+th, td {
+  padding: 0.35rem 0.6rem; /* Reduced from default */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+  }
+  
+  .section {
+    padding: calc(var(--base-spacing) * 2.5) 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 60vh;
+    padding: 4rem 0 1.5rem;
+  }
+  
+  .section-title {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1rem, 3.5vw, 1.6rem);
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
 }
