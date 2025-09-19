@@ -1,0 +1,15 @@
+# SQL Server: Database Mirroring vs Log Shipping vs Replication
+
+| Feature / Aspect           | Database Mirroring                                           | Log Shipping                                             | Replication                                                   |
+|----------------------------|-------------------------------------------------------------|--------------------------------------------------------|---------------------------------------------------------------|
+| **Purpose**                | High availability / failover                                 | Disaster recovery / standby                            | Data distribution & synchronization                            |
+| **How it works**           | Maintains a **principal** and **mirror** database; transactions sent to mirror in real-time (synchronous) or near real-time (asynchronous) | Regularly **backups transaction logs** on primary and restores them on secondary server(s) | Copies and distributes data from **publisher → subscriber** using snapshot, transactional, or merge methods |
+| **Data latency**           | Very low (synchronous) or low (asynchronous)               | Moderate to high (depends on backup frequency)       | Varies by type: snapshot (periodic), transactional (near real-time), merge (periodic or on demand) |
+| **Failover**               | Automatic (High Safety with Witness) or manual             | Manual failover                                       | Not automatic; manual intervention needed                     |
+| **Number of secondaries**  | 1 mirrored database (can have a witness for automatic failover) | 1 or more secondary servers                           | Many subscribers allowed                                       |
+| **Use case**               | High availability within same or nearby sites              | Disaster recovery / standby                            | Reporting, distributed databases, data integration            |
+| **Data consistency**       | Fully consistent (transactional)                            | Eventually consistent (depends on restore schedule)  | Depends on replication type; transactional = consistent, merge = may have conflicts |
+| **SQL Server edition requirement** | Standard (synchronous) / Enterprise (asynchronous with automatic failover) | Standard or Enterprise                                 | Standard or Enterprise (features vary by type)                |
+| **Database state on secondary** | Mirror is **read-only** (cannot query directly)        | Secondary can be **read-only (standby)** or **restoring** | Subscribers can be **read/write** depending on replication type |
+| **Maintenance impact**     | Minimal, transparent to users                               | Requires regular monitoring of log backups & restores | Requires schema & publication maintenance                     |
+| **Transaction types supported** | All transactions                                        | All transactions (via log backups)                    | Depends: snapshot = entire dataset; transactional = individual changes; merge = conflicts possible |
