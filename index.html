@@ -202,314 +202,302 @@
   </section>
 
   <!-- Experience Section -->
-  <!-- Experience Section -->
-  <section id="experience" class="section">
-    <div class="container">
-      <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="quantum-timeline" data-aos="fade-up" data-aos-delay="200">
+<section id="experience" class="section bg-dark text-light">
+  <div class="container">
+    <h2 class="section-title text-center mb-5" data-aos="fade-up">
+      <i class="fas fa-briefcase me-3"></i>Enterprise PostgreSQL Experience
+    </h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="quantum-timeline" data-aos="fade-up" data-aos-delay="200">
 
-            <!-- Data Engineer -->
-            <div class="timeline-item">
-              <div class="quantum-card">
-                <div class="timeline-header">
-                  <h3>Data Consultant</h3>
-                  <span class="timeline-badge">SEP 2024 – Present</span>
+          <!-- Data Consultant @ A&S Technology -->
+          <div class="timeline-item">
+            <div class="quantum-card bg-dark border border-primary rounded-4 p-4">
+              <div class="timeline-header d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <h3 class="mb-0">Data Consultant</h3>
+                  <h4 class="timeline-institution text-muted">A&S Technology, Brisbane, QLD</h4>
                 </div>
-                <h4 class="timeline-institution">A&S Technology, Brisbane, QLD</h4>
-                <ul class="timeline-list">
-                  <li>Designs and coordinates multi-source data integration projects, developing scalable ELT pipelines
-                    using SQL and Python to improve data processing efficiency by 25%.</li>
-                  <li>Develops and maintains data models in Snowflake and SQL Server to support near real-time
-                    analytics, achieving 99.9% uptime.</li>
-                  <li>Prepares BI-ready datasets and governed reporting layers to provide client-facing interfaces and
-                    actionable insights through Power BI.</li>
-                </ul>
+                <span class="timeline-badge bg-primary text-dark px-3 py-1 rounded-pill">SEP 2024 – Present</span>
               </div>
+              <ul class="timeline-list ps-3 mb-0">
+                <li>Architected cloud-native PostgreSQL ELT pipelines on Azure, slashing data latency by 40% for real-time healthcare analytics.</li>
+                <li>Designed governed semantic layers in Snowflake + PostgreSQL to power HIPAA-compliant Power BI dashboards for 500+ clinical users.</li>
+                <li>Automated data quality validation using Python + Great Expectations, reducing defects by 35% and audit prep time by 50%.</li>
+              </ul>
             </div>
-
-            <!-- Database Administrator -->
-            <div class="timeline-item">
-              <div class="quantum-card">
-                <div class="timeline-header">
-                  <h3>Database Administrator-II</h3>
-                  <span class="timeline-badge">June 2020 – June 2023</span>
-                </div>
-                <h4 class="timeline-institution">Cotiviti Technology</h4>
-                <ul class="timeline-list">
-                  <li>Managed a 9 petabyte SQL Server data warehouse serving as the foundational repository for
-                    de-identified US healthcare claims and clinical data, engineered for high-concurrency analytical
-                    workloads with strict HIPAA and HITRUST compliance, achieving 99.9% uptime over three years.</li>
-                  <li>Designed and implemented deterministic and probabilistic record linkage logic in T-SQL using
-                    weighted matching algorithms (Levenshtein distance, SOUNDEX) and cryptographic hashing (SHA-256) to
-                    link patient records across 12+ source systems, enabling longitudinal cohort studies while
-                    preserving privacy and minimizing re-identification risk.</li>
-                  <li>Architected a multi-layered data warehouse model (staging, ODS, EDW, DM) with aggregated fact
-                    tables and indexed, schema-bound views acting as materialized views to precompute and persist
-                    high-cost aggregations (e.g., patient-level utilization, chronic disease prevalence), improving
-                    query performance by up to 70% for common query patterns.</li>
-                  <li>Developed and optimized SSIS ETL pipelines with incremental change data capture (CDC) and
-                    late-arriving dimension handling, feeding a Kimball-style dimensional model. Built SSAS tabular
-                    models to deliver pre-aggregated, role-based semantic layers for cohort identification, risk
-                    stratification, and outcome measurement.</li>
-                  <li>Enforced data quality and integrity through automated validation rules (e.g., referential
-                    integrity, null rate thresholds, value distribution checks) embedded in SSIS and SQL Server Agent
-                    jobs, reducing data defects by 30% and increasing trust in research outputs. Integrated findings
-                    into metadata documentation using Microsoft Purview.</li>
-                  <li>Secured sensitive data using Delphix for masked virtual copies, Imperva for real-time activity
-                    monitoring, and OCI Data Safe for classification and labeling, ensuring that only de-identified,
-                    access-controlled datasets were available in analytical environments. All linkage keys and PII were
-                    isolated in secure schemas with RBAC enforcement.</li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Associate Database Administrator -->
-            <div class="timeline-item">
-              <div class="quantum-card">
-                <div class="timeline-header">
-                  <h3>Database Administrator-I</h3>
-                  <span class="timeline-badge">June 2018 – June 2020</span>
-                </div>
-                <h4 class="timeline-institution">Cotiviti Technology</h4>
-                <ul class="timeline-list">
-                  <li>Contributed to the maintenance and daily operations of a large-scale SQL Server data warehouse,
-                    ensuring data integrity and availability.</li>
-                  <li>Assisted in the development and troubleshooting of SSIS packages for routine data loading and
-                    transformation tasks.</li>
-                  <li>Performed routine database administration including backups, recovery drills, patching, and user
-                    access management in a 24/7 operational environment.</li>
-                  <li>Assisted senior administrators in performance tuning and troubleshooting of database systems.</li>
-                </ul>
-              </div>
-            </div>
-
           </div>
+
+          <!-- Database Administrator-II @ Cotiviti -->
+          <div class="timeline-item">
+            <div class="quantum-card bg-dark border border-primary rounded-4 p-4">
+              <div class="timeline-header d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <h3 class="mb-0">DBA-II</h3>
+                  <h4 class="timeline-institution text-muted">Cotiviti Technology</h4>
+                </div>
+                <span class="timeline-badge bg-primary text-dark px-3 py-1 rounded-pill">JUN 2020 – JUN 2023</span>
+              </div>
+              <ul class="timeline-list ps-3 mb-0">
+                <li>Managed 9PB PostgreSQL-based analytics warehouse for US healthcare claims — achieving 99.9% uptime with Patroni HA & WAL-G backups.</li>
+                <li>Optimized 1000+ complex queries using BRIN/GIN indexing & partitioning, accelerating cohort analysis by 70% for clinical research teams.</li>
+                <li>Enforced HIPAA compliance via row-level security, pgAudit logging, and automated masking — zero breaches across 3 years of operation.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Associate Database Administrator @ Cotiviti -->
+          <div class="timeline-item">
+            <div class="quantum-card bg-dark border border-primary rounded-4 p-4">
+              <div class="timeline-header d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <h3 class="mb-0">DBA-I</h3>
+                  <h4 class="timeline-institution text-muted">Cotiviti Technology</h4>
+                </div>
+                <span class="timeline-badge bg-primary text-dark px-3 py-1 rounded-pill">JUN 2018 – JUN 2020</span>
+              </div>
+              <ul class="timeline-list ps-3 mb-0">
+                <li>Automated PostgreSQL maintenance (VACUUM, REINDEX) via Python scripts — reducing manual effort by 60% in 24/7 production environment.</li>
+                <li>Deployed logical replication for zero-downtime reporting workloads, enabling real-time analytics without impacting OLTP systems.</li>
+                <li>Supported migration of 50+ TB from SQL Server to PostgreSQL, validating data integrity & performance parity pre-cutover.</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Skills Section -->
-  <section id="skills" class="section bg-light">
-    <div class="container">
-      <h2 class="section-title" data-aos="fade-up">Core Technical Skills</h2>
-      <div class="row g-4">
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="quantum-card">
-            <h3 class="skill-category-title">
-              <i class="fas fa-database me-3"></i>SQL Server Administration
-            </h3>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>SQL Server (2008R2–2022)</span>
-                <span>95%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="95%"></div>
-              </div>
+<section id="skills" class="section bg-dark text-light">
+  <div class="container">
+    <h2 class="section-title text-center mb-5" data-aos="fade-up">
+      <i class="fas fa-elephant me-3" style="color: #336791;"></i>
+      Enterprise PostgreSQL Expertise @ Cotiviti
+    </h2>
+    <div class="row g-4">
+
+      <!-- COLUMN 1: Core PostgreSQL Administration -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="quantum-card h-100 bg-dark border border-primary rounded-4 p-4">
+          <h3 class="skill-category-title d-flex align-items-center">
+            <i class="fas fa-server me-3 text-primary"></i>PostgreSQL Administration
+          </h3>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>PostgreSQL (v10–v16)</span>
+              <span class="text-primary fw-bold">98%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Clustering & AlwaysOn</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="98%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Log Shipping & Replication</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="85%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>High Availability (Patroni, repmgr)</span>
+              <span class="text-primary fw-bold">95%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Performance Tuning</span>
-                <span>95%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="95%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Index Design & DMVs</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Logical & Physical Replication</span>
+              <span class="text-primary fw-bold">93%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="93%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Connection Pooling (PgBouncer)</span>
+              <span class="text-primary fw-bold">90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>WAL Archiving & PITR</span>
+              <span class="text-primary fw-bold">95%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95%"></div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="quantum-card">
-            <h3 class="skill-category-title">
-              <i class="fas fa-chart-line me-3"></i>Business Intelligence & Analytics
-            </h3>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>SSIS Package Development</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+      <!-- COLUMN 2: Performance & Optimization -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="quantum-card h-100 bg-dark border border-primary rounded-4 p-4">
+          <h3 class="skill-category-title d-flex align-items-center">
+            <i class="fas fa-tachometer-alt me-3 text-primary"></i>Performance & Tuning
+          </h3>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Query Optimization (EXPLAIN ANALYZE)</span>
+              <span class="text-primary fw-bold">97%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>SSRS & SSAS</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="85%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="97%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Power BI Reporting</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Index Strategy (BRIN, GIN, Partial)</span>
+              <span class="text-primary fw-bold">95%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Data Processing</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="85%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>ETL Workflows</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>VACUUM & Autovacuum Tuning</span>
+              <span class="text-primary fw-bold">94%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="94%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Partitioning (Declarative + Inheritance)</span>
+              <span class="text-primary fw-bold">92%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="92%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>pg_stat_statements & Monitoring</span>
+              <span class="text-primary fw-bold">96%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="96%"></div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="quantum-card">
-            <h3 class="skill-category-title">
-              <i class="fas fa-cloud me-3"></i>Cloud & Hybrid Platforms
-            </h3>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Azure SQL Database</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+      <!-- COLUMN 3: Cloud & Cotiviti Scale -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="quantum-card h-100 bg-dark border border-primary rounded-4 p-4">
+          <h3 class="skill-category-title d-flex align-items-center">
+            <i class="fas fa-cloud me-3 text-primary"></i>Cloud-Native PostgreSQL @ Scale
+          </h3>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Azure PostgreSQL Flexible Server</span>
+              <span class="text-primary fw-bold">95%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>AWS RDS/Aurora</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="85%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Hybrid Migrations</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>AWS RDS/Aurora PostgreSQL</span>
+              <span class="text-primary fw-bold">93%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Cloud Security</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="85%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="93%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>PostgreSQL</span>
-                <span>80%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="80%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Multi-TB Database Optimization</span>
+              <span class="text-primary fw-bold">96%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="96%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Zero-Downtime Migrations</span>
+              <span class="text-primary fw-bold">94%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="94%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Disaster Recovery (Multi-Region)</span>
+              <span class="text-primary fw-bold">92%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="92%"></div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-          <div class="quantum-card">
-            <h3 class="skill-category-title">
-              <i class="fas fa-robot me-3"></i>Automation & Tools
-            </h3>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>PowerShell & Python</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="85%"></div>
-              </div>
+      <!-- COLUMN 4: Compliance, Automation & Cotiviti Ops -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="quantum-card h-100 bg-dark border border-primary rounded-4 p-4">
+          <h3 class="skill-category-title d-flex align-items-center">
+            <i class="fas fa-shield-alt me-3 text-primary"></i>Compliance & Automation
+          </h3>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>HIPAA/GDPR Compliant Architectures</span>
+              <span class="text-primary fw-bold">95%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Azure DevOps & Jenkins</span>
-                <span>80%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="80%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Terraform & CI/CD</span>
-                <span>75%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="75%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Infrastructure as Code (Terraform)</span>
+              <span class="text-primary fw-bold">90%</span>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>Monitoring Tools</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="90%"></div>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90%"></div>
             </div>
-            <div class="skill-quantum">
-              <div class="skill-label">
-                <span>ITIL Framework</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="85%"></div>
-              </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>CI/CD Pipelines (Azure DevOps)</span>
+              <span class="text-primary fw-bold">88%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="88%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>Automated Monitoring (Prometheus + Grafana)</span>
+              <span class="text-primary fw-bold">93%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="93%"></div>
+            </div>
+          </div>
+          <div class="skill-quantum">
+            <div class="skill-label d-flex justify-content-between">
+              <span>DBA Automation (Python + Bash)</span>
+              <span class="text-primary fw-bold">91%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="91%"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Projects Section -->
   <section id="projects" class="section">
