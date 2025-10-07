@@ -1,0 +1,136 @@
+    /* Main layout */
+    .lesson-layout {
+      display: flex;
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 20px;
+      gap: 30px;
+    }
+
+    /* Sidebar */
+    .chapters-sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 25px;
+      height: fit-content;
+      position: sticky;
+      top: 80px;
+    }
+
+    .sidebar-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--neutron-cyan);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chapter-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .chapter-item {
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .chapter-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+      color: var(--neutron-cyan);
+    }
+
+    .chapter-item.current {
+      background: rgba(0, 255, 255, 0.2);
+      border: 1px solid var(--neutron-cyan);
+      color: var(--neutron-cyan);
+      font-weight: 600;
+    }
+
+    .chapter-number {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 255, 255, 0.2);
+      color: var(--neutron-cyan);
+      border-radius: 50%;
+      text-align: center;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+
+    /* Main content */
+    .lesson-main {
+      flex: 1;
+    }
+
+    .lesson-header {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .lesson-content {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 30px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .lesson-content h1, .lesson-content h2, .lesson-content h3 {
+      color: var(--neutron-cyan);
+      margin-top: 1.5em;
+    }
+
+    .lesson-content pre {
+      background: #1e1e2e;
+      border-radius: 10px;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+    }
+
+    .lesson-content code {
+      background: rgba(0,255,255,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+
+    .btn-outline-light {
+      border-color: var(--neutron-cyan);
+      color: var(--neutron-cyan);
+    }
+
+    .btn-outline-light:hover {
+      background: rgba(0,255,255,0.1);
+    }
+
+    /* Responsive: hide sidebar on mobile */
+    @media (max-width: 992px) {
+      .lesson-layout {
+        flex-direction: column;
+      }
+      .chapters-sidebar {
+        position: static;
+        width: 100%;
+      }
+    }
