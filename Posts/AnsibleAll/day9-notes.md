@@ -1,3 +1,9 @@
+---
+title: Ansible Day 9 Notes
+layout: default
+render_with_liquid: false
+---
+
 # Using Filters and variable types
 * Filters: lookup plugin that allows you to manipulate data
 * jinja2 filters can be used in Ansible

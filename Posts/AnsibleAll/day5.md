@@ -1,3 +1,9 @@
+---
+title: Ansible Day 9 Notes
+layout: default
+render_with_liquid: false
+---
+
 ## Using Conditionals
 * Conditionals are used to perform different actions based on certain conditions.
 * Conditionals are defined using the when keyword.

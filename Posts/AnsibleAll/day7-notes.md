@@ -1,3 +1,9 @@
+---
+title: Ansible Day 9 Notes
+layout: default
+render_with_liquid: false
+---
+
 ## Day 7 Notes
 ### Ansible Collections
 - A collection is a distribution format for Ansible content that can include playbooks, roles, modules, and plugins.

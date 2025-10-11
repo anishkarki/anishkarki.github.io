@@ -1,3 +1,9 @@
+---
+title: Ansible Day 9 Notes
+layout: default
+render_with_liquid: false
+---
+
 ## Managing Heterogeneous environment with Ansible
 * VM with ansible
 * K8s with ansible

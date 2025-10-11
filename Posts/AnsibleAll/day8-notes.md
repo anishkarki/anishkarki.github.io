@@ -1,3 +1,9 @@
+---
+title: Ansible Day 9 Notes
+layout: default
+render_with_liquid: false
+---
+
 # This will include
 * Ansible best practices and optimisations
 * Using filters

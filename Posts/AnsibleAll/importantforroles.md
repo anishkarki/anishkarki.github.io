@@ -1,3 +1,9 @@
+---
+title: Ansible Day 9 Notes
+layout: default
+render_with_liquid: false
+---
+
 # 📘 Ansible Playbook & Role Components — Detailed Reference
 
 This document explains **each component of an Ansible project**: playbooks, roles, tasks, handlers, variables, and supporting files.  
