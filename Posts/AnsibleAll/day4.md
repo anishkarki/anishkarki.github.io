@@ -142,10 +142,10 @@ Reserved variables automatically created by Ansible:
 | Variable | Description |
 |-----------|-------------|
 | `hostvars` | Access variables of other hosts, e.g., `hostvars['hostname']['var_name']` |
-| `groups` | List all hosts in an inventory group, e.g., `{% for host in groups['group_name'] %}` |
+| `groups` | List all hosts in an inventory group, e.g., ` for host in groups['group_name'] ` |
 | `inventory_hostname` | Name of the host as in the inventory (useful when facts are disabled) |
 | `inventory_hostname_short` | Short hostname (without domain) |
-| `group_names` | List of all groups the host belongs to, e.g., `{% if 'group_name' in group_names %}` |
+| `group_names` | List of all groups the host belongs to, e.g., ``` 'group_name' in group_names``` |
 
 ---
 
