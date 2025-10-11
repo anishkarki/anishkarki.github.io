@@ -1,3 +1,9 @@
+---
+title: Ansible Best Practices — Day 4
+layout: default
+render_with_liquid: false
+---
+
 # DevOps Best Practices
 
 ## Ansible Best Practices — Day 4
