@@ -90,5 +90,3 @@ Slow fact gathering:
   * web_pacakge: httpd
   * web_service: httpd
 * create a simple playbook that uses the debug module to show the current value of the variables of the variables ```web_package``` and ```web_service```
----
-
