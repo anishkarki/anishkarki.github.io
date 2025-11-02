@@ -267,5 +267,25 @@
     "featured": true,
     "readTime": "14 min read",
     "file": "Posts/Temperature_Wildfire_Analytics_Fabric.md"
+  },
+  {
+    "id": 15,
+    "title": "Monitoring with OpenSearch: Setup and Best Practices",
+    "excerpt": "Explore effective monitoring strategies using OpenSearch, an open-source search and analytics engine forked from Elasticsearch. Learn setup, configuration, and best practices for logging, metrics, and observability in modern systems.",
+    "content": "OpenSearch is a powerful tool for monitoring and analyzing logs, metrics, and traces in distributed systems. This guide covers installation and cluster setup, indexing data, creating dashboards, alerting, and advanced features like anomaly detection to build a robust monitoring solution for your infrastructure and applications.",
+    "category": "monitoring",
+    "tags": [
+      "OpenSearch",
+      "Monitoring",
+      "Logging",
+      "Elasticsearch",
+      "Observability",
+      "Analytics"
+    ],
+    "date": "2025-11-02T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "10 min read",
+    "file": "Posts/Montoring/OpenSearch.md"
   }
 ]
