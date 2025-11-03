@@ -90,3 +90,23 @@ print(respose)
 
 get_logs_orderbydate(client, index='postgreslogs', size=100)
 ```
+#### Creating index pattern with python using requests
+```py
+import requests
+
+url = "http://localhost:5601/api/saved_objects/index-pattern"
+headers = {"kbn-xsrf": "true", "Content-Type": "application/json"}
+auth = ('admin', 'admin')
+data = {
+    "attributes": {
+        "title": "postgreslogs*",
+        "timeFieldName": "@timestamp"
+    }
+}
+
+r = requests.post(url, json=data, headers=headers, auth=auth, verify=False)
+print(r.json())  # {'id': 'index-pattern:...', 'attributes': {...}}
+```
+### Location of index pattern:
+* dashboard management &rarr; opensearch-dashboards/indexPatterns
+
