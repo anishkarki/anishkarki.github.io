@@ -364,7 +364,291 @@ curl -k -u admin:OpenSearch@2024 -X POST https://localhost:19200/_plugins/_alert
     ]
   }'
 
+(ansible_v) ➜  myDemoSetup git:(main) ✗ curl -k -u admin:OpenSearch@2024 https://localhost:19200/_plugins/_alerting/monitors/15I8WJoBHocox8i_sw9c | \
+  jq -r '.monitor | "Name: \(.name)\nEnabled: \(.enabled)\nID: \(.id)\nType: \(.monitor_type)"'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2269  100  2269    0     0   179k      0 --:--:-- --:--:-- --:--:--  184k
+Name: Postgres Raw Logs - 87b4cc23f27c
+Enabled: true
+ID: null
+Type: query_level_monitor
+
+(ansible_v) ➜  myDemoSetup git:(main) ✗ curl -k -u admin:OpenSearch@2024 -X POST https://localhost:19200/_plugins/_alerting/monitors/_search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":{"match_all":{}}}' | \
+  jq -r '.hits.hits[]._source | "• \(.name) (\(._id)) – Enabled: \(.enabled) – Type: \(.monitor_type // "query_level")"'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2480  100  2454  100    26   155k   1686 --:--:-- --:--:-- --:--:--  161k
+• Postgres Raw Logs - 87b4cc23f27c (null) – Enabled: true – Type: query_level_monitor
+(ansible_v) ➜  myDemoSetup git:(main) ✗ 
+
+
+
+## Listing all the monitors
+(ansible_v) ➜  myDemoSetup git:(main) ✗ curl -k -u admin:OpenSearch@2024 -X POST https://localhost:19200/_plugins/_alerting/monitors/_search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":{"match_all":{}}}' | \
+  jq                                                                                                                                                                                                            
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2480  100  2454  100    26   202k   2197 --:--:-- --:--:-- --:--:--  220k
+{
+  "took": 2,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 1,
+      "relation": "eq"
+    },
+    "max_score": 2.0,
+    "hits": [
+      {
+        "_index": ".opendistro-alerting-config",
+        "_id": "15I8WJoBHocox8i_sw9c",
+        "_version": 1,
+        "_seq_no": 0,
+        "_primary_term": 1,
+        "_score": 2.0,
+        "_source": {
+          "type": "monitor",
+          "schema_version": 0,
+          "name": "Postgres Raw Logs - 87b4cc23f27c",
+          "monitor_type": "query_level_monitor",
+          "enabled": true,
+          "enabled_time": 1762416963536,
+          "schedule": {
+            "period": {
+              "interval": 5,
+              "unit": "MINUTES"
+            }
+          },
+          "inputs": [
+            {
+              "search": {
+                "indices": [
+                  "postgres*"
+                ],
+                "query": {
+                  "size": 0,
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "match": {
+                            "host.name": {
+                              "query": "87b4cc23f27c",
+                              "operator": "OR",
+                              "prefix_length": 0,
+                              "max_expansions": 50,
+                              "fuzzy_transpositions": true,
+                              "lenient": false,
+                              "zero_terms_query": "NONE",
+                              "auto_generate_synonyms_phrase_query": true,
+                              "boost": 1.0
+                            }
+                          }
+                        },
+                        {
+                          "range": {
+                            "@timestamp": {
+                              "from": "now-5m/m",
+                              "to": null,
+                              "include_lower": true,
+                              "include_upper": true,
+                              "boost": 1.0
+                            }
+                          }
+                        }
+                      ],
+                      "adjust_pure_negative": true,
+                      "boost": 1.0
+                    }
+                  },
+                  "aggregations": {
+                    "raw_count": {
+                      "value_count": {
+                        "field": "_raw"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "triggers": [
+            {
+              "query_level_trigger": {
+                "id": "0pI8WJoBHocox8i_rw_P",
+                "name": "High Raw Log Volume",
+                "severity": "1",
+                "condition": {
+                  "script": {
+                    "source": "ctx.results[0].aggregations.raw_count.value > 10",
+                    "lang": "painless"
+                  }
+                },
+                "actions": [
+                  {
+                    "id": "05I8WJoBHocox8i_rw_Q",
+                    "name": "Send to Test Email Channel",
+                    "destination_id": "yZI4WJoBHocox8i_xA-r",
+                    "message_template": {
+                      "source": "Monitor {{ctx.monitor.name}} just entered alert status.\n\nHost: 87b4cc23f27c\nRaw log count (5 min): {{ctx.results[0].aggregations.raw_count.value}}\nTime: {{ctx.trigger.triggered_time}}",
+                      "lang": "mustache"
+                    },
+                    "throttle_enabled": false,
+                    "subject_template": {
+                      "source": "High _raw logs on host 87b4cc23f27c",
+                      "lang": "mustache"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "last_update_time": 1762416963538,
+          "data_sources": {
+            "query_index": ".opensearch-alerting-queries",
+            "findings_index": ".opensearch-alerting-finding-history-write",
+            "findings_index_pattern": "<.opensearch-alerting-finding-history-{now/d}-1>",
+            "alerts_index": ".opendistro-alerting-alerts",
+            "alerts_history_index": ".opendistro-alerting-alert-history-write",
+            "alerts_history_index_pattern": "<.opendistro-alerting-alert-history-{now/d}-1>",
+            "comments_index": ".opensearch-alerting-comments-history-write",
+            "comments_index_pattern": "<.opensearch-alerting-comments-history-{now/d}-1>",
+            "query_index_mappings_by_type": {},
+            "findings_enabled": false
+          },
+          "delete_query_index_in_every_run": false,
+          "should_create_single_alert_for_findings": false,
+          "owner": "alerting"
+        }
+      }
+    ]
+  }
+}
+(ansible_v) ➜  myDemoSetup git:(main) ✗ 
+
+(ansible_v) ➜  myDemoSetup git:(main) ✗ curl -k -u admin:OpenSearch@2024 -X POST https://localhost:19200/_plugins/_alerting/monitors/_search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":{"match_all":{}}}' | \
+  jq -r '.hits.hits[0]._id'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2480  100  2454  100    26   127k   1381 --:--:-- --:--:-- --:--:--  134k
+15I8WJoBHocox8i_sw9c
+(ansible_v) ➜  myDemoSetup git:(main) ✗ 
+
+Delete: curl -k -u admin:OpenSearch@2024 -X DELETE https://localhost:19200/_plugins/_alerting/monitors/15I8WJoBHocox8i_sw9c
+
+
+
+# Create a new monitor that check _raw and gives out alert if more than 10 counts in 5 minutes
+curl -k -u admin:OpenSearch@2024 -X POST https://localhost:19200/_plugins/_alerting/monitors \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "type": "monitor",
+    "name": "Postgres ERROR Count Alert",
+    "monitor_type": "query_level_monitor",
+    "enabled": true,
+    "schedule": {
+      "period": {
+        "interval": 5,
+        "unit": "MINUTES"
+      }
+    },
+    "inputs": [{
+      "search": {
+        "indices": ["postgres*"],
+        "query": {
+          "size": 0,
+          "query": {
+            "bool": {
+              "must": [
+                { "match": { "_raw": "ERROR" } },
+                { "range": { "@timestamp": { "gte": "now-5m/m" } } }
+              ]
+            }
+          },
+          "aggregations": {
+            "error_count": {
+              "value_count": { "field": "_id" }
+            }
+          }
+        }
+      }
+    }],
+    "triggers": [{
+      "name": "High ERROR Count",
+      "severity": "1",
+      "condition": {
+        "script": {
+          "source": "ctx.results[0].aggregations.error_count.value > 10",
+          "lang": "painless"
+        }
+      },
+      "actions": [{
+        "name": "Send Email Alert",
+        "destination_id": "yZI4WJoBHocox8i_xA-r",
+        "subject_template": { "source": "High ERROR Count in Postgres Logs" },
+        "message_template": {
+          "source": "Monitor {{ctx.monitor.name}} triggered!\n\n> 10 ERROR logs detected in last 5 minutes\nCount: {{ctx.results[0].aggregations.error_count.value}}\nTime: {{ctx.trigger.triggered_time}}\n\nCheck logs for: relation does not exist, function does not exist, etc."
+        }
+      }]
+    }]
+  }'
+  
+{"_id":"dJKLWJoBHocox8i_ZxIG","_version":1,"_seq_no":3,"_primary_term":1,"monitor":{"type":"monitor","schema_version":0,"name":"Postgres ERROR Count Alert","monitor_type":"query_level_monitor","enabled":true,"enabled_time":1762422122243,"schedule":{"period":{"interval":5,"unit":"MINUTES"}},"inputs":[{"search":{"indices":["postgres*"],"query":{"size":0,"query":{"bool":{"must":[{"match":{"_raw":{"query":"ERROR","operator":"OR","prefix_length":0,"max_expansions":50,"fuzzy_transpositions":true,"lenient":false,"zero_terms_query":"NONE","auto_generate_synonyms_phrase_query":true,"boost":1.0}}},{"range":{"@timestamp":{"from":"now-5m/m","to":null,"include_lower":true,"include_upper":true,"boost":1.0}}}],"adjust_pure_negative":true,"boost":1.0}},"aggregations":{"error_count":{"value_count":{"field":"_id"}}}}}}],"triggers":[{"query_level_trigger":{"id":"cpKLWJoBHocox8i_ZxID","name":"High ERROR Count","severity":"1","condition":{"script":{"source":"ctx.results[0].aggregations.error_count.value > 10","lang":"painless"}},"actions":[{"id":"c5KLWJoBHocox8i_ZxID","name":"Send Email Alert","destination_id":"yZI4WJoBHocox8i_xA-r","message_template":{"source":"Monitor {{ctx.monitor.name}} triggered!\n\n> 10 ERROR logs detected in last 5 minutes\nCount: {{ctx.results[0].aggregations.error_count.value}}\nTime: {{ctx.trigger.triggered_time}}\n\nCheck logs for: relation does not exist, function does not exist, etc.","lang":"mustache"},"throttle_enabled":false,"subject_template":{"source":"High ERROR Count in Postgres Logs","lang":"mustache"}}]}}],"last_update_time":1762422122243,"data_sources":{"query_index":".opensearch-alerting-queries","findings_index":".opensearch-alerting-finding-history-write","findings_index_pattern":"<.opensearch-alerting-finding-history-{now/d}-1>","alerts_index":".opendistro-alerting-alerts","alerts_history_index":".opendistro-alerting-alert-history-write","alerts_history_index_pattern":"<.opendistro-alerting-alert-history-{now/d}-1>","comments_index":".opensearch-alerting-comments-history-write","comments_index_pattern":"<.opensearch-alerting-comments-history-{now/d}-1>","query_index_mappings_by_type":{},"findings_enabled":false},"delete_query_index_in_every_run":false,"should_create_single_alert_for_findings":false,"owner":"alerting"}}%  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Getting stated with vector search and the Opensearch provided ML model
 ```bash
 # Allow the node to give out the ml run in single node
