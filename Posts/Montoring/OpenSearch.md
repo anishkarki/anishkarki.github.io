@@ -610,24 +610,91 @@ curl -k -u admin:OpenSearch@2024 -X POST https://localhost:19200/_plugins/_alert
 
 
 
+## DSL To filter the data:
+GET /postgres*/_search
+{
+  "size": 0,
+  "aggs": {
+    "top_raw": {
+      "terms": {
+        "field": "_raw.keyword",
+        "size": 10
+      }
+    }
+  }
+}
 
+GET /postgres*/_search
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "host.name": {
+              "value": "87b4cc23f27c"
+            }
+          }
+        },
+        {
+          "match": {
+            "_raw": "ERROR:"
+          }
+        }
+        ]
+    }
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+GET /postgres*/_search
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "host.name": {
+              "value": "87b4cc23f27c"
+            }
+          }
+        },
+        {
+          "match": {
+            "_raw": "ERROR:"
+          }
+        }
+        ]
+    }
+  },
+  "aggs": {
+    "top_raw": {
+      "terms": {
+        "field": "_raw.keyword",
+        "size": 10
+      }
+    }
+  }
+}
 ```
+| keyword|Meaning|
+|---|---|
+| Get| Http method to retrieve data. used for read-only operations|
+| /postgres*/_search| search API endpoints|
+|"size": 0| Return 0 documents in hits. We only want aggregations, not raw docs|
+|"query" | Filter documents before aggregation. Only matching docs are counted|
+|"bool"| Boolean query -combines multiple condition with logic (```must```, ```shoudl```, ```must_not```) etc.|
+|"must" | all confitions inside must be true (logical AND)|
+|{"term": {"host.name": "..."}}| Exact match on host.name field|
+|{"Match": {"_raw": "ERROR:"}} | Full text-search on _raw field. Analyzes text and matches docs contianing ERROR: (case-insensative by default)|
+|"aggs" | Aggregates -- compute metrics, stats, or buckets over filtered docs|
+| "top_raw"| Custom name for the aggregation|
+|"terms" | bucket aggreagtion--group docs by unique values of a field|
+| "field": "_raw.keyword"| use the keyword version of _raw for exact string bucketing (required for terms aggs).|
+|size:10| returns top 10 most frequent log line|
+
+
 
 
 
