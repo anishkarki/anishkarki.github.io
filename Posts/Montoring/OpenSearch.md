@@ -365,3 +365,99 @@ curl -k -u admin:OpenSearch@2024 -X POST https://localhost:19200/_plugins/_alert
   }'
 
 ```
+### Getting stated with vector search and the Opensearch provided ML model
+```bash
+# Allow the node to give out the ml run in single node
+PUT _cluster/settings
+{
+  "persistent": {
+    "plugins.ml_commons.only_run_on_ml_node": "false",
+    "plugins.ml_commons.native_memory_threshold": "99"
+  }
+}
+## Start by using opensource huggingface distilbert: will get into details later
+POST /_plugins/_ml/models/_register?deploy=true
+{
+  "name": "huggingface/sentence-transformers/msmarco-distilbert-base-tas-b",
+  "version": "1.0.3",
+  "model_format": "TORCH_SCRIPT"
+}
+#Output
+{
+  "task_id": "upJlWJoBHocox8i_tBGP",
+  "status": "CREATED"
+}
+
+# Check the status of the download:
+GET /_plugins/_ml/tasks/upJlWJoBHocox8i_tBGP
+{
+  "model_id": "xZJlWJoBHocox8i_vREK",
+  "task_type": "REGISTER_MODEL",
+  "function_name": "TEXT_EMBEDDING",
+  "state": "COMPLETED",
+  "worker_node": [
+    "PRbPvKIxTvq8dUFkBwZE9Q"
+  ],
+  "create_time": 1762419651564,
+  "last_update_time": 1762419717673,
+  "is_async": true
+}
+
+# Now using the model id we can test the new output
+GET /_plugins/_ml/models/xZJlWJoBHocox8i_vREK
+## Output
+{
+  "name": "huggingface/sentence-transformers/msmarco-distilbert-base-tas-b",
+  "model_group_id": "spJlWJoBHocox8i_sxHY",
+  "algorithm": "TEXT_EMBEDDING",
+  "model_version": "1",
+  "model_format": "TORCH_SCRIPT",
+  "model_state": "DEPLOYED",
+  "model_content_size_in_bytes": 266357253,
+  "model_content_hash_value": "2fcc51bd52df9bd55f0d46007b80663dc6014687a321d23c00508a08d9c86d86",
+  "model_config": {
+    "model_type": "distilbert",
+    "embedding_dimension": 768,
+    "framework_type": "SENTENCE_TRANSFORMERS",
+    "all_config": """{"_name_or_path": "sentence-transformers/msmarco-distilbert-base-tas-b", "activation": "gelu", "architectures": ["DistilBertModel"], "attention_dropout": 0.1, "dim": 768, "dropout": 0.1, "hidden_dim": 3072, "initializer_range": 0.02, "max_position_embeddings": 512, "model_type": "distilbert", "n_heads": 12, "n_layers": 6, "pad_token_id": 0, "qa_dropout": 0.1, "seq_classif_dropout": 0.2, "sinusoidal_pos_embds": false, "tie_weights_": true, "torch_dtype": "float32", "transformers_version": "4.49.0", "vocab_size": 30522}""",
+    "additional_config": {
+      "space_type": "innerproduct"
+    },
+    "pooling_mode": "CLS"
+  },
+  "created_time": 1762419653743,
+  "last_updated_time": 1762419736267,
+  "last_registered_time": 1762419717657,
+  "last_deployed_time": 1762419735539,
+  "auto_redeploy_retry_times": 0,
+  "total_chunks": 27,
+  "planning_worker_node_count": 1,
+  "current_worker_node_count": 1,
+  "planning_worker_nodes": [
+    "PRbPvKIxTvq8dUFkBwZE9Q"
+  ],
+  "deploy_to_all_nodes": true,
+  "is_hidden": false
+}
+## We can see that model_state is deployed and the model was split into 27 smaller chunks.
+
+# Lets ingest the data
+# Setup a text embedding processor: a task that transfoms docuement fields before documents are ingested into an index. 
+# Register a pipeline:
+PUT /_ingest/pipeline/nlp-ingest-pipeline
+{
+  "description": "An NLP ingest pipeline",
+  "processors": [
+    {
+      "text_embedding": {
+        "model_id": "xZJlWJoBHocox8i_vREK",
+        "field_map": {
+          "text": "passage_embedding"
+        }
+      }
+    }
+  ]
+}
+
+
+```
