@@ -694,6 +694,11 @@ GET /postgres*/_search
 | "field": "_raw.keyword"| use the keyword version of _raw for exact string bucketing (required for terms aggs).|
 |size:10| returns top 10 most frequent log line|
 
+* Buckets are the building blocks of aggregations, the other being metrics.
+* Buckets as groups or containers that hold docuements with similar char. 
+* Let you group and organize the data.
+
+
 
 
 
