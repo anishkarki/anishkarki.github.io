@@ -93,121 +93,128 @@
       }
     ]
   },
-  "postgresql": {
-    "title": "PostgreSQL Mastery",
-    "description": "Complete guide to PostgreSQL from basics to advanced topics. Learn database design, query optimization, replication, and performance tuning techniques.",
-    "difficulty": "beginner",
-    "icon": "fas fa-database",
-    "iconColor": "var(--photon-green)",
-    "topics": ["SQL Fundamentals", "Query Optimization", "Replication", "Backup & Recovery"],
-    "chapters": [
-      {
-        "number": 1,
-        "title": "Introduction to PostgreSQL",
-        "description": "Overview of PostgreSQL features and architecture",
-        "duration": "35 min",
-        "file": "01-introduction.md"
-      },
-      {
-        "number": 2,
-        "title": "Installation & Configuration",
-        "description": "Installing and configuring PostgreSQL",
-        "duration": "40 min",
-        "file": "02-installation.md"
-      },
-      {
-        "number": 3,
-        "title": "Database Design",
-        "description": "Designing efficient database schemas",
-        "duration": "60 min",
-        "file": "03-database-design.md"
-      },
-      {
-        "number": 4,
-        "title": "SQL Fundamentals",
-        "description": "Core SQL queries and operations",
-        "duration": "55 min",
-        "file": "04-sql-fundamentals.md"
-      },
-      {
-        "number": 5,
-        "title": "Advanced Queries",
-        "description": "Complex queries, CTEs, and window functions",
-        "duration": "70 min",
-        "file": "05-advanced-queries.md"
-      },
-      {
-        "number": 6,
-        "title": "Indexing Strategies",
-        "description": "Creating and optimizing indexes",
-        "duration": "50 min",
-        "file": "06-indexing.md"
-      },
-      {
-        "number": 7,
-        "title": "Query Performance Tuning",
-        "description": "Analyzing and optimizing query performance",
-        "duration": "65 min",
-        "file": "07-performance-tuning.md"
-      },
-      {
-        "number": 8,
-        "title": "Transactions & ACID",
-        "description": "Understanding transactions and concurrency",
-        "duration": "45 min",
-        "file": "08-transactions.md"
-      },
-      {
-        "number": 9,
-        "title": "Backup & Recovery",
-        "description": "Backup strategies and disaster recovery",
-        "duration": "55 min",
-        "file": "09-backup-recovery.md"
-      },
-      {
-        "number": 10,
-        "title": "Replication Setup",
-        "description": "Setting up streaming replication",
-        "duration": "60 min",
-        "file": "10-replication.md"
-      },
-      {
-        "number": 11,
-        "title": "High Availability",
-        "description": "Implementing HA with PostgreSQL",
-        "duration": "70 min",
-        "file": "11-high-availability.md"
-      },
-      {
-        "number": 12,
-        "title": "Monitoring & Logging",
-        "description": "Monitoring tools and log analysis",
-        "duration": "50 min",
-        "file": "12-monitoring.md"
-      },
-      {
-        "number": 13,
-        "title": "Security Best Practices",
-        "description": "Securing your PostgreSQL database",
-        "duration": "55 min",
-        "file": "13-security.md"
-      },
-      {
-        "number": 14,
-        "title": "Extensions & PL/pgSQL",
-        "description": "Using extensions and stored procedures",
-        "duration": "60 min",
-        "file": "14-extensions.md"
-      },
-      {
-        "number": 15,
-        "title": "Production Deployment",
-        "description": "Best practices for production environments",
-        "duration": "65 min",
-        "file": "15-production.md"
-      }
-    ]
-  },
+  "postgresql_advanced": {
+  "title": "PostgreSQL Advanced Mastery",
+  "description": "Deep dive into PostgreSQL architecture, performance tuning, HA, replication, and disaster recovery. Focused for database administrators and performance engineers.",
+  "difficulty": "advanced",
+  "icon": "fas fa-server",
+  "iconColor": "var(--photon-blue)",
+  "topics": [
+    "Architecture & Internals",
+    "Backup & Recovery",
+    "Monitoring & Observability",
+    "Replication & High Availability",
+    "Performance Tuning"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "PostgreSQL Architecture & Core Internals",
+      "description": "Explore PostgreSQL processes, shared buffers, WAL, and background workers.",
+      "duration": "75 min",
+      "file": "01-architecture-core.md"
+    },
+    {
+      "number": 2,
+      "title": "Corruption Detection & Data Integrity",
+      "description": "Detect and mitigate corruption using checksums, control files, and page verification.",
+      "duration": "65 min",
+      "file": "02-corruption-integrity.md"
+    },
+    {
+      "number": 3,
+      "title": "Backup Strategies & PITR",
+      "description": "Logical vs physical backups, pg_basebackup, WAL archiving, and Point-in-Time Recovery.",
+      "duration": "70 min",
+      "file": "03-backup-strategies.md"
+    },
+    {
+      "number": 4,
+      "title": "Restore & Disaster Recovery",
+      "description": "Recovery.conf, timeline switching, and fast recovery techniques.",
+      "duration": "60 min",
+      "file": "04-restore-recovery.md"
+    },
+    {
+      "number": 5,
+      "title": "Monitoring & Observability",
+      "description": "Using pg_stat_statements, pgBadger, pgMonitor, and Grafana for performance insights.",
+      "duration": "75 min",
+      "file": "05-monitoring-observability.md"
+    },
+    {
+      "number": 6,
+      "title": "Replication & Streaming Internals",
+      "description": "Synchronous/asynchronous streaming, logical replication, slots, and failover logic.",
+      "duration": "80 min",
+      "file": "06-replication-internals.md"
+    },
+    {
+      "number": 7,
+      "title": "High Availability & Failover Management",
+      "description": "Patroni, repmgr, keepalived, and automatic failover orchestration.",
+      "duration": "80 min",
+      "file": "07-high-availability.md"
+    },
+    {
+      "number": 8,
+      "title": "Performance Tuning & Optimization",
+      "description": "PostgreSQL configuration tuning, autovacuum, caching, planner statistics, and I/O optimization.",
+      "duration": "85 min",
+      "file": "08-performance-tuning.md"
+    },
+    {
+      "number": 9,
+      "title": "Query Optimization Deep Dive",
+      "description": "Understanding EXPLAIN plans, planner cost parameters, and advanced index strategies.",
+      "duration": "70 min",
+      "file": "09-query-optimization.md"
+    },
+    {
+      "number": 10,
+      "title": "WAL Internals & Crash Recovery",
+      "description": "Write-ahead logging design, checkpointing, and recovery sequence analysis.",
+      "duration": "75 min",
+      "file": "10-wal-internals.md"
+    },
+    {
+      "number": 11,
+      "title": "Storage & Tablespace Management",
+      "description": "Data files, TOAST tables, FSM/VISMAP pages, and disk layout optimization.",
+      "duration": "60 min",
+      "file": "11-storage-tablespace.md"
+    },
+    {
+      "number": 12,
+      "title": "Locking, Concurrency & Deadlocks",
+      "description": "MVCC internals, lock types, deadlock prevention, and transaction tuning.",
+      "duration": "70 min",
+      "file": "12-locking-concurrency.md"
+    },
+    {
+      "number": 13,
+      "title": "Maintenance & Vacuum Operations",
+      "description": "Autovacuum tuning, bloat management, reindexing, and analyze strategies.",
+      "duration": "65 min",
+      "file": "13-maintenance-vacuum.md"
+    },
+    {
+      "number": 14,
+      "title": "Disaster Simulations & Failover Testing",
+      "description": "Practicing failover, node failure, corruption restore, and resilience validation.",
+      "duration": "70 min",
+      "file": "14-disaster-simulation.md"
+    },
+    {
+      "number": 15,
+      "title": "Enterprise Operations & Automation",
+      "description": "CI/CD pipelines for DB schema, backup automation, and performance regression testing.",
+      "duration": "75 min",
+      "file": "15-enterprise-automation.md"
+    }
+  ]
+}
+,
   "kubernetes": {
     "title": "Kubernetes Orchestration",
     "description": "Deep dive into container orchestration with Kubernetes. Learn cluster management, deployment strategies, service mesh, and production-ready configurations.",
