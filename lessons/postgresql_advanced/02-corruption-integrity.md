@@ -266,6 +266,24 @@ ORDER BY i.size_bytes DESC NULLS LAST;
 |I/o and cache| cache_hit_pct| >95% | 80-90| <80% | Investigate: too big? random access? ```if this is less than 90, index is not in memory, it is performance killer```|
 | | avg_blks_per_scan| <3 | 3-10| >10| index too deep or fragmented|
 | | avg_blks_read| low| medium| very high| index doing full scans|
+| Structure | is_valid | true| | false | ```reindex``` immediately|
+||is_ready| true||false| cocurrent build in progress (do async build)|
+|| has_predicate| NULL or correct| | wrong partial condition| Fix or drop|
+|| key_columns| match query patterns| | includes unused columns| rebuild|
+|Size: is it bloated?| size_pretty| <100MB|100-1G|>1G|parition or fix it |
+||size_bytes/idx_tup_fetch| <100bytes/row| 100-500| >500|```Rule: Index>1GB and idx_scan=0; drop or rebuild```|
+|Progress on Build?| build_progress_pct| - or 100%|||if stuck <100% or for >10 min; check ```pg_stat_activity```|
+||vac_index_progress_pct|- or 100%|||if stuck; ```vacuum (verbose)``` the table|
+|```Contention```|waiting_locks|0||>0|check waiting_pids|
+|| waiting_pids|{}||{value, value}|```select pg_cancel_backend(pid) or kill``` |
+
+---
+#### Lets monitor a table completely:
+```sql
+
+
+```
+
 
 ### Advanced physical level monitoring
 * ```get_raw_page(<table>,<blockid>)```: Gives the actual page information in the table in physical level
