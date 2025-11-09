@@ -280,7 +280,61 @@ ORDER BY i.size_bytes DESC NULLS LAST;
 ---
 #### Lets monitor a table completely:
 ```sql
+select * from pg_class where relname ~ 'customer';
+select * from pg_namespace;
 
+
+
+select pg_get_indexdef(i.indexrelid) from pg_index i
+join pg_class c on i.indexrelid = c.oid
+where c.relname ~ 'customer'
+;
+CREATE INDEX idx_public_customer ON public.customer USING btree (c_id);
+--- get the oid
+select relfilenode from pg_class where relname = 'idx_public_customer';
+
+-- file block count
+select pg_relation_size('idx_public_customer')/current_setting('block_size')::int as blocks;
+
+-- Inspect root_page, magic, level, fastroot
+select * from bt_metap('idx_public_customer');
+-- how many pages in the index
+select relpages from pg_class where relname='idx_public_customer';
+
+
+select * from bt_page_items('idx_public_customer', 1);
+-- compare the index and table:
+SELECT *
+FROM customer t
+LEFT JOIN bt_page_items('idx_public_customer', 1) i
+ON t.ctid = i.ctid
+WHERE i.ctid IS NULL;
+
+--- Get the total number of index pages;
+SELECT pg_relation_size('idx_public_customer') / current_setting('block_size')::int AS num_pages;
+-- 252
+WITH all_index_ctids AS (
+  SELECT (bt_page_items('idx_public_customer', blk)).ctid
+  FROM generate_series(1, 251) AS blk
+)
+SELECT t.ctid AS table_ctid
+FROM customer t
+LEFT JOIN all_index_ctids i ON t.ctid = i.ctid
+WHERE i.ctid IS NULL;
+
+
+EXPLAIN (ANALYZE, BUFFERS)
+select * from customer where c_id=2154;
+
+EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
+SELECT * FROM customer WHERE c_id = 2154;
+
+--
+\! postgres@a003b3ca26d4:/usr/lib/postgresql/18/bin$ ./pg_amcheck --heap -d tpcc -v --jobs=2
+-- Run it in offpeak hours or in replica
+
+-- Pg_verify checksums requires cluster to be down:
+Offline: pg_checksums --check on the cluster data directory
 
 ```
 
@@ -288,3 +342,15 @@ ORDER BY i.size_bytes DESC NULLS LAST;
 ### Advanced physical level monitoring
 * ```get_raw_page(<table>,<blockid>)```: Gives the actual page information in the table in physical level
 * ```bt_page_items()```: It inspects the B-tree index pages. 
+* ```pg_amcheck```: Checks index+heap logical consitency. Read-only I/o heavy
+    * It checks B-tree indexes
+        * verify b-tree pages are correctly linked
+        * checks that all keys are in order
+        * ensures that there is no missing or corrupted index pages
+    * Optional heap check (```--scan, --heap```)
+        * checks that table heap pages are consitent
+        * verify the index entries point to valid tuples in the heap
+    * Cross-checks indexes and heap
+        * detects tuples that exist in the heap but are missing from the index
+    * reports corrpution
+* ```pg_verify_checksums```: Requires database to be offline.
