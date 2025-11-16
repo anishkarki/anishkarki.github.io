@@ -1,6 +1,27 @@
 [
   {
     "id": 1,
+    "title": "OpenStack Management: Complete Setup, Infrastructure as Code, and Essential Commands",
+    "excerpt": "Master OpenStack management from authentication to infrastructure provisioning. Learn how to use Terraform for Infrastructure as Code, configure networking, manage VMs, and essential OpenStack CLI commands for production environments.",
+    "content": "OpenStack is a powerful open-source cloud computing platform that provides Infrastructure as a Service (IaaS). This comprehensive guide covers everything from initial setup and authentication to deploying production infrastructure using Terraform, and essential commands needed to operate it effectively.",
+    "category": "cloud-infrastructure",
+    "tags": [
+      "OpenStack",
+      "Infrastructure as Code",
+      "Terraform",
+      "Cloud Management",
+      "DevOps",
+      "Networking",
+      "IaaS"
+    ],
+    "date": "2025-11-16T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "16 min read",
+    "file": "Posts/OpenStack_Management.md"
+  },
+  {
+    "id": 2,
     "title": "Optimizing SQL Server Performance: Advanced Indexing Strategies",
     "excerpt": "Dive deep into advanced indexing techniques that can dramatically improve your SQL Server performance. Learn about covering indexes, filtered indexes, and when to use them effectively in high-transaction environments.",
     "content": "In this comprehensive guide, we'll explore advanced indexing strategies that can significantly boost your SQL Server performance. From understanding index internals to implementing covering indexes and filtered indexes, this article covers everything you need to know to optimize your database queries for enterprise-scale applications.",
@@ -19,7 +40,7 @@
     "file": "Posts/SQL_Server_Perfromance.md"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Azure SQL Database Migration: Best Practices and Common Pitfalls",
     "excerpt": "A comprehensive guide to migrating your on-premises SQL Server databases to Azure SQL Database, including migration strategies, common challenges, and how to overcome them effectively.",
     "content": "Migrating to Azure SQL Database can be complex and challenging. This article provides a step-by-step approach to ensure a smooth migration process, covering assessment tools, migration strategies, performance optimization, and post-migration best practices for enterprise environments.",
@@ -38,7 +59,7 @@
     "file": "Posts/azure-sql-migration-guide.md"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Automating Database Backup Verification with Python",
     "excerpt": "Learn how to build a robust Python script to automatically verify your database backups and ensure data integrity across your enterprise environment with real-world examples.",
     "content": "Database backup verification is crucial for any enterprise environment. This tutorial shows you how to create a comprehensive Python-based automation system that can verify backups across multiple servers, providing detailed reports, alerts, and ensuring your disaster recovery strategy is bulletproof.",
@@ -57,7 +78,7 @@
     "file": "Posts/python-backup-verification.md"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "High Availability Setup: SQL Server AlwaysOn Availability Groups",
     "excerpt": "Master the setup and configuration of SQL Server AlwaysOn Availability Groups for enterprise-level high availability and disaster recovery. Complete with troubleshooting tips.",
     "content": "AlwaysOn Availability Groups provide enterprise-grade high availability and disaster recovery capabilities for SQL Server. This detailed guide walks through the complete setup process, from prerequisites and network configuration to testing failover scenarios and ongoing maintenance.",
@@ -76,7 +97,7 @@
     "file": "Posts/sql-server-alwayson-setup.md"
   },
   {
-    "id": 5,
+    "id": 6,
     "title": "Power BI Dashboard Design: From Raw Data to Business Insights",
     "excerpt": "Transform raw data into compelling visualizations with advanced Power BI techniques. Learn dashboard design principles that drive business decisions and user adoption.",
     "content": "Creating effective Power BI dashboards requires more than just connecting to data sources. This comprehensive article covers design principles, DAX optimization techniques, performance considerations, and user experience best practices for building dashboards that truly inform and inspire business action.",
@@ -95,7 +116,7 @@
     "file": "Posts/power-bi-dashboard-design.md"
   },
   {
-    "id": 6,
+    "id": 7,
     "title": "Database Security Best Practices in the Cloud Era",
     "excerpt": "Essential security measures for protecting your databases in cloud environments, including encryption strategies, access controls, and continuous monitoring approaches.",
     "content": "Cloud database security requires a comprehensive, multi-layered approach. This guide covers encryption at rest and in transit, identity and access management, network security, threat detection, and continuous monitoring strategies specifically designed for cloud database environments.",
@@ -114,7 +135,7 @@
     "file": "Posts/cloud-database-security.md"
   },
   {
-    "id": 7,
+    "id": 9,
     "title": "Machine Learning with SQL: Predicting Database Performance Issues",
     "excerpt": "Explore how to use machine learning techniques to predict and prevent database performance issues before they impact your users. Practical examples included.",
     "content": "Learn how to implement machine learning models that can predict database performance issues before they occur. This article covers data collection strategies, feature engineering, model selection, and practical implementation using SQL Server Machine Learning Services and Python.",
@@ -133,7 +154,7 @@
     "file": "Posts/ml-database-performance.md"
   },
   {
-    "id": 8,
+    "id": 10,
     "title": "Docker Containers for Database Development: Best Practices",
     "excerpt": "Streamline your database development workflow using Docker containers. Learn how to create consistent development environments and automate testing processes.",
     "content": "Docker containers can revolutionize database development by providing consistent, reproducible environments. This guide covers containerizing SQL Server, managing data persistence, automated testing strategies, and integrating containers into your development pipeline.",
@@ -152,7 +173,7 @@
     "file": "Posts/docker-database-development.md"
   },
   {
-    "id": 9,
+    "id": 11,
     "title": "Zero-Downtime Database Deployments: Strategies and Tools",
     "excerpt": "Achieve zero-downtime database deployments using modern techniques. Learn about blue-green deployments, feature flags, and rollback strategies for mission-critical systems.",
     "content": "Zero-downtime deployments are essential for mission-critical database systems. This comprehensive guide covers blue-green deployment strategies, database versioning, feature flags, automated rollback procedures, and monitoring techniques to ensure seamless database updates without service interruption.",
@@ -171,7 +192,7 @@
     "file": "Posts/zero-downtime-deployments.md"
   },
   {
-    "id": 10,
+    "id": 12,
     "title": "Advanced T-SQL Techniques for Performance Optimization",
     "excerpt": "Master advanced T-SQL techniques that can dramatically improve query performance. From window functions to query hints, unlock the full potential of SQL Server.",
     "content": "Advanced T-SQL techniques can significantly improve query performance and code maintainability. This deep-dive article covers window functions, common table expressions, query hints, execution plan analysis, and advanced join techniques with real-world performance comparisons.",
@@ -190,7 +211,7 @@
     "file": "Posts/advanced-tsql-techniques.md"
   },
   {
-    "id": 11,
+    "id": 13,
     "title": "Building Real-time Data Pipelines with Apache Kafka and SQL Server",
     "excerpt": "Learn how to build scalable, real-time data pipelines that connect SQL Server with Apache Kafka for high-throughput data processing and analytics.",
     "content": "Real-time data processing is crucial for modern applications. This tutorial demonstrates how to build robust data pipelines using Apache Kafka with SQL Server, covering message serialization, error handling, exactly-once processing, and monitoring strategies for production environments.",
@@ -209,7 +230,7 @@
     "file": "Posts/kafka-sql-server-pipeline.md"
   },
   {
-    "id": 12,
+    "id": 14,
     "title": "Multi-Cloud Database Strategy: AWS, Azure, and Google Cloud",
     "excerpt": "Navigate the complexities of multi-cloud database deployments. Compare services, learn migration strategies, and understand when to use each cloud provider's database offerings.",
     "content": "Multi-cloud strategies are becoming increasingly important for enterprise resilience and cost optimization. This comprehensive comparison covers database services across AWS, Azure, and Google Cloud, including migration strategies, cost analysis, and architectural considerations for each platform.",
@@ -228,7 +249,7 @@
     "file": "Posts/multi-cloud-database-strategy.md"
   },
   {
-    "id": 13,
+    "id": 15,
     "title": "Unlocking European Lifestyle Insights with Microsoft Fabric Analytics",
     "excerpt": "Discover how Microsoft Fabric can be used to analyze key European lifestyle metrics including population, life satisfaction, Power BI adoption, and renewable energy share, providing actionable insights for policy and business.",
     "content": "Microsoft Fabric offers a unified analytics platform to tackle complex data challenges. This blog post demonstrates how we can use its capabilities, from data ingestion to advanced analytics, to create a comprehensive data model and Power BI reports exploring the dynamics between population, life satisfaction, and key sustainability indicators like renewable energy share across Europe.",
@@ -248,7 +269,7 @@
     "file": "Posts/European_Lifestyle_Analytics_Fabric.md"
   },
   {
-    "id": 14,
+    "id": 16,
     "title": "Wildfire & Temperature Analytics with Microsoft Fabric and Python",
     "excerpt": "Learn how Microsoft Fabric and Python can be used to analyze rising global temperatures, wildfire occurrences, and their correlations—helping researchers, policymakers, and emergency services prepare for climate-driven risks.",
     "content": "Microsoft Fabric provides a powerful, unified analytics platform to process and analyze climate and environmental datasets. This post demonstrates how Fabric can be used with Python for data ingestion, transformation, and advanced analytics. Using open climate datasets, we analyze global temperature trends, map wildfire occurrences, and explore predictive modeling to assess fire risks.\n\nWe will:\n- Ingest temperature anomaly and wildfire occurrence datasets into Fabric Lakehouse.\n- Use PySpark in Fabric Notebooks for large-scale cleaning and aggregation.\n- Apply Python libraries (pandas, scikit-learn, matplotlib) for trend analysis, time-series forecasting, and geospatial risk mapping.\n- Publish dashboards in Power BI showing correlations between temperature rise, drought severity, and wildfire frequency.\n\nThe combination of Fabric’s scalability with Python’s analytical flexibility enables powerful end-to-end climate risk intelligence workflows.",
@@ -269,7 +290,7 @@
     "file": "Posts/Temperature_Wildfire_Analytics_Fabric.md"
   },
   {
-    "id": 15,
+    "id": 17,
     "title": "Monitoring with OpenSearch: Setup and Best Practices",
     "excerpt": "Explore effective monitoring strategies using OpenSearch, an open-source search and analytics engine forked from Elasticsearch. Learn setup, configuration, and best practices for logging, metrics, and observability in modern systems.",
     "content": "OpenSearch is a powerful tool for monitoring and analyzing logs, metrics, and traces in distributed systems. This guide covers installation and cluster setup, indexing data, creating dashboards, alerting, and advanced features like anomaly detection to build a robust monitoring solution for your infrastructure and applications.",
