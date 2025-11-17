@@ -817,3 +817,403 @@ PUT /_ingest/pipeline/nlp-ingest-pipeline
 
 
 ```
+````
+
+---
+
+# PostgreSQL Error Monitoring & Alerting (Day 1: Replication Slots & SQL Errors)
+
+## Overview
+Create two monitors for production PostgreSQL error tracking:
+1. **Monitor 1**: Alert on ANY FATAL or PANIC error (1 count threshold)
+2. **Monitor 2**: Alert when 2+ ERROR logs occur within 5 minutes
+
+Both use the same webhook/email channel for notifications with customizable message templates.
+
+---
+
+## Setup: Create a Webhook Notification Channel
+
+If you already have a custom webhook (Teams, Slack, PagerDuty), register it as a config:
+
+```bash
+# Create a custom webhook channel
+curl -k -u admin:OpenSearch@2024 -X POST \
+  https://localhost:19200/_plugins/_notifications/configs \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "config": {
+      "name": "PostgreSQL Alerts Webhook",
+      "description": "Webhook for PostgreSQL critical alerts (FATAL, PANIC, ERROR)",
+      "config_type": "webhook",
+      "is_enabled": true,
+      "webhook": {
+        "url": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
+        "header_params": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+  }'
+
+# Response: {"config_id": "your_webhook_config_id"}
+# Save the config_id for use in monitors below
+```
+
+Or use an existing email channel if already configured:
+```bash
+# List all notification channels
+curl -k -u admin:OpenSearch@2024 -X GET \
+  https://localhost:19200/_plugins/_notifications/channels
+```
+
+---
+
+## DSL Filter: Extract PostgreSQL Error Levels
+
+### Test Query: Find all FATAL, PANIC, and ERROR logs
+```json
+GET /postgres*/_search
+{
+  "size": 100,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": { "@timestamp": { "gte": "now-24h" } }
+        }
+      ],
+      "should": [
+        { "match": { "_raw": "FATAL:" } },
+        { "match": { "_raw": "PANIC:" } },
+        { "match": { "_raw": "ERROR:" } }
+      ],
+      "minimum_should_match": 1
+    }
+  },
+  "_source": ["@timestamp", "_raw", "host", "pid"]
+}
+```
+
+### Aggregation: Count errors by severity and host
+```json
+GET /postgres*/_search
+{
+  "size": 0,
+  "query": {
+    "range": { "@timestamp": { "gte": "now-5m" } }
+  },
+  "aggs": {
+    "by_severity": {
+      "filters": {
+        "filters": {
+          "FATAL": { "match": { "_raw": "FATAL:" } },
+          "PANIC": { "match": { "_raw": "PANIC:" } },
+          "ERROR": { "match": { "_raw": "ERROR:" } }
+        }
+      },
+      "aggs": {
+        "by_host": {
+          "terms": { "field": "host.keyword", "size": 10 }
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## Monitor 1: Alert on ANY FATAL or PANIC Error (Count >= 1)
+
+### Create the Monitor
+```bash
+curl -k -u admin:OpenSearch@2024 -X POST \
+  https://localhost:19200/_plugins/_alerting/monitors \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "type": "monitor",
+    "name": "Postgres FATAL/PANIC Alert",
+    "monitor_type": "query_level_monitor",
+    "enabled": true,
+    "schedule": {
+      "period": {
+        "interval": 1,
+        "unit": "MINUTES"
+      }
+    },
+    "inputs": [{
+      "search": {
+        "indices": ["postgres*"],
+        "query": {
+          "size": 0,
+          "query": {
+            "bool": {
+              "must": [
+                { "range": { "@timestamp": { "gte": "now-1m" } } }
+              ],
+              "should": [
+                { "match": { "_raw": "FATAL:" } },
+                { "match": { "_raw": "PANIC:" } }
+              ],
+              "minimum_should_match": 1
+            }
+          },
+          "aggs": {
+            "critical_count": {
+              "value_count": { "field": "_id" }
+            },
+            "sample_logs": {
+              "top_hits": {
+                "size": 3,
+                "_source": ["@timestamp", "_raw", "host", "pid"],
+                "sort": [{ "@timestamp": { "order": "desc" } }]
+              }
+            }
+          }
+        }
+      }
+    }],
+    "triggers": [{
+      "name": "FATAL/PANIC Error Detected",
+      "severity": "1",
+      "condition": {
+        "script": {
+          "source": "ctx.results[0].aggregations.critical_count.value >= 1",
+          "lang": "painless"
+        }
+      },
+      "actions": [{
+        "name": "Send to Webhook",
+        "destination_id": "YOUR_WEBHOOK_CONFIG_ID",
+        "subject_template": {
+          "source": "🚨 CRITICAL: PostgreSQL FATAL/PANIC Error Detected"
+        },
+        "message_template": {
+          "source": "**Alert:** {{ctx.monitor.name}}\n\n**Severity:** CRITICAL\n\n**Count (last 1 min):** {{ctx.results[0].aggregations.critical_count.value}}\n\n**Sample Logs:**\n{{#ctx.results[0].aggregations.sample_logs.hits.hits}}\n- [{{_source.@timestamp}}] {{_source._raw}}\n{{/ctx.results[0].aggregations.sample_logs.hits.hits}}\n\n**Time Triggered:** {{ctx.trigger.triggered_time}}\n\n**Action:** Investigate immediately. FATAL/PANIC errors indicate critical system failures."
+        }
+      }]
+    }]
+  }'
+```
+
+---
+
+## Monitor 2: Alert on 2+ ERROR Logs Within 5 Minutes
+
+### Create the Monitor
+```bash
+curl -k -u admin:OpenSearch@2024 -X POST \
+  https://localhost:19200/_plugins/_alerting/monitors \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "type": "monitor",
+    "name": "Postgres High ERROR Count (5 min)",
+    "monitor_type": "query_level_monitor",
+    "enabled": true,
+    "schedule": {
+      "period": {
+        "interval": 5,
+        "unit": "MINUTES"
+      }
+    },
+    "inputs": [{
+      "search": {
+        "indices": ["postgres*"],
+        "query": {
+          "size": 0,
+          "query": {
+            "bool": {
+              "must": [
+                { "match": { "_raw": "ERROR:" } },
+                { "range": { "@timestamp": { "gte": "now-5m" } } }
+              ]
+            }
+          },
+          "aggs": {
+            "error_count": {
+              "value_count": { "field": "_id" }
+            },
+            "by_host": {
+              "terms": { "field": "host.keyword", "size": 5 },
+              "aggs": {
+                "top_errors": {
+                  "top_hits": {
+                    "size": 2,
+                    "_source": ["@timestamp", "_raw", "pid"],
+                    "sort": [{ "@timestamp": { "order": "desc" } }]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }],
+    "triggers": [{
+      "name": "High ERROR Count in 5 Minutes",
+      "severity": "2",
+      "condition": {
+        "script": {
+          "source": "ctx.results[0].aggregations.error_count.value >= 2",
+          "lang": "painless"
+        }
+      },
+      "actions": [{
+        "name": "Send to Webhook",
+        "destination_id": "YOUR_WEBHOOK_CONFIG_ID",
+        "subject_template": {
+          "source": "⚠️ WARNING: PostgreSQL ERROR Count Threshold Exceeded"
+        },
+        "message_template": {
+          "source": "**Alert:** {{ctx.monitor.name}}\n\n**Severity:** WARNING (2+ errors in 5 min)\n\n**Total ERROR Count:** {{ctx.results[0].aggregations.error_count.value}}\n\n**Errors by Host:**\n{{#ctx.results[0].aggregations.by_host.buckets}}\n- **Host:** {{key}} (Count: {{doc_count}})\n  {{#top_errors.hits.hits}}\n  • [{{_source.@timestamp}}] {{_source._raw}}\n  {{/top_errors.hits.hits}}\n{{/ctx.results[0].aggregations.by_host.buckets}}\n\n**Time Triggered:** {{ctx.trigger.triggered_time}}\n\n**Action:** Review error logs and identify patterns. Common causes: missing tables, constraint violations, permission issues."
+        }
+      }]
+    }]
+  }'
+```
+
+---
+
+## Webhook Message Template Examples
+
+### For Slack Webhook (JSON format)
+If using Slack, format the message as JSON:
+
+```json
+{
+  "text": "PostgreSQL Alert",
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "🚨 PostgreSQL FATAL Error"
+      }
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Severity:*\nCRITICAL"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Count:*\n{{ctx.results[0].aggregations.critical_count.value}}"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "{{ctx.monitor.name}} triggered at {{ctx.trigger.triggered_time}}"
+      }
+    }
+  ]
+}
+```
+
+### For Microsoft Teams Webhook (JSON format)
+```json
+{
+  "@type": "MessageCard",
+  "@context": "https://schema.org/extensions",
+  "summary": "PostgreSQL Alert",
+  "themeColor": "cc0000",
+  "title": "🚨 PostgreSQL FATAL/PANIC Error",
+  "sections": [
+    {
+      "activityTitle": "Monitor: {{ctx.monitor.name}}",
+      "facts": [
+        {
+          "name": "Severity:",
+          "value": "CRITICAL"
+        },
+        {
+          "name": "Count:",
+          "value": "{{ctx.results[0].aggregations.critical_count.value}}"
+        },
+        {
+          "name": "Time:",
+          "value": "{{ctx.trigger.triggered_time}}"
+        }
+      ]
+    }
+  ],
+  "potentialAction": [
+    {
+      "@type": "OpenUri",
+      "name": "View Logs in OpenSearch",
+      "targets": [
+        {
+          "os": "default",
+          "uri": "https://localhost:5601/app/discover"
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## List, Update, Delete Monitors
+
+### List all monitors
+```bash
+curl -k -u admin:OpenSearch@2024 -X POST \
+  https://localhost:19200/_plugins/_alerting/monitors/_search \
+  -H 'Content-Type: application/json' \
+  -d '{"query": {"match_all": {}}}' | jq
+```
+
+### Get a specific monitor by ID
+```bash
+curl -k -u admin:OpenSearch@2024 -X GET \
+  https://localhost:19200/_plugins/_alerting/monitors/MONITOR_ID
+```
+
+### Update a monitor
+```bash
+curl -k -u admin:OpenSearch@2024 -X PUT \
+  https://localhost:19200/_plugins/_alerting/monitors/MONITOR_ID \
+  -H 'Content-Type: application/json' \
+  -d '{...updated monitor JSON...}'
+```
+
+### Delete a monitor
+```bash
+curl -k -u admin:OpenSearch@2024 -X DELETE \
+  https://localhost:19200/_plugins/_alerting/monitors/MONITOR_ID
+```
+
+### Test a monitor (trigger manually)
+```bash
+curl -k -u admin:OpenSearch@2024 -X POST \
+  https://localhost:19200/_plugins/_alerting/monitors/MONITOR_ID/_execute
+```
+
+---
+
+## Key Points
+
+- **Monitor 1 (FATAL/PANIC)**: Runs every 1 minute, triggers on ANY occurrence (threshold >= 1)
+- **Monitor 2 (ERROR)**: Runs every 5 minutes, triggers when count >= 2 in that window
+- **Webhook**: Already created; just add the `config_id` to `destination_id` in monitor actions
+- **Message Template**: Uses Mustache syntax (`{{...}}`) to embed dynamic monitor data
+- **Aggregations**: Include `top_hits` to show sample logs in alert message for quick diagnosis
+
+---
+
+## Customization
+
+Replace `YOUR_WEBHOOK_CONFIG_ID` with the actual config ID from your webhook setup. You can:
+- Adjust thresholds (change `>= 1` or `>= 2`)
+- Modify schedule interval (1m, 5m, 15m, 1h, etc.)
+- Add additional filters (by `host`, `database`, `user`, etc.)
+- Change message templates per your team's notification needs
+
+
+```
