@@ -832,9 +832,30 @@ Both use the same webhook/email channel for notifications with customizable mess
 
 ---
 
+## Using Existing Webhook Channels (Quick Start)
+
+If you already have a webhook channel created, just get its `config_id`:
+
+```bash
+# List all webhook channels
+curl -k -u admin:OpenSearch@2024 -X GET \
+  https://localhost:19200/_plugins/_notifications/channels | jq '.channel_list[] | {config_id, name, channel_type}'
+
+# Output example:
+# {
+#   "config_id": "webhook_12345",
+#   "name": "PostgreSQL Alerts Webhook",
+#   "channel_type": "webhook"
+# }
+```
+
+Then use that `config_id` in the `destination_id` field of monitor actions (see examples below).
+
+---
+
 ## Setup: Create a Webhook Notification Channel
 
-If you already have a custom webhook (Teams, Slack, PagerDuty), register it as a config:
+If you need to create a new custom webhook (Teams, Slack, PagerDuty), register it as a config:
 
 ```bash
 # Create a custom webhook channel
@@ -1156,6 +1177,68 @@ If using Slack, format the message as JSON:
   ]
 }
 ```
+
+---
+
+## Add Actions to Existing Monitors (Template Only)
+
+If you want to add webhook actions to monitors you've already created:
+
+### Update a Monitor to Add Webhook Action
+
+```bash
+# Get the monitor first to see its full JSON
+curl -k -u admin:OpenSearch@2024 -X GET \
+  https://localhost:19200/_plugins/_alerting/monitors/MONITOR_ID | jq > monitor.json
+
+# Edit monitor.json and add to the "triggers[0].actions" array:
+{
+  "name": "Send to Webhook",
+  "destination_id": "your_webhook_config_id",
+  "subject_template": {
+    "source": "PostgreSQL Alert"
+  },
+  "message_template": {
+    "source": "Count: {{ctx.results[0].aggregations.critical_count.value}}"
+  }
+}
+
+# Then update the monitor:
+curl -k -u admin:OpenSearch@2024 -X PUT \
+  https://localhost:19200/_plugins/_alerting/monitors/MONITOR_ID \
+  -H 'Content-Type: application/json' \
+  -d @monitor.json
+```
+
+### Simple Message Template Examples
+
+**Minimal (one-liner):**
+```json
+"message_template": {
+  "source": "Alert triggered: {{ctx.monitor.name}} at {{ctx.trigger.triggered_time}}"
+}
+```
+
+**With error count:**
+```json
+"message_template": {
+  "source": "🚨 {{ctx.monitor.name}}\nCount: {{ctx.results[0].aggregations.critical_count.value}}\nTime: {{ctx.trigger.triggered_time}}"
+}
+```
+
+**With sample logs:**
+```json
+"message_template": {
+  "source": "**Alert:** {{ctx.monitor.name}}\n\n**Count:** {{ctx.results[0].aggregations.critical_count.value}}\n\n**Samples:**\n{{#ctx.results[0].aggregations.sample_logs.hits.hits}}\n- [{{_source.@timestamp}}] {{_source._raw}}\n{{/ctx.results[0].aggregations.sample_logs.hits.hits}}"
+}
+```
+
+**Key context variables available:**
+- `{{ctx.monitor.name}}` - Monitor name
+- `{{ctx.trigger.triggered_time}}` - When alert triggered
+- `{{ctx.results[0].aggregations.COUNT_AGG_NAME.value}}` - Any aggregation result
+- `{{ctx.results[0].hits.hits}}` - Top documents from search
+- `{{#ARRAY}}...{{/ARRAY}}` - Loop through array items
 
 ---
 
