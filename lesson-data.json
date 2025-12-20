@@ -416,5 +416,48 @@
       "file": "12-future-proofing.md"
     }
   ]
+  },
+  "openstack_terraform": {
+    "title": "OpenStack Terraform Lab",
+    "description": "Four-day OpenStack networking and compute automation sprint with Terraform, packed with real CLI output and plan files.",
+    "difficulty": "beginner",
+    "icon": "fas fa-cloud",
+    "iconColor": "#13B5EC",
+    "topics": [
+      "OpenStack Networking",
+      "Terraform Modules",
+      "Floating IPs",
+      "State Management"
+    ],
+    "chapters": [
+      {
+        "number": 1,
+        "title": "Day 1 – Network Fundamentals",
+        "description": "Inspect networks, decode CIDRs, and practice floating IP allocation.",
+        "duration": "45 min",
+        "file": "01-day-1-network-fundamentals.md"
+      },
+      {
+        "number": 2,
+        "title": "Day 2 – Compute Adventures",
+        "description": "Wire cluster config, data sources, and security groups before launching VMs.",
+        "duration": "50 min",
+        "file": "02-day-2-compute-adventures.md"
+      },
+      {
+        "number": 3,
+        "title": "Day 3 – Terraform Mastery",
+        "description": "Pin providers, manage state, and rehearse multi-cloud workflows.",
+        "duration": "45 min",
+        "file": "03-day-3-terraform-mastery.md"
+      },
+      {
+        "number": 4,
+        "title": "Day 4 – Keep It Running",
+        "description": "Read plans like a detective, lock state, and destroy labs responsibly.",
+        "duration": "40 min",
+        "file": "04-day-4-keep-it-running.md"
+      }
+    ]
   }
 }
