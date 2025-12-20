@@ -13,7 +13,7 @@ mkdir -p ansible_collections/my_namespace/postgresql_monitor
 cd ansible_collections/my_namespace/postgresql_monitor
 ```
 
-### Everything good starts with a beautiful docs (Go ask Linus Trevalod)
+### Everything good starts with a beautiful docs (Go ask Linus Benedict Torvalds)
 ```sh
 mkdir docs
 touch galaxy.yml README.md CHANGELOG.md docs/README.md
