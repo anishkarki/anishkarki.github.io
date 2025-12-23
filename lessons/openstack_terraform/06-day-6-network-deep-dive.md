@@ -122,7 +122,12 @@ A `/28` gives 16 total addresses, but only 12 are usable.
 ```
 
 These ranges are defined by RFC 1918. Routers on the public internet drop traffic from these ranges, making them safe to reuse behind NAT.
+* Those three blocks are the IPv4 “private use” ranges defined by RFC 1918. The IETF carved out non-routable space so anyone can build internal networks without conflicting with public IPs. The sizes were chosen to provide small, medium, and large private address pools:
 
+  * 10.0.0.0/8 — biggest block (16 M addresses) for large deployments.
+  * 172.16.0.0/12 — medium block (1 M addresses).
+  * 192.168.0.0/16 — smaller block (65 K addresses).
+* Routers on the public internet drop traffic from these ranges, so they’re safe for reuse behind NAT or within isolated clouds like OpenStack. RFC 1918 doesn’t define other private ranges; anything outside these blocks is assumed public and must be globally unique.
 ---
 
 ### OpenStack Network Components

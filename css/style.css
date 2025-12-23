@@ -1,51 +1,68 @@
+/* =====================================================
+   ANISH KARKI - PROFESSIONAL PORTFOLIO
+   Modern, Clean Design System
+   ===================================================== */
+
 :root {
-  /* Professional, accessible color palette */
-  --quantum-blue: black;
-  --plasma-purple: #2A3B5D;
-  --neutron-cyan: White;
-  --photon-green: #2C5E7A;
-  --electron-violet: #5A6A8A;
-  --proton-orange: #8A6A4A;
-  --stellar-white: #F8FAFC;
-  --cosmic-gray: White;
-  --nebula-pink: #8A6A7A;
+  /* Color Palette - Professional & Cohesive */
+  --primary-bg: #0f172a;
+  --secondary-bg: #1e293b;
+  --card-bg: #1e293b;
+  --card-bg-hover: #334155;
   
-  /* Subdued gradients */
-  --quantum-gradient: linear-gradient(135deg, var(--quantum-blue) 0%, var(--plasma-purple) 50%, #2A2F4D 100%);
-  --plasma-gradient: linear-gradient(45deg, var(--nebula-pink), var(--photon-green));
-  --stellar-gradient: radial-gradient(circle at center, rgba(58, 110, 165, 0.05) 0%, transparent 70%);
+  /* Accent Colors */
+  --accent-primary: #3b82f6;
+  --accent-secondary: #60a5fa;
+  --accent-tertiary: #93c5fd;
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+  --accent-glow: rgba(59, 130, 246, 0.3);
   
-  /* Base colours */
-  --primary-color: var(--quantum-blue);
-  --primary-color-rgb: 26, 43, 77;
-  --secondary-color: var(--neutron-cyan);
-  --accent-color: var(--electron-violet);
-  --text-light: var(--stellar-white);
-  --text-altdark: var(--cosmic-gray);
-  --text-dark: #1f2937;
+  /* Text Colors */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-accent: #60a5fa;
+  
+  /* Border & Shadow */
+  --border-color: rgba(59, 130, 246, 0.15);
+  --border-hover: rgba(59, 130, 246, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
   
   /* Typography */
-  --font-primary: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   
-  /* Physics constants */
-  --golden-ratio: 1.618;
-  --pi: 3.14159;
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
   
-  /* Responsive Font Sizes */
-  --base-font-size: 0.92rem; /* Reduced from 1rem */
-  --base-line-height: 1.45; /* Reduced from 1.6 for tighter text */
-  --base-spacing: 0.75rem; /* Reduced from 1rem for less whitespace */
-  --container-max-width: 1100px; /* Slightly narrower container */
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 50px;
   
   /* Transitions */
-  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Container */
+  --container-max: 1200px;
 }
 
-
-/* Global Styles */
+/* =====================================================
+   RESET & BASE STYLES
+   ===================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -53,42 +70,40 @@
 }
 
 html {
-  font-size: 95%;
-  line-height: var(--base-line-height);
+  font-size: 16px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--neutron-cyan) var(--quantum-blue);
+  scrollbar-color: var(--accent-primary) var(--primary-bg);
 }
 
-/* Custom Scrollbar for Webkit */
-::-webkit-scrollbar { 
-  width: 8px; 
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-::-webkit-scrollbar-track { 
-  background: var(--quantum-blue); 
+::-webkit-scrollbar-track {
+  background: var(--primary-bg);
 }
 
-::-webkit-scrollbar-thumb { 
-  background: var(--plasma-gradient);
-  border-radius: 4px;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover { 
-  background: var(--neutron-cyan); 
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
 }
 
 body {
   font-family: var(--font-primary);
-  background: var(--quantum-gradient);
-  color: var(--stellar-white);
-  overflow-x: hidden;
-  position: relative;
+  background: var(--primary-bg);
+  color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Background */
+/* Subtle Background Pattern */
 body::before {
   content: '';
   position: fixed;
@@ -97,70 +112,38 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(58, 110, 165, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(90, 106, 138, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(44, 94, 122, 0.03) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(96, 165, 250, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
   pointer-events: none;
-  z-index: -2;
+  z-index: -1;
 }
 
-/* Scroll Progress Indicator */
+/* =====================================================
+   SCROLL PROGRESS INDICATOR
+   ===================================================== */
 .scroll-indicator {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 3px;
-  background: rgba(58, 110, 165, 0.1);
-  z-index: 9999;
+  background: rgba(59, 130, 246, 0.1);
+  z-index: 10000;
 }
 
 .scroll-progress {
   height: 100%;
-  background: var(--plasma-gradient);
+  background: var(--accent-gradient);
   width: 0%;
-  transition: width 0.1s ease;
+  transition: width 100ms ease-out;
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
-/* Particle System - Reduced intensity */
-.particle-system {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.quantum-particle {
-  position: absolute;
-  background: var(--neutron-cyan);
-  border-radius: 50%;
-  animation: quantumFloat 20s ease-in-out infinite;
-  opacity: 0.15 !important;
-}
-
-@keyframes quantumFloat {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.1;
-  }
-  25% { 
-    transform: translate3d(30px, -50px, 0) scale(1.2);
-    opacity: 0.2;
-  }
-  50% { 
-    transform: translate3d(-20px, -30px, 0) scale(0.8);
-    opacity: 0.15;
-  }
-  75% { 
-    transform: translate3d(-40px, -70px, 0) scale(1.1);
-    opacity: 0.18;
-  }
-}
-
-/* Neural Network Background - Reduced opacity */
+/* =====================================================
+   PARTICLE & NEURAL NETWORK BACKGROUNDS
+   ===================================================== */
+.particle-system,
 .neural-network {
   position: fixed;
   top: 0;
@@ -169,104 +152,126 @@ body::before {
   height: 100%;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.05;
+  opacity: 0.4;
+}
+
+.quantum-particle {
+  position: absolute;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: floatParticle 25s ease-in-out infinite;
+  opacity: 0.2;
+}
+
+@keyframes floatParticle {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+  25% { transform: translate(20px, -40px) scale(1.1); opacity: 0.25; }
+  50% { transform: translate(-15px, -20px) scale(0.9); opacity: 0.2; }
+  75% { transform: translate(-30px, -60px) scale(1.05); opacity: 0.22; }
 }
 
 .neuron {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: var(--neutron-cyan);
+  width: 3px;
+  height: 3px;
+  background: var(--accent-secondary);
   border-radius: 50%;
-  animation: neuronPulse 3s ease-in-out infinite;
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .synapse {
   position: absolute;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neutron-cyan), transparent);
-  animation: synapseFlow 2s linear infinite;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  animation: flow 2s linear infinite;
 }
 
-@keyframes neuronPulse {
-  0%, 100% { 
-    transform: scale(1);
-    box-shadow: 0 0 5px rgba(58, 110, 165, 0.3);
-  }
-  50% { 
-    transform: scale(1.5);
-    box-shadow: 0 0 10px rgba(58, 110, 165, 0.4);
-  }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.4); opacity: 0.5; }
 }
 
-@keyframes synapseFlow {
+@keyframes flow {
   0% { opacity: 0; transform: scaleX(0); }
-  50% { opacity: 0.3; transform: scaleX(1); }
+  50% { opacity: 0.4; transform: scaleX(1); }
   100% { opacity: 0; transform: scaleX(0); }
 }
 
-/* Enhanced Navbar */
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
 .navbar {
-  background: rgba(26, 43, 77, 0.95) !important;
+  background: rgba(15, 23, 42, 0.95) !important;
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(58, 110, 165, 0.1);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-md) 0;
   transition: var(--transition-normal);
-  padding: 1rem 0;
 }
 
 .navbar-scrolled {
-  background: rgba(26, 43, 77, 0.98) !important;
-  box-shadow: 0 4px 20px rgba(58, 110, 165, 0.05);
+  background: rgba(15, 23, 42, 0.98) !important;
+  box-shadow: var(--shadow-md);
+  border-bottom-color: var(--border-hover);
 }
 
 .navbar-brand {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.5rem;
-  color: var(--neutron-cyan);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
 .nav-link {
-  color: var(--stellar-white) !important;
+  color: var(--text-secondary) !important;
   font-weight: 500;
+  font-size: 0.95rem;
+  padding: var(--space-sm) var(--space-md) !important;
   position: relative;
   transition: var(--transition-normal);
-  padding: 0.8rem 1.2rem !important;
   text-decoration: none;
 }
 
-.nav-link::before {
+.nav-link::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0;
   height: 2px;
-  background: var(--neutron-cyan);
+  background: var(--accent-gradient);
   transition: var(--transition-normal);
   transform: translateX(-50%);
+  border-radius: 2px;
 }
 
-.nav-link:hover::before,
-.nav-link.active::before {
-  width: 80%;
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary) !important;
 }
 
-.nav-link:hover {
-  color: var(--neutron-cyan) !important;
-  transform: translateY(-2px);
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 70%;
 }
 
 .navbar-toggler {
-  border: 1px solid rgba(58, 110, 165, 0.2);
-  color: var(--neutron-cyan);
+  border: 1px solid var(--border-color);
+  color: var(--text-accent);
+  padding: var(--space-sm);
 }
 
 .navbar-toggler:focus {
-  box-shadow: 0 0 0 0.2rem rgba(58, 110, 165, 0.1);
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-/* Hero Section */
+/* =====================================================
+   HERO SECTION
+   ===================================================== */
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -277,33 +282,47 @@ body::before {
 }
 
 .hero-greeting {
-  color: var(--neutron-cyan);
-  font-weight: 500;
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 1rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  margin-bottom: var(--space-md);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.hero-greeting::before {
+  content: '';
+  width: 40px;
+  height: 2px;
+  background: var(--accent-gradient);
+  border-radius: 2px;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 800;
-  color: var(--stellar-white);
-  margin-bottom: 1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
   line-height: 1.1;
+  letter-spacing: -2px;
 }
 
 .hero-subtitle {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  color: var(--cosmic-gray);
-  margin-bottom: 2rem;
-  font-weight: 300;
-  min-height: 3rem;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+  font-weight: 400;
+  min-height: 2.5rem;
 }
 
 .typing-effect {
-  border-right: 3px solid var(--neutron-cyan);
-  animation: blink 1s infinite;
+  color: var(--text-accent);
+  border-right: 3px solid var(--accent-primary);
+  padding-right: 4px;
+  animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
@@ -311,66 +330,67 @@ body::before {
 }
 
 .hero-description {
-  color: var(--cosmic-gray);
+  color: var(--text-secondary);
   line-height: 1.8;
   max-width: 600px;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
   font-size: 1.1rem;
 }
 
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
 }
 
 .social-links {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--space-lg);
 }
 
 .social-link {
-  color: var(--neutron-cyan);
+  color: var(--text-secondary);
   font-size: 1.5rem;
   transition: var(--transition-normal);
   text-decoration: none;
 }
 
 .social-link:hover {
-  color: var(--neutron-cyan);
-  transform: translateY(-3px) scale(1.1);
+  color: var(--accent-primary);
+  transform: translateY(-3px);
 }
 
-/* DNA Helix - Reduced opacity */
+/* DNA Helix Decoration */
 .dna-helix {
   position: absolute;
-  right: -200px;
+  right: -150px;
   top: 20%;
-  width: 400px;
-  height: 600px;
-  opacity: 0.1;
+  width: 300px;
+  height: 500px;
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 .dna-strand {
   position: absolute;
   width: 100%;
   height: 100%;
-  animation: dnaRotation 20s linear infinite;
+  animation: rotate 30s linear infinite;
 }
 
 .dna-base {
   position: absolute;
-  width: 8px;
-  height: 8px;
-  background: var(--neutron-cyan);
+  width: 6px;
+  height: 6px;
+  background: var(--accent-primary);
   border-radius: 50%;
-  box-shadow: 0 0 5px rgba(58, 110, 165, 0.3);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
-@keyframes dnaRotation {
-  0% { transform: rotateY(0deg) rotateX(0deg); }
-  100% { transform: rotateY(360deg) rotateX(360deg); }
+@keyframes rotate {
+  from { transform: rotateY(0deg) rotateX(0deg); }
+  to { transform: rotateY(360deg) rotateX(360deg); }
 }
 
 /* Scroll Down Indicator */
@@ -379,50 +399,57 @@ body::before {
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  animation: bounce 2s infinite;
-  z-index: 3;
+  animation: bounce 2s ease-in-out infinite;
+  z-index: 5;
 }
 
 .scroll-link {
-  color: var(--neutron-cyan);
-  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
   text-decoration: none;
   transition: var(--transition-normal);
 }
 
+.scroll-link i {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+}
+
 .scroll-link:hover {
-  color: var(--neutron-cyan);
+  color: var(--accent-primary);
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { 
-    transform: translateY(0) translateX(-50%); 
-  }
-  40% { 
-    transform: translateY(-10px) translateX(-50%); 
-  }
-  60% { 
-    transform: translateY(-5px) translateX(-50%); 
-  }
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
 }
 
-/* Quantum Buttons */
+/* =====================================================
+   BUTTONS
+   ===================================================== */
 .quantum-btn {
-  background: linear-gradient(45deg, var(--neutron-cyan), var(--photon-green));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  background: var(--accent-gradient);
   border: none;
-  color: var(--quantum-blue);
+  color: white;
   font-weight: 600;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: var(--transition-normal);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
+  letter-spacing: 0.5px;
 }
 
 .quantum-btn::before {
@@ -432,30 +459,30 @@ body::before {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s ease;
+}
+
+.quantum-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px var(--accent-glow);
+  color: white;
+  text-decoration: none;
 }
 
 .quantum-btn:hover::before {
   left: 100%;
 }
 
-.quantum-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 5px 15px rgba(58, 110, 165, 0.2);
-  color: var(--quantum-blue);
-  text-decoration: none;
-}
-
 .quantum-btn-outline {
   background: transparent;
-  border: 2px solid var(--neutron-cyan);
-  color: var(--neutron-cyan);
+  border: 2px solid var(--accent-primary);
+  color: var(--accent-primary);
 }
 
 .quantum-btn-outline:hover {
-  background: var(--neutron-cyan);
-  color: var(--quantum-blue);
+  background: var(--accent-primary);
+  color: white;
 }
 
 /* Section Styling */
