@@ -419,15 +419,17 @@
   },
   "openstack_terraform": {
     "title": "OpenStack Terraform Lab",
-    "description": "Four-day OpenStack networking and compute automation sprint with Terraform, packed with real CLI output and plan files.",
-    "difficulty": "beginner",
+    "description": "Six-day OpenStack networking and compute automation sprint with Terraform, featuring real CLI output, modular architecture, and deep-dive networking concepts.",
+    "difficulty": "intermediate",
     "icon": "fas fa-cloud",
     "iconColor": "#13B5EC",
     "topics": [
       "OpenStack Networking",
       "Terraform Modules",
       "Floating IPs",
-      "State Management"
+      "State Management",
+      "Variables & Outputs",
+      "Security Groups"
     ],
     "chapters": [
       {
@@ -457,6 +459,20 @@
         "description": "Read plans like a detective, lock state, and destroy labs responsibly.",
         "duration": "40 min",
         "file": "04-day-4-keep-it-running.md"
+      },
+      {
+        "number": 5,
+        "title": "Day 5 – Variables & Modules",
+        "description": "Master input variables, outputs, and reusable Terraform modules.",
+        "duration": "55 min",
+        "file": "05-day-5-variables-modules.md"
+      },
+      {
+        "number": 6,
+        "title": "Day 6 – Network Deep Dive",
+        "description": "Build a complete network module with routers, subnets, security groups, and floating IPs.",
+        "duration": "65 min",
+        "file": "06-day-6-network-deep-dive.md"
       }
     ]
   }
