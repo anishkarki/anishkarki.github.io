@@ -419,7 +419,7 @@
   },
   "openstack_terraform": {
     "title": "OpenStack Terraform Lab",
-    "description": "Six-day OpenStack networking and compute automation sprint with Terraform, featuring real CLI output, modular architecture, and deep-dive networking concepts.",
+    "description": "Seven-day OpenStack networking and compute automation sprint with Terraform, featuring real CLI output, modular architecture, deep-dive networking concepts, and troubleshooting.",
     "difficulty": "intermediate",
     "icon": "fas fa-cloud",
     "iconColor": "#13B5EC",
@@ -429,7 +429,8 @@
       "Floating IPs",
       "State Management",
       "Variables & Outputs",
-      "Security Groups"
+      "Security Groups",
+      "Troubleshooting"
     ],
     "chapters": [
       {
@@ -473,6 +474,13 @@
         "description": "Build a complete network module with routers, subnets, security groups, and floating IPs.",
         "duration": "65 min",
         "file": "06-day-6-network-deep-dive.md"
+      },
+      {
+        "number": 7,
+        "title": "Day 7 – Troubleshooting",
+        "description": "Debug br-ex bridge issues, Neutron namespaces, and floating IP connectivity problems.",
+        "duration": "40 min",
+        "file": "07-day-7-troubleshooting.md"
       }
     ]
   }

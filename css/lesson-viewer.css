@@ -195,9 +195,8 @@
   font-weight: 500;
   line-height: 1.4;
   margin-bottom: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .chapter-duration {
@@ -630,12 +629,21 @@
   .chapters-sidebar {
     position: relative;
     top: 0;
-    max-height: none;
+    max-height: 400px;
+    overflow-y: auto;
     order: 2;
   }
   
   .lesson-main {
     order: 1;
+  }
+  
+  .chapter-item {
+    padding: 12px 14px;
+  }
+  
+  .chapter-item-title {
+    font-size: 0.85rem;
   }
 }
 
@@ -759,6 +767,10 @@
 .chapter-item:nth-child(4) { animation-delay: 0.2s; }
 .chapter-item:nth-child(5) { animation-delay: 0.25s; }
 .chapter-item:nth-child(6) { animation-delay: 0.3s; }
+.chapter-item:nth-child(7) { animation-delay: 0.35s; }
+.chapter-item:nth-child(8) { animation-delay: 0.4s; }
+.chapter-item:nth-child(9) { animation-delay: 0.45s; }
+.chapter-item:nth-child(10) { animation-delay: 0.5s; }
 
 /* Smooth scrollbar for content */
 .lesson-content::-webkit-scrollbar {

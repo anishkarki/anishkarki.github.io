@@ -1,48 +1,85 @@
-## Day 3: Think Like Terraform
+## Day 3: Terraform Developer Workflows
 
 ### Must Remember
-- Providers are plugins; install them with `terraform init` and pin versions so builds are reproducible.
-- Terraform state is the source of truth. Corrupt it and Terraform forgets what exists.
-- The workflow loop (Scope → Author → Initialize → Plan → Apply) is the heartbeat of every project.
+- Providers define individual units of infrastructure as **resources**.
+- Terraform uses **state files** to track real infrastructure.
+- The same patterns work across clouds: Azure, AWS, OpenStack, GCP.
 
-### Can View Docs (Because Credentials Expire)
-- Azure service principal output (appId, password, tenant) changes each run; capture it securely when you create it.
-- Backend configuration for remote state depends on which storage (HCP, S3, Swift) you pick—follow provider docs when you wire it in.
+### Can View Docs (Because Values Change)
+- Provider versions and API endpoints change frequently.
+- Service Principal credentials and subscription IDs are tenant-specific.
 
-### Provider Reality Check
-Providers translate Terraform intent into real API calls. Keep the versions explicit:
-```hcl
-terraform {
-  required_providers {
-    openstack = {
-      source  = "terraform-provider-openstack/openstack"
-      version = "~> 1.57"
-    }
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
-    }
-  }
-}
+---
+
+### Core Terraform Concepts
+
+1. **Providers** define individual units of infrastructure (compute instance, networks) as resources
+2. **Modules** compose resources from different providers into reusable configurations
+3. **Automatic ordering** - Terraform figures out dependency order for you
+
+---
+
+### The Terraform Workflow
+
+| Step | Action | Command |
+|------|--------|---------|
+| **Scope** | Identify infrastructure for your project | Planning |
+| **Author** | Write the configuration | Edit `.tf` files |
+| **Initialize** | Install provider plugins | `terraform init` |
+| **Plan** | Preview changes | `terraform plan` |
+| **Apply** | Create/modify infrastructure | `terraform apply` |
+
+---
+
+### State Management
+
+Terraform uses a **state file** to track your real infrastructure.
+
 ```
-Run `terraform init` and watch the provider binaries download so you know the lock file is current:
-```text
-Downloading terraform-provider-openstack/openstack 1.57.0...
-Downloading hashicorp/azurerm 3.0.2...
+⚠️ WARNING: State files can contain sensitive information!
+   - Passwords
+   - Security keys
+   - API tokens
+
+Store your state file securely and restrict access.
 ```
 
-### Azure Muscle Memory (Even If You Stay On OpenStack)
-1. Authenticate and scope the subscription.
+**Collaboration Options:**
+- **HCP Terraform** (free for up to 5 users) - securely share state with teammates
+- **S3/Azure Blob** backend - remote state storage
+- **GitLab/GitHub integration** - version control for infrastructure
+
+---
+
+### Setting Up Azure Resources
+
+Azure uses **Service Principals** for authentication (similar to OpenStack's Application Credentials).
+
+#### Step 1: Login and Get Subscription ID
 ```sh
 az login
-az account set --subscription "35akss-subscription-id"
+
+# Output:
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "35akss-subscription-id",
+    "isDefault": true,
+    "name": "Subscription-Name",
+    "state": "Enabled",
+    "tenantId": "0envbwi39-TenantId"
+  }
+]
+
+# Set the subscription
+az account set --subscription "<subscription-id>"
 ```
-2. Create a service principal and capture the JSON response.
+
+#### Step 2: Create a Service Principal
 ```sh
-az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/35akss-subscription-id"
-```
-Sample output:
-```json
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<SUBSCRIPTION_ID>"
+
+# Output:
 {
   "appId": "xxxxxx-xxx-xxxx-xxxx-xxxxxxxxxx",
   "displayName": "azure-cli-2022-xxxx",
@@ -50,15 +87,28 @@ Sample output:
   "tenant": "xxxxx-xxxx-xxxxx-xxxx-xxxxx"
 }
 ```
-3. Export the credentials so Terraform can read them.
+
+#### Step 3: Set Environment Variables
 ```sh
-export ARM_CLIENT_ID="xxxxxx-xxx-xxxx-xxxx-xxxxxxxxxx"
-export ARM_CLIENT_SECRET="xxxxxx~xxxxxx~xxxxx"
-export ARM_SUBSCRIPTION_ID="35akss-subscription-id"
-export ARM_TENANT_ID="xxxxx-xxxx-xxxxx-xxxx-xxxxx"
+export ARM_CLIENT_ID="<APPID_VALUE>"
+export ARM_CLIENT_SECRET="<PASSWORD_VALUE>"
+export ARM_SUBSCRIPTION_ID="<SUBSCRIPTION_ID>"
+export ARM_TENANT_ID="<TENANT_VALUE>"
 ```
-4. Apply the minimal resource group configuration:
+
+#### Step 4: Write Azure Configuration
 ```hcl
+# main.tf
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0.2"
+    }
+  }
+  required_version = ">= 1.1.0"
+}
+
 provider "azurerm" {
   features {}
 }
@@ -68,48 +118,159 @@ resource "azurerm_resource_group" "rg" {
   location = "westus2"
 }
 ```
-Run `terraform apply` and confirm the resource group appears in the Azure portal. The syntax mirrors OpenStack resources, proving the provider abstraction works.
 
-### Keep Config Files In Order
-- `main.tf`: provider blocks, module calls, backend configuration.
-- `variables.tf`: declare names, types, descriptions, defaults.
-- `terraform.tfvars`: store actual values, especially per-environment overrides.
-Terraform merges inputs in this order: defaults → `tfvars` → environment variables (`TF_VAR_*`) → CLI `-var`. Later wins. Test it:
-```sh
-export TF_VAR_instance_count=2
-terraform plan -var="instance_count=3"
-```
-Terraform will use `3` because CLI overrides environment variables.
+---
 
-### State Handling Drill
-Inspect the state after an apply so you understand what Terraform remembers:
-```sh
-terraform state list
-terraform show
-```
-If you move to remote state (recommended for teams), add a backend block and re-init:
+### Components of main.tf
+
+#### 1. Terraform Block
+Installs providers from the Terraform Registry.
 ```hcl
 terraform {
-  backend "s3" {
-    bucket = "openstack-terraform-state"
-    key    = "prod/terraform.tfstate"
-    region = "us-east-1"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"  # shorthand for registry.terraform.io/hashicorp/azurerm
+      version = "~> 3.0.2"
+    }
   }
 }
 ```
-```sh
-terraform init -migrate-state
-```
 
-### Practice Moves
-1. Create a dummy module that outputs a string.
+#### 2. Provider Block
+Configures the specified provider. You can define **multiple providers** to manage resources across clouds.
 ```hcl
-output "module_message" {
-  value = "Hello from module"
+provider "azurerm" {
+  features {}
+}
+
+provider "openstack" {
+  auth_url = var.OS_AUTH_URL
+  region   = var.OS_REGION_NAME
 }
 ```
-Call it from root and run `terraform output` to prove modules can pass data back.
-2. Use a data block for a flavor and reference it in a resource to avoid hard-coded IDs.
-3. Add both OpenStack and Azure providers to one config, but `-target` apply only OpenStack resources to see Terraform ignore the rest.
 
-Tomorrow we wrap up by managing change: reading plans like a detective, locking state, and cleaning up safely.
+#### 3. Resource Block
+Defines components of your infrastructure.
+```hcl
+resource "azurerm_resource_group" "rg" {
+  name     = "myTFResourceGroup"
+  location = "westus2"
+}
+```
+
+- **Resource type prefix** maps to provider name (`azurerm_resource_group` → `azurerm` provider)
+- **Unique ID** = type + name (`azurerm_resource_group.rg`)
+
+---
+
+### OpenStack Setup
+
+#### Authentication with Application Credentials
+Best practice: use **Application Credentials** (similar to Service Principal).
+
+1. In Horizon dashboard: **Identity > Application Credentials > Create**
+2. Download the `openrc` file
+3. Source it: `source openrc`
+
+#### The Three Essential Files
+
+| File | Purpose | When Loaded |
+|------|---------|-------------|
+| `main.tf` | Terraform block, provider blocks, resources | Always |
+| `variables.tf` | Declares input variables (names, types, defaults) | Always |
+| `terraform.tfvars` | Provides variable values | Auto-loaded at plan/apply |
+
+**Value Precedence (later overrides earlier):**
+```
+defaults (variables.tf) → terraform.tfvars → TF_VAR_* env vars → CLI flags (-var)
+```
+
+---
+
+### Provider Block Deep Dive
+
+```hcl
+provider "openstack" {
+  auth_url                      = var.OS_AUTH_URL
+  region                        = var.OS_REGION_NAME
+  endpoint_type                 = var.OS_INTERFACE
+  application_credential_id     = var.OS_APPLICATION_CREDENTIAL_ID
+  application_credential_secret = var.OS_APPLICATION_CREDENTIAL_SECRET
+}
+```
+
+---
+
+### Data Sources (Data Block)
+
+Query your cloud provider for information about **existing** resources.
+
+```hcl
+# Simple query by name
+data "openstack_compute_flavor_v2" "small" {
+  name = "m1.small"
+}
+
+# Query with filters (when not sure of exact name)
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
+  }
+
+  owners = ["099720109477"]  # Canonical
+}
+```
+
+Reference data attributes: `data.openstack_compute_flavor_v2.small.id`
+
+---
+
+### Resource Block Examples
+
+```hcl
+resource "aws_instance" "app_server" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "learn-terraform"
+  }
+}
+
+resource "openstack_compute_instance_v2" "vm" {
+  name      = "my-instance"
+  image_id  = data.openstack_images_image_v2.ubuntu.id
+  flavor_id = data.openstack_compute_flavor_v2.small.id
+}
+```
+
+---
+
+### Essential Commands
+
+```sh
+terraform validate   # Check syntax
+terraform init       # Download providers
+terraform plan       # Preview changes
+terraform apply      # Create resources
+terraform apply -auto-approve  # Skip confirmation
+terraform state list # List managed resources
+terraform show       # Show current state
+terraform destroy    # Remove everything
+```
+
+---
+
+### End-Of-Day Checklist
+
+- [ ] Understand Terraform block, provider block, resource block
+- [ ] Know how to set up Azure Service Principal
+- [ ] Know how to use OpenStack Application Credentials
+- [ ] Understand the three essential files and value precedence
+- [ ] Practice querying with data sources
+- [ ] Run through the init → plan → apply workflow
+
+Tomorrow we manage existing infrastructure and learn about variables and outputs!
