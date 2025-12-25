@@ -898,14 +898,15 @@ body::after {
   background: var(--term-bg);
   border: 1px solid var(--term-border);
   border-radius: var(--term-radius);
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   text-decoration: none;
-  color: var(--term-text);
+  color: var(--term-text-dim);
 }
 
 .contact-item:hover {
-  border-color: var(--term-green);
-  color: var(--term-green);
+  border-color: var(--term-blue);
+  color: var(--term-text);
+  background: rgba(88, 166, 255, 0.05);
 }
 
 .contact-item.location-item {
@@ -914,22 +915,30 @@ body::after {
 
 .contact-item.location-item:hover {
   border-color: var(--term-border);
-  color: var(--term-text);
+  color: var(--term-text-dim);
+  background: var(--term-bg);
 }
 
 .contact-icon {
   width: 40px;
   height: 40px;
   background: var(--term-bg-card);
-  border: 1px solid var(--term-green);
+  border: 1px solid var(--term-border);
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: var(--space-md);
   font-size: 1rem;
-  color: var(--term-green);
+  color: var(--term-blue);
   flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.contact-item:hover .contact-icon {
+  border-color: var(--term-blue);
+  color: var(--term-text-bright);
+  background: rgba(88, 166, 255, 0.1);
 }
 
 .contact-info {
@@ -942,7 +951,7 @@ body::after {
 }
 
 .contact-info strong {
-  color: var(--term-cyan);
+  color: var(--term-blue);
   font-weight: 600;
   display: block;
   margin-bottom: 2px;
@@ -952,8 +961,19 @@ body::after {
   text-align: center;
 }
 
+.contact-cta .quantum-btn {
+  border-color: var(--term-blue);
+  color: var(--term-blue);
+}
+
+.contact-cta .quantum-btn:hover {
+  background: var(--term-blue);
+  color: var(--term-bg);
+  box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+}
+
 .contact-details h3 {
-  color: var(--term-green);
+  color: var(--term-text-dim);
   font-size: 1rem;
   margin-bottom: var(--space-md);
 }
@@ -977,12 +997,12 @@ body::after {
 }
 
 .contact-list a {
-  color: var(--term-cyan);
+  color: var(--term-blue);
   text-decoration: none;
 }
 
 .contact-list a:hover {
-  color: var(--term-green);
+  color: var(--term-text-bright);
   text-decoration: underline;
 }
 
