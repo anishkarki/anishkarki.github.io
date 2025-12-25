@@ -419,7 +419,7 @@
   },
   "openstack_terraform": {
     "title": "OpenStack Terraform Lab",
-    "description": "Seven-day OpenStack networking and compute automation sprint with Terraform, featuring real CLI output, modular architecture, deep-dive networking concepts, and troubleshooting.",
+    "description": "Eight-day OpenStack networking and compute automation sprint with Terraform, featuring real CLI output, modular architecture, cluster deployment, and troubleshooting.",
     "difficulty": "intermediate",
     "icon": "fas fa-cloud",
     "iconColor": "#13B5EC",
@@ -430,14 +430,15 @@
       "State Management",
       "Variables & Outputs",
       "Security Groups",
+      "Bastion Pattern",
       "Troubleshooting"
     ],
     "chapters": [
       {
         "number": 1,
         "title": "Day 1 – Network Fundamentals",
-        "description": "Inspect networks, decode CIDRs, and practice floating IP allocation.",
-        "duration": "45 min",
+        "description": "Inspect networks, decode CIDRs, NAT, and practice floating IP allocation.",
+        "duration": "50 min",
         "file": "01-day-1-network-fundamentals.md"
       },
       {
@@ -450,8 +451,8 @@
       {
         "number": 3,
         "title": "Day 3 – Terraform Mastery",
-        "description": "Pin providers, manage state, and rehearse multi-cloud workflows.",
-        "duration": "45 min",
+        "description": "Multi-cloud workflows with Azure, state management, and provider patterns.",
+        "duration": "55 min",
         "file": "03-day-3-terraform-mastery.md"
       },
       {
@@ -478,9 +479,16 @@
       {
         "number": 7,
         "title": "Day 7 – Troubleshooting",
-        "description": "Debug br-ex bridge issues, Neutron namespaces, and floating IP connectivity problems.",
-        "duration": "40 min",
+        "description": "Debug br-ex bridge issues, Neutron namespaces, and floating IP connectivity.",
+        "duration": "45 min",
         "file": "07-day-7-troubleshooting.md"
+      },
+      {
+        "number": 8,
+        "title": "Day 8 – Cluster Architecture",
+        "description": "Build multi-node clusters with bastion hosts, for_each patterns, and secure access.",
+        "duration": "55 min",
+        "file": "08-day-8-cluster-architecture.md"
       }
     ]
   }
