@@ -1,28 +1,28 @@
 /* =====================================================
    LESSON VIEWER - Professional Design System
-   Modern, Clean, Fully Responsive
+   Nord Theme - Clean & Readable
    ===================================================== */
 
 /* CSS Custom Properties for Lesson Viewer */
 :root {
-  --lesson-bg-primary: #0a0f1a;
-  --lesson-bg-secondary: #111827;
-  --lesson-bg-card: rgba(17, 24, 39, 0.8);
-  --lesson-border: rgba(99, 179, 237, 0.15);
-  --lesson-border-hover: rgba(99, 179, 237, 0.4);
-  --lesson-accent: #63b3ed;
-  --lesson-accent-light: #90cdf4;
-  --lesson-accent-dark: #3182ce;
-  --lesson-success: #48bb78;
-  --lesson-warning: #ecc94b;
-  --lesson-danger: #fc8181;
-  --lesson-text-primary: #f7fafc;
-  --lesson-text-secondary: #a0aec0;
-  --lesson-text-muted: #718096;
-  --lesson-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --lesson-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --lesson-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --lesson-shadow-glow: 0 0 40px rgba(99, 179, 237, 0.15);
+  --lesson-bg-primary: #2E3440;
+  --lesson-bg-secondary: #3B4252;
+  --lesson-bg-card: rgba(67, 76, 94, 0.8);
+  --lesson-border: rgba(136, 192, 208, 0.2);
+  --lesson-border-hover: rgba(136, 192, 208, 0.5);
+  --lesson-accent: #88C0D0;
+  --lesson-accent-light: #8FBCBB;
+  --lesson-accent-dark: #81A1C1;
+  --lesson-success: #A3BE8C;
+  --lesson-warning: #EBCB8B;
+  --lesson-danger: #BF616A;
+  --lesson-text-primary: #ECEFF4;
+  --lesson-text-secondary: #D8DEE9;
+  --lesson-text-muted: #9DA8B8;
+  --lesson-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --lesson-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --lesson-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --lesson-shadow-glow: 0 0 40px rgba(136, 192, 208, 0.15);
   --lesson-radius-sm: 8px;
   --lesson-radius-md: 12px;
   --lesson-radius-lg: 16px;
@@ -79,7 +79,7 @@
 .sidebar-header {
   padding: 24px 24px 20px;
   border-bottom: 1px solid var(--lesson-border);
-  background: linear-gradient(135deg, rgba(99, 179, 237, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(136, 192, 208, 0.1), transparent);
 }
 
 .sidebar-title {
@@ -91,7 +91,7 @@
   margin: 0 0 8px;
   padding: 24px 24px 20px;
   border-bottom: 1px solid var(--lesson-border);
-  background: linear-gradient(135deg, rgba(99, 179, 237, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(136, 192, 208, 0.1), transparent);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -130,13 +130,13 @@
 }
 
 .chapter-item:hover {
-  background: rgba(99, 179, 237, 0.08);
+  background: rgba(136, 192, 208, 0.08);
   color: var(--lesson-text-primary);
   border-color: var(--lesson-border);
 }
 
 .chapter-item.current {
-  background: linear-gradient(135deg, rgba(99, 179, 237, 0.15), rgba(99, 179, 237, 0.05));
+  background: linear-gradient(135deg, rgba(136, 192, 208, 0.15), rgba(136, 192, 208, 0.05));
   border-color: var(--lesson-accent);
   color: var(--lesson-text-primary);
   box-shadow: var(--lesson-shadow-glow);
@@ -170,7 +170,7 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  background: rgba(99, 179, 237, 0.2);
+  background: rgba(136, 192, 208, 0.2);
   color: var(--lesson-accent);
   border-radius: 50%;
   font-size: 0.75rem;
@@ -182,7 +182,7 @@
 .chapter-item.current .chapter-number {
   background: var(--lesson-accent);
   color: var(--lesson-bg-primary);
-  box-shadow: 0 0 12px rgba(99, 179, 237, 0.5);
+  box-shadow: 0 0 12px rgba(136, 192, 208, 0.5);
 }
 
 .chapter-info {
@@ -215,7 +215,7 @@
 .sidebar-progress {
   padding: 20px 24px;
   border-top: 1px solid var(--lesson-border);
-  background: rgba(99, 179, 237, 0.03);
+  background: rgba(136, 192, 208, 0.03);
 }
 
 .progress-label {
@@ -237,7 +237,7 @@
 
 .progress-bar-track {
   height: 6px;
-  background: rgba(99, 179, 237, 0.15);
+  background: rgba(136, 192, 208, 0.15);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -271,7 +271,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: rgba(99, 179, 237, 0.1);
+  background: rgba(136, 192, 208, 0.1);
   border: 1px solid var(--lesson-border);
   border-radius: var(--lesson-radius-md);
   color: var(--lesson-accent);
@@ -283,7 +283,7 @@
 }
 
 .back-link:hover {
-  background: rgba(99, 179, 237, 0.2);
+  background: rgba(136, 192, 208, 0.2);
   border-color: var(--lesson-accent);
   transform: translateX(-4px);
   color: var(--lesson-accent-light);
@@ -415,7 +415,7 @@
 .lesson-content blockquote {
   margin: 1.5em 0;
   padding: 20px 24px;
-  background: linear-gradient(135deg, rgba(99, 179, 237, 0.1), rgba(99, 179, 237, 0.05));
+  background: linear-gradient(135deg, rgba(136, 192, 208, 0.1), rgba(136, 192, 208, 0.05));
   border-left: 4px solid var(--lesson-accent);
   border-radius: 0 var(--lesson-radius-md) var(--lesson-radius-md) 0;
   color: var(--lesson-text-primary);
@@ -436,13 +436,13 @@
 
 /* Code - Inline */
 .lesson-content code {
-  background: rgba(99, 179, 237, 0.15);
+  background: rgba(136, 192, 208, 0.15);
   color: var(--lesson-accent-light);
   padding: 3px 8px;
   border-radius: 4px;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.875em;
-  border: 1px solid rgba(99, 179, 237, 0.2);
+  border: 1px solid rgba(136, 192, 208, 0.2);
 }
 
 /* Code - Blocks */
@@ -479,7 +479,7 @@
 }
 
 .lesson-content thead {
-  background: rgba(99, 179, 237, 0.1);
+  background: rgba(136, 192, 208, 0.1);
 }
 
 .lesson-content th {
@@ -505,7 +505,7 @@
 }
 
 .lesson-content tr:hover td {
-  background: rgba(99, 179, 237, 0.05);
+  background: rgba(136, 192, 208, 0.05);
 }
 
 /* Images */
@@ -554,7 +554,7 @@
   align-items: center;
   gap: 10px;
   padding: 14px 24px;
-  background: rgba(99, 179, 237, 0.1);
+  background: rgba(136, 192, 208, 0.1);
   border: 1px solid var(--lesson-border);
   border-radius: var(--lesson-radius-md);
   color: var(--lesson-text-primary);
@@ -567,7 +567,7 @@
 
 .nav-btn:hover:not(:disabled),
 .btn-outline-light:hover:not(:disabled) {
-  background: rgba(99, 179, 237, 0.2);
+  background: rgba(136, 192, 208, 0.2);
   border-color: var(--lesson-accent);
   transform: translateY(-2px);
   box-shadow: var(--lesson-shadow-md);
@@ -593,7 +593,7 @@
 
 #next-btn:hover:not(:disabled) {
   transform: translateX(4px);
-  box-shadow: 0 0 24px rgba(99, 179, 237, 0.4);
+  box-shadow: 0 0 24px rgba(136, 192, 208, 0.4);
   color: var(--lesson-bg-primary);
 }
 

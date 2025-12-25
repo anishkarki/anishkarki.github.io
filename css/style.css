@@ -1,35 +1,35 @@
 /* =====================================================
    ANISH KARKI - DEV TERMINAL PORTFOLIO
-   Retro Terminal / Dev-C Aesthetic
+   Nord Theme - Professional & Clean
    ===================================================== */
 
 :root {
-  /* Terminal Color Palette */
-  --term-bg: #0a0e14;
-  --term-bg-light: #0d1117;
-  --term-bg-card: #161b22;
-  --term-border: #30363d;
-  --term-border-highlight: #238636;
+  /* Nord Polar Night (Backgrounds) */
+  --term-bg: #2E3440;
+  --term-bg-light: #3B4252;
+  --term-bg-card: #434C5E;
+  --term-border: #4C566A;
+  --term-border-highlight: #88C0D0;
   
-  /* Matrix Green Theme */
-  --term-green: #00ff41;
-  --term-green-dim: #00cc33;
-  --term-green-bright: #39ff14;
-  --term-green-glow: rgba(0, 255, 65, 0.3);
+  /* Nord Frost (Accents) */
+  --term-green: #A3BE8C;
+  --term-green-dim: #8FBCBB;
+  --term-green-bright: #A3BE8C;
+  --term-green-glow: rgba(163, 190, 140, 0.3);
   
-  /* Accent Colors */
-  --term-cyan: #00d4ff;
-  --term-yellow: #ffcc00;
-  --term-orange: #ff9500;
-  --term-red: #ff4444;
-  --term-purple: #bd93f9;
-  --term-blue: #58a6ff;
+  /* Nord Frost & Aurora Colors */
+  --term-cyan: #88C0D0;
+  --term-yellow: #EBCB8B;
+  --term-orange: #D08770;
+  --term-red: #BF616A;
+  --term-purple: #B48EAD;
+  --term-blue: #81A1C1;
   
-  /* Text Colors */
-  --term-text: #c9d1d9;
-  --term-text-dim: #8b949e;
-  --term-text-bright: #f0f6fc;
-  --term-comment: #6a737d;
+  /* Nord Snow Storm (Text) */
+  --term-text: #D8DEE9;
+  --term-text-dim: #9DA8B8;
+  --term-text-bright: #ECEFF4;
+  --term-comment: #6D7A8E;
   
   /* Typography */
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;

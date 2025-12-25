@@ -1,22 +1,22 @@
 /* =====================================================
    LESSONS PAGE - Professional Design System
-   Modern Course Cards & Modal Design
+   Nord Theme - Course Cards & Modal Design
    ===================================================== */
 
 /* CSS Custom Properties */
 :root {
-  --course-bg-card: rgba(17, 24, 39, 0.85);
-  --course-border: rgba(99, 179, 237, 0.12);
-  --course-accent: #63b3ed;
-  --course-accent-light: #90cdf4;
-  --course-success: #48bb78;
-  --course-warning: #ecc94b;
-  --course-danger: #fc8181;
-  --course-text-primary: #f7fafc;
-  --course-text-secondary: #a0aec0;
-  --course-text-muted: #718096;
-  --course-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --course-shadow-hover: 0 20px 60px rgba(99, 179, 237, 0.15);
+  --course-bg-card: rgba(67, 76, 94, 0.85);
+  --course-border: rgba(136, 192, 208, 0.15);
+  --course-accent: #88C0D0;
+  --course-accent-light: #8FBCBB;
+  --course-success: #A3BE8C;
+  --course-warning: #EBCB8B;
+  --course-danger: #BF616A;
+  --course-text-primary: #ECEFF4;
+  --course-text-secondary: #D8DEE9;
+  --course-text-muted: #9DA8B8;
+  --course-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --course-shadow-hover: 0 20px 60px rgba(136, 192, 208, 0.15);
   --course-radius: 20px;
   --course-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
