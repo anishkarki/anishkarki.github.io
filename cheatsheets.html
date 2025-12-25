@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anish Karki | Cheatsheets | Quick Reference Guides</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <!-- Marked.js for Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cheatsheet.css">
+</head>
+
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <!-- Particle System -->
+  <div class="particle-system" id="particleSystem"></div>
+
+  <!-- Neural Network Background -->
+  <div class="neural-network" id="neuralNetwork"></div>
+
+  <!-- Navbar -->
+  <div id="project-navbar-placeholder"></div>
+  
+  <!-- Cheatsheet Hero Section -->
+  <section class="cheatsheet-hero-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <div data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="cheatsheet-hero-title">
+              <i class="fas fa-scroll cheatsheet-icon"></i>
+              Quick Reference Guides
+            </h1>
+            <p class="cheatsheet-hero-subtitle">
+              Battle-tested configurations, essential commands, and practical tips curated from real-world experience
+            </p>
+            <div class="cheatsheet-stats">
+              <div class="cheatsheet-stat">
+                <div class="stat-number" id="totalCheatsheets">0</div>
+                <div class="stat-label">Cheatsheets</div>
+              </div>
+              <div class="cheatsheet-stat">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Time Saved</div>
+              </div>
+              <div class="cheatsheet-stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Googling Required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Floating Code Elements -->
+    <div class="floating-code">
+      <div class="code-snippet" data-aos="fade-up" data-aos-delay="200">
+        <code>:wq  # save and quit</code>
+      </div>
+      <div class="code-snippet" data-aos="fade-up" data-aos-delay="400">
+        <code>git stash && git pull</code>
+      </div>
+      <div class="code-snippet" data-aos="fade-up" data-aos-delay="600">
+        <code>kubectl get pods -A</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cheatsheet Content Section -->
+  <section class="cheatsheet-content-section">
+    <div class="container">
+      <div class="row">
+        <!-- Cheatsheet Sidebar -->
+        <div class="col-lg-3 mb-4" data-aos="fade-right">
+          <div class="cheatsheet-sidebar">
+            <div class="sidebar-card">
+              <h4 class="sidebar-title">
+                <i class="fas fa-filter me-2"></i>Categories
+              </h4>
+              <div class="category-list">
+                <a href="#" class="category-item active" data-category="all">
+                  <i class="fas fa-globe me-2"></i>All Sheets
+                  <span class="category-count" id="allCount">0</span>
+                </a>
+                <a href="#" class="category-item" data-category="editor">
+                  <i class="fas fa-edit me-2"></i>Editors
+                  <span class="category-count" id="editorCount">0</span>
+                </a>
+                <a href="#" class="category-item" data-category="shell">
+                  <i class="fas fa-terminal me-2"></i>Shell & CLI
+                  <span class="category-count" id="shellCount">0</span>
+                </a>
+                <a href="#" class="category-item" data-category="database">
+                  <i class="fas fa-database me-2"></i>Database
+                  <span class="category-count" id="databaseCount">0</span>
+                </a>
+                <a href="#" class="category-item" data-category="devops">
+                  <i class="fas fa-infinity me-2"></i>DevOps
+                  <span class="category-count" id="devopsCount">0</span>
+                </a>
+                <a href="#" class="category-item" data-category="cloud">
+                  <i class="fas fa-cloud me-2"></i>Cloud
+                  <span class="category-count" id="cloudCount">0</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="sidebar-card">
+              <h4 class="sidebar-title">
+                <i class="fas fa-search me-2"></i>Search
+              </h4>
+              <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search cheatsheets...">
+                <i class="fas fa-search search-icon"></i>
+              </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="sidebar-card tips-card">
+              <h4 class="sidebar-title">
+                <i class="fas fa-lightbulb me-2"></i>Quick Tips
+              </h4>
+              <ul class="tips-list">
+                <li><code>Ctrl+F</code> to search within a cheatsheet</li>
+                <li>Bookmark frequently used sheets</li>
+                <li>Click code blocks to copy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-lg-9">
+          <!-- View Toggle -->
+          <div class="content-header" data-aos="fade-up">
+            <div class="results-info">
+              <span id="resultsCount">0</span> cheatsheets found
+            </div>
+            <div class="view-toggle">
+              <button class="view-btn active" data-view="grid" title="Grid View">
+                <i class="fas fa-th-large"></i>
+              </button>
+              <button class="view-btn" data-view="list" title="List View">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cheatsheets Grid -->
+          <div class="cheatsheets-container" id="cheatsheetsContainer">
+            <div class="loading-spinner">
+              <div class="spinner"></div>
+              <p>Loading cheatsheets...</p>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination-container" id="paginationContainer">
+            <!-- Pagination will be inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cheatsheet Modal -->
+  <div class="cheatsheet-modal" id="cheatsheetModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Cheatsheet Title</h2>
+        <div class="modal-actions">
+          <button class="modal-btn" id="copyAllBtn" title="Copy All">
+            <i class="fas fa-copy"></i>
+          </button>
+          <button class="modal-btn" id="printBtn" title="Print">
+            <i class="fas fa-print"></i>
+          </button>
+          <button class="modal-btn close-btn" id="closeModal" title="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Cheatsheet content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <!-- Custom Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/cheatsheets.js"></script>
+</body>
+</html>

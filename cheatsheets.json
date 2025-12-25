@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "title": "Ultimate Vim Configuration & Cheatsheet",
+    "description": "Complete Vim setup guide with modern configuration, essential keybindings, and productivity tips for efficient text editing.",
+    "category": "editor",
+    "tags": ["Vim", "Neovim", "Editor", "Configuration", "Productivity"],
+    "date": "2025-12-26T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/vim-ultimate-config.md"
+  }
+]
