@@ -5,10 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeAOS();
   initializeParticleSystem();
   initializeNeuralNetwork();
-  initializeDNAHelix();
   initializeTypedJS();
   initializeSkillBars();
-  setupNavbar();
   setupScrollProgress();
   enableSmoothScrolling();
   initializeInteractiveElements();
@@ -31,7 +29,7 @@ function loadComponents() {
         .then(data => element.innerHTML = data)
         .then(() => {
           // Initialize navbar functionality after navbar is loaded
-          if (comp.id === "navbar-placeholder") {
+          if (comp.id === "navbar-placeholder" || comp.id === "project-navbar-placeholder") {
             setupNavbar();
           }
         })
@@ -137,54 +135,6 @@ function createSynapse(container, index) {
   `;
   
   container.appendChild(synapse);
-}
-
-// DNA Helix Visualization
-function initializeDNAHelix() {
-  const dnaStrand = document.getElementById('dnaStrand');
-  if (!dnaStrand) return;
-
-  const baseCount = 25;
-  
-  for (let i = 0; i < baseCount; i++) {
-    createDNABase(dnaStrand, i, baseCount);
-  }
-}
-
-function createDNABase(container, index, totalCount) {
-  const base = document.createElement('div');
-  base.className = 'dna-base';
-  
-  const angle = (index / totalCount) * 360 * 2; // Two full rotations
-  const y = (index / totalCount) * 100;
-  const x = 50 + 30 * Math.cos(angle * Math.PI / 180);
-  
-  base.style.cssText = `
-    left: ${x}%;
-    top: ${y}%;
-    animation-delay: ${index * 0.1}s;
-    animation-duration: ${Math.random() * 2 + 3}s;
-  `;
-  
-  container.appendChild(base);
-  
-  // Create complementary base pair
-  if (index % 2 === 0) {
-    const complementaryBase = document.createElement('div');
-    complementaryBase.className = 'dna-base';
-    const complementaryX = 50 - 30 * Math.cos(angle * Math.PI / 180);
-    
-    complementaryBase.style.cssText = `
-      left: ${complementaryX}%;
-      top: ${y}%;
-      animation-delay: ${index * 0.1 + 0.5}s;
-      animation-duration: ${Math.random() * 2 + 3}s;
-      background: var(--photon-green);
-      box-shadow: 0 0 15px var(--photon-green);
-    `;
-    
-    container.appendChild(complementaryBase);
-  }
 }
 
 // Enhanced Typing Effect
@@ -549,7 +499,6 @@ function initializeScrollAnimations() {
 // Parallax Effects
 function initializeParallaxEffects() {
   const heroSection = document.querySelector('.hero-section');
-  const dnaHelix = document.querySelector('.dna-helix');
   
   if (window.innerWidth > 768) { // Only on desktop
     window.addEventListener('scroll', function() {
@@ -558,10 +507,6 @@ function initializeParallaxEffects() {
       
       if (heroSection) {
         heroSection.style.transform = `translateY(${rate}px)`;
-      }
-      
-      if (dnaHelix) {
-        dnaHelix.style.transform = `translateY(${scrolled * 0.2}px) rotateY(${scrolled * 0.1}deg)`;
       }
     });
   }
@@ -625,36 +570,6 @@ function optimizeForPerformance() {
   });
 }
 
-// Initialize Contact Form Enhancement (if needed)
-function initializeContactForm() {
-  const contactForm = document.querySelector('#contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Add quantum loading effect
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      
-      submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
-      submitBtn.disabled = true;
-      
-      // Simulate form submission (replace with actual logic)
-      setTimeout(() => {
-        submitBtn.textContent = '✓ Message Sent!';
-        submitBtn.style.background = 'var(--photon-green)';
-        
-        setTimeout(() => {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-          submitBtn.style.background = '';
-          this.reset();
-        }, 3000);
-      }, 2000);
-    });
-  }
-}
-
 // Social Links Enhancement
 function enhanceSocialLinks() {
   const socialLinks = document.querySelectorAll('.social-link, .footer a');
@@ -678,7 +593,6 @@ function initializeAllEnhancements() {
   initializeParallaxEffects();
   initializeMouseEffects();
   optimizeForPerformance();
-  initializeContactForm();
   enhanceSocialLinks();
 }
 
@@ -686,12 +600,3 @@ function initializeAllEnhancements() {
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(initializeAllEnhancements, 1000); // Delay for better performance
 });
-
-// Export functions for use in other files
-window.PortfolioEffects = {
-  initializeParticleSystem,
-  initializeNeuralNetwork,
-  initializeDNAHelix,
-  initializeTypedJS,
-  initializeSkillBars
-};

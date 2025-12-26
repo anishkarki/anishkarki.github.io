@@ -1,35 +1,50 @@
 /* =====================================================
    ANISH KARKI - DEV TERMINAL PORTFOLIO
-   Nord Theme - Professional & Clean
+   Crystal Clear High-Contrast Theme
    ===================================================== */
 
 :root {
-  /* Nord Polar Night (Backgrounds) */
-  --term-bg: #2E3440;
-  --term-bg-light: #3B4252;
-  --term-bg-card: #434C5E;
-  --term-border: #4C566A;
-  --term-border-highlight: #88C0D0;
+  /* Crystal Clear High-Contrast (Backgrounds) */
+  --term-bg: #0a0a0a;
+  --term-bg-light: #121212;
+  --term-bg-card: #1a1a1a;
+  --term-border: #333333;
+  --term-border-highlight: #60a5fa;
   
-  /* Nord Frost (Accents) */
-  --term-green: #A3BE8C;
-  --term-green-dim: #8FBCBB;
-  --term-green-bright: #A3BE8C;
-  --term-green-glow: rgba(163, 190, 140, 0.3);
+  /* High-Contrast Accents - Vibrant & Readable */
+  --term-green: #4ade80;
+  --term-green-dim: #22c55e;
+  --term-green-bright: #86efac;
+  --term-green-glow: rgba(74, 222, 128, 0.4);
   
-  /* Nord Frost & Aurora Colors */
-  --term-cyan: #88C0D0;
-  --term-yellow: #EBCB8B;
-  --term-orange: #D08770;
-  --term-red: #BF616A;
-  --term-purple: #B48EAD;
-  --term-blue: #81A1C1;
+  /* Vibrant Accent Colors */
+  --term-cyan: #60a5fa;
+  --term-yellow: #fde047;
+  --term-orange: #fb923c;
+  --term-red: #f87171;
+  --term-purple: #c084fc;
+  --term-blue: #60a5fa;
   
-  /* Nord Snow Storm (Text) */
-  --term-text: #D8DEE9;
-  --term-text-dim: #9DA8B8;
-  --term-text-bright: #ECEFF4;
-  --term-comment: #6D7A8E;
+  /* High-Contrast Text - Maximum Readability */
+  --term-text: #f5f5f5;
+  --term-text-dim: #d4d4d4;
+  --term-text-bright: #ffffff;
+  --term-comment: #a3a3a3;
+  
+  /* Legacy Variable Mappings (High-Contrast) */
+  --quantum-gradient: linear-gradient(135deg, #0a0a0a 0%, #121212 100%);
+  --plasma-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --stellar-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  --quantum-blue: #0a0a0a;
+  --neutron-cyan: #60a5fa;
+  --stellar-white: #ffffff;
+  --cosmic-gray: #d4d4d4;
+  --photon-green: #4ade80;
+  --electron-violet: #c084fc;
+  --nebula-pink: #f472b6;
+  --proton-orange: #fb923c;
+  --transition-normal: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
   
   /* Typography */
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
@@ -339,11 +354,6 @@ body::after {
   color: var(--term-green);
   text-shadow: 0 0 10px var(--term-green-glow);
   transform: translateY(-2px);
-}
-
-/* DNA Helix - Hidden for terminal theme */
-.dna-helix {
-  display: none;
 }
 
 /* Scroll Indicator */

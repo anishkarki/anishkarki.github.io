@@ -1,19 +1,19 @@
 /* Cheatsheet Viewer Styles */
 
 :root {
-  --cs-bg-primary: #2E3440;
-  --cs-bg-secondary: #3B4252;
-  --cs-bg-tertiary: #434C5E;
-  --cs-border: #4C566A;
-  --cs-text-primary: #ECEFF4;
-  --cs-text-secondary: #D8DEE9;
-  --cs-text-muted: #9DA8B8;
-  --cs-accent: #88C0D0;
-  --cs-accent-hover: #8FBCBB;
-  --cs-success: #A3BE8C;
-  --cs-warning: #EBCB8B;
-  --cs-error: #BF616A;
-  --cs-purple: #B48EAD;
+  --cs-bg-primary: #0a0a0a;
+  --cs-bg-secondary: #171717;
+  --cs-bg-tertiary: #1f1f1f;
+  --cs-border: #404040;
+  --cs-text-primary: #ffffff;
+  --cs-text-secondary: #e5e5e5;
+  --cs-text-muted: #d4d4d4;
+  --cs-accent: #60a5fa;
+  --cs-accent-hover: #93c5fd;
+  --cs-success: #4ade80;
+  --cs-warning: #fde047;
+  --cs-error: #f87171;
+  --cs-purple: #c084fc;
 }
 
 /* Layout */
@@ -287,7 +287,7 @@
 }
 
 .cheatsheet-content pre {
-  background: #1a1d23;
+  background: #0f0f0f;
   border: 1px solid var(--cs-border);
   border-radius: 8px;
   padding: 1rem 1.25rem;

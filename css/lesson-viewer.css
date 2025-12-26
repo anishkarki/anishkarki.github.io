@@ -1,28 +1,28 @@
 /* =====================================================
    LESSON VIEWER - Professional Design System
-   Nord Theme - Clean & Readable
+   Crystal Clear High-Contrast Theme
    ===================================================== */
 
 /* CSS Custom Properties for Lesson Viewer */
 :root {
-  --lesson-bg-primary: #2E3440;
-  --lesson-bg-secondary: #3B4252;
-  --lesson-bg-card: rgba(67, 76, 94, 0.8);
-  --lesson-border: rgba(136, 192, 208, 0.2);
-  --lesson-border-hover: rgba(136, 192, 208, 0.5);
-  --lesson-accent: #88C0D0;
-  --lesson-accent-light: #8FBCBB;
-  --lesson-accent-dark: #81A1C1;
-  --lesson-success: #A3BE8C;
-  --lesson-warning: #EBCB8B;
-  --lesson-danger: #BF616A;
-  --lesson-text-primary: #ECEFF4;
-  --lesson-text-secondary: #D8DEE9;
-  --lesson-text-muted: #9DA8B8;
+  --lesson-bg-primary: #0a0a0a;
+  --lesson-bg-secondary: #171717;
+  --lesson-bg-card: rgba(31, 31, 31, 0.9);
+  --lesson-border: rgba(64, 64, 64, 0.6);
+  --lesson-border-hover: rgba(96, 165, 250, 0.5);
+  --lesson-accent: #60a5fa;
+  --lesson-accent-light: #93c5fd;
+  --lesson-accent-dark: #3b82f6;
+  --lesson-success: #4ade80;
+  --lesson-warning: #fde047;
+  --lesson-danger: #f87171;
+  --lesson-text-primary: #ffffff;
+  --lesson-text-secondary: #e5e5e5;
+  --lesson-text-muted: #d4d4d4;
   --lesson-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
   --lesson-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
   --lesson-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --lesson-shadow-glow: 0 0 40px rgba(136, 192, 208, 0.15);
+  --lesson-shadow-glow: 0 0 40px rgba(96, 165, 250, 0.2);
   --lesson-radius-sm: 8px;
   --lesson-radius-md: 12px;
   --lesson-radius-lg: 16px;
