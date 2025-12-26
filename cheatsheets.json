@@ -1,12 +1,22 @@
 [
   {
     "id": 1,
-    "title": "Ultimate Vim Configuration & Cheatsheet",
-    "description": "Complete Vim setup guide with modern configuration, essential keybindings, and productivity tips for efficient text editing.",
+    "title": "Vim Cheatsheet",
+    "description": "Complete Vim reference from basics to advanced. Includes modes, movement, editing, text objects, macros, and a ready-to-use config.",
     "category": "editor",
     "tags": ["Vim", "Neovim", "Editor", "Configuration", "Productivity"],
     "date": "2025-12-26T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/vim-ultimate-config.md"
+  },
+  {
+    "id": 2,
+    "title": "Terraform Cheatsheet",
+    "description": "Complete Terraform reference covering providers, resources, variables, modules, state management, loops, functions, and best practices.",
+    "category": "devops",
+    "tags": ["Terraform", "IaC", "DevOps", "AWS", "Infrastructure"],
+    "date": "2025-12-26T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/terraform-essentials.md"
   }
 ]

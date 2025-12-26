@@ -1,0 +1,457 @@
+/* Cheatsheet Viewer Styles */
+
+:root {
+  --cs-bg-primary: #2E3440;
+  --cs-bg-secondary: #3B4252;
+  --cs-bg-tertiary: #434C5E;
+  --cs-border: #4C566A;
+  --cs-text-primary: #ECEFF4;
+  --cs-text-secondary: #D8DEE9;
+  --cs-text-muted: #9DA8B8;
+  --cs-accent: #88C0D0;
+  --cs-accent-hover: #8FBCBB;
+  --cs-success: #A3BE8C;
+  --cs-warning: #EBCB8B;
+  --cs-error: #BF616A;
+  --cs-purple: #B48EAD;
+}
+
+/* Layout */
+.cheatsheet-layout {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 80px;
+  background: var(--cs-bg-primary);
+}
+
+/* Sidebar */
+.toc-sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--cs-bg-secondary);
+  border-right: 1px solid var(--cs-border);
+  padding: 2rem 1.5rem;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-title {
+  color: var(--cs-text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-title i {
+  color: var(--cs-accent);
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.toc-list li {
+  margin-bottom: 0.25rem;
+}
+
+.toc-list a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: var(--cs-text-secondary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.toc-list a:hover {
+  background: var(--cs-bg-tertiary);
+  color: var(--cs-accent);
+  border-left-color: var(--cs-accent);
+}
+
+.toc-list a.active {
+  background: var(--cs-bg-tertiary);
+  color: var(--cs-accent);
+  border-left-color: var(--cs-accent);
+}
+
+.toc-list .toc-h3 {
+  padding-left: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--cs-text-muted);
+}
+
+/* Sidebar Actions */
+.sidebar-actions {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cs-border);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: var(--cs-bg-tertiary);
+  border: 1px solid var(--cs-border);
+  color: var(--cs-text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: var(--cs-accent);
+  color: var(--cs-bg-primary);
+  border-color: var(--cs-accent);
+}
+
+/* Main Content */
+.cheatsheet-main {
+  flex: 1;
+  padding: 2rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cheatsheet-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--cs-border);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--cs-accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--cs-accent-hover);
+}
+
+#cheatsheet-title {
+  color: var(--cs-text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+}
+
+.cheatsheet-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: var(--cs-text-muted);
+  font-size: 0.85rem;
+}
+
+.cheatsheet-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.meta-tag {
+  background: var(--cs-bg-tertiary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* Content Styling */
+.cheatsheet-content {
+  color: var(--cs-text-secondary);
+  line-height: 1.7;
+}
+
+.cheatsheet-content h1 {
+  color: var(--cs-text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+  padding-top: 1rem;
+}
+
+.cheatsheet-content h2 {
+  color: var(--cs-accent);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--cs-border);
+}
+
+.cheatsheet-content h2:first-of-type {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.cheatsheet-content h3 {
+  color: var(--cs-text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+
+.cheatsheet-content h4 {
+  color: var(--cs-text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.cheatsheet-content p {
+  margin: 0 0 1rem;
+}
+
+.cheatsheet-content a {
+  color: var(--cs-accent);
+  text-decoration: none;
+}
+
+.cheatsheet-content a:hover {
+  text-decoration: underline;
+}
+
+.cheatsheet-content strong {
+  color: var(--cs-text-primary);
+  font-weight: 600;
+}
+
+.cheatsheet-content em {
+  color: var(--cs-text-muted);
+}
+
+/* Tables */
+.cheatsheet-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+
+.cheatsheet-content th {
+  background: var(--cs-bg-tertiary);
+  color: var(--cs-text-primary);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--cs-border);
+}
+
+.cheatsheet-content td {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--cs-border);
+  background: var(--cs-bg-secondary);
+}
+
+.cheatsheet-content tr:hover td {
+  background: var(--cs-bg-tertiary);
+}
+
+/* Code Blocks */
+.cheatsheet-content code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  background: var(--cs-bg-tertiary);
+  color: var(--cs-accent);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+.cheatsheet-content pre {
+  background: #1a1d23;
+  border: 1px solid var(--cs-border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+}
+
+.cheatsheet-content pre code {
+  background: none;
+  color: var(--cs-text-secondary);
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* Lists */
+.cheatsheet-content ul,
+.cheatsheet-content ol {
+  margin: 0.5rem 0 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.cheatsheet-content li {
+  margin-bottom: 0.4rem;
+}
+
+.cheatsheet-content li::marker {
+  color: var(--cs-accent);
+}
+
+/* Blockquotes */
+.cheatsheet-content blockquote {
+  border-left: 3px solid var(--cs-accent);
+  background: var(--cs-bg-secondary);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.cheatsheet-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Horizontal Rule */
+.cheatsheet-content hr {
+  border: none;
+  border-top: 1px solid var(--cs-border);
+  margin: 2rem 0;
+}
+
+/* Footer */
+.cheatsheet-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--cs-border);
+  text-align: center;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--cs-bg-tertiary);
+  color: var(--cs-text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: var(--cs-accent);
+  color: var(--cs-bg-primary);
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--cs-text-muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--cs-bg-tertiary);
+  border-top-color: var(--cs-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .cheatsheet-layout {
+    flex-direction: column;
+  }
+  
+  .toc-sidebar {
+    width: 100%;
+    min-width: 100%;
+    position: relative;
+    top: 0;
+    height: auto;
+    max-height: 300px;
+    border-right: none;
+    border-bottom: 1px solid var(--cs-border);
+  }
+  
+  .cheatsheet-main {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+  
+  #cheatsheet-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .toc-sidebar {
+    padding: 1rem;
+  }
+  
+  .sidebar-actions {
+    flex-direction: column;
+  }
+  
+  .cheatsheet-content table {
+    font-size: 0.8rem;
+  }
+  
+  .cheatsheet-content th,
+  .cheatsheet-content td {
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .toc-sidebar,
+  .back-link,
+  .cheatsheet-footer,
+  #navbar-container,
+  #footer-container {
+    display: none !important;
+  }
+  
+  .cheatsheet-layout {
+    display: block;
+  }
+  
+  .cheatsheet-main {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .cheatsheet-content pre {
+    background: #f5f5f5 !important;
+    color: #333 !important;
+    border: 1px solid #ddd;
+  }
+}

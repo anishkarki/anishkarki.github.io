@@ -117,12 +117,11 @@ function renderCheatsheets() {
   // Apply view class
   container.className = `cheatsheets-container ${currentView === 'list' ? 'list-view' : ''}`;
   
-  // Add click handlers
+  // Add click handlers - Navigate to viewer page instead of modal
   container.querySelectorAll('.cheatsheet-card').forEach(card => {
     card.addEventListener('click', () => {
       const id = parseInt(card.dataset.id);
-      const sheet = cheatsheets.find(s => s.id === id);
-      if (sheet) openModal(sheet);
+      window.location.href = `cheatsheet-viewer.html?id=${id}`;
     });
   });
   

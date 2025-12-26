@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cheatsheet Viewer | Anish Karki</title>
+  
+  <!-- External CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cheatsheet-viewer.css">
+  
+</head>
+<body>
+  <!-- Navbar placeholder -->
+  <div id="navbar-container"></div>
+
+  <div class="cheatsheet-layout">
+    <!-- Sidebar: Table of Contents -->
+    <aside class="toc-sidebar" id="toc-sidebar">
+      <h3 class="sidebar-title">
+        <i class="fas fa-list"></i>
+        <span>Contents</span>
+      </h3>
+      <ul class="toc-list" id="toc-list">
+        <!-- TOC will be injected by JS -->
+      </ul>
+      <div class="sidebar-actions">
+        <button class="action-btn" id="copyAllBtn" title="Copy all">
+          <i class="fas fa-copy"></i> Copy All
+        </button>
+        <button class="action-btn" id="printBtn" title="Print">
+          <i class="fas fa-print"></i> Print
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="cheatsheet-main">
+      <div class="cheatsheet-header">
+        <a href="cheatsheets.html" class="back-link">
+          <i class="fas fa-arrow-left"></i> Back to Cheatsheets
+        </a>
+        <h1 id="cheatsheet-title">Loading...</h1>
+        <div class="cheatsheet-meta" id="cheatsheet-meta"></div>
+      </div>
+
+      <article class="cheatsheet-content" id="cheatsheet-content">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading cheatsheet...</p>
+        </div>
+      </article>
+
+      <div class="cheatsheet-footer">
+        <a href="cheatsheets.html" class="back-btn">
+          <i class="fas fa-th-large"></i> Browse All Cheatsheets
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/cheatsheet-viewer.js"></script>
+</body>
+</html>
