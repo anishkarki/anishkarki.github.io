@@ -4,7 +4,13 @@
     "title": "Vim Cheatsheet",
     "description": "Complete Vim reference from basics to advanced. Includes modes, movement, editing, text objects, macros, and a ready-to-use config.",
     "category": "editor",
-    "tags": ["Vim", "Neovim", "Editor", "Configuration", "Productivity"],
+    "tags": [
+      "Vim",
+      "Neovim",
+      "Editor",
+      "Configuration",
+      "Productivity"
+    ],
     "date": "2025-12-26T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/vim-ultimate-config.md"
@@ -14,9 +20,46 @@
     "title": "Terraform Cheatsheet",
     "description": "Complete Terraform reference covering providers, resources, variables, modules, state management, loops, functions, and best practices.",
     "category": "devops",
-    "tags": ["Terraform", "IaC", "DevOps", "AWS", "Infrastructure"],
+    "tags": [
+      "Terraform",
+      "IaC",
+      "DevOps",
+      "AWS",
+      "Infrastructure"
+    ],
     "date": "2025-12-26T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/terraform-essentials.md"
+  },
+  {
+    "id": 3,
+    "title": "Python Programming Cheatsheet",
+    "description": "Comprehensive Python reference covering data types, control structures, functions, OOP, and commonly used libraries.",
+    "category": "programming",
+    "tags": [
+      "Python",
+      "Programming",
+      "Scripting",
+      "Backend"
+    ],
+    "date": "2025-12-29T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/python-programming.md"
+  },
+  {
+    "id": 4,
+    "title": "Visual Studio Code Ultimate Cheatsheet",
+    "description": "The definitive guide to VS Code shortcuts for Windows. Boost your productivity with essential commands for editing, navigation, debugging, and terminal usage.",
+    "category": "editor",
+    "tags": [
+      "VS Code",
+      "Editor",
+      "Shortcuts",
+      "Productivity",
+      "IDE"
+    ],
+    "date": "2025-12-29T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/vscode-ultimate.md"
   }
 ]
