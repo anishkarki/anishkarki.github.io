@@ -116,5 +116,20 @@ Ctrl + Shift + `      # Create new terminal
 Ctrl + C              # Copy selection
 Ctrl + V              # Paste into terminal
 Ctrl + Up / Down      # Scroll up/down
-Shift + PgUp / PgDn   # Scroll page up/down
 ```
+## 15 Must Knows
+1. **Command Palette** (`Ctrl+Shift+P`): Access all commands.
+2. **Quick Open** (`Ctrl+P`): Quickly find and open files.
+3. **Multi-Cursor** (`Ctrl+D`): Add next occurrence to selection.
+4. **Move Line** (`Alt+Up/Down`): Move current line up or down.
+5. **Toggle Comment** (`Ctrl+/`): Comment/uncomment lines.
+6. **Select All Occurrences** (`Ctrl+Shift+L`): Select all matching text.
+7. **Global Search** (`Ctrl+Shift+F`): Search across the entire project.
+8. **Toggle Terminal** (`Ctrl+` `): Open/close integrated terminal.
+9. **Split Editor** (`Ctrl+\`): Split screen for side-by-side editing.
+10. **Go to Definition** (`F12`): Jump to where a symbol is defined.
+11. **Format Document** (`Shift+Alt+F`): Auto-format code.
+12. **Quick Fix** (`Ctrl+.`): Show fixes (e.g., imports).
+13. **Rename Symbol** (`F2`): Rename variable/function across file.
+14. **Focus Sidebar** (`Ctrl+Shift+E`): Jump to file explorer.
+15. **Zen Mode** (`Ctrl+K Z`): Distraction-free coding.
