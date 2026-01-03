@@ -61,5 +61,21 @@
     "date": "2025-12-29T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/vscode-ultimate.md"
+  },
+  {
+    "id": 5,
+    "title": "Git Essentials Cheatsheet",
+    "description": "A practical Git reference for version control mastery. Covers setup, branching, merging, inspection, and advanced history rewriting.",
+    "category": "devops",
+    "tags": [
+      "Git",
+      "Version Control",
+      "DevOps",
+      "CLI",
+      "Productivity"
+    ],
+    "date": "2026-01-03T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/git-essentials.md"
   }
 ]
