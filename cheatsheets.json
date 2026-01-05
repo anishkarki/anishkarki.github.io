@@ -65,7 +65,7 @@
   {
     "id": 5,
     "title": "Git Essentials Cheatsheet",
-    "description": "A practical Git reference for version control mastery. Covers setup, branching, merging, inspection, and advanced history rewriting.",
+    "description": "A practical Git reference for version control mastery. Covers setup, branching, merging, conflict resolution, inspection, and advanced history rewriting.",
     "category": "devops",
     "tags": [
       "Git",

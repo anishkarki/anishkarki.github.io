@@ -15,6 +15,7 @@ A practical Git reference for version control mastery, from basics to advanced w
 | [Sharing & Updating](#sharing--updating) | 🟡 Intermediate |
 | [Stashing](#stashing) | 🟡 Intermediate |
 | [Rewriting History](#rewriting-history) | 🟠 Advanced |
+| [Merge, Rebase & Conflicts](#merge-rebase--conflicts) | 🟠 Advanced |
 | [Debugging](#debugging) | 🟠 Advanced |
 | [Must Knows](#15-must-knows) | 🚀 Essentials |
 
@@ -101,6 +102,45 @@ A practical Git reference for version control mastery, from basics to advanced w
 | `git reset --soft HEAD~1` | Undo last commit but keep changes |
 | `git cherry-pick <commit>` | Apply changes from a specific commit |
 | `git revert <commit>` | Create a new commit undoing changes |
+
+### Merge, Rebase & Conflicts
+
+#### Merge Workflow (Preserve History)
+Merges `feature` branch into `main`, creating a merge commit.
+
+1. **Switch**: `git checkout main`
+2. **Update**: `git pull origin main`
+3. **Merge**: `git merge feature`
+4. **Resolve**: Handle conflicts if any.
+5. **Push**: `git push origin main`
+
+#### Rebase Workflow (Linear History)
+Reapplies `feature` commits on top of `main` for a clean history.
+
+1. **Switch**: `git checkout feature`
+2. **Update**: `git fetch origin`
+3. **Rebase**: `git rebase origin/main`
+4. **Resolve**: Handle conflicts if any.
+5. **Push**: `git push origin feature --force` (Force push required)
+
+#### Conflict Resolution
+When a merge or rebase stops due to conflicts:
+
+1. **Identify**: `git status` shows conflicted files.
+2. **Inspect**: Open file and look for markers:
+   ```text
+   <<<<<<< HEAD
+   Your Current Changes
+   =======
+   Incoming Changes to Apply
+   >>>>>>> branch-name
+   ```
+3. **Decide**: Edit the file to keep desired code and remove markers.
+4. **Stage**: `git add <file>` to mark as resolved.
+5. **Continue**:
+   - Merge: `git commit` (Finish merge commit)
+   - Rebase: `git rebase --continue`
+6. **Abort**: `git merge --abort` or `git rebase --abort` (If you want to stop)
 
 ### Debugging
 
