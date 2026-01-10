@@ -240,17 +240,27 @@ yi(  → yank inside parentheses
 
 ### Splits & Buffers
 
-**Splits:**
+**Splits (Windows):**
 
 | Key | Action |
 |-----|--------|
-| `:vs file` | Vertical split |
-| `:sp file` | Horizontal split |
-| `Ctrl+w h/j/k/l` | Navigate splits |
-| `Ctrl+w =` | Equal size splits |
-| `Ctrl+w _` | Maximize height |
-| `Ctrl+w \|` | Maximize width |
-| `:q` | Close split |
+| `:vs` / `:vs file` | Vertical split (current/new file) |
+| `:sp` / `:sp file` | Horizontal split (current/new file) |
+| `Ctrl+w w` | Cycle between windows |
+| `Ctrl+w h/j/k/l` | Navigate to left/down/up/right split |
+| `Ctrl+w c` / `:q` | Close current window |
+| `Ctrl+w o` | Close all *other* windows (keep focus only) |
+
+**Window Manipulation:**
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+w =` | Equalize size of all splits |
+| `Ctrl+w _` | Maximize height of current split |
+| `Ctrl+w \|` | Maximize width of current split |
+| `Ctrl+w +` / `-` | Increase / decrease height |
+| `Ctrl+w >` / `<` | Increase / decrease width |
+| `Ctrl+w H/J/K/L` | Move split (far left/bottom/top/right) |
 
 **Buffers:**
 
@@ -444,3 +454,22 @@ endif
 ---
 
 > Start simple. Add complexity only when you need it.
+
+---
+
+## 15 Must Knows
+1. **Repeat Command** (`.`): Repeat the last change.
+2. **Jump Back/Forward** (`Ctrl+o` / `Ctrl+i`): Navigate jump history.
+3. **Undo/Redo** (`u` / `Ctrl+r`): Undo and redo changes.
+4. **Text Objects** (`ciw`, `di"`, `yi(`): Change/Delete/Yank inside word/quotes/parens.
+5. **Go to File Start/End** (`gg` / `G`): Jump to top or bottom.
+6. **Search Word** (`*`): Search for the word under current cursor.
+7. **Match Bracket** (`%`): Jump between matching `{}`, `[]`, `()`.
+8. **Line Start/End** (`0` / `$`): Jump to the start or end of the line.
+9. **Save & Quit** (`:x` or `:wq`): Save changes and exit.
+10. **Search** (`/pattern`): Search forward (`n`/`N` for next/prev).
+11. **Cut & Paste** (`dd` / `p`): Delete (cut) line and paste it.
+12. **Window Cycle** (`Ctrl+w w`): Switch between split windows.
+13. **Macros** (`qa` ... `q` -> `@a`): Record and replay complex tasks.
+14. **Switch Case** (`~`): Toggle case of character under cursor.
+15. **Clear Highlight** (`:noh`): Clear search highlighting.

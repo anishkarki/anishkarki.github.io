@@ -309,7 +309,7 @@
     "readTime": "10 min read",
     "file": "Posts/Montoring/OpenSearch.md"
   },
-    {
+  {
     "id": 18,
     "title": "Monitoring with OpenSearch: Setup and Best Practices",
     "excerpt": "Explore effective monitoring strategies using OpenSearch, an open-source search and analytics engine forked from Elasticsearch. Learn setup, configuration, and best practices for logging, metrics, and observability in modern systems.",
@@ -328,6 +328,43 @@
     "featured": true,
     "readTime": "10 min read",
     "file": "Posts/CloudConcepts/OpenStackManagement.md"
+  },
+  {
+    "id": 19,
+    "title": "Beautify Your Terminal with Python Rich",
+    "excerpt": "Discover how to use the Rich library in Python to create stunning terminal applications with syntax highlighting, tables, progress bars, and markdown support.",
+    "content": "Rich is a Python library for writing rich text (with color and style) to the terminal, and for displaying advanced content such as tables, markdown, and syntax highlighted code. In this guide, we will explore its key features and how to implement them.",
+    "category": "python",
+    "tags": [
+      "Python",
+      "CLI",
+      "Terminal",
+      "Rich",
+      "UI"
+    ],
+    "date": "2025-12-29T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "5 min read",
+    "file": "Posts/rich-python-library.md"
+  },
+  {
+    "id": 20,
+    "title": "Bash Tricks: A Guide to Effective Bash Programming",
+    "excerpt": "A comprehensive guide to effective bash programming, covering TTYs, terminal identification, and creating GUI dialogs with Whiptail.",
+    "content": "Bash is a powerful tool. This guide covers essential concepts like TTY vs PTY, understanding terminal devices, and how to use Whiptail to create interactive GUI dialogs in your scripts.",
+    "category": "scripting",
+    "tags": [
+      "Bash",
+      "Linux",
+      "Scripting",
+      "Terminal",
+      "Whiptail"
+    ],
+    "date": "2025-12-31T00:00:00Z",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "5 min read",
+    "file": "Posts/bash_tricks.md"
   }
-
 ]
