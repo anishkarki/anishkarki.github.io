@@ -1,0 +1,107 @@
+---
+title: "SQL Server High Availability: Complete Guide"
+date: "2026-01-12"
+category: "SQL Server High Availability"
+tags: []
+excerpt: "A comprehensive, production-ready guide to sql server high availability, covering fundamentals, best practices, troubleshooting, and real-world examples from enterprise environments."
+author: "Anish Karki"
+featured: true
+---
+
+# Explore IaaS and PaaS solutions for high availability and disaster recovery
+* Understand an AG you need to understand how deploying a windows server failover cluster (WSFC), 
+    * In IaaS, the configuration managed at the azure level.
+    * In PaaS, its in database or database server itself.
+
+## Describe failover clusters in windows server
+* Witness resource, for the quorum mechanism
+    * can be disk, file share (SMB 2.0 or later) or cloud witness. 
+* MS Distributed transaction coordinator (DTC or MSDTC), those that do it to be clustered if deploying an AG or FCI. 
+* Workgroup cluster: The WSFC itself needs a unique name in the domain (and DNS) and requires an object in AD DS called the cluster name object (CNO).
+*A typical Azure-based WSFC will only require a single virtual network card (vNIC). Unlike on-premises setups, the IP address for the vNIC must be configured in Azure, not within the VM. Inside the VM, it appears as a dynamic (DHCP) address, which is expected. However, cluster validation generates a warning that can be safely ignored.*
+
+
+1. Enable failover clustering
+```Install-windowsfeature failover-clustering -includemanagementtools```
+2. Validate
+    * *For FCIs, these tests also check the shared storage to ensure that the disks are configured correctly. For AGs with no shared storage, in Windows Server 2016 and later, the results come back as not applicable. For Windows Server 2012 R2, the disk tests show a warning when there are no shared disks. This state is expected.*
+3. Create the new cluster
+```New-Cluster -Name MyWSFC -Node Node1,Node2,…,NodeN -StaticAddress w.x.y.z```
+for the workgroup cluster that only use DNS, syntax: ```New-Cluster -Name MyWSFC -Node Node1,Node2,…,NodeN -StaticAddress w.x.y.z -NoStorage -AdministrativeAccessPoint DNS```
+```New-Cluster -Name MyWSFC -Node Node1,Node2,…,NodeN -StaticAddress w.x.y.z -NoStorage -ManagementPointNetwork Singleton```
+#### MIltiple subnet
+* Virtual network names on DNS server are updated with virtual IP addresses corresponding to the respective subnets
+* After a multi-subnet failover, clients and applications can then connect to the FCI via the same virtual network name.
+
+## COnfigure Always on
+* necessary to have identical storage configurations.
+* enable feature. 
+* Create the availability group
+* Create an internal azure load balancer
+
+
+* Use of the Load balancer
+* probe port. Load balancer required unique probe port: Get-ClusterResource IPAddressResourceNameForListener | Set-ClusterParameter ProbePort PortNumber \
+```Test-NetConnection NameOrIPAddress -Port PortNumber```
+* The main difference between an on-premises configuration and an Azure configuration for a distributed AG is that as part of the load balancer configuration in each region, the endpoint port for the AG needs to be added. The default port is 5022.
+
+### azure site recovery:
+* There's a Site Recovery Mobility extension configured on the VM.
+* Changes are sent continually unless Azure Site Recovery is unconfigured or replication is disabled
+* Crash consistent recovery points are generated every five minutes, and application-specific recovery points are generated according to what is configured in the replication policy.
+--- 
+* Volume Shadow Service (VSS) – lowering this value could potentially cause problems for SQL Server since there's a brief freeze and thaw of I/O when the snapshots are taken. The impact of the freeze and thaw could be magnified if other options such as an AG are configured. Most won't encounter issues, but if Azure Site Recovery interferes with SQL Server, you may want to consider other availability options.
+
+* A consideration for Azure Site Recovery is if there's a failover to another region, the replica VMs aren't protected when they're brought online. They'll have to be reprotected
+---
+### Active geo replication
+* Active geo-replication provides business continuity by allowing customers to programmatically or manually failover primary databases to secondary regions during major disaster.
+* Azure SQL Managed Instance doesn't support active geo-replication. You must use auto-failover groups instead, which will learn on the next unit.
+* the geo-secondary is configured with the same compute size as the primary
+* multiple replicas
+* Async
+* any region
+* manual failvoer only.
+
+### Cross subscription geo-replication is a feature that allows you to perform this task.
+
+### Auto-failover group:
+* Uniuq within the domain. SQL MI supports one auto-failover group.
+* Has listner: (no need to update connection string after failover)
+* different region
+* primary logical server and secondary logical server
+    * Automatic: switches to region
+    * Read-ony: read-only listner is disabled to ensure performance of the new primary when the secondary is down. 
+* configure GradePeriodWithDataLossHours: how long azure waits before failing over. no dataloss set higher, more time to sync 
+* one or more database ( same size and edition.) seeding. 
+
+Both supports read scale
+
+### Setup:
+* Do you need long-term backups? Or is 1-35 days long enough?
+* What are your RTO and RPO needs?
+* Based on the SLA, what service tier makes the most sense?
+* Do you need Availability Zones?
+* Do you need geo-replicated HADR or failover groups?
+* Is your application ready?
+---
+#### Monitor:
+1. Azure status
+2. Azure Service Health
+---
+* az sql mi list lists the status of managed instances.
+* az sql db list lists the status of Azure SQL databases.
+
+You can also use PowerShell commands to determine the availability of an Azure SQL database. For example:
+* Get-AzSQLDatabase gets all the databases on a server and their details, including status.
+* REST APIs aren't as easy to use, but you can use them to get the status of managed instances and databases.
+
+## Backup history:
+* backup database and txn logs
+* XEvents to track hisotry
+* log view
+
+### Replica Status
+```sys.dm_database_replica_states```
+
+* resource health by using the Azure portal or REST APIs.

@@ -14,7 +14,7 @@ let blogPosts = [];
 let filteredPosts = [];
 let currentCategory = 'all';
 let currentPage = 1;
-let postsPerPage = 6;
+let postsPerPage = 100;
 let currentView = 'grid';
 
 // Initialize the main blog system
@@ -55,16 +55,16 @@ function processBlogPosts(posts) {
     category: post.category || 'general',
     file: post.file // Ensure we have the file path
   }));
-  
+
   // Sort posts by date (newest first)
   blogPosts.sort((a, b) => b.date - a.date);
-  
+
   filteredPosts = [...blogPosts];
-  
+
   updateCategoryCounts();
   updateTotalPostsCount();
   renderBlogPosts();
-  
+
   // Show success message
   showNotification('Blog posts loaded successfully!', 'success');
 }
@@ -80,11 +80,11 @@ function calculateReadTime(content) {
 // Update category counts
 function updateCategoryCounts() {
   const categories = {};
-  
+
   blogPosts.forEach(post => {
     categories[post.category] = (categories[post.category] || 0) + 1;
   });
-  
+
   // Update DOM elements
   const totalPostsEl = document.getElementById('allCount');
   const databaseCountEl = document.getElementById('databaseCount');
@@ -92,7 +92,7 @@ function updateCategoryCounts() {
   const performanceCountEl = document.getElementById('performanceCount');
   const automationCountEl = document.getElementById('automationCount');
   const analyticsCountEl = document.getElementById('analyticsCount');
-  
+
   if (totalPostsEl) totalPostsEl.textContent = blogPosts.length;
   if (databaseCountEl) databaseCountEl.textContent = categories.database || 0;
   if (cloudCountEl) cloudCountEl.textContent = categories.cloud || 0;
@@ -113,19 +113,19 @@ function updateTotalPostsCount() {
 function animateNumber(element, start, end, duration) {
   const range = end - start;
   const startTime = performance.now();
-  
+
   function updateNumber(currentTime) {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
     const current = Math.floor(start + (range * progress));
-    
+
     element.textContent = current;
-    
+
     if (progress < 1) {
       requestAnimationFrame(updateNumber);
     }
   }
-  
+
   requestAnimationFrame(updateNumber);
 }
 
@@ -133,36 +133,36 @@ function animateNumber(element, start, end, duration) {
 function renderBlogPosts() {
   const blogList = document.getElementById('blog-list');
   if (!blogList) return;
-  
+
   blogList.classList.remove('loading');
-  
+
   if (filteredPosts.length === 0) {
     renderEmptyState(blogList);
     return;
   }
-  
+
   // Calculate pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
   const currentPosts = filteredPosts.slice(startIndex, endIndex);
-  
+
   // Apply current view class
   blogList.className = `blog-posts-${currentView}`;
-  
+
   // Render posts
   blogList.innerHTML = currentPosts.map(post => createPostHTML(post)).join('');
-  
+
   // Add animations
   const postCards = blogList.querySelectorAll('.blog-post-card');
   postCards.forEach((card, index) => {
     card.style.animationDelay = `${index * 0.1}s`;
     card.classList.add('animate-in');
   });
-  
+
   // Update pagination
   updatePagination(totalPages);
-  
+
   // Scroll to top of posts
   if (currentPage > 1) {
     blogList.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -176,17 +176,16 @@ function createPostHTML(post) {
     month: 'long',
     day: 'numeric'
   });
-  
-  const tagsHTML = post.tags.slice(0, 4).map(tag => 
+
+  const tagsHTML = post.tags.slice(0, 4).map(tag =>
     `<span class="post-tag">${tag}</span>`
   ).join('');
-  
+
   // Create the proper post URL with file parameter
   const postUrl = `post.html?file=${encodeURIComponent(post.file)}`;
-  
+
   return `
     <article class="blog-post-card ${currentView === 'list' ? 'list-view' : ''}" data-category="${post.category}">
-      ${post.featured ? '<div class="featured-badge"><i class="fas fa-star"></i> Featured</div>' : ''}
       
       <div class="post-content">
         <div class="post-meta-header">
@@ -278,26 +277,26 @@ function showError(message) {
 function initializeSearchFunctionality() {
   const searchInput = document.getElementById('blogSearch');
   if (!searchInput) return;
-  
+
   let searchTimeout;
-  
-  searchInput.addEventListener('input', function(e) {
+
+  searchInput.addEventListener('input', function (e) {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       performSearch(e.target.value);
     }, 300);
   });
-  
+
   // Add search button functionality
   const searchBtn = document.querySelector('.search-btn');
   if (searchBtn) {
-    searchBtn.addEventListener('click', function() {
+    searchBtn.addEventListener('click', function () {
       performSearch(searchInput.value);
     });
   }
-  
+
   // Enter key functionality
-  searchInput.addEventListener('keypress', function(e) {
+  searchInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       performSearch(this.value);
     }
@@ -307,27 +306,27 @@ function initializeSearchFunctionality() {
 // Perform search
 function performSearch(query) {
   const searchTerm = query.toLowerCase().trim();
-  
+
   if (searchTerm === '') {
-    filteredPosts = blogPosts.filter(post => 
+    filteredPosts = blogPosts.filter(post =>
       currentCategory === 'all' || post.category === currentCategory
     );
   } else {
     filteredPosts = blogPosts.filter(post => {
       const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
-      const matchesSearch = 
+      const matchesSearch =
         post.title.toLowerCase().includes(searchTerm) ||
         post.excerpt.toLowerCase().includes(searchTerm) ||
         post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
         (post.content && post.content.toLowerCase().includes(searchTerm));
-      
+
       return matchesCategory && matchesSearch;
     });
   }
-  
+
   currentPage = 1;
   renderBlogPosts();
-  
+
   // Show search results notification
   if (query.trim()) {
     showNotification(`Found ${filteredPosts.length} posts matching "${query}"`, 'info');
@@ -337,18 +336,18 @@ function performSearch(query) {
 // Initialize category filtering
 function initializeCategoryFiltering() {
   const categoryItems = document.querySelectorAll('.category-item');
-  
+
   categoryItems.forEach(item => {
-    item.addEventListener('click', function(e) {
+    item.addEventListener('click', function (e) {
       e.preventDefault();
-      
+
       // Update active state
       categoryItems.forEach(cat => cat.classList.remove('active'));
       this.classList.add('active');
-      
+
       // Get selected category
       currentCategory = this.getAttribute('data-category');
-      
+
       // Filter posts
       filterByCategory(currentCategory);
     });
@@ -359,20 +358,20 @@ function initializeCategoryFiltering() {
 function filterByCategory(category) {
   const searchInput = document.getElementById('blogSearch');
   const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
-  
+
   filteredPosts = blogPosts.filter(post => {
     const matchesCategory = category === 'all' || post.category === category;
-    const matchesSearch = !searchTerm || 
+    const matchesSearch = !searchTerm ||
       post.title.toLowerCase().includes(searchTerm) ||
       post.excerpt.toLowerCase().includes(searchTerm) ||
       post.tags.some(tag => tag.toLowerCase().includes(searchTerm));
-    
+
     return matchesCategory && matchesSearch;
   });
-  
+
   currentPage = 1;
   renderBlogPosts();
-  
+
   // Show filter notification
   const categoryName = getCategoryDisplayName(category);
   showNotification(`Showing ${filteredPosts.length} posts in ${categoryName}`, 'info');
@@ -381,16 +380,16 @@ function filterByCategory(category) {
 // Initialize view toggle
 function initializeViewToggle() {
   const viewButtons = document.querySelectorAll('.view-btn');
-  
+
   viewButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       // Update active state
       viewButtons.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      
+
       // Get selected view
       currentView = this.getAttribute('data-view');
-      
+
       // Re-render posts with new view
       renderBlogPosts();
     });
@@ -409,12 +408,12 @@ function updatePagination(totalPages) {
     paginationContainer.style.display = 'none';
     return;
   }
-  
+
   paginationContainer.style.display = 'block';
   const pagination = paginationContainer.querySelector('.pagination');
-  
+
   let paginationHTML = '';
-  
+
   // Previous button
   if (currentPage > 1) {
     paginationHTML += `
@@ -425,11 +424,11 @@ function updatePagination(totalPages) {
       </li>
     `;
   }
-  
+
   // Page numbers
   const startPage = Math.max(1, currentPage - 2);
   const endPage = Math.min(totalPages, currentPage + 2);
-  
+
   if (startPage > 1) {
     paginationHTML += `
       <li class="page-item">
@@ -440,7 +439,7 @@ function updatePagination(totalPages) {
       paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
     }
   }
-  
+
   for (let i = startPage; i <= endPage; i++) {
     paginationHTML += `
       <li class="page-item ${i === currentPage ? 'active' : ''}">
@@ -448,7 +447,7 @@ function updatePagination(totalPages) {
       </li>
     `;
   }
-  
+
   if (endPage < totalPages) {
     if (endPage < totalPages - 1) {
       paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
@@ -459,7 +458,7 @@ function updatePagination(totalPages) {
       </li>
     `;
   }
-  
+
   // Next button
   if (currentPage < totalPages) {
     paginationHTML += `
@@ -470,12 +469,12 @@ function updatePagination(totalPages) {
       </li>
     `;
   }
-  
+
   pagination.innerHTML = paginationHTML;
-  
+
   // Add click handlers
   pagination.querySelectorAll('.page-link[data-page]').forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
       const page = parseInt(this.getAttribute('data-page'));
       if (page !== currentPage) {
@@ -490,7 +489,7 @@ function updatePagination(totalPages) {
 function resetFilters() {
   currentCategory = 'all';
   currentPage = 1;
-  
+
   // Reset UI
   document.querySelectorAll('.category-item').forEach(item => {
     item.classList.remove('active');
@@ -498,16 +497,16 @@ function resetFilters() {
       item.classList.add('active');
     }
   });
-  
+
   const searchInput = document.getElementById('blogSearch');
   if (searchInput) {
     searchInput.value = '';
   }
-  
+
   // Reset filtered posts
   filteredPosts = [...blogPosts];
   renderBlogPosts();
-  
+
   showNotification('Filters reset successfully!', 'success');
 }
 
@@ -534,7 +533,7 @@ function createBlogParticles() {
     `;
     heroSection.appendChild(particle);
   }
-  
+
   // Add blog particle animation
   if (!document.querySelector('#blog-particle-styles')) {
     const style = document.createElement('style');
@@ -650,7 +649,7 @@ function showNotification(message, type = 'info') {
   // Remove existing notifications
   const existingNotifications = document.querySelectorAll('.blog-notification');
   existingNotifications.forEach(notif => notif.remove());
-  
+
   const notification = document.createElement('div');
   notification.className = `blog-notification notification-${type}`;
   notification.innerHTML = `
@@ -659,7 +658,7 @@ function showNotification(message, type = 'info') {
       <span>${message}</span>
     </div>
   `;
-  
+
   // Add notification styles
   notification.style.cssText = `
     position: fixed;
@@ -676,14 +675,14 @@ function showNotification(message, type = 'info') {
     backdrop-filter: blur(10px);
     max-width: 300px;
   `;
-  
+
   document.body.appendChild(notification);
-  
+
   // Animate in
   setTimeout(() => {
     notification.style.transform = 'translateX(0)';
   }, 100);
-  
+
   // Auto remove
   setTimeout(() => {
     notification.style.transform = 'translateX(100%)';

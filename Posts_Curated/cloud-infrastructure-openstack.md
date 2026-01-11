@@ -1,11 +1,10 @@
 ---
 title: "OpenStack Management: Complete Setup, Infrastructure as Code, and Essential Commands"
 date: "2025-11-16"
-category: "cloud-infrastructure"
-tags: ["OpenStack", "Infrastructure as Code", "Terraform", "Cloud Management", "DevOps", "Networking", "IaaS"]
+category: "Cloud Infrastructure - OpenStack"
+tags: ["OpenStack", "Infrastructure as Code", "Terraform", "Cloud Management", "DevOps", "Networking"]
 excerpt: "Master OpenStack management from authentication to infrastructure provisioning. Learn how to use Terraform for Infrastructure as Code, configure networking, manage VMs, and essential OpenStack CLI commands for production environments."
 author: "Anish Karki"
-readTime: "16 min read"
 featured: true
 ---
 
@@ -755,3 +754,4 @@ OpenStack provides tremendous flexibility and control for managing your infrastr
 *Managing complex cloud infrastructure doesn't have to be overwhelming. Start with Terraform, master the essential CLI commands, and build from there. Happy infrastructure coding!*
 
 *Have questions about OpenStack management or want to discuss infrastructure automation? Connect with me on [LinkedIn](https://www.linkedin.com/in/anish-karki-dba/) or [send me an email](mailto:anish.karki1.618@outlook.com).*
+
