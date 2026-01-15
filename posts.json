@@ -150,5 +150,18 @@
     "featured": true,
     "readTime": "19 min read",
     "file": "Posts_Curated/sql-server-performance-tuning.md"
+  },
+  {
+    "id": 12,
+    "title": "OpenSearch PostgreSQL Dashboard: Complete Monitoring Setup with NDJSON",
+    "excerpt": "A production-ready OpenSearch dashboard for monitoring PostgreSQL/Patroni clusters with real-time log analysis, error tracking, and interactive filters. Includes complete NDJSON for one-click import.",
+    "content": "---\ntitle: \"OpenSearch PostgreSQL Dashboard: Complete Monitoring Setup with NDJSON\"\ndate: \"2026-01-15\"\ncategory: \"OpenSearch & Observability\"\ntags: [\"OpenSearch\", \"PostgreSQL\", \"Patroni\", \"Monitoring\", \"Dashboard\", \"Observability\", \"DevOps\"]\nexcerpt: \"A production-ready OpenSearch dashboard for monitoring PostgreSQL/Patroni clusters with real-time log analysis, error tracking, and interactive filters. Includes complete NDJSON for one-click import.\"\nauthor: \"Anish Karki\"\nfeatured: true\n---\n\n# 🐘 OpenSearch PostgreSQL & Patroni Monitoring Dashboard\n\nThis guide provides a complete, production-ready OpenSearch dashboard for monitoring PostgreSQL and Patroni cluster logs. The dashboard includes real-time visualizations, error tracking, and interactive filters for deep log analysis.\n\n## 🎯 What This Dashboard Provides\n\n| Feature | Description |\n|---------|-------------|\n| **📊 Real-time Metrics** | Total events, error counts, warning counts, active sources |\n| **📈 Time-Series Analysis** | Log volume over time, errors/warnings trends |\n| **🔍 Interactive Filters** | Filter by hostname, log source, log type |\n| **⚖️ Node Comparison** | Compare Patroni1 vs Patroni2 log volumes |\n| **📁 Source Breakdown** | Visualize logs by source file |\n",
+    "category": "OpenSearch & Observability",
+    "tags": ["OpenSearch", "PostgreSQL", "Patroni", "Monitoring", "Dashboard", "Observability", "DevOps"],
+    "date": "2026-01-15",
+    "author": "Anish Karki",
+    "featured": true,
+    "readTime": "8 min read",
+    "file": "Posts_Curated/opensearch-postgresql-dashboard.md"
   }
 ]
