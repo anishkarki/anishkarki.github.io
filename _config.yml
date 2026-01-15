@@ -4,3 +4,7 @@ kramdown:
   input: GFM
   syntax_highlighter_opts:
     disable_liquid: true
+# Include markdown files for direct serving
+include:
+  - Posts_Curated
+  - Posts
