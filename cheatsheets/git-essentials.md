@@ -29,6 +29,7 @@ A practical Git reference for version control mastery, from basics to advanced w
 |---------|-------------|
 | `git config --global user.name "Name"` | Set global username |
 | `git config --global user.email "email"` | Set global email |
+| `git config --list` | List all configuration settings |
 | `git config --global color.ui auto` | Enable helpful color output |
 | `git init` | Initialize a new local repository |
 | `git clone <url>` | Clone a remote repository |
@@ -50,8 +51,10 @@ A practical Git reference for version control mastery, from basics to advanced w
 | `git branch` | List local branches |
 | `git branch <name>` | Create a new branch |
 | `git checkout <name>` | Switch to a branch |
+| `git switch <name>` | Switch to a branch (modern alternative) |
 | `git checkout -b <name>` | Create and switch to a new branch |
 | `git merge <branch>` | Merge specified branch into current |
+| `git rebase <branch>` | Rebase current branch onto another |
 | `git branch -d <name>` | Delete a local branch (safe) |
 
 ---
@@ -63,7 +66,9 @@ A practical Git reference for version control mastery, from basics to advanced w
 | Command | Description |
 |---------|-------------|
 | `git log` | Show commit history |
-| `git log --oneline --graph` | Show history as a graph |
+| `git log --oneline` | Show condensed commit history |
+| `git log --graph` | Show history as a graph |
+| `git log --oneline --graph` | Show condensed history as a graph |
 | `git show <commit>` | Show changes in a specific commit |
 | `git diff` | Show unstaged changes |
 | `git diff --staged` | Show staged changes |
@@ -75,8 +80,10 @@ A practical Git reference for version control mastery, from basics to advanced w
 | `git remote add origin <url>` | Add a remote repository |
 | `git remote -v` | List remote repositories |
 | `git push origin <branch>` | Push changes to remote |
+| `git push origin main` | Push main branch to remote |
 | `git push -u origin <branch>` | Push and set upstream tracking |
 | `git pull` | Fetch and merge from remote |
+| `git pull origin main` | Pull and merge main from remote |
 | `git fetch` | Download objects from remote (no merge) |
 
 ### Stashing
@@ -84,7 +91,7 @@ A practical Git reference for version control mastery, from basics to advanced w
 | Command | Description |
 |---------|-------------|
 | `git stash` | Stash modified & staged changes |
-| `git stash pop` | Restore most recent stash |
+| `git stash pop` | Restore most recent stash and remove from stash list |
 | `git stash list` | List stack-order of stashed changes |
 | `git stash drop` | Discard most recent stash |
 
@@ -97,11 +104,18 @@ A practical Git reference for version control mastery, from basics to advanced w
 | Command | Description |
 |---------|-------------|
 | `git rebase <branch>` | Reapply commits on top of another branch |
+| `git rebase HEAD~n` | Rebase last _n_ commits |
 | `git rebase -i HEAD~n` | Interactive rebase last _n_ commits |
 | `git reset --hard HEAD~1` | Undo last commit & discard changes |
-| `git reset --soft HEAD~1` | Undo last commit but keep changes |
+| `git reset --soft HEAD~1` | Undo last commit but keep changes staged |
+| `git reset --mixed HEAD~1` | Undo last commit, keep changes unstaged |
+| `git restore <file>` | Restore file to last committed state |
 | `git cherry-pick <commit>` | Apply changes from a specific commit |
 | `git revert <commit>` | Create a new commit undoing changes |
+| `git tag <tagname>` | Create a lightweight tag |
+| `git tag v1.0` | Create a tag named v1.0 |
+| `git push origin <tagname>` | Push a specific tag to remote |
+| `git push origin v1.0` | Push v1.0 tag to remote |
 
 ### Merge, Rebase & Conflicts
 
