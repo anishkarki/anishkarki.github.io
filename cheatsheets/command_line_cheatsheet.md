@@ -66,13 +66,35 @@ Mastering these shortcuts will allow you to fly through the command line without
 *   `chmod +x script.sh`: Make a file executable.
 *   `chown user:group file`: Change file owner and group.
 
-### Productivity Tricks
-*   `!!`: Run the **last command** again.
-    *   Example: `sudo !!` (Run the last command with sudo).
-*   `!$`: Reuse the **last argument** of the previous command.
-    *   Example: `mkdir project; cd !$` (Makes 'project' and then cds into it).
-*   `alias name='command'`: Create your own shortcuts.
+### ⚡ Special Parameters (Shell Variables)
+| Variable | Description |
+| :--- | :--- |
+| **`$?`** | **Exit status** of the last command (0 = Success, Non-zero = Error). |
+| **`$!`** | **PID** of the last background command. |
+| **`$$`** | **PID** of the current shell. |
+| **`$0`** | The name of the shell or script. |
+| **`$_`** | The last argument of the previous command. |
+| **`$-`** | Current shell option flags (e.g., `i` for interactive). |
+| **`$#`** | Number of arguments passed to script/function. |
+| **`$@`** | All arguments passed to script/function. |
+| **`$USER`** | Current user name. |
+| **`$RANDOM`** | Returns a random integer between 0 and 32767. |
+
+### 📜 History Expansion (Bang commands)
+| Shortcut | Action | Example |
+| :--- | :--- | :--- |
+| **`!!`** | Run the **entire** last command. | `sudo !!` |
+| **`!$`** | Use the **last argument** of the last command. | `cat !$` |
+| **`!^`** | Use the **first argument** of the last command. | `mkdir !^` |
+| **`!*`** | Use **all arguments** of the last command. | |
+| **`!n`** | Run command number `n` from history. | `!104` |
+| **`!string`** | Run the most recent command starting with `string`. | `!gi` (runs git) |
+| **`^old^new`** | Replace `old` with `new` in previous command. | `^tst^test` (fix typo) |
+
+### 📝 Aliases
+*   `alias name='command'`: Create your own shortcuts (put in `~/.bashrc`).
     *   Example: `alias ll='ls -lah'`
+    *   Example: `alias ..='cd ..'`
 
 ## 🧬 Sed & Awk Tricks (Text Processing)
 
