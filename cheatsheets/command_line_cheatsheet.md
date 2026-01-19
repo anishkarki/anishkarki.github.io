@@ -73,3 +73,23 @@ Mastering these shortcuts will allow you to fly through the command line without
     *   Example: `mkdir project; cd !$` (Makes 'project' and then cds into it).
 *   `alias name='command'`: Create your own shortcuts.
     *   Example: `alias ll='ls -lah'`
+
+## 🧬 Sed & Awk Tricks (Text Processing)
+
+Stream editing and pattern scanning powers allow for quick data manipulation without opening a text editor.
+
+### Sed (Stream Editor)
+*   `sed 's/foo/bar/g' file.txt`: Replace **all** occurrences of "foo" with "bar".
+    *   `s`: Substitute. `g`: Global (all occurrences in line).
+*   `sed '/pattern/d' file.txt`: Delete lines matching "pattern".
+*   `sed -n '1,5p' file.txt`: Print only lines 1 through 5.
+*   `sed -i 's/old/new/g' file.txt`: Edit file **in-place** (save changes to file).
+*   `sed '/^$/d' file.txt`: Delete empty lines.
+
+### Awk (Data Extraction)
+*   `awk '{print $1}' file.txt`: Print the **first column** of every line.
+*   `awk '{print $NF}' file.txt`: Print the **last column** of every line (`NF` = Number of Fields).
+*   `awk '/fail/ {print $0}' file.txt`: Print lines containing "fail".
+*   `awk -F: '{print $1}' /etc/passwd`: Use `:` as a separator (default is whitespace) and print the first column (usernames).
+*   `awk 'length($0) > 80' file.txt`: Print lines longer than 80 characters.
+*   `ls -l | awk '{sum += $5} END {print sum}'`: Sum the 5th column (file sizes) and print the total.
