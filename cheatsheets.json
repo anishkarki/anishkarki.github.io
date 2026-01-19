@@ -77,5 +77,23 @@
     "date": "2026-01-03T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/git-essentials.md"
+  },
+  {
+    "id": 6,
+    "title": "Command Line & Bash Cheatsheet",
+    "description": "Essential command line shortcuts and Bash tricks for improved productivity. Includes readline shortcuts, file management, and powerful Sed/Awk data processing examples.",
+    "category": "devops",
+    "tags": [
+      "Bash",
+      "Shell",
+      "CLI",
+      "Linux",
+      "Productivity",
+      "Sed",
+      "Awk"
+    ],
+    "date": "2026-01-20T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/command_line_cheatsheet.md"
   }
 ]
