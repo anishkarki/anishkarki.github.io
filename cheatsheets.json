@@ -95,5 +95,22 @@
     "date": "2026-01-20T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/command_line_cheatsheet.md"
+  },
+  {
+    "id": 7,
+    "title": "Sed Cheatsheet",
+    "description": "A comprehensive guide to `sed`, including basic substitution, advanced pattern matching using regex, flow control, and powerful one-liners for text processing.",
+    "category": "shell",
+    "tags": [
+      "Sed",
+      "Shell",
+      "CLI",
+      "Text Processing",
+      "Regex",
+      "Stream Editor"
+    ],
+    "date": "2026-02-02T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/sed-cheatsheet.md"
   }
 ]
