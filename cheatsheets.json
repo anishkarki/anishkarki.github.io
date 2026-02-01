@@ -112,5 +112,22 @@
     "date": "2026-02-02T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/sed-cheatsheet.md"
+  },
+  {
+    "id": 8,
+    "title": "Awk Cheatsheet",
+    "description": "A comprehensive guide to `awk`, covering basic field extraction, filtering, math, formatting, and advanced text processing. Organized by difficulty.",
+    "category": "shell",
+    "tags": [
+      "Awk",
+      "Shell",
+      "CLI",
+      "Text Processing",
+      "Stream Editor",
+      "Linux"
+    ],
+    "date": "2026-02-02T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/awk-cheatsheet.md"
   }
 ]
