@@ -1,217 +1,159 @@
 # Sed Cheatsheet
 
-A comprehensive guide to `sed`, the stream editor, including basic substitution, advanced pattern matching, and powerful text processing scripts.
+A comprehensive guide to `sed`, the stream editor. This guide is broken down into essentials you **must remember**, intermediate patterns that are **good to have**, and advanced **tricks** for power users.
 
 ---
 
-## ⚡ Basic Syntax
+## 🟢 Must Remember (Essentials)
 
+These are the commands you will use 90% of the time.
+
+### Basic Syntax
 ```bash
 sed [options] 'command' file(s)
-sed [options] -f scriptfile file(s)
+# Example:
+sed 's/foo/bar/' file.txt
 ```
 
+### Key Options
 | Option | Description |
 | :--- | :--- |
-| `-n` | **Silent mode**. Suppresses automatic printing of pattern space. Use with `p` to print specific lines. |
-| `-e script` | Add the script to the commands to be executed. |
-| `-f script-file` | Add the contents of script-file to the commands to be executed. |
-| `-i[SUFFIX]` | **In-place edit**. Edits files in place (makes backup if SUFFIX supplied). |
-| `-r` / `-E` | Use **extended regular expressions** in the script (no need to escape `(`, `)`, `+`, `?`). |
+| **`-n`** | **Silent mode**. Do not print anything by default. (Crucial when using `p`). |
+| **`-i`** | **In-place**. Save changes directly to the file. |
+| **`-E` / `-r`** | **Extended Regex**. Enables easier regex (no need to escape `+`, `?`, `(...)`). |
+
+### Basic Substitution (`s///`)
+The bread and butter of sed.
+```bash
+# Substitute the FIRST occurrence of "apple" with "mango" per line
+sed 's/apple/mango/' file.txt
+
+# Substitute ALL occurrences per line (Global flag 'g')
+sed 's/apple/mango/g' file.txt
+```
+
+### Deleting Lines (`d`)
+```bash
+# Delete lines matching "error"
+sed '/error/d' file.txt
+
+# Delete lines 1 through 5
+sed '1,5d' file.txt
+
+# Delete multiple empty lines
+sed '/^$/d' file.txt
+```
+
+### Printing Specific Lines (`p`)
+Always use with `-n` (no print) to avoid duplicates.
+```bash
+# Print only lines containing "success"
+sed -n '/success/p' file.txt
+
+# Print first 10 lines (like head)
+sed -n '1,10p' file.txt
+```
 
 ---
 
-## 🔄 Substitution (`s`)
+## 🟡 Good to Have (Intermediate)
 
-The most common use of sed.
+These features extend your ability to manipulate data precisely.
 
-**Syntax:** `s/regexp/replacement/flags`
-
-### Basic Replacement
+### Addresses (Selecting Lines)
+Restrict where commands apply.
 ```bash
-# Replace "day" with "night" (first occurrence per line)
-echo "day and night" | sed 's/day/night/'
-# Output: night and night
+# Apply substitution only on lines 10 to 20
+sed '10,20s/foo/bar/g' file.txt
 
-# Global replacement (all occurrences per line) with 'g' flag
-sed 's/day/night/g' file.txt
+# Apply only to lines starting with "Section"
+sed '/^Section/s/foo/bar/g' file.txt
 ```
 
 ### Delimiters
-You can use any character as a delimiter if your pattern contains slashes.
+If your text contains slashes (e.g., paths), use a different delimiter like `:` or `|`.
 ```bash
-# Using colon ':' as delimiter
-echo '/var/www' | sed 's:/var/www:/home/www:'
+# Change /var/www to /home/www
+sed 's:/var/www:/home/www:g' file.txt
+```
+
+### Captured Groups & Backreferences
+Reuse parts of the matched pattern using `\1`, `\2`, etc.
+*   **Without `-E`**: Parentheses must be escaped `\(...\)`.
+*   **With `-E`**: Use plain parentheses `(...)`.
+
+```bash
+# Input: "Page 1 of 5" -> Output: "1 of 5"
+# We capture "Page " as group 1, and the rest as group 2. We only want group 2.
+echo "Page 1 of 5" | sed -E 's/(Page )(.*)/\2/'
+
+# Swap words: "Hello World" -> "World Hello"
+echo "Hello World" | sed -E 's/([a-z]+) ([a-z]+)/\2 \1/'
 ```
 
 ### Matched String (`&`)
-Use `&` in the replacement string to refer to the **entire** matched pattern.
+Use `&` to refer to the **entire** text that was matched.
 ```bash
-# Surround lowercase words with parentheses
-echo "abc is abc" | sed 's/[a-z]*/(&)/g'
-# Output: (abc) () (is) () (abc)
+# Wrap every number in brackets: "123" -> "[123]"
+echo "Item 123" | sed -E 's/[0-9]+/[&]/g'
 ```
 
-### Backreferences (`\1`, `\2`, ...)
-Use `\1` through `\9` to refer to captured groups `(...)`.
-
-> **Note:** Without `-r` or `-E`, you must escape parentheses `\(...\)`. With `-r` or `-E`, use plain `(...)`.
-
-```bash
-# Keep only the first word
-echo "bcdef123" | sed 's/\([a-z]*\).*/\1/'
-
-# Swap two words (Standard Regex)
-echo "abc def" | sed 's/\([a-z]\+\) \([a-z]\+\)/\2 \1/'
-
-# Swap two words (Extended Regex -r/-E)
-echo "abc def" | sed -E 's/([a-z]+) ([a-z]+)/\2 \1/'
-```
-
-### Specific Occurrence
-Replace only the Nth occurrence of a pattern.
-```bash
-# Replace the 2nd colon with a dash
-echo "root:xyz123:0:0" | sed 's/:/-/2'
-```
-
----
-
-## 🎯 Addresses
-
-Restrict commands to specific lines.
-
-| Address | Description | Example |
-| :--- | :--- | :--- |
-| `n` | Line number `n`. | `sed '10d'` (delete line 10) |
-| `$` | The last line. | `sed '$d'` (delete last line) |
-| `/regexp/` | Lines matching regex. | `sed '/error/d'` (delete lines with "error") |
-| `n, m` | Range from line `n` to `m`. | `sed '1,5p'` (print lines 1-5) |
-| `/start/, /end/` | Range from start match to end match. | `sed '/begin/,/end/p'` |
-
----
-
-## 🛠️ Basic Commands
-
-| Command | Syntax | Description |
-| :--- | :--- | :--- |
-| **d** | `[addr]d` | **Delete** pattern space. Start next cycle. |
-| **p** | `[addr]p` | **Print** pattern space. (Use with `-n`). |
-| **q** | `[addr]q` | **Quit** sed (stops processing). |
-| **a** | `[addr]a text` | **Append** `text` after the line. |
-| **i** | `[addr]i text` | **Insert** `text` before the line. |
-| **c** | `[addr]c text` | **Change** (replace) the line with `text`. |
-| **y** | `[addr]y/src/dst/` | **Transliterate** chars (like `tr`). |
-
-### Examples
-```bash
-# Delete empty lines
-sed '/^$/d' file.txt
-
-# Print only lines containing "duplicate"
-sed -n '/duplicate/p' file.txt
-
-# Reverse first 3 characters in a line
-echo "abcdef" | sed 's/\(.\)\(.\)\(.\)/\3\2\1/'
-```
-
----
-
-## 🧪 Advanced Patterns & Deduplication
-
-Advanced usage often involves addressing duplicates or complex word boundaries.
-
-### Word Boundaries
-Use `\b` to match the empty string at the edge of a word.
-
-```bash
-# Parenthesize first word only
-echo "hello there" | sed 's/[^ ]*/(&)/'
-```
-
-### Duplicate Removal
-Techniques to find or remove duplicate patterns.
-
-```bash
-# Find lines with duplicate words (GNU sed)
-echo "apple app" | sed -rn '/\b([a-z]+)\b.*\b\1\b/p'
-
-# Remove duplicate word in a line
-echo "abc def xyz abc" | sed -E 's/\b([a-z]+)\b(.*)\b\1\b/\1\2/'
-```
-
----
-
-## 📥 Hold Space vs Pattern Space
-
-Sed maintains two data buffers:
-1.  **Pattern Space**: The buffer where the current line is read and operations are performed.
-2.  **Hold Space**: A secondary buffer for temporary storage.
-
-| Command | Description |
-| :--- | :--- |
-| **h** | **Copy** Pattern -> Hold (overwrites Hold). |
-| **H** | **Append** Pattern -> Hold. |
-| **g** | **Copy** Hold -> Pattern (overwrites Pattern). |
-| **G** | **Append** Hold -> Pattern. |
-| **x** | **Exchange** Pattern and Hold spaces. |
-
-### Example: Reverse Lines in a File (like `tac`)
-```bash
-sed -n '1!G;h;$p' file.txt
-```
-*   `1!G`: If not 1st line, append hold to pattern.
-*   `h`: Copy pattern (so far reversed) to hold.
-*   `$p`: If last line, print.
-
----
-
-## 📜 Multiline Commands
-
-Process multiple lines at once.
-
-| Command | Description |
-| :--- | :--- |
-| **N** | Append next line to pattern space (separated by `\n`). |
-| **D** | Delete first part of pattern space (up to `\n`), restart cycle. |
-| **P** | Print first part of pattern space (up to `\n`). |
-
-### Example: Join lines
-```bash
-# Join pair of lines side-by-side
-sed 'N; s/\n/ /' file.txt
-```
-
----
-
-## 🔀 Flow Control (Branching)
-
-Sed scripts can branch to labels, allowing for loops and conditional logic.
-
-| Command | Description |
-| :--- | :--- |
-| **:label** | Define a **label** for branching. |
-| **b [label]** | **Branch** (jump) unconditionally to `label`. If label is omitted, branch to end of script. |
-| **t [label]** | **Test**. Branch to `label` only if a substitution (`s///`) has successfully changed the pattern space since the last input line or last reset. |
-
-### Example: Loop to remove all HTML tags
-```bash
-sed ':start; s/<[^>]*>//g; t start' file.html
-```
-*   `:start`: Label.
-*   `s/...`: Substitute command.
-*   `t start`: If substitution happened, jump back to start.
-
----
-
-## ⚡ Useful One-Liners
-
+### Useful One-Liners
 | Task | Command |
 | :--- | :--- |
 | **Double space a file** | `sed G` |
-| **Number lines** | `sed '=' file \| sed 'N; s/\n/ /'` |
-| **Count lines** (like `wc -l`) | `sed -n '$='` |
-| **Print first 10 lines** (like `head`) | `sed 10q` |
 | **Delete trailing whitespace** | `sed 's/[ \t]*$//'` |
 | **Delete leading whitespace** | `sed 's/^[ \t]*//'` |
-| **Dos2Unix** (CRLF -> LF) | `sed 's/\r$//'` |
+| **Dos2Unix** (Remove `\r`) | `sed 's/\r$//'` |
+
+---
+
+## 🔴 Advanced Tricks (Power User)
+
+For complex multi-line processing and logic.
+
+### Hold Space vs Pattern Space
+Sed has a "clipboard" called the **Hold Space**.
+*   **Pattern Space**: Current line being processed.
+*   **Hold Space**: Hidden buffer.
+
+| Cmd | Action | Description |
+| :--- | :--- | :--- |
+| `h` | Pattern → Hold | **Copy** current line to clipboard. |
+| `g` | Hold → Pattern | **Paste** clipboard to current line (overwriting). |
+| `G` | Hold → Pattern | **Append** clipboard to current line. |
+| `x` | Exchange | Swap Pattern and Hold spaces. |
+
+**Example: Reverse a file (tac)**
+```bash
+sed -n '1!G;h;$p' file.txt
+```
+
+### Multiline Commands (`N`, `D`, `P`)
+Process input across line breaks.
+*   **`N`**: Read next line and append to current pattern space (joined by `\n`).
+*   **`D`**: Delete up to the first newline.
+*   **`P`**: Print up to the first newline.
+
+**Example: Join every 2 lines**
+```bash
+sed 'N; s/\n/ /' file.txt
+```
+
+### Duplicate Removal (Advanced)
+```bash
+# Remove duplicate words in a single line
+echo "abc def xyz abc" | sed -E 's/\b([a-z]+)\b(.*)\b\1\b/\1\2/'
+```
+
+### Flow Control (Branching)
+Think of this as `goto` for sed.
+*   `:label` defines a marker.
+*   `b label` jumps to matches unconditionally.
+*   `t label` jumps **only if** the last substitution succeeded.
+
+**Example: Recursive HTML tag removal**
+```bash
+# Keep removing <...> until none are left
+sed ':start; s/<[^>]*>//g; t start' file.html
+```
