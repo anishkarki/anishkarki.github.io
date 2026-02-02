@@ -129,5 +129,22 @@
     "date": "2026-02-02T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/awk-cheatsheet.md"
+  },
+  {
+    "id": 9,
+    "title": "Cursor AI & Prompt Engineering",
+    "description": "Master the Cursor IDE. Includes essential shortcuts, context management with @ symbols, prompt engineering frameworks (CO-STAR), and project customization via .cursorrules.",
+    "category": "editor",
+    "tags": [
+      "Cursor",
+      "AI",
+      "Editor",
+      "Prompt Engineering",
+      "Shortcuts",
+      "Productivity"
+    ],
+    "date": "2026-02-02T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/cursor-ai-settings.md"
   }
 ]
