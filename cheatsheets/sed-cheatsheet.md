@@ -84,7 +84,6 @@ Reuse parts of the matched pattern using `\1`, `\2`, etc.
 
 ```bash
 # Input: "Page 1 of 5" -> Output: "1 of 5"
-# We capture "Page " as group 1, and the rest as group 2. We only want group 2.
 echo "Page 1 of 5" | sed -E 's/(Page )(.*)/\2/'
 
 # Swap words: "Hello World" -> "World Hello"
@@ -202,7 +201,7 @@ Command: `sed ':start; s/<[^>]*>//g; t start'`
 How to mix `sed` with bash scripts, variables, and complex streams.
 
 ### 1. Variables & Shell Arguments
-Sed treats single quotes `'...'` as literal strings. specialized quoting is needed to pass shell variables.
+Sed treats single quotes `'...'` as literal strings. Specialized quoting is needed to pass shell variables.
 
 | Method | Example | Description |
 | :--- | :--- | :--- |
@@ -258,7 +257,7 @@ sed '\_/usr/local/bin_s_/usr/local/common/all_'
 ---
 
 ### 4. Running Scripts (`-f`)
-For complex logic, savecommands in a file ("sedscript") to reuse them.
+For complex logic, save commands in a file ("sedscript") to reuse them.
 `sed -f sedscript <oldfile >newfile`
 
 **`sedscript` contents:**
@@ -278,8 +277,87 @@ s/two/2/
 ' < input.txt > output.txt
 ```
 
-### 6 Printing with p
-```sh
-sed -n '/match/ p'
+### 6. Inverse Matching (`!`)
+Apply a command to lines that DO NOT match.
+```bash
+# Print lines that DO NOT match "error" (equivalent to grep -v)
+sed -n '/error/ !p' log.txt
 ```
 
+### 7. Early Exit (`q`)
+Stop processing the file once a condition is met. Highly efficient for large files.
+```bash
+# Print the first 11 lines and then quit (faster than processing the whole file)
+sed '11 q' huge_file.log
+```
+
+---
+
+## 📜 5. Logic Blocks & Scripting
+For complex logic, group commands with `{}`.
+
+### Block Example: Comment & Whitespace Cleanup
+This script processes lines *outside* of `begin/end` blocks.
+```bash
+#!/bin/sh
+# ^I represents a literal TAB character.
+sed '
+    /begin/,/end/ !{   # If NOT between "begin" and "end"...
+         s/#.*//       # Delete comments
+         s/[ ^I]*$//   # Delete trailing usage/tabs
+         /^$/ d        # Delete empty lines
+         p             # Print result
+    }
+' file.txt
+```
+
+### Reading Files (`r`)
+Inject content from external files. This is perfect for macros or templating.
+
+#### Case 1: Append a Footer
+Insert the contents of `footer.txt` at the very end (`$`) of the stream.
+```bash
+sed '$r footer.txt' < input.txt > output.txt
+```
+
+#### Case 2: The "Include" Pattern
+Search for a placeholder (e.g., `INCLUDE`) and replace it with the actual file content.
+```bash
+#!/bin/sh
+sed '/INCLUDE/ {
+    r included_file.txt   # Read file content into pattern space
+    d                     # Delete the line containing the word "INCLUDE"
+}' template.txt > final.txt
+```
+
+### Append a line with a, insert with i and change a line with c
+```bash
+#!/bin/sh
+sed '
+/WORD/ {
+i\
+Add this line before
+a\
+Add this line after
+c\
+Change the line to this one
+}'
+```
+
+### print line number with =
+```bash
+sed -n '/pattern/ =' file
+```
+
+```bash
+#!/bin/sh
+lines=$(sed -n '$=' file )
+```
+
+### transform with y
+```bash
+# Replace all a with A, b with B, c with C
+echo "abc" | sed 'y/abc/ABC/'
+```
+
+---
