@@ -13,6 +13,7 @@ The website has been completely updated to reflect the latest professional exper
 - **LinkedIn**: Updated to https://www.linkedin.com/in/anish-karki-dba/
 
 ### Work Experience Updates
+- **Database Engineer** at Kyndryl, Melbourne (Remote) (Oct 2024 - Present) — Client: NAB Bank
 - **Data and Database Engineer** at A&S Technology (September 2023 - Present)
 - **Database Administrator** at Cotiviti Technology, USA (July 2020 - June 2023)
 - **Associate Database Administrator** at Cotiviti Technology, Nepal (July 2018 - July 2020)
