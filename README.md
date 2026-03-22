@@ -9,7 +9,7 @@ The website has been completely updated to reflect the latest professional exper
 ### Professional Information Updates
 - **Title**: Updated to "SQL Database Administrator | Cloud Migration | Azure Certified"
 - **Contact**: Updated email to anish.karki1.618@outlook.com
-- **Location**: Updated to Craigieburn, 3060 VIC, Australia
+- **Location**: Updated to 33 Meredith Street, Banyo, Queensland 4014
 - **LinkedIn**: Updated to https://www.linkedin.com/in/anish-karki-dba/
 
 ### Work Experience Updates
@@ -23,9 +23,12 @@ The website has been completely updated to reflect the latest professional exper
 
 ### Certifications Updates
 - Microsoft Azure Database Administrator Associate (DP-300) - 2025
+- Microsoft Azure Administrator Associate (AZ-104) - 2026
+- Microsoft Azure Solutions Architect Expert (AZ-305) - 2026
 - Microsoft Azure Data Fundamentals (DP-900) - 2024
 - Microsoft Security, Compliance, and Identity Fundamentals (SC-900) - 2023
 - Microsoft Power Platform Fundamentals (PL-900) - 2024
+- HashiCorp Certified: Terraform Associate - 2026
 - Python Fundamentals by PearsonVue - 2024
 
 ### Key Projects Updates
@@ -95,7 +98,7 @@ anishkarki.github.io/
 ## Contact Information
 - **Email**: anish.karki1.618@outlook.com
 - **Phone**: +61 451165843
-- **Location**: Craigieburn, 3060 VIC, Australia
+- **Location**: 33 Meredith Street, Banyo, Queensland 4014
 - **LinkedIn**: [anish-karki-dba](https://www.linkedin.com/in/anish-karki-dba/)
 - **Portfolio**: [anishkarki.github.io](https://anishkarki.github.io/)
 
