@@ -1,117 +1,182 @@
-# Command Line Cheatsheet
+# Advanced Command Line & Shell Scripting
 
-A collection of useful keyboard shortcuts and essential Bash commands to improve your terminal productivity.
-
-## ⌨️ Command Line Navigation (Readline Shortcuts)
-
-Mastering these shortcuts will allow you to fly through the command line without reaching for the arrow keys.
-
-### Cursor Movement
-| Shortcut | Action | Mnemonic/Note |
-| :--- | :--- | :--- |
-| **Ctrl + A** | Go to the **beginning** of the line | **A**lpha (Start) |
-| **Ctrl + E** | Go to the **end** of the line | **E**nd |
-| **Alt + B** | Move back one **word** | **B**ack |
-| **Alt + F** | Move forward one **word** | **F**orward |
-| **Ctrl + B** | Move back one **character** | **B**ackward |
-| **Ctrl + F** | Move forward one **character** | **F**orward |
-| **Ctrl + XX** | Toggle between start of line and current cursor position | |
-
-### Editing
-| Shortcut | Action | Note |
-| :--- | :--- | :--- |
-| **Ctrl + K** | Cut text from cursor to the **end** of the line | "Kill" |
-| **Ctrl + U** | Cut text from cursor to the **start** of the line | |
-| **Ctrl + W** | Cut the word **before** the cursor | Useful for deleting typos |
-| **Alt + D** | Cut the word **after** the cursor | |
-| **Ctrl + Y** | **Paste** (Yank) the last deleted text | Restores text cut with K, U, or W |
-| **Alt + T** | Swap current word with previous word | |
-| **Ctrl + _** | Undo the last edit | |
-
-### History & Control
-| Shortcut | Action | Note |
-| :--- | :--- | :--- |
-| **Ctrl + R** | **Search** history backward | Type to search, Ctrl+R again to cycle |
-| **Ctrl + G** | **Quit** history search mode | |
-| **Ctrl + L** | **Clear** the screen | Preserves current command |
-| **Ctrl + C** | **Kill** the current running process | SIGINT |
-| **Ctrl + Z** | **Suspend** the current process | Send to background (resume with `fg`) |
-| **Ctrl + D** | **Exit** the current shell | Same as `exit` |
+A dense CLI reference for system engineers and principal developers. Covers advanced Bash scripting paradigms, pipeline debugging, network diagnostics, process tracing, and text parsers.
 
 ---
 
-## 🛠️ Important Bash Commands
+## 🟢 Quick Navigation
 
-### File & Directory Management
-*   `ls -lah`: List all files, including hidden ones, with details in human-readable format.
-*   `cd -`: Switch to the **previous** directory you were in.
-*   `mkdir -p path/to/folder`: Create nested directories in one go.
-*   `cp -r source dest`: Copy directories recursively.
-*   `rm -rf path`: Force remove a directory and its contents (⚠️ use with caution).
+| Section | Level | Focus |
+|:---|:---|:---|
+| [Readline Keyboard Shortcuts](#readline-keyboard-shortcuts) | 🟢 Basic | Terminal line control |
+| [Process Inspection & Signals](#process-inspection--signals) | 🟡 Intermediate | System tracing, ports, process signals |
+| [Network Diagnostics](#network-diagnostics) | 🟡 Intermediate | Sockets, routing, packet sniffing |
+| [Bash Parameter & History Expansion](#bash-parameter--history-expansion) | 🟠 Advanced | Dynamic string manipulation, bang commands |
+| [Pipeline Mastery (Awk, Sed, Jq)](#pipeline-mastery-awk-sed-jq) | 🟠 Advanced | Log parsing, structural data filters |
+| [Shell Options & Execution Control](#shell-options--execution-control) | ⚙️ Setup | Safety flags, process redirection |
 
-### Searching & text Processing
-*   `grep -r "text" .`: Recursively search for "text" in the current directory.
-    *   `grep -i`: Case insensitive search.
-    *   `grep -v`: Invert match (exclude lines).
-*   `find . -name "*.txt"`: Find files ending in `.txt` starting from current directory.
-*   `head -n 5 file`: Show the first 5 lines of a file.
-*   `tail -f file.log`: Follow the output of a log file in real-time.
-*   `history | grep "command"`: Search your command history for a specific command.
+---
 
-### System & Processes
-*   `ps aux`: List all running processes.
-*   `top` / `htop`: Interactive process viewer (shows CPU/RAM usage).
-*   `df -h`: Show disk space usage in human-readable format.
-*   `du -sh *`: Show the size of files and directories in the current folder.
-*   `chmod +x script.sh`: Make a file executable.
-*   `chown user:group file`: Change file owner and group.
+## 🟢 Readline Keyboard Shortcuts
 
-### ⚡ Special Parameters (Shell Variables)
-| Variable | Description |
-| :--- | :--- |
-| **`$?`** | **Exit status** of the last command (0 = Success, Non-zero = Error). |
-| **`$!`** | **PID** of the last background command. |
-| **`$$`** | **PID** of the current shell. |
-| **`$0`** | The name of the shell or script. |
-| **`$_`** | The last argument of the previous command. |
-| **`$-`** | Current shell option flags (e.g., `i` for interactive). |
-| **`$#`** | Number of arguments passed to script/function. |
-| **`$@`** | All arguments passed to script/function. |
-| **`$USER`** | Current user name. |
-| **`$RANDOM`** | Returns a random integer between 0 and 32767. |
+Control the shell command prompt without breaking flow.
 
-### 📜 History Expansion (Bang commands)
-| Shortcut | Action | Example |
-| :--- | :--- | :--- |
-| **`!!`** | Run the **entire** last command. | `sudo !!` |
-| **`!$`** | Use the **last argument** of the last command. | `cat !$` |
-| **`!^`** | Use the **first argument** of the last command. | `mkdir !^` |
-| **`!*`** | Use **all arguments** of the last command. | |
-| **`!n`** | Run command number `n` from history. | `!104` |
-| **`!string`** | Run the most recent command starting with `string`. | `!gi` (runs git) |
-| **`^old^new`** | Replace `old` with `new` in previous command. | `^tst^test` (fix typo) |
+### Cursor Movement
+| Shortcut | Action | Mnemonic |
+|:---|:---|:---|
+| **`Ctrl + a`** | Move cursor to the **beginning** of the line | **A**lpha (Start) |
+| **`Ctrl + e`** | Move cursor to the **end** of the line | **E**nd |
+| **`Alt + b`** / **`Alt + f`** | Move cursor **back** / **forward** one word | **B**ack / **F**orward |
+| **`Ctrl + b`** / **`Ctrl + f`** | Move cursor **back** / **forward** one character | **B**ackward / **F**orward |
+| **`Ctrl + xx`** | Toggle cursor between start of line and current position | X-axis jump |
 
-### 📝 Aliases
-*   `alias name='command'`: Create your own shortcuts (put in `~/.bashrc`).
-    *   Example: `alias ll='ls -lah'`
-    *   Example: `alias ..='cd ..'`
+### Editing & Yanking
+*   **`Ctrl + k`** — **Kill** (cut) text from current cursor to the **end** of the line.
+*   **`Ctrl + u`** — **Undo** (cut) text from cursor to the **start** of the line.
+*   **`Ctrl + w`** — Cut the word **before** the cursor.
+*   **`Alt + d`** — Cut the word **after** the cursor.
+*   **`Ctrl + y`** — **Yank** (paste) the last cut text back into the terminal.
+*   **`Ctrl + _`** — Undo the last keyboard edit.
 
-## 🧬 Sed & Awk Tricks (Text Processing)
+---
 
-Stream editing and pattern scanning powers allow for quick data manipulation without opening a text editor.
+## 🟡 Process Inspection & Signals
 
-### Sed (Stream Editor)
-*   `sed 's/foo/bar/g' file.txt`: Replace **all** occurrences of "foo" with "bar".
-    *   `s`: Substitute. `g`: Global (all occurrences in line).
-*   `sed '/pattern/d' file.txt`: Delete lines matching "pattern".
-*   `sed -n '1,5p' file.txt`: Print only lines 1 through 5.
-*   `sed -i 's/old/new/g' file.txt`: Edit file **in-place** (save changes to file).
-*   `sed '/^$/d' file.txt`: Delete empty lines.
+Debug application runtimes, lock files, and zombie processes.
 
-### Awk (Data Extraction)
-*   `awk '{print $1}' file.txt`: Print the **first column** of every line.
-*   `awk '{print $NF}' file.txt`: Print the **last column** of every line (`NF` = Number of Fields).
-*   `awk '/fail/ {print $0}' file.txt`: Print lines containing "fail".
-*   `awk -F: '{print $1}' /etc/passwd`: Use `:` as a separator (default is whitespace) and print the first column (usernames).
-*   `awk 'length($0) > 80' file.txt`: Print lines longer than 80 characters.
-*   `ls -l | awk '{sum += $5} END {print sum}'`: Sum the 5th column (file sizes) and print the total.
+### System Tracing & Process Audits
+*   **Find process holding port open:**
+    ```bash
+    lsof -i :8080
+    ss -tulanp | grep 8080
+    ```
+*   **Trace system calls of running process:**
+    ```bash
+    strace -p <PID> -f -e trace=network,openat
+    ```
+*   **View process tree hierarchy:**
+    ```bash
+    pstree -aps <PID>
+    ```
+
+### Signal Codes (`kill -[SIGNAL] <PID>`)
+| Signal | Value | Action | Mnemonic / Purpose |
+|:---|:---|:---|:---|
+| **`SIGHUP`** | `1` | Hangup / reload configuration | **H**ang **U**p (Daemon hot reload) |
+| **`SIGINT`** | `2` | Interrupt from keyboard (`Ctrl+c`) | **I**nterrupt |
+| **`SIGKILL`** | `9` | Forceful shutdown (non-catchable) | **Kill** immediately |
+| **`SIGTERM`** | `15` | Polite terminate (allows cleanup / default) | **Term**inate |
+| **`SIGSTOP`** | `19` | Suspend process execution | **Stop** scheduling |
+| **`SIGCONT`** | `18` | Continue suspended process | **Cont**inue |
+
+---
+
+## 🟡 Network Diagnostics
+
+Inspect network packets and test endpoint listeners.
+
+### Tools & Use Cases
+*   **Audit Active Listeners:**
+    ```bash
+    ss -tulanp  # (t: TCP, u: UDP, l: Listening, a: All, n: Numeric, p: Process PID)
+    ```
+*   **Port Scanning & Banner Grabbing:**
+    ```bash
+    nc -zv 10.0.0.1 22-80      # Scan port range (z: zero-I/O, v: verbose)
+    nc -w 3 10.0.0.1 80        # Probe HTTP header banner with 3s timeout
+    ```
+*   **Packet Sniffing (Raw Traffic Dump):**
+    ```bash
+    tcpdump -i eth0 -A port 80  # Dump HTTP text payload from eth0 (A: ASCII)
+    tcpdump -i any host 1.1.1.1 # Monitor all interface traffic targeting IP
+    ```
+
+---
+
+## 🟠 Bash Parameter & History Expansion
+
+Manipulate variables dynamically and invoke command history.
+
+### Bash Parameter Expansions
+Assume `FILE="/opt/app/src/server.ts"`
+
+| Pattern | Expansion Code | Result / Action | Mnemonic |
+|:---|:---|:---|:---|
+| Default Value | `${TIMEOUT:-30}` | Returns `30` if `TIMEOUT` is unset or empty | **Default** |
+| Error on Unset | `${DB_URL:?Need DB}` | Exits script with error message if unset | **Assert** |
+| Replace First | `${FILE/server/client}` | `"/opt/app/src/client.ts"` | **Substitute** |
+| Replace All | `${FILE//s/z}` | `"/opt/app/zrc/zerver.tz"` | **Global sub** |
+| Strip Prefix (Short) | `${FILE#*/}` | `"opt/app/src/server.ts"` (Removes up to first `/`) | **#** (Front trim) |
+| Strip Prefix (Long) | `${FILE##*/}` | `"server.ts"` (Extract file basename) | **##** (Max front trim) |
+| Strip Suffix (Short) | `${FILE%/*}` | `"/opt/app/src"` (Extract parent directory) | **%** (Back trim) |
+| Strip Suffix (Long) | `${FILE%%/*}` | `""` (Removes everything after first `/`) | **%%** (Max back trim) |
+
+### History (Bang Commands)
+*   **`!!`** — Re-run the last command (e.g., `sudo !!` to run with root permissions).
+*   **`!$`** — Select the **last argument** of the previous command (e.g., `cat !$`).
+*   **`!^`** — Select the **first argument** of the previous command (e.g., `mkdir !^`).
+*   **`!*`** — Select **all arguments** of the previous command.
+*   **`!:2`** — Select the **second argument** of the previous command.
+*   **`!gi`** — Run the most recent history command starting with `gi` (e.g., `git status`).
+*   **`^old^new`** — Substitute `old` with `new` in last command and run (fix typo).
+
+---
+
+## 🟠 Pipeline Mastery (Awk, Sed, Jq)
+
+Process unstructured logs or structured payloads inside shell streams.
+
+### Advanced Awk
+*   **Average values in column 3:**
+    ```bash
+    awk '{ sum += $3; count++ } END { print "Avg:", sum/count }' metrics.log
+    ```
+*   **Count occurrences of unique values (simulates uniq -c):**
+    ```bash
+    awk '{ count[$1]++ } END { for (ip in count) print ip, count[ip] }' access.log
+    ```
+
+### Advanced Sed
+*   **In-place edit with backup configuration:**
+    ```bash
+    sed -i.bak 's/localhost/production/g' config.env
+    ```
+*   **Delete lines containing pattern OR empty lines:**
+    ```bash
+    sed -e '/DEBUG/d' -e '/^$/d' server.log
+    ```
+
+### Jq (Structured JSON Parser)
+*   **Filter JSON and extract nested arrays:**
+    ```bash
+    jq '.users[] | select(.role == "admin") | .email' users.json
+    ```
+*   **Reconstruct JSON keys and export as CSV:**
+    ```bash
+    jq -r '.items[] | [.id, .metadata.name] | @csv' data.json > output.csv
+    ```
+
+---
+
+## ⚙️ Shell Options & Execution Control
+
+Write safe and defensive scripts. Place these flags at the top of your scripts.
+
+### Defensive Shell Configurations
+```bash
+set -o errexit   # (set -e) Exit immediately if any command returns non-zero status
+set -o nounset   # (set -u) Exit if script tries to reference an undefined variable
+set -o pipefail  # Pipeline exit code matches the rightmost command that failed
+set -o xtrace    # (set -x) Print commands to stderr before executing (debug mode)
+```
+*Combined safety shorthand:* `set -euo pipefail`
+
+### Redirections & Process Substitution
+*   **Silent stdout and stderr:**
+    ```bash
+    run_command &>/dev/null
+    ```
+*   **Process Substitution (compare outputs of two commands as files):**
+    ```bash
+    diff <(curl -s api.com/v1) <(curl -s api.com/v2)
+    ```

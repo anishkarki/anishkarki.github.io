@@ -1,475 +1,206 @@
-# Vim Cheatsheet
+# Vim for Principal Engineers
 
-A practical Vim reference organized from basics to advanced.
-
----
-
-## Quick Navigation
-
-| Section | Level |
-|---------|-------|
-| [Modes](#modes) | 🟢 Basic |
-| [Movement](#movement) | 🟢 Basic |
-| [Editing](#editing) | 🟢 Basic |
-| [Search & Replace](#search--replace) | 🟡 Intermediate |
-| [File Explorer](#file-explorer-netrw) | 🟡 Intermediate |
-| [Definition Jump](#definition-jump-ctags) | 🟡 Intermediate |
-| [Text Objects](#text-objects) | 🟡 Intermediate |
-| [Splits & Buffers](#splits--buffers) | 🟡 Intermediate |
-| [Registers](#registers) | 🟠 Advanced |
-| [Macros](#macros) | 🟠 Advanced |
-| [Marks](#marks) | 🟠 Advanced |
-| [My Config](#my-vim-config) | ⚙️ Setup |
+A high-density, advanced Vim reference for masters of the command line. Focuses on speed, composition, automation, macro refactoring, and registers.
 
 ---
 
-## 🟢 BASIC
+## 🟢 Quick Navigation
 
-### Modes
-
-| Mode | Enter | Exit | Purpose |
-|------|-------|------|---------|
-| **Normal** | `Esc` | - | Commands & navigation |
-| **Insert** | `i` | `Esc` | Typing text |
-| **Visual** | `v` | `Esc` | Select text |
-| **Command** | `:` | `Enter` | Run commands |
-
-**Insert mode entry points:**
-
-| Key | Action |
-|-----|--------|
-| `i` / `a` | Insert before / append after cursor |
-| `I` / `A` | Insert at line start / end |
-| `o` / `O` | Open line below / above |
+| Section | Level | Focus |
+|:---|:---|:---|
+| [Visual Block & Multi-line Edit](#visual-block--multi-line-edit) | 🟢 Basic | Columns, visual selections |
+| [Text Objects & Composition](#text-objects--composition) | 🟡 Intermediate | Structural editing, syntax targets |
+| [Jump List & Change List](#jump-list--change-list) | 🟡 Intermediate | Navigation history, change tracking |
+| [Advanced Registers](#advanced-registers) | 🟠 Advanced | Clipboard, calculation, patterns |
+| [Macros & Automation](#macros--automation) | 🟠 Advanced | Mass editing, macro refactoring |
+| [Search, Replace & Regex](#search-replace--regex) | 🟠 Advanced | Backreferences, visual limits, global command |
+| [Vim Config (.vimrc)](#vim-config-vimrc) | ⚙️ Setup | Optimized settings |
 
 ---
 
-### Movement
+## 🟢 Visual Block & Multi-line Edit
 
-**Character & Line:**
+Visual Block mode (`Ctrl + v`) is Vim's native multi-cursor.
 
-| Key | Action |
-|-----|--------|
-| `h j k l` | ← ↓ ↑ → |
-| `w` / `b` | Next / previous word |
-| `e` | End of word |
-| `0` / `$` | Start / end of line |
-| `^` | First non-blank character |
-
-**Screen & File:**
-
-| Key | Action |
-|-----|--------|
-| `gg` / `G` | First / last line |
-| `Ctrl+d` | Half page down |
-| `Ctrl+u` | Half page up |
-| `{` / `}` | Previous / next paragraph |
-| `%` | Jump to matching bracket |
-| `:42` | Go to line 42 |
+### Multi-line Operations
+*   **Column Insert (Prepending):**
+    1. Press `Ctrl + v` and select vertical lines.
+    2. Press `I` (capital `i`).
+    3. Type your text (e.g., `# ` or `// `).
+    4. Press `Esc` (text will appear on all lines after a split-second delay).
+*   **Column Append:** Press `Ctrl + v`, select lines, press `$` (to go to end of varying line lengths), press `A`, type, press `Esc`.
+*   **Column Replace/Change:** Press `Ctrl + v`, select block, press `c`, type new text, press `Esc`.
+*   **Visual Selection Command execution:**
+    Select lines visually and press `:`. Vim prepends `:'<,'>` (current selection). Run shell filter commands:
+    *   `:'<,'>!sort` — Sort selected lines.
+    *   `:'<,'>!jq .` — Format selected JSON block.
 
 ---
 
-### Editing
+## 🟡 Text Objects & Composition
 
-**Basic Operations:**
+Compose edits using `[operator] [count] [text-object]`.
 
-| Key | Action |
-|-----|--------|
-| `x` | Delete character |
-| `dd` | Delete line |
-| `yy` | Yank (copy) line |
-| `p` / `P` | Paste after / before |
-| `u` | Undo |
-| `Ctrl+r` | Redo |
-| `.` | Repeat last change |
+### Mnemonic Text Objects
+| Object | Key | Inner (`i`) | Around (`a`) | Mnemonic |
+|:---|:---|:---|:---|:---|
+| **Word** | `w` / `W` | `iw` | `aw` | **W**ord / **W**ord (whitespace inclusive) |
+| **Sentence** | `s` | `is` | `as` | **S**entence |
+| **Paragraph** | `p` | `ip` | `ap` | **P**aragraph |
+| **Quotes** | `"`, `'`, `` ` `` | `i"` | `a"` | Double / Single / Backtick quotes |
+| **Braces** | `B` or `{` | `i{` or `iB` | `a{` or `aB` | **B**races / Curly Brackets |
+| **Parentheses** | `b` or `(` | `i(` or `ib` | `a(` or `ab` | **b**races / Parentheses |
+| **Brackets** | `[` | `i[` | `a[` | Square brackets |
+| **HTML/XML Tags** | `t` | `it` | `at` | **T**ag (e.g., `<div>...</div>`) |
 
-**Save & Quit:**
-
-| Key | Action |
-|-----|--------|
-| `:w` | Save |
-| `:w filename` | Save as filename |
-| `:saveas filename` | Save as and switch to new file |
-| `:wq` | Save and quit |
-| `:q` | Quit |
-| `:q!` | Quit without saving |
-
-**Insert & Change:**
-
-| Key | Action |
-|-----|--------|
-| `r{char}` | Replace single character |
-| `R` | Replace mode |
-| `cc` | Change entire line |
-| `C` | Change to end of line |
-| `s` | Substitute character |
-| `S` | Substitute line |
-
-**Operator + Motion:**
-
-```
-d + motion = delete    y + motion = yank    c + motion = change
-
-dw  → delete word          yw  → yank word
-d$  → delete to line end   y$  → yank to line end
-dG  → delete to file end   cw  → change word
-```
+### Example Combinations
+*   `ci"` — **C**hange **I**nner **"** (Delete inside quotes, enter insert mode)
+*   `da{` — **D**elete **A**round **{** (Delete curly braces and their contents)
+*   `yt=` — **Y**ank **T**il **=** (Copy everything up to the equals sign)
+*   `gUit` — Make **I**nner **T**ag uppercase
 
 ---
 
-## 🟡 INTERMEDIATE
+## 🟡 Jump List & Change List
 
-### Search & Replace
+Tracks your movement and edit coordinates across buffers.
 
-**Search:**
+### Jumps vs. Changes
+| Command | Action | Mnemonic |
+|:---|:---|:---|
+| `Ctrl + o` | Jump to **older** cursor position | **O**lder |
+| `Ctrl + i` | Jump to **newer** cursor position (Tab key) | **I**nner / Newer |
+| `g;` | Go to older change in change list | Go to semicolon (historical change) |
+| `g,` | Go to newer change in change list | Go to comma (forward in changes) |
+| `''` (two single quotes) | Jump back to line before last jump | Previous line |
+| `` `` `` (two backticks) | Jump back to exact coordinates before last jump | Previous point |
+| `:jumps` | View the jump list hierarchy | View jumps |
+| `:changes` | View the edit change list | View changes |
 
-| Key | Action |
-|-----|--------|
-| `/pattern` | Search forward |
-| `?pattern` | Search backward |
-| `n` / `N` | Next / previous match |
-| `*` / `#` | Search word under cursor |
+---
 
-**Replace:**
+## 🟠 Advanced Registers
+
+Vim has 9 classes of registers. View registers with `:reg`.
+
+### Essential Registers
+| Register | Purpose | Usage / Mnemonic |
+|:---|:---|:---|
+| `""` | Unnamed register | Default target for `d`, `c`, `y`, `x` |
+| `"0` | **Yank** register | Holds last yanked text (prevents delete/cut from overwriting it) |
+| `"+` or `"*` | System clipboard | Interaction with external apps (`"+y` to copy, `"+p` to paste) |
+| `"_` | **Black hole** register | Discard deleted text completely (`"_dd` avoids overwriting paste memory) |
+| `"/` | Search pattern | Holds the string from last `/` search |
+| `".` | Last inserted text | Read-only memory of what you typed |
+| `":` | Last executed command line | Read-only |
+| `"= ` | **Expression** register | Math or function evaluator. In insert mode, `Ctrl+r =5*20` inserts `100`. |
+
+---
+
+## 🟠 Macros & Automation
+
+Record a sequence of keystrokes to a register and repeat or edit it.
+
+### Basic Workflow
+*   `q` + `[register]` — Start recording (e.g., `qa` to record into `a`).
+*   `q` — Stop recording.
+*   `@a` — Play macro `a`.
+*   `@@` — Replay last macro.
+*   `100@a` — Play macro 100 times.
+
+### Advanced: Edit a Macro in-place
+If you made a typo in macro `a`, don't re-record. Edit it as text:
+1. Open a new line.
+2. Paste the macro contents: `"ap`
+3. Edit the keystrokes (e.g., fix a typo, add a missing keystroke).
+4. Select the edited text and yank it back to `a`: `"ay$`
+5. Run the corrected macro: `@a`
+
+### Run Macro on Visual Selection
+Run macro `a` on all selected lines simultaneously:
+`:'<,'>normal @a`
+
+---
+
+## 🟠 Search, Replace & Regex
+
+Master Vim’s regular expression engine.
+
+### Search and Replace CLI
+*   **Syntax:** `:[range]s/[pattern]/[replacement]/[flags]`
+*   **Flags:** `g` (global/all line matches), `c` (confirm matches), `i` (ignore case).
+*   **Visual Line Search Limit:** `:%s/\%Vold/new/g` (only replaces 'old' inside visual selection boundaries).
+
+### Pattern Matches & Backreferences
+*   **Search for word duplicates:** `/\(\w\+\)\s\+\1`
+*   **Swap order of two strings separated by a comma:**
+    `:%s/\(\w\+\),\s*\(\w\+\)/\2, \1/g`
+*   **Very Magic mode (`\v`):** Prevents backslash escapes for operators:
+    `:%s/\v(foo|bar)/baz/g` (equivalent to standard `:%s/\(foo\|bar\)/baz/g`)
+
+### The Global Command (`:g`)
+Perform commands on all lines matching a pattern.
+*   `:g/TODO/d` — Delete all lines containing "TODO".
+*   `:g!/Pattern/d` or `:v/Pattern/d` — Delete all lines *not* matching "Pattern".
+*   `:g/DEBUG/normal @a` — Run macro `a` on all lines containing "DEBUG".
+
+---
+
+## ⚙️ Vim Config (.vimrc)
+
+High performance plugin-free setup. Paste into `~/.vimrc`:
 
 ```vim
-:s/old/new/       " Replace first on line
-:s/old/new/g      " Replace all on line
-:%s/old/new/g     " Replace all in file
-:%s/old/new/gc    " Replace with confirmation
-```
-
-**Jump to Search Results:**
-
-| Key | Action |
-|-----|--------|
-| `n` | Jump to next match |
-| `N` | Jump to previous match |
-| `gn` | Select next match (visual) |
-| `cgn` | Change next match (repeatable with `.`) |
-
----
-
-### File Explorer (netrw)
-
-**Open Directory:**
-
-| Key | Action |
-|-----|--------|
-| `:Ex` | Open explorer in current window |
-| `:Vex` | Open explorer in vertical split |
-| `:Sex` | Open explorer in horizontal split |
-| `:Lex` | Open explorer in left sidebar |
-| `vim .` | Open vim in current directory |
-
-**Navigate in Explorer:**
-
-| Key | Action |
-|-----|--------|
-| `Enter` | Open file/directory |
-| `-` | Go up one directory |
-| `%` | Create new file |
-| `d` | Create new directory |
-| `D` | Delete file/directory |
-| `R` | Rename file |
-| `i` | Toggle view style |
-
----
-
-### Definition Jump (ctags)
-
-**Setup (run once in project root):**
-
-```bash
-# Install ctags
-sudo apt install universal-ctags    # Debian/Ubuntu
-brew install ctags                  # macOS
-
-# Generate tags file
-ctags -R .
-```
-
-**Jump Commands:**
-
-| Key | Action |
-|-----|--------|
-| `Ctrl+]` | Jump to definition |
-| `Ctrl+t` | Jump back |
-| `g]` | List all definitions |
-| `:tag name` | Jump to tag by name |
-| `:ts` | List matching tags |
-| `:tn` / `:tp` | Next / previous tag |
-
-**Built-in (no ctags):**
-
-| Key | Action |
-|-----|--------|
-| `gd` | Go to local definition |
-| `gD` | Go to global definition |
-| `gf` | Go to file under cursor |
-| `Ctrl+o` | Jump back |
-| `Ctrl+i` | Jump forward |
-
----
-
-### Text Objects
-
-Use with operators: `d` (delete), `c` (change), `y` (yank), `v` (select)
-
-| Object | Inner (`i`) | Around (`a`) |
-|--------|-------------|--------------|
-| Word | `diw` | `daw` |
-| Sentence | `dis` | `das` |
-| Paragraph | `dip` | `dap` |
-| Quotes `"` | `di"` | `da"` |
-| Parens `()` | `di(` | `da(` |
-| Braces `{}` | `di{` | `da{` |
-| Brackets `[]` | `di[` | `da[` |
-| Tags `<>` | `dit` | `dat` |
-
-**Examples:**
-
-```
-ciw  → change inner word (replace word, keep spaces)
-ci"  → change inside quotes
-dap  → delete around paragraph (include blank lines)
-yi(  → yank inside parentheses
-```
-
----
-
-### Splits & Buffers
-
-**Splits (Windows):**
-
-| Key | Action |
-|-----|--------|
-| `:vs` / `:vs file` | Vertical split (current/new file) |
-| `:sp` / `:sp file` | Horizontal split (current/new file) |
-| `Ctrl+w w` | Cycle between windows |
-| `Ctrl+w h/j/k/l` | Navigate to left/down/up/right split |
-| `Ctrl+w c` / `:q` | Close current window |
-| `Ctrl+w o` | Close all *other* windows (keep focus only) |
-
-**Window Manipulation:**
-
-| Key | Action |
-|-----|--------|
-| `Ctrl+w =` | Equalize size of all splits |
-| `Ctrl+w _` | Maximize height of current split |
-| `Ctrl+w \|` | Maximize width of current split |
-| `Ctrl+w +` / `-` | Increase / decrease height |
-| `Ctrl+w >` / `<` | Increase / decrease width |
-| `Ctrl+w H/J/K/L` | Move split (far left/bottom/top/right) |
-
-**Buffers:**
-
-| Key | Action |
-|-----|--------|
-| `:e file` | Edit file |
-| `:ls` | List buffers |
-| `:bn` / `:bp` | Next / previous buffer |
-| `:b#` | Alternate buffer |
-| `:bd` | Close buffer |
-
----
-
-## 🟠 ADVANCED
-
-### Registers
-
-| Register | Description |
-|----------|-------------|
-| `""` | Default (unnamed) |
-| `"0` | Last yank |
-| `"a-z` | Named registers |
-| `"+` | System clipboard |
-| `"_` | Black hole (discard) |
-
-**Usage:**
-
-```vim
-"ayy    " Yank line to register a
-"ap     " Paste from register a
-"+y     " Yank to clipboard
-"+p     " Paste from clipboard
-"_dd    " Delete without saving
-:reg    " View registers
-```
-
----
-
-### Macros
-
-| Key | Action |
-|-----|--------|
-| `qa` | Start recording to register `a` |
-| `q` | Stop recording |
-| `@a` | Play macro `a` |
-| `@@` | Replay last macro |
-| `5@a` | Play macro 5 times |
-
-**Example workflow:**
-
-```vim
-qa          " Start recording
-0           " Go to line start
-i- [ ] Esc  " Add checkbox
-j           " Next line
-q           " Stop recording
-10@a        " Apply to 10 lines
-```
-
----
-
-### Marks
-
-| Key | Action |
-|-----|--------|
-| `ma` | Set mark `a` |
-| `'a` | Jump to line of mark |
-| `` `a `` | Jump to exact position |
-| `'.` | Last change location |
-| `''` | Previous jump location |
-| `:marks` | List all marks |
-
----
-
-## ⚙️ MY VIM CONFIG
-
-A clean, plugin-free setup optimized for Python & Bash. Copy to `~/.vimrc`:
-
-```vim
-" ── Basics ──────────────────────────────────
 set nocompatible
 filetype plugin indent on
 syntax enable
 set encoding=utf-8
 
-" ── Display ─────────────────────────────────
-set number
-set showmatch
-set scrolloff=8
-set colorcolumn=80,120
-set termguicolors
-set background=dark
+" ── Interface & UX ──────────────────────────
+set number relativenumber " Hybrid line numbers for easy counts
+set scrolloff=8           " Keep cursor centered
+set cursorline            " Highlight current line
+set showmode showcmd      " Show mode and commands
+set hidden                " Switch buffers without saving
+set splitbelow splitright " Natural splits
 
-" ── Indentation (Python default: 4 spaces) ──
+" ── Indents & Tabs ──────────────────────────
 set autoindent smartindent
 set expandtab
 set shiftwidth=4 tabstop=4 softtabstop=4
 
-" ── Search ──────────────────────────────────
+" ── Advanced Search & Redo ──────────────────
 set hlsearch incsearch
 set ignorecase smartcase
-
-" ── Editing ─────────────────────────────────
-set clipboard=unnamedplus
-set hidden
-set undofile
+set undofile              " Persistent undo across close/reopen
 set undodir=~/.vim/undodir
 
-" ── Splits ──────────────────────────────────
-set splitbelow splitright
+" ── Clipboard integration ────────────────────
+set clipboard=unnamedplus " Sync with system clipboard
 
-" ── Leader ──────────────────────────────────
+" ── Mappings ────────────────────────────────
 let mapleader = " "
 
-" ── Key Mappings ────────────────────────────
-" Quick escape
+" Quick Esc and Save
 inoremap jk <Esc>
-
-" Save & quit
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 
-" Clear search
+" Toggle Search Highlights
 nnoremap <leader><space> :nohlsearch<CR>
 
-" Window navigation
+" Seamless Window Navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Buffer navigation
-nnoremap <leader>bn :bnext<CR>
-nnoremap <leader>bp :bprevious<CR>
+" Quickfix navigation
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cn :cnext<CR>
+nnoremap <leader>cp :cprevious<CR>
 
-" Keep selection when indenting
+" Visual mode: indent keeping selection
 vnoremap < <gv
 vnoremap > >gv
-
-" Center after jumps
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-" File explorer
-nnoremap <leader>e :Explore<CR>
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-
-" ── Python & Bash Settings ──────────────────
-augroup LangSettings
-  autocmd!
-  " Python: 4 spaces, run with F5
-  autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-  autocmd FileType python setlocal colorcolumn=80,120
-  autocmd FileType python nnoremap <buffer> <F5> :w<CR>:!python3 %<CR>
-  autocmd FileType python nnoremap <buffer> <leader>r :w<CR>:!python3 %<CR>
-  
-  " Bash: 2 spaces, run with F5
-  autocmd FileType sh setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  autocmd FileType sh nnoremap <buffer> <F5> :w<CR>:!bash %<CR>
-  autocmd FileType sh nnoremap <buffer> <leader>r :w<CR>:!bash %<CR>
-  
-  " Bash shebang auto-insert for new .sh files
-  autocmd BufNewFile *.sh 0put =\"#!/bin/bash\n\"|$
-augroup END
-
-" ── Handy Commands ──────────────────────────
-" Make file executable
-nnoremap <leader>x :!chmod +x %<CR>
-
-" ── Create undo directory ───────────────────
-if !isdirectory(expand('~/.vim/undodir'))
-  call mkdir(expand('~/.vim/undodir'), 'p')
-endif
 ```
-
----
-
-## 💡 Tips
-
-1. **Master the basics first** — `hjkl`, `w/b`, `i/a`, `d/y/c` + motions
-2. **Use text objects** — `ciw` is faster than finding word boundaries
-3. **Repeat with `.`** — Make changes repeatable
-4. **Think operator + motion** — `d` + `w` = delete word
-5. **Use counts** — `5j` moves 5 lines, `3dw` deletes 3 words
-
-**Python/Bash shortcuts:**
-- `F5` or `Space+r` — Run current file
-- `Space+x` — Make file executable
-
----
-
-> Start simple. Add complexity only when you need it.
-
----
-
-## 15 Must Knows
-1. **Repeat Command** (`.`): Repeat the last change.
-2. **Jump Back/Forward** (`Ctrl+o` / `Ctrl+i`): Navigate jump history.
-3. **Undo/Redo** (`u` / `Ctrl+r`): Undo and redo changes.
-4. **Text Objects** (`ciw`, `di"`, `yi(`): Change/Delete/Yank inside word/quotes/parens.
-5. **Go to File Start/End** (`gg` / `G`): Jump to top or bottom.
-6. **Search Word** (`*`): Search for the word under current cursor.
-7. **Match Bracket** (`%`): Jump between matching `{}`, `[]`, `()`.
-8. **Line Start/End** (`0` / `$`): Jump to the start or end of the line.
-9. **Save & Quit** (`:x` or `:wq`): Save changes and exit.
-10. **Search** (`/pattern`): Search forward (`n`/`N` for next/prev).
-11. **Cut & Paste** (`dd` / `p`): Delete (cut) line and paste it.
-12. **Window Cycle** (`Ctrl+w w`): Switch between split windows.
-13. **Macros** (`qa` ... `q` -> `@a`): Record and replay complex tasks.
-14. **Switch Case** (`~`): Toggle case of character under cursor.
-15. **Clear Highlight** (`:noh`): Clear search highlighting.

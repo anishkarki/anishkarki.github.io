@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "title": "Vim Cheatsheet",
-    "description": "Complete Vim reference from basics to advanced. Includes modes, movement, editing, text objects, macros, and a ready-to-use config.",
+    "title": "Vim for Principal Engineers",
+    "description": "High-density Vim reference targeting Visual Block multi-line editing, jump and change lists, advanced registers, macro refactoring, and regex patterns.",
     "category": "editor",
     "tags": [
       "Vim",
@@ -11,7 +11,7 @@
       "Configuration",
       "Productivity"
     ],
-    "date": "2025-12-26T00:00:00Z",
+    "date": "2026-07-08T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/vim-ultimate-config.md"
   },
@@ -48,8 +48,8 @@
   },
   {
     "id": 4,
-    "title": "Visual Studio Code Ultimate Cheatsheet",
-    "description": "The definitive guide to VS Code shortcuts for Windows. Boost your productivity with essential commands for editing, navigation, debugging, and terminal usage.",
+    "title": "VS Code Advanced Productivity",
+    "description": "Advanced VS Code guide focusing on multi-cursor operations, workspace search filters, regular expression case replacements, and custom task/keybinding configurations.",
     "category": "editor",
     "tags": [
       "VS Code",
@@ -58,7 +58,7 @@
       "Productivity",
       "IDE"
     ],
-    "date": "2025-12-29T00:00:00Z",
+    "date": "2026-07-08T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/vscode-ultimate.md"
   },
@@ -80,9 +80,9 @@
   },
   {
     "id": 6,
-    "title": "Command Line & Bash Cheatsheet",
-    "description": "Essential command line shortcuts and Bash tricks for improved productivity. Includes readline shortcuts, file management, and powerful Sed/Awk data processing examples.",
-    "category": "devops",
+    "title": "Advanced Command Line & Shell Scripting",
+    "description": "Master command line navigation, process inspection and signaling, networking tools, Bash parameter expansions, bang commands, and stream parsing with Awk/Sed/Jq.",
+    "category": "shell",
     "tags": [
       "Bash",
       "Shell",
@@ -92,7 +92,7 @@
       "Sed",
       "Awk"
     ],
-    "date": "2026-01-20T00:00:00Z",
+    "date": "2026-07-08T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/command_line_cheatsheet.md"
   },
@@ -132,8 +132,8 @@
   },
   {
     "id": 9,
-    "title": "Cursor AI & Prompt Engineering",
-    "description": "Master the Cursor IDE. Includes essential shortcuts, context management with @ symbols, prompt engineering frameworks (CO-STAR), and project customization via .cursorrules.",
+    "title": "Cursor AI & Prompt Engineering (Principal Edition)",
+    "description": "Maximized productivity with Cursor IDE context orchestration, privacy indexing, `.cursorrules` configurations, and Composer multi-file agentic prompting.",
     "category": "editor",
     "tags": [
       "Cursor",
@@ -143,8 +143,23 @@
       "Shortcuts",
       "Productivity"
     ],
-    "date": "2026-02-02T00:00:00Z",
+    "date": "2026-07-08T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/cursor-ai-settings.md"
+  },
+  {
+    "id": 10,
+    "title": "Tmux Advanced Cheatsheet",
+    "description": "High-density Tmux reference covering session control, socket sharing, multi-client pair programming, advanced layouts, scrolling/copying vi-mode, and config scripts.",
+    "category": "shell",
+    "tags": [
+      "Tmux",
+      "Terminal Multiplexer",
+      "CLI",
+      "Productivity"
+    ],
+    "date": "2026-07-08T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/tmux-advanced.md"
   }
 ]

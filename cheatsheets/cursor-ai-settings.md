@@ -1,152 +1,127 @@
-# Cursor AI & Prompt Engineering (Enterprise Edition)
+# Cursor AI & Prompt Engineering (Principal Edition)
 
-A comprehensive guide for maximizing productivity with Cursor AI in an enterprise environment. Covers context management, security best practices, advanced prompt engineering, and unified team configuration.
-
----
-
-## 🟢 Essentials & Security
-
-### Key Shortcuts
-| Shortcut | Name | Description |
-| :--- | :--- | :--- |
-| **`Ctrl` + `K`** | **Generate / Edit** | In-line code generation. High speed, aimed at single blocks/files. |
-| **`Ctrl` + `L`** | **Chat** | Sidebar chat for Q&A, debugging, and exploration. |
-| **`Ctrl` + `I`** | **Composer** | **The Power Tool**. Multi-file agent that creates/edits files across the repo. |
-| **`Ctrl` + `P`** | **File Search** | Quickly open files (standard VS Code). |
-| **`@`** | **Context Menu** | The most important key. Opens context selector (`@File`, `@Web`, etc.). |
-
-### 🔒 Enterprise Privacy & Security
-Before pasting proprietary code, ensure your settings are correct:
-1.  **Privacy Mode**: Go to `Settings > General > Privacy Mode` and set to **"Codebase Indexing only"** or **"Local"** if available. Ensure "Allow data training" is **OFF**.
-2.  **API Keys**: If using own API keys (BYOK), ensure they are scoped correctly.
-3.  **`.cursorignore`**: Create this file in root to prevent Cursor from indexing sensitive files (like `.env`, `secrets.json`, or massive data dumps).
-    ```gitignore
-    # .cursorignore
-    .env
-    **/*.csv
-    secrets/
-    legacy_module_do_not_touch/
-    ```
+A comprehensive guide for maximizing productivity with the Cursor IDE. Designed for senior and principal engineers managing large-scale, complex repositories, orchestrating multi-file agents, and configuring custom team-wide rules.
 
 ---
 
-## 🟡 Context Management Strategy
+## 🟢 Quick Navigation
 
-In large enterprise repos (monorepos), adding **correct** context is 80% of the battle.
-
-| Symbol | Context | When to use |
-| :--- | :--- | :--- |
-| **`@Files`** | Specific File(s) | **Precision Work**. "Fix the bug in `@UserService.ts` and `@UserController.ts`". Always prefer this over `@Codebase` if you know where the code is. |
-| **`@Codebase`** | Global Index | **Exploration**. "Where is the authentication logic defined?" or "How do we handle logging in this repo?". *Warning: Can be noisy.* |
-| **`@Web`** | Live Internet | **Research**. "What is the latest breaking change in Next.js 14?" |
-| **`@Docs`** | Custom Docs | **Libraries**. "How do I use the Table component? `@MUI Docs`". (Configure in Settings > Features > Docs). |
-| **`@Git`** | Git History | **Review**. "What changed in the last commit? `@Git`". |
-| **`@Folders`** | Sub-directories | **Scoped Context**. "Refactor the logic in `@/services/auth` module". |
-
-### � Pro Tip: Pinning Context
-You can **pin** frequently used documentation or files in the Chat usage so they persist across messages.
+| Section | Level | Focus |
+|:---|:---|:---|
+| [Essential Shortcuts](#essential-shortcuts) | 🟢 Basic | Core key mappings |
+| [Vector Index & Privacy](#vector-index--privacy) | 🟢 Basic | Privacy settings, indexing exclusions |
+| [Context Orchestration (@ Symbols)](#context-orchestration--symbols) | 🟡 Intermediate | Scoping AI context precisely |
+| [Composer (Agent Mode) Orchestration](#composer-agent-mode-orchestration) | 🟠 Advanced | Multi-file codebase generation |
+| [.cursorrules System Architecture](#cursorrules-system-architecture) | 🟠 Advanced | Team guidelines, architecture prompts |
+| [Advanced Prompting Frameworks](#advanced-prompting-frameworks) | 💡 Setup | Code generation prompt engineering |
 
 ---
 
-## 🔴 Enterprise Prompt Engineering (CO-STAR)
+## 🟢 Essential Shortcuts
 
-Use the **CO-STAR** framework for reliable, production-grade outputs.
+Learn the four pillars of Cursor's AI engine.
 
-### 1. Context (C)
-**Don't say:** "Fix this."
-**Say:** "I am an enterprise Java developer working on a Spring Boot microservice. We use Lombok and JUnit 5."
-
-### 2. Objective (O)
-**Don't say:** "Write a test."
-**Say:** "Write a parameterized unit test for the `calculateTax` method. Cover edge cases like negative input and null values."
-
-### 3. Style (S)
-**Define your stack strictly.**
-"Use strict TypeScript. Prefer functional programming patterns. Use `zod` for validation."
-
-### 4. Tone (T)
-"Be professional. adding explanatory comments only for complex logic. No yapping."
-
-### 5. Audience (A)
-"For a Senior DevOps Engineer." (implied: assumes knowledge of Docker/K8s, skips basics).
-
-### 6. Response (R)
-"Return the code in a single block. Do not explain the imports."
-
-### 🏢 Real-World Enterprise Example
-> "Using `@Codebase`, I need to refactor the `OrderProcessing` class.
-> **Context**: We are moving from a synchronous REST call to an event-driven Kafka approach.
-> **Objective**: Replace the direct HTTP call to InventoryService with a Kafka Producer message.
-> **Style**: Use our existing `EventBus` wrapper found in `@EventBus.java`. Follow the logic patterns in `@PaymentService.java`.
-> **Constraint**: Do not break existing unit tests. Return the updated Class and the new Test."
+| Shortcut | Name | Target | Mnemonic |
+|:---|:---|:---|:---|
+| **`Ctrl + K`** | Inline Generate / Edit | Targeted line/block generation | **K**ode edit inline |
+| **`Ctrl + L`** | Chat Sidebar | Multi-turn reasoning, query logs, explainers | **L**isten / Chat |
+| **`Ctrl + I`** | Composer | Multi-file agent capable of rewriting directory structures | **I**nvent / Orchestrate |
+| **`@`** | Context Trigger | Opens resource selector inside any prompt box | **A**dd context |
 
 ---
 
-## � Advanced Configuration (.cursorrules)
+## 🟢 Vector Index & Privacy
 
-The **`.cursorrules`** file acts as a permanent "System Prompt" for your project. Commit this file so the whole team shares the AI instructions.
+### 🔒 Enterprise Privacy & Local Compliance
+1.  **Privacy Mode:** Go to `Cursor Settings > General > Privacy Mode` and toggle **ON**. This ensures your code is never stored or used to train public models.
+2.  **API Routing:** Configure local or corporate gateway API endpoints under `Cursor Settings > Models > OpenAI/Anthropic API Key`.
 
-### Template: Enterprise TypeScript/Node
-```markdown
-# .cursorrules
+### Excluding Vectors with `.cursorignore`
+Create a `.cursorignore` file in your root workspace directory. This stops Cursor from wasting search context tokens on large directories or build outputs:
 
-You are a Senior Full Stack Engineer at [Company].
-
-## 1. Code Style
-- **TypeScript**: Use strict typing. No `any`. Use `interface` over `type` for public APIs.
-- **Naming**: camelCase for vars, PascalCase for components/classes, UPPER_CASE for constants.
-- **Async**: Prefer `async/await` over `.then()`.
-
-## 2. Testing (Vital)
-- All new logic MUST have a corresponding Unit Test (`.test.ts`).
-- Use `vitest` syntax.
-- Mock external calls using `vi.mock()`.
-
-## 3. Libraries
-- Date handling: Use `date-fns` (NOT moment.js).
-- Styling: Tailwind CSS.
-- Validation: Zod.
-
-## 4. Security
-- NEVER hardcode secrets or API keys. Use `process.env`.
-- Sanitize all user inputs using the provided `sanitize()` helper.
-```
-
-### Template: Python/Django
-```markdown
-# .cursorrules
-
-You are a Django Backend Expert.
-
-## 1. Architecture
-- Follow the "Fat Models, Thin Views" philosophy.
-- Services should be placed in `services.py`, not views.
-
-## 2. Style
-- Follow PEP8 explicitly.
-- Use Type Hints for all function arguments and returns.
-
-## 3. Database
-- Use Django ORM methods (`select_related`, `prefetch_related`) to avoid N+1 queries.
-- Do not use raw SQL unless explicitly asked.
+```gitignore
+# .cursorignore
+node_modules/
+.git/
+dist/
+build/
+package-lock.json
+*.log
+# Exclude proprietary large datasets
+data/
+secrets/
 ```
 
 ---
 
-## 🚀 "Composer" (Ctrl+I) Workflows
+## 🟡 Context Orchestration (@ Symbols)
 
-Composer (Agent Mode) can edit multiple files. Use it for:
+Adding context is the single most important factor for high-quality code generation.
 
-### 1. The "Scaffold" Workflow
-"Create a new feature 'UserPromotions'.
-1. Create a Mongoose model in `models/Promotion.ts`.
-2. Create a service `services/promotionService.ts`.
-3. Create a controller `controllers/promotionController.ts`.
-4. Add the route in `routes.ts`.
-Follow the pattern used in `@UserFeature`."
+### Context Options
+*   **`@Files`** — **Precision targeting.** Reference exact source code (e.g., `@UserService.ts`, `@authMiddleware.js`). Use this when you know exactly which files need to change.
+*   **`@Codebase`** — **Semantic search.** Automatically parses the local index vector database to find relevant code snippets. Use for open-ended queries (e.g., "How do we handle error routing?").
+*   **`@Docs`** — **Third-party frameworks.** Instantly pulls documentation from standard libraries or custom links configured in `Settings > Features > Docs` (e.g., `@Next.js 14`, `@Tailwind`).
+*   **`@Git`** — **Commit checks.** References recent commits, stash items, or branch diffs (e.g., "Find the bugs in the changes from `@Git (Working Copy)`").
+*   **`@Folders`** — **Scoped generation.** Limits the AI's search context to a subdirectory (e.g., `@/src/api`).
 
-### 2. The "Migration" Workflow
-"We are migrating from `axios` to `fetch`. Find all instances of `axios.post` in `@/frontend` folder and replace them with our custom `fetchClient`. Ensure error handling is preserved."
+---
 
-### 3. The "Test Coverage" Workflow
-"Analyze `@paymentHelpers.ts`. It currently has 0 tests. Create a test file `paymentHelpers.test.ts` and add tests to achieve 100% branch coverage."
+## 🟠 Composer (Agent Mode) Orchestration
+
+Composer (`Ctrl + I`) is a multi-file autonomous agent. It does not just generate snippets; it writes and edits files directly in your workspace.
+
+### Orchestration Patterns
+1.  **Scaffolding Workflow:**
+    > "Create a new microservice module `UserBilling`.
+    > 1. Create a schema in `@billingSchema.ts`.
+    > 2. Implement the controller in `@billingController.ts`.
+    > 3. Register the route endpoints in `@routes.ts`.
+    > Follow the architecture and imports style of `@UserModule`."
+2.  **Mass Migration Workflow:**
+    > "Migrate the frontend components inside `@/src/components` from class-based components to React functional components. Use hooks and ensure type definitions match `@types.d.ts`."
+3.  **Test Coverage Booster:**
+    > "Analyze the logic of `@paymentService.ts`. Identify code branch gaps, and write a comprehensive unit test suite targeting 100% coverage using Jest. Save to `paymentService.test.ts`."
+
+---
+
+## 🟠 .cursorrules System Architecture
+
+The `.cursorrules` file defines a workspace-wide system prompt for all developers on the project.
+
+### Template: TypeScript Backend Monorepo
+```markdown
+# .cursorrules (TypeScript Backend)
+
+You are a Principal Backend Architect. Follow these coding constraints strictly:
+
+## 1. Technical Stack
+- Node.js (v20+), TypeScript (Strict Mode), Fastify, Prisma.
+- Testing: Vitest.
+
+## 2. Coding Patterns
+- Use functional programming paradigms. Prefer pure functions over classes.
+- Ensure all API endpoints validate input schemas using Zod.
+- Avoid 'any' type cast; use unknown and type guards where necessary.
+
+## 3. Database & Performance
+- Always use Prisma's `select` filter to fetch only necessary database fields.
+- Prevent N+1 query issues by batching database reads via dataloaders.
+
+## 4. Error Handling
+- Never throw raw Errors. Return a Result type wrapper: `type Result<T, E> = { ok: true, data: T } | { ok: false, error: E }`.
+```
+
+---
+
+## 💡 Advanced Prompting Frameworks
+
+Use the **CO-STAR** framework inside Chat (`Ctrl + L`) or Composer (`Ctrl + I`) for high-fidelity code.
+
+### The CO-STAR Structure
+*   **Context (C):** Establish the background. (e.g., "We are building a latency-critical Go API running on Kubernetes.")
+*   **Objective (O):** State the explicit task. (e.g., "Implement a connection pool wrapper for Redis client.")
+*   **Style (S):** Define the formatting and coding patterns. (e.g., "Write idiomatic Go. Prefer standard library imports, minimize external dependencies.")
+*   **Tone (T):** Define explanation limits. (e.g., "Provide clear inline comments for complex algorithms. Do not explain standard language features.")
+*   **Audience (A):** Align on expertise. (e.g., "Written for Principal Engineers; assume familiarity with concurrency primitives.")
+*   **Response (R):** Define output format. (e.g., "Return only the compilable code block. No yapping.")
