@@ -269,6 +269,19 @@
       margin-right: 4px;
       font-size: 0.65rem;
     }
+    .card-steps {
+      padding: 4px 8px;
+      font-size: 0.86rem;
+      background: var(--bg-code);
+    }
+    .card-steps li {
+      list-style-type: decimal;
+      list-style-position: inside;
+      padding: 2px 0;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(38, 48, 64, 0.2);
+    }
+    .card-steps li:last-child { border-bottom: none; }
 
     /* ─── Fenced Code Blocks ─── */
     pre {
@@ -1076,12 +1089,12 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
         <tr><td class="cmd-cell">:&lt;,&gt;normal @a</td><td class="desc-cell">Execute macro <code>a</code> on all lines inside visual selection</td></tr>
       </table>
       <div class="card-subhead">In-place Macro Editing (No re-recording)</div>
-      <ul class="card-list">
-        <li>1. Paste macro content on a blank line: <code>"ap</code></li>
-        <li>2. Edit the raw keystrokes manually</li>
-        <li>3. Yank content back to register: visual select ➔ <code>"ay$</code></li>
-        <li>4. Run corrected macro: <code>@a</code></li>
-      </ul>
+      <ol class="card-steps">
+        <li>Paste macro content on a blank line: <code>"ap</code></li>
+        <li>Edit the raw keystrokes manually</li>
+        <li>Yank content back to register: visual select ➔ <code>"ay$</code></li>
+        <li>Run corrected macro: <code>@a</code></li>
+      </ol>
     </div>
   </div>
 
@@ -1094,19 +1107,19 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
       <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
     </div>
     <div class="card-body">
-      <div class="card-subhead">Regex &amp; Replace (:%s/pat/rep/flags)</td>
+      <div class="card-subhead">Regex &amp; Replace (:%s/pat/rep/flags)</div>
       <table>
-        <tr><td class="cmd-cell">\%V</td><td class="desc-cell">Visual Limit: replacement restricted inside visual boundaries</td></tr>
-        <tr><td class="cmd-cell">\v</td><td class="desc-cell">Very Magic: operators do not require escape slashes</td></tr>
-        <tr><td class="cmd-cell">/\(\w\+\)\s\+\1</td><td class="desc-cell">Search duplicate words adjacent to each other</td></tr>
-        <tr><td class="cmd-cell">:%s/\(\w\+\),\s*\(\w\+\)/\2, \1/g</td><td class="desc-cell">Swap order of two strings separated by a comma</td></tr>
+        <tr><td class="cmd-cell"><code>\%V</code></td><td class="desc-cell">Visual Limit: replacement restricted inside visual boundaries</td></tr>
+        <tr><td class="cmd-cell"><code>\v</code></td><td class="desc-cell">Very Magic: operators do not require escape slashes</td></tr>
+        <tr><td class="cmd-cell"><code>/\(\w\+\)\s\+\1</code></td><td class="desc-cell">Search duplicate words adjacent to each other</td></tr>
+        <tr><td class="cmd-cell"><code>:%s/\(\w\+\),\s*\(\w\+\)/\2, \1/g</code></td><td class="desc-cell">Swap order of two strings separated by a comma</td></tr>
       </table>
       <div class="card-subhead">The Global Command (:g/pat/cmd)</div>
       <table>
-        <tr><td class="cmd-cell">:g/TODO/d</td><td class="desc-cell">Delete all lines containing string <code>TODO</code></td></tr>
-        <tr><td class="cmd-cell">:v/Pattern/d</td><td class="desc-cell">Inverse: Delete all lines that <strong>do not</strong> match <code>Pattern</code></td></tr>
-        <tr><td class="cmd-cell">:g/DEBUG/normal @a</td><td class="desc-cell">Execute macro <code>a</code> on lines matching pattern <code>DEBUG</code></td></tr>
-        <tr><td class="cmd-cell">:g/TODO/t $</td><td class="desc-cell">Find all lines containing <code>TODO</code> and copy (t) to EOF ($)</td></tr>
+        <tr><td class="cmd-cell"><code>:g/TODO/d</code></td><td class="desc-cell">Delete all lines containing string <code>TODO</code></td></tr>
+        <tr><td class="cmd-cell"><code>:v/Pattern/d</code></td><td class="desc-cell">Inverse: Delete all lines that <strong>do not</strong> match <code>Pattern</code></td></tr>
+        <tr><td class="cmd-cell"><code>:g/DEBUG/normal @a</code></td><td class="desc-cell">Execute macro <code>a</code> on lines matching pattern <code>DEBUG</code></td></tr>
+        <tr><td class="cmd-cell"><code>:g/TODO/t $</code></td><td class="desc-cell">Find all lines containing <code>TODO</code> and copy (t) to EOF ($)</td></tr>
       </table>
     </div>
   </div>
@@ -1122,10 +1135,10 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
     <div class="card-body">
       <div class="card-subhead">Workspace-wide Search &amp; Replace</div>
       <table>
-        <tr><td class="cmd-cell">:vimgrep /P/ **/*</td><td class="desc-cell">Search workspace files for pattern <code>P</code></td></tr>
-        <tr><td class="cmd-cell">:copen / :cclose</td><td class="desc-cell">Open interactive quickfix search list / Close window</td></tr>
-        <tr><td class="cmd-cell">:cnext / :cprevious</td><td class="desc-cell">Jump to next / previous search coordinate</td></tr>
-        <tr><td class="cmd-cell">:cfdo %s/o/n/g \| up</td><td class="desc-cell">Replace <code>o</code> with <code>n</code> on all matching files &amp; save (update)</td></tr>
+        <tr><td class="cmd-cell"><code>:vimgrep /P/ **/*</code></td><td class="desc-cell">Search workspace files for pattern <code>P</code></td></tr>
+        <tr><td class="cmd-cell"><code>:copen</code> / <code>:cclose</code></td><td class="desc-cell">Open interactive quickfix search list / Close window</td></tr>
+        <tr><td class="cmd-cell"><code>:cnext</code> / <code>:cprevious</code></td><td class="desc-cell">Jump to next / previous search coordinate</td></tr>
+        <tr><td class="cmd-cell"><code>:cfdo %s/o/n/g \| up</code></td><td class="desc-cell">Replace <code>o</code> with <code>n</code> on all matching files &amp; save (update)</td></tr>
       </table>
       <div class="card-subhead">High-Performance setup (~/.vimrc)</div>
       <pre><code><span class="kw">set</span> number relativenumber
