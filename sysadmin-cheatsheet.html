@@ -3,522 +3,1175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sysadmin All-in-One Cheatsheet | Anish Karki</title>
-  <meta name="description" content="Ultra-compact single-page sysadmin cheatsheet covering Bash, Tmux, Vim, Grep, Sed, and Awk.">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Principal Sysadmin All-in-One Cheatsheet | Anish Karki</title>
+  <meta name="description" content="Ultra-compact single-page dashboard containing every useful command from Vim, Tmux, Bash, Sed, Awk, Jq, and Grep. Optimized for quick reference and printing.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* ═══════════════════════════════════════════════════
-       SCREEN THEME: Dark, dense, PDF-like
+       SCREEN THEME: High-density Dark Console
        ═══════════════════════════════════════════════════ */
     :root {
-      --bg: #0c0e14;
-      --bg2: #141721;
-      --bg3: #1a1e2e;
-      --border: #2a2f45;
-      --text: #c8cdd8;
-      --text-dim: #8891a5;
-      --accent: #60a5fa;
-      --accent2: #a78bfa;
-      --green: #6ee7b7;
-      --orange: #fbbf24;
-      --pink: #f472b6;
-      --red: #f87171;
-      --cyan: #22d3ee;
+      --bg: #07090e;
+      --bg-card: #0f131a;
+      --bg-code: #05070a;
+      --border: #263040;
+      --border-focus: #4b5e7d;
+      --text: #d1d7e0;
+      --text-muted: #8b9bb0;
+      --text-bright: #ffffff;
+      
+      --accent: #58a6ff;
+      --accent-dim: #1f4068;
+      --cyan: #39c5db;
+      --green: #56d364;
+      --orange: #f0883e;
+      --pink: #ff7b72;
+      --purple: #bc8cff;
+      --yellow: #e3b341;
+      --red: #ff7b72;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
-      font-size: 11px;
+      font-size: 10px;
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.35;
-      padding: 12px 16px;
+      line-height: 1.3;
+      padding: 8px 12px 24px;
       min-height: 100vh;
     }
 
-    /* ─── Header ─── */
-    .sheet-header {
-      text-align: center;
-      padding: 6px 0 10px;
-      border-bottom: 2px solid var(--accent);
-      margin-bottom: 10px;
+    /* ─── Control Bar (Sticky) ─── */
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 9, 14, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 6px 12px;
+      margin-bottom: 8px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
       gap: 12px;
     }
-    .sheet-header h1 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.5px;
-    }
-    .sheet-header .subtitle {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      font-weight: 400;
-    }
-    .sheet-header .pill {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--bg);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* ─── Multi-column layout ─── */
-    .columns {
-      column-count: 3;
-      column-gap: 14px;
-      column-rule: 1px solid var(--border);
-    }
-
-    /* ─── Sections ─── */
-    .section {
-      break-inside: avoid;
-      margin-bottom: 10px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .section-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 5px 8px;
-      color: #fff;
+    .brand {
       display: flex;
       align-items: center;
-      gap: 5px;
-      border-bottom: 1px solid var(--border);
+      gap: 8px;
     }
-    .section-title.bash   { background: linear-gradient(90deg, #1e3a5f, var(--bg2)); }
-    .section-title.tmux   { background: linear-gradient(90deg, #1a3340, var(--bg2)); }
-    .section-title.grep   { background: linear-gradient(90deg, #2d1f3d, var(--bg2)); }
-    .section-title.sed    { background: linear-gradient(90deg, #3d2b1f, var(--bg2)); }
-    .section-title.awk    { background: linear-gradient(90deg, #1f3d2b, var(--bg2)); }
-    .section-title.vim    { background: linear-gradient(90deg, #3d1f2b, var(--bg2)); }
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      letter-spacing: 0.3px;
+    }
+    .brand .badge {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .search-container {
+      position: relative;
+      flex: 1;
+      max-width: 320px;
+    }
+    .search-input {
+      width: 100%;
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      color: var(--text-bright);
+      font-size: 0.8rem;
+      padding: 4px 8px 4px 28px;
+      border-radius: 4px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.15s;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.15);
+    }
+    .search-icon {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    .action-group {
+      display: flex;
+      gap: 6px;
+    }
+    .btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .btn:hover {
+      background: var(--border);
+      color: var(--text-bright);
+      border-color: var(--text-muted);
+    }
+    .btn.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .btn.primary:hover {
+      background: #79b8ff;
+      border-color: #79b8ff;
+    }
 
-    .section-title .icon {
-      font-size: 1rem;
+    /* ─── Multi-column Layout ─── */
+    .columns-container {
+      column-count: 4;
+      column-gap: 10px;
+      column-rule: 1px solid rgba(38, 48, 64, 0.4);
+    }
+
+    /* ─── Card Section ─── */
+    .card {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+      transition: all 0.15s ease-in-out;
+    }
+    .card:hover {
+      border-color: var(--border-focus);
+    }
+    .card-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      color: var(--text-bright);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .card-title.bash { background: linear-gradient(90deg, #101c2e, var(--bg-card)); border-left: 3px solid var(--accent); }
+    .card-title.tmux { background: linear-gradient(90deg, #0e241b, var(--bg-card)); border-left: 3px solid var(--green); }
+    .card-title.grep { background: linear-gradient(90deg, #241c12, var(--bg-card)); border-left: 3px solid var(--orange); }
+    .card-title.sed  { background: linear-gradient(90deg, #271424, var(--bg-card)); border-left: 3px solid var(--purple); }
+    .card-title.awk  { background: linear-gradient(90deg, #142427, var(--bg-card)); border-left: 3px solid var(--cyan); }
+    .card-title.vim  { background: linear-gradient(90deg, #271414, var(--bg-card)); border-left: 3px solid var(--pink); }
+
+    .card-title span i {
+      margin-right: 4px;
+    }
+    
+    .card-body {
+      padding: 2px 0;
     }
 
     /* ─── Tables ─── */
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.82rem;
+      font-size: 0.76rem;
     }
     th {
       text-align: left;
       font-weight: 600;
       color: var(--accent);
-      padding: 3px 6px;
-      background: var(--bg3);
+      padding: 2px 6px;
+      background: var(--bg-code);
       border-bottom: 1px solid var(--border);
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
     td {
-      padding: 2.5px 6px;
-      border-bottom: 1px solid rgba(42,47,69,0.5);
+      padding: 2px 6px;
+      border-bottom: 1px solid rgba(38, 48, 64, 0.4);
       vertical-align: top;
+      word-break: break-word;
     }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(96,165,250,0.04); }
+    tr:hover td { background: rgba(88, 166, 255, 0.03); }
 
-    td:first-child {
-      white-space: nowrap;
+    td.cmd-cell {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       color: var(--green);
       font-weight: 600;
-      width: 45%;
+      width: 42%;
     }
-    td:last-child {
-      color: var(--text-dim);
-      font-size: 0.78rem;
+    td.desc-cell {
+      color: var(--text-muted);
     }
-
-    /* ─── Inline code ─── */
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      background: var(--bg3);
-      color: var(--cyan);
-      padding: 0px 3px;
-      border-radius: 3px;
+    td.desc-cell strong {
+      color: var(--text-bright);
       font-weight: 600;
     }
 
-    /* ─── Code blocks ─── */
+    /* ─── Sub-Headings ─── */
+    .card-subhead {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--yellow);
+      padding: 3px 6px 1px;
+      background: rgba(227, 179, 65, 0.05);
+      border-bottom: 1px solid rgba(38, 48, 64, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ─── Custom Blocks & Lists ─── */
+    .card-list {
+      padding: 3px 6px;
+      font-size: 0.74rem;
+      background: var(--bg-code);
+    }
+    .card-list li {
+      list-style: none;
+      padding: 1px 0;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(38, 48, 64, 0.2);
+    }
+    .card-list li:last-child { border-bottom: none; }
+    .card-list li::before {
+      content: "▪";
+      color: var(--accent);
+      margin-right: 4px;
+      font-size: 0.6rem;
+    }
+
+    /* ─── Fenced Code Blocks ─── */
     pre {
-      background: #0a0c10;
+      background: var(--bg-code);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 3px;
       padding: 4px 6px;
-      margin: 4px 6px 6px;
+      margin: 4px 6px;
       overflow-x: auto;
-      font-size: 0.75rem;
-      line-height: 1.35;
+      font-size: 0.72rem;
+      line-height: 1.25;
+      font-family: 'JetBrains Mono', monospace;
     }
     pre code {
       background: none;
       padding: 0;
       color: var(--text);
     }
-    .cm { color: var(--text-dim); }  /* comment */
-    .kw { color: var(--accent); }    /* keyword */
-    .str { color: var(--green); }    /* string */
-    .flag { color: var(--orange); }  /* flag */
-    .var { color: var(--pink); }     /* variable */
-
-    /* ─── Sub-headers inside sections ─── */
-    .sub-head {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--accent2);
-      padding: 3px 6px 1px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
+    
+    /* ─── Inline highlights ─── */
+    code.hl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      background: var(--bg-code);
+      color: var(--cyan);
+      padding: 0 2px;
+      border-radius: 2px;
+      border: 1px solid rgba(38,48,64,0.3);
     }
 
-    /* ─── Compact list ─── */
-    .compact-list {
-      padding: 2px 6px 4px;
-      font-size: 0.78rem;
+    /* Token highlighting for shell code */
+    .cm { color: var(--text-muted); font-style: italic; } /* Comment */
+    .kw { color: var(--purple); font-weight: 600; }        /* Keyword */
+    .str { color: var(--green); }                         /* String */
+    .flg { color: var(--orange); }                        /* Flag */
+    .var { color: var(--pink); }                          /* Var */
+    .num { color: var(--yellow); }                        /* Number */
+
+    /* ─── Search Highlight ─── */
+    .search-match {
+      background: rgba(227, 179, 65, 0.25);
+      border-bottom: 1px solid var(--yellow);
     }
-    .compact-list li {
-      list-style: none;
-      padding: 1.5px 0;
-      color: var(--text-dim);
-    }
-    .compact-list li::before {
-      content: "›";
-      color: var(--accent);
-      margin-right: 4px;
-      font-weight: 700;
+    .card.hidden {
+      display: none !important;
     }
 
     /* ─── Footer ─── */
-    .sheet-footer {
+    .footer {
       text-align: center;
-      padding: 6px 0 2px;
-      margin-top: 8px;
+      padding: 12px 0 4px;
+      margin-top: 16px;
       border-top: 1px solid var(--border);
-      color: var(--text-dim);
-      font-size: 0.7rem;
-    }
-
-    /* ─── Print button ─── */
-    .print-btn {
-      position: fixed;
-      top: 12px;
-      right: 16px;
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      z-index: 100;
-      transition: all 0.2s;
-    }
-    .print-btn:hover {
-      background: var(--accent2);
-      transform: scale(1.05);
+      color: var(--text-muted);
+      font-size: 0.72rem;
     }
 
     /* ═══════════════════════════════════════════════════
-       PRINT THEME: Light, compact, single-page A4/Letter
+       PRINT THEME: Maximum compression fit-to-page A4
        ═══════════════════════════════════════════════════ */
     @media print {
       :root {
-        --bg: #fff;
-        --bg2: #fff;
-        --bg3: #f5f5f5;
-        --border: #d0d0d0;
-        --text: #1a1a1a;
-        --text-dim: #555;
-        --accent: #1d4ed8;
-        --accent2: #7c3aed;
-        --green: #047857;
-        --orange: #b45309;
-        --pink: #be185d;
-        --red: #dc2626;
-        --cyan: #0e7490;
+        --bg: #ffffff;
+        --bg-card: #ffffff;
+        --bg-code: #f6f8fa;
+        --border: #d0d7de;
+        --text: #24292f;
+        --text-muted: #57606a;
+        --text-bright: #0969da;
+        --accent: #0969da;
+        --green: #116329;
+        --orange: #953800;
+        --purple: #8250df;
+        --cyan: #0550ae;
+        --yellow: #4d2d00;
       }
 
-      html { font-size: 7.5pt; }
+      html { font-size: 6.8pt; }
 
       body {
-        background: #fff;
-        color: #1a1a1a;
-        padding: 4mm;
+        background: #ffffff;
+        color: #24292f;
+        padding: 0;
       }
 
       @page {
         size: A4 portrait;
-        margin: 4mm;
+        margin: 4mm 4mm 4mm 4mm;
       }
 
-      .print-btn { display: none !important; }
+      .controls { display: none !important; }
 
-      .sheet-header {
-        border-bottom-color: #1d4ed8;
-        padding: 2px 0 4px;
-        margin-bottom: 4px;
-      }
-      .sheet-header h1 { color: #111; }
-      .sheet-header .pill { background: #1d4ed8; color: #fff; }
-
-      .columns {
-        column-gap: 8px;
+      .columns-container {
+        column-count: 4;
+        column-gap: 6px;
+        column-rule: 1px solid #d0d7de;
       }
 
-      .section {
-        margin-bottom: 4px;
-        border-color: #d0d0d0;
+      .card {
+        margin-bottom: 5px;
+        border-color: #d0d7de;
         box-shadow: none;
       }
-      .section-title {
-        padding: 2px 5px;
-        font-size: 0.8rem;
-      }
-      .section-title.bash,
-      .section-title.tmux,
-      .section-title.grep,
-      .section-title.sed,
-      .section-title.awk,
-      .section-title.vim {
-        background: #f0f0f0 !important;
-        color: #111;
-      }
-
-      table { font-size: 0.78rem; }
-      th { padding: 1.5px 4px; font-size: 0.7rem; }
-      td { padding: 1.5px 4px; }
-      td:first-child { color: var(--green); }
-
-      code {
-        background: #eee;
-        color: var(--cyan);
+      .card-title {
+        padding: 1px 4px;
         font-size: 0.75rem;
+        background: #f6f8fa !important;
+        color: #0969da !important;
+        border-left: 2px solid #0969da !important;
+        border-bottom-color: #d0d7de;
       }
-      pre {
-        background: #f5f5f5 !important;
-        border-color: #ccc;
-        padding: 2px 4px;
-        margin: 2px 4px 4px;
-        font-size: 0.7rem;
+      .card-subhead {
+        background: #f6f8fa;
+        color: #24292f;
+        font-weight: 700;
+        padding: 1px 4px;
       }
-      pre code { color: #333; }
 
-      .sheet-footer {
-        margin-top: 3px;
+      table { font-size: 0.72rem; }
+      th { padding: 1px 3px; font-size: 0.65rem; }
+      td { padding: 1px 3px; border-bottom-color: #d0d7de; }
+      td.cmd-cell { color: var(--green); font-weight: 700; }
+
+      pre {
+        background: #f6f8fa !important;
+        border-color: #d0d7de;
+        padding: 1px 3px;
+        margin: 1px 3px;
+        font-size: 0.65rem;
+      }
+      pre code { color: #24292f; }
+
+      .footer {
+        margin-top: 4px;
         padding: 2px 0;
       }
     }
 
-    /* ─── Responsive: narrow screens ─── */
+    /* Responsive grid logic for viewports */
+    @media screen and (max-width: 1600px) {
+      .columns-container { column-count: 3; }
+    }
     @media screen and (max-width: 1200px) {
-      .columns { column-count: 2; }
+      .columns-container { column-count: 2; }
     }
     @media screen and (max-width: 768px) {
-      .columns { column-count: 1; }
-      html { font-size: 12px; }
+      .columns-container { column-count: 1; }
+      html { font-size: 11px; }
     }
   </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()" title="Print / Save as PDF">🖨️ Print PDF</button>
-
-<!-- ═══ HEADER ═══ -->
-<div class="sheet-header">
-  <h1>⚡ Sysadmin All-in-One Cheatsheet</h1>
-  <span class="pill">Single Page</span>
+<!-- ═══ CONTROLS (Sticky) ═══ -->
+<div class="controls">
+  <div class="brand">
+    <h1>⚡ Sysadmin All-in-One Dashboard</h1>
+    <span class="badge">Master Reference</span>
+  </div>
+  <div class="search-container">
+    <i class="fa fa-search search-icon"></i>
+    <input type="text" id="search" class="search-input" placeholder="Search commands, flags, tools...">
+  </div>
+  <div class="action-group">
+    <button class="btn" onclick="toggleCollapseAll()"><i class="fa-solid fa-arrows-up-down"></i> Expand/Collapse</button>
+    <button class="btn primary" onclick="window.print()"><i class="fa fa-print"></i> Print PDF</button>
+  </div>
 </div>
 
-<div class="columns">
+<!-- ═══ COLUMNS CONTAINER ═══ -->
+<div class="columns-container" id="columns">
 
   <!-- ════════════════════════════════════════════
-       BASH CLI & JOB CONTROL
+       BASH KEYBOARD SHORTCUTS
        ════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title bash"><span class="icon">⌨️</span> Bash CLI &amp; Job Control</div>
-    <table>
-      <tr><th>Shortcut / Command</th><th>Action</th></tr>
-      <tr><td>Ctrl+a / Ctrl+e</td><td>Jump to <b>start</b> / <b>end</b> of line</td></tr>
-      <tr><td>Ctrl+u / Ctrl+k</td><td>Cut to <b>start</b> / <b>end</b> of line</td></tr>
-      <tr><td>Ctrl+w / Alt+d</td><td>Cut word <b>backward</b> / <b>forward</b></td></tr>
-      <tr><td>Ctrl+y</td><td>Paste (yank) last cut buffer</td></tr>
-      <tr><td>Ctrl+r / Ctrl+g</td><td>Reverse search history / Exit search</td></tr>
-      <tr><td>!!</td><td>Re-run entire last command (<code>sudo !!</code>)</td></tr>
-      <tr><td>!$</td><td>Last argument of previous command</td></tr>
-      <tr><td>!* / !:n</td><td>All args / n-th arg of previous command</td></tr>
-      <tr><td>^old^new^</td><td>Quick-fix: rerun last cmd replacing old→new</td></tr>
-      <tr><td>Ctrl+z / fg %n / bg %n</td><td>Suspend / Resume foreground / background</td></tr>
-      <tr><td>disown -h %n</td><td>Keep job running after shell exit</td></tr>
-      <tr><td>cmd &gt; f 2&gt;&amp;1 / cmd |&amp; cmd2</td><td>Redirect both stdout+stderr / Pipe both</td></tr>
-      <tr><td>cmd &lt;(other_cmd)</td><td>Process substitution (treat output as file)</td></tr>
-      <tr><td>(cd dir &amp;&amp; cmd)</td><td>Run in subshell (no dir change)</td></tr>
-    </table>
+  <div class="card" data-search="bash cli prompt shortcuts readline cursor editing kill yank line">
+    <div class="card-title bash">
+      <span><i class="fa-solid fa-keyboard"></i> Bash Line Editing</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Key Binding</th><th>Action / Mnemonic</th></tr>
+        <tr><td class="cmd-cell">Ctrl + a</td><td class="desc-cell">Jump cursor to <strong>start</strong> of line</td></tr>
+        <tr><td class="cmd-cell">Ctrl + e</td><td class="desc-cell">Jump cursor to <strong>end</strong> of line</td></tr>
+        <tr><td class="cmd-cell">Alt + b</td><td class="desc-cell">Move cursor <strong>backward</strong> 1 word</td></tr>
+        <tr><td class="cmd-cell">Alt + f</td><td class="desc-cell">Move cursor <strong>forward</strong> 1 word</td></tr>
+        <tr><td class="cmd-cell">Ctrl + b / f</td><td class="desc-cell">Cursor back / forward 1 char</td></tr>
+        <tr><td class="cmd-cell">Ctrl + xx</td><td class="desc-cell">Toggle cursor between start &amp; current</td></tr>
+        <tr><td class="cmd-cell">Ctrl + k</td><td class="desc-cell">Cut text to <strong>end</strong> of line</td></tr>
+        <tr><td class="cmd-cell">Ctrl + u</td><td class="desc-cell">Cut text to <strong>start</strong> of line</td></tr>
+        <tr><td class="cmd-cell">Ctrl + w</td><td class="desc-cell">Cut word <strong>before</strong> cursor</td></tr>
+        <tr><td class="cmd-cell">Alt + d</td><td class="desc-cell">Cut word <strong>after</strong> cursor</td></tr>
+        <tr><td class="cmd-cell">Ctrl + y</td><td class="desc-cell">Paste (<strong>yank</strong>) last cut buffer</td></tr>
+        <tr><td class="cmd-cell">Ctrl + _</td><td class="desc-cell">Undo last keyboard edit</td></tr>
+      </table>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════
-       TMUX
+       BASH HISTORY BANG COMMANDS
        ════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title tmux"><span class="icon">⚡</span> Tmux (Prefix = Ctrl+b)</div>
-    <div class="sub-head">Sessions &amp; Windows</div>
-    <table>
-      <tr><th>Key / Command</th><th>Action</th></tr>
-      <tr><td>tmux new -s name</td><td>Create named session</td></tr>
-      <tr><td>tmux attach -t name</td><td>Attach to session</td></tr>
-      <tr><td>tmux ls / kill-session -t</td><td>List sessions / Kill session</td></tr>
-      <tr><td>Prefix d / Prefix $</td><td>Detach / Rename session</td></tr>
-      <tr><td>Prefix s / Prefix w</td><td>Session list / Window list</td></tr>
-      <tr><td>Prefix c / Prefix ,</td><td>Create window / Rename window</td></tr>
-      <tr><td>Prefix p / Prefix n</td><td>Previous / Next window</td></tr>
-    </table>
-    <div class="sub-head">Panes &amp; Layouts</div>
-    <table>
-      <tr><td>Prefix % / Prefix "</td><td>Split vertical / horizontal</td></tr>
-      <tr><td>Prefix o / Prefix x</td><td>Cycle pane / Kill pane</td></tr>
-      <tr><td>Prefix z / Prefix !</td><td>Zoom pane / Break to window</td></tr>
-      <tr><td>Prefix Space</td><td>Cycle layouts</td></tr>
-    </table>
-    <div class="sub-head">Sync &amp; Copy Mode</div>
-    <table>
-      <tr><td>:setw synchronize-panes on</td><td>Type in <b>all panes</b> simultaneously</td></tr>
-      <tr><td>Prefix [</td><td>Enter copy/scroll mode (vi keys)</td></tr>
-      <tr><td>/ or ? → Space → Enter</td><td>Search → Select → Yank</td></tr>
-      <tr><td>Prefix ]</td><td>Paste yanked buffer</td></tr>
-      <tr><td>tmux list-buffers</td><td>List all paste buffers</td></tr>
-      <tr><td>tmux save-buffer -b 0 f.txt</td><td>Save buffer 0 to file</td></tr>
-    </table>
+  <div class="card" data-search="bash history bang commands arguments rerun substitution">
+    <div class="card-title bash">
+      <span><i class="fa-solid fa-clock-rotate-left"></i> Bash History (Bangs)</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Bang Code</th><th>Action / Target</th></tr>
+        <tr><td class="cmd-cell">!!</td><td class="desc-cell">Re-run <strong>entire last command</strong></td></tr>
+        <tr><td class="cmd-cell">!$</td><td class="desc-cell">Insert <strong>last argument</strong> of last command</td></tr>
+        <tr><td class="cmd-cell">!^</td><td class="desc-cell">Insert <strong>first argument</strong> of last command</td></tr>
+        <tr><td class="cmd-cell">!*</td><td class="desc-cell">Insert <strong>all arguments</strong> of last command</td></tr>
+        <tr><td class="cmd-cell">!:n</td><td class="desc-cell">Insert <strong>n-th argument</strong> of last command</td></tr>
+        <tr><td class="cmd-cell">!string</td><td class="desc-cell">Run last command starting with <code>string</code></td></tr>
+        <tr><td class="cmd-cell">!?string?</td><td class="desc-cell">Run last command containing <code>string</code></td></tr>
+        <tr><td class="cmd-cell">^old^new</td><td class="desc-cell">Re-run last cmd replacing <code>old</code> with <code>new</code></td></tr>
+      </table>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════
-       GREP
+       BASH REDIRECTION & SUBSHELLS
        ════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title grep"><span class="icon">🔍</span> Grep</div>
-    <table>
-      <tr><th>Flag</th><th>Action</th></tr>
-      <tr><td>-r / -R</td><td>Recursive (R follows symlinks)</td></tr>
-      <tr><td>-i / -v / -c</td><td>Case-insensitive / Invert / Count</td></tr>
-      <tr><td>-l / -L</td><td>Files with match / Files without</td></tr>
-      <tr><td>-o</td><td>Print only matching part</td></tr>
-      <tr><td>-E / -P</td><td>Extended regex / Perl regex (<code>\d \w \s</code>)</td></tr>
-      <tr><td>-A n / -B n / -C n</td><td>Lines after / before / around match</td></tr>
-      <tr><td>--exclude-dir={.git,vendor}</td><td>Skip directories in recursive search</td></tr>
-    </table>
-    <pre><code><span class="cm"># Extract IPs from logs</span>
-grep <span class="flag">-oP</span> <span class="str">"\b\d{1,3}(\.\d{1,3}){3}\b"</span> access.log
-<span class="cm"># Recursive search excluding dirs</span>
-grep <span class="flag">-r</span> <span class="flag">--exclude-dir</span>=node_modules <span class="str">"pattern"</span> /etc/</code></pre>
+  <div class="card" data-search="bash redirection streams stderr stdout subshell process substitution">
+    <div class="card-title bash">
+      <span><i class="fa-solid fa-shuffle"></i> Streams &amp; Execution</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Syntax</th><th>Action / Behavior</th></tr>
+        <tr><td class="cmd-cell">&amp;&gt;/dev/null</td><td class="desc-cell">Redirect <strong>both</strong> stdout &amp; stderr to blackhole</td></tr>
+        <tr><td class="cmd-cell">|&amp;</td><td class="desc-cell">Pipe <strong>both</strong> stdout &amp; stderr to next command</td></tr>
+        <tr><td class="cmd-cell">&lt;(command)</td><td class="desc-cell"><strong>Process substitution</strong> (command output as file)</td></tr>
+        <tr><td class="cmd-cell">(cd d &amp;&amp; cmd)</td><td class="desc-cell">Run inside subshell (parent dir remains same)</td></tr>
+        <tr><td class="cmd-cell">cmd &gt; f 2&gt;&amp;1</td><td class="desc-cell">Classic redirect stdout + stderr to file <code>f</code></td></tr>
+      </table>
+      <pre><code><span class="cm"># Process substitution example:</span>
+diff <span class="flag">&lt;(</span>curl -s api/v1<span class="flag">)</span> <span class="flag">&lt;(</span>curl -s api/v2<span class="flag">)</span></code></pre>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════
-       SED
+       BASH OPTIONS & PARAMETER EXPANSION
        ════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title sed"><span class="icon">🌊</span> Sed</div>
-    <table>
-      <tr><th>Command</th><th>Action</th></tr>
-      <tr><td>s/old/new/</td><td>Replace first match per line</td></tr>
-      <tr><td>s/old/new/g</td><td>Replace <b>all</b> matches per line</td></tr>
-      <tr><td>-i (GNU) / -i '' (BSD)</td><td>In-place file edit</td></tr>
-      <tr><td>5s/old/new/</td><td>Replace only on line 5</td></tr>
-      <tr><td>10,20s/old/new/g</td><td>Replace in line range 10–20</td></tr>
-      <tr><td>/pat/s/old/new/g</td><td>Replace on lines matching <code>/pat/</code></td></tr>
-      <tr><td>/pat/d</td><td>Delete lines matching pattern</td></tr>
-      <tr><td>5d / 10,20d</td><td>Delete line 5 / Delete range 10–20</td></tr>
-      <tr><td>-E 's/(.*)\s(.*)/\2 \1/'</td><td>Capture groups: swap two words</td></tr>
-    </table>
-    <pre><code><span class="cm"># Reverse lines (tac equivalent)</span>
-sed <span class="flag">-n</span> <span class="str">'1!G;h;$p'</span> file
-<span class="cm"># Double-space a file</span>
-sed <span class="str">'G'</span> file</code></pre>
+  <div class="card" data-search="bash options safety parameter expansion prefix suffix defaults">
+    <div class="card-title bash">
+      <span><i class="fa-solid fa-gears"></i> Bash Options &amp; Params</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Safety Flags (set -euo pipefail)</div>
+      <table>
+        <tr><td class="cmd-cell">set -o errexit</td><td class="desc-cell">Exit on any non-zero return command</td></tr>
+        <tr><td class="cmd-cell">set -o nounset</td><td class="desc-cell">Exit if uninitialized var referenced</td></tr>
+        <tr><td class="cmd-cell">set -o pipefail</td><td class="desc-cell">Pipe returns rightmost fail exit code</td></tr>
+        <tr><td class="cmd-cell">set -o xtrace</td><td class="desc-cell">Trace execution (prints command logs)</td></tr>
+      </table>
+      <div class="card-subhead">Parameter Expansion (FILE="/opt/app/server.ts")</div>
+      <table>
+        <tr><td class="cmd-cell">${V:-30}</td><td class="desc-cell">Returns value <code>30</code> if <code>V</code> is unset/empty</td></tr>
+        <tr><td class="cmd-cell">${V:?msg}</td><td class="desc-cell">Fails script with <code>msg</code> error if <code>V</code> unset</td></tr>
+        <tr><td class="cmd-cell">${FILE/s/c}</td><td class="desc-cell">Replace first: <code>"/opt/app/cerver.ts"</code></td></tr>
+        <tr><td class="cmd-cell">${FILE//s/z}</td><td class="desc-cell">Replace all: <code>"/opt/app/zerver.tz"</code></td></tr>
+        <tr><td class="cmd-cell">${FILE#*/}</td><td class="desc-cell">Trim front short: <code>"opt/app/server.ts"</code></td></tr>
+        <tr><td class="cmd-cell">${FILE##*/}</td><td class="desc-cell">Trim front long: <code>"server.ts"</code> (basename)</td></tr>
+        <tr><td class="cmd-cell">${FILE%/*}</td><td class="desc-cell">Trim back short: <code>"/opt/app"</code> (dirname)</td></tr>
+        <tr><td class="cmd-cell">${FILE%%/*}</td><td class="desc-cell">Trim back long: <code>""</code></td></tr>
+      </table>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════
-       AWK
+       PROCESS INSPECTION & JOB CONTROL
        ════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title awk"><span class="icon">📊</span> Awk</div>
-    <div class="sub-head">Built-in Variables</div>
-    <ul class="compact-list">
-      <li><code>$0</code> entire line · <code>$1..$NF</code> fields · <code>NF</code> field count</li>
-      <li><code>NR</code> line number (global) · <code>FNR</code> line number (per-file)</li>
-      <li><code>FS/OFS</code> input/output field separator · <code>RS/ORS</code> record separators</li>
-    </ul>
-    <table>
-      <tr><th>Command</th><th>Action</th></tr>
-      <tr><td>-F',' '{print $1, $NF}'</td><td>Parse CSV: first &amp; last column</td></tr>
-      <tr><td>'$5 > 90'</td><td>Filter: lines where col 5 &gt; 90</td></tr>
-      <tr><td>'{s+=$5} END {print s/NR}'</td><td>Average of column 5</td></tr>
-      <tr><td>'{ip[$1]++} END {for(k in ip) print k,ip[k]}'</td><td>Frequency count (e.g. hits per IP)</td></tr>
-      <tr><td>'!seen[$0]++'</td><td>Deduplicate lines (preserve order)</td></tr>
-      <tr><td>'NR==10,NR==20'</td><td>Print lines 10 through 20</td></tr>
-      <tr><td>BEGIN{OFS=","} {print $1,$2}</td><td>Change output separator to comma</td></tr>
-    </table>
+  <div class="card" data-search="process job signals inspect trace socket port active kill sigterm sigkill">
+    <div class="card-title bash">
+      <span><i class="fa-solid fa-microchip"></i> Process &amp; Job Control</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Job Operations</div>
+      <table>
+        <tr><td class="cmd-cell">Ctrl + z</td><td class="desc-cell">Suspend foreground process (<code>SIGTSTP</code>)</td></tr>
+        <tr><td class="cmd-cell">jobs -l</td><td class="desc-cell">List background jobs with status &amp; PIDs</td></tr>
+        <tr><td class="cmd-cell">fg %n / bg %n</td><td class="desc-cell">Resume job <code>n</code> in foreground / background</td></tr>
+        <tr><td class="cmd-cell">disown -h %n</td><td class="desc-cell">Protect job <code>n</code> from terminal hangup signal</td></tr>
+        <tr><td class="cmd-cell">nohup cmd &amp;</td><td class="desc-cell">Run decoupled from terminal lifecycle</td></tr>
+      </table>
+      <div class="card-subhead">Inspection CLI</div>
+      <table>
+        <tr><td class="cmd-cell">lsof -i :80</td><td class="desc-cell">Find process listening on port 80</td></tr>
+        <tr><td class="cmd-cell">ss -tulanp</td><td class="desc-cell">Display active TCP/UDP ports and PIDs</td></tr>
+        <tr><td class="cmd-cell">strace -p $P</td><td class="desc-cell">Trace system calls for PID <code>$P</code></td></tr>
+        <tr><td class="cmd-cell">pstree -aps $P</td><td class="desc-cell">Print process tree parentage for PID <code>$P</code></td></tr>
+      </table>
+      <div class="card-subhead">Common Kill Signals</div>
+      <table>
+        <tr><td class="cmd-cell">SIGHUP (1)</td><td class="desc-cell">Hangup daemon (usually hot-reloads configuration)</td></tr>
+        <tr><td class="cmd-cell">SIGINT (2)</td><td class="desc-cell">Keyboard interrupt (default <code>Ctrl + c</code>)</td></tr>
+        <tr><td class="cmd-cell">SIGKILL (9)</td><td class="desc-cell">Force kill immediately (non-catchable)</td></tr>
+        <tr><td class="cmd-cell">SIGTERM (15)</td><td class="desc-cell">Graceful termination request (clean exit)</td></tr>
+        <tr><td class="cmd-cell">SIGSTOP (19)</td><td class="desc-cell">Pause execution queue (non-catchable)</td></tr>
+        <tr><td class="cmd-cell">SIGCONT (18)</td><td class="desc-cell">Resume execution after STOP</td></tr>
+      </table>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════
-       VIM
+       NETWORK DIAGNOSTICS
        ════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title vim"><span class="icon">📝</span> Vim</div>
-    <div class="sub-head">Navigation &amp; Jumps</div>
-    <table>
-      <tr><th>Command</th><th>Action</th></tr>
-      <tr><td>Ctrl+o / Ctrl+i</td><td>Jump backward / forward in jump list</td></tr>
-      <tr><td>g; / g,</td><td>Jump backward / forward in change list</td></tr>
-      <tr><td>* / #</td><td>Search word under cursor forward / backward</td></tr>
-    </table>
-    <div class="sub-head">Visual Block &amp; Registers</div>
-    <table>
-      <tr><td>Ctrl+v → I/A → type → Esc Esc</td><td>Multi-line column insert / append</td></tr>
-      <tr><td>"0p</td><td>Paste from <b>yank register</b> (safe from deletes)</td></tr>
-      <tr><td>"+y / "+p</td><td>Copy / Paste to <b>system clipboard</b></td></tr>
-      <tr><td>"_d</td><td>Delete to <b>black hole</b> (don't overwrite registers)</td></tr>
-      <tr><td>"Ay (uppercase)</td><td><b>Append</b> to named register a</td></tr>
-    </table>
-    <div class="sub-head">Macros &amp; Global Commands</div>
-    <table>
-      <tr><td>qa → actions → q / @a / @@</td><td>Record / Play / Replay last macro</td></tr>
-      <tr><td>"ap → edit → 0"ay$</td><td>Edit macro contents in buffer</td></tr>
-      <tr><td>:g/pat/d</td><td>Delete all lines matching <code>/pat/</code></td></tr>
-      <tr><td>:v/pat/d</td><td>Delete all lines <b>NOT</b> matching <code>/pat/</code></td></tr>
-      <tr><td>:g/pat/s/old/new/g</td><td>Substitute only on matching lines</td></tr>
-      <tr><td>:cfdo %s/old/new/g | update</td><td>Replace across all quickfix files &amp; save</td></tr>
-    </table>
+  <div class="card" data-search="network tcpdump port scan listening sockets netcat tcp udp packet banner">
+    <div class="card-title bash">
+      <span><i class="fa-solid fa-network-wired"></i> Network Diagnostics</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Command</th><th>Action / Diagnostic target</th></tr>
+        <tr><td class="cmd-cell">ss -tulanp</td><td class="desc-cell">Sockets: TCP/UDP, listening, numeric, PID</td></tr>
+        <tr><td class="cmd-cell">nc -zv $IP $P</td><td class="desc-cell">Ping port range <code>$P</code> on target <code>$IP</code></td></tr>
+        <tr><td class="cmd-cell">nc -w 3 $IP 80</td><td class="desc-cell">Probe banner with 3-second timeout limit</td></tr>
+        <tr><td class="cmd-cell">tcpdump -i eth0 -A port 80</td><td class="desc-cell">Sniff ASCII payloads on interface eth0</td></tr>
+        <tr><td class="cmd-cell">tcpdump -i any host $IP</td><td class="desc-cell">Capture all packet streams targeting <code>$IP</code></td></tr>
+      </table>
+    </div>
   </div>
 
-</div><!-- /columns -->
+  <!-- ════════════════════════════════════════════
+       TMUX SESSION & WINDOWS
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="tmux sessions sockets nested pair programming rename detach attach list">
+    <div class="card-title tmux">
+      <span><i class="fa-solid fa-window-restore"></i> Tmux Session Control</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">CLI Management</div>
+      <table>
+        <tr><td class="cmd-cell">tmux new -s $S</td><td class="desc-cell">Start new session named <code>$S</code></td></tr>
+        <tr><td class="cmd-cell">tmux attach -t $S</td><td class="desc-cell">Attach to running session <code>$S</code></td></tr>
+        <tr><td class="cmd-cell">tmux ls</td><td class="desc-cell">List all active tmux sessions</td></tr>
+        <tr><td class="cmd-cell">tmux kill-session -t $S</td><td class="desc-cell">Destroy session <code>$S</code></td></tr>
+        <tr><td class="cmd-cell">tmux kill-server</td><td class="desc-cell">Kill tmux daemon and all sessions</td></tr>
+      </table>
+      <div class="card-subhead">Pair Programming Socket Sharing</div>
+      <pre><code><span class="cm"># Host creates socket:</span>
+tmux -S /tmp/shared new -s pair
+chmod 777 /tmp/shared
+<span class="cm"># Guest attaches:</span>
+tmux -S /tmp/shared attach -t pair</code></pre>
+      <div class="card-subhead">Interactive Key Bindings (Prefix = Ctrl+b)</div>
+      <table>
+        <tr><td class="cmd-cell">Prefix + d</td><td class="desc-cell"><strong>Detach</strong> client from active session</td></tr>
+        <tr><td class="cmd-cell">Prefix + $</td><td class="desc-cell">Rename current session</td></tr>
+        <tr><td class="cmd-cell">Prefix + s</td><td class="desc-cell">Interactive session selector</td></tr>
+        <tr><td class="cmd-cell">Prefix + c</td><td class="desc-cell"><strong>Create</strong> new window</td></tr>
+        <tr><td class="cmd-cell">Prefix + ,</td><td class="desc-cell">Rename active window</td></tr>
+        <tr><td class="cmd-cell">Prefix + p / n</td><td class="desc-cell">Switch to <strong>previous</strong> / <strong>next</strong> window</td></tr>
+        <tr><td class="cmd-cell">Prefix + w</td><td class="desc-cell">Interactive window picker</td></tr>
+        <tr><td class="cmd-cell">Prefix + &amp;</td><td class="desc-cell">Kill active window</td></tr>
+      </table>
+    </div>
+  </div>
 
-<div class="sheet-footer">
-  Anish Karki · Principal Sysadmin Cheatsheet · <span id="year"></span> · Print with Ctrl+P or click 🖨️
+  <!-- ════════════════════════════════════════════
+       TMUX PANES & ADVANCED FLOW
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="tmux panes synchronize layouts zoom split join rotate config mode keys vi">
+    <div class="card-title tmux">
+      <span><i class="fa-solid fa-border-all"></i> Tmux Panes &amp; Sync</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Pane Operations</div>
+      <table>
+        <tr><td class="cmd-cell">Prefix + %</td><td class="desc-cell">Split pane <strong>vertically</strong> (left/right)</td></tr>
+        <tr><td class="cmd-cell">Prefix + "</td><td class="desc-cell">Split pane <strong>horizontally</strong> (top/bottom)</td></tr>
+        <tr><td class="cmd-cell">Prefix + o</td><td class="desc-cell">Rotate cursor focus through panes</td></tr>
+        <tr><td class="cmd-cell">Prefix + x</td><td class="desc-cell">Kill active pane</td></tr>
+        <tr><td class="cmd-cell">Prefix + z</td><td class="desc-cell"><strong>Zoom</strong> pane (toggle maximize)</td></tr>
+        <tr><td class="cmd-cell">Prefix + !</td><td class="desc-cell">Break active pane out to a new window</td></tr>
+        <tr><td class="cmd-cell">Prefix + Space</td><td class="desc-cell">Cycle through default pane layouts</td></tr>
+        <tr><td class="cmd-cell">Prefix + Ctrl + o</td><td class="desc-cell">Orbit/rotate panes position</td></tr>
+        <tr><td class="cmd-cell">join-pane -s :2</td><td class="desc-cell">Pull window 2 into current window as pane</td></tr>
+      </table>
+      <div class="card-subhead">Cluster Mirror (synchronize input)</div>
+      <table>
+        <tr><td class="cmd-cell">:setw synchronize-panes on</td><td class="desc-cell">Type keys into <strong>all panes</strong> in window</td></tr>
+        <tr><td class="cmd-cell">:setw synchronize-panes off</td><td class="desc-cell">Disable key synchronization</td></tr>
+      </table>
+      <div class="card-subhead">VI Copy Mode Keys</div>
+      <ul class="card-list">
+        <li>Set <code>setw -g mode-keys vi</code> in config</li>
+        <li><strong>Enter:</strong> <code>Prefix + [</code> (Scrollback active)</li>
+        <li><strong>Move:</strong> <code>h j k l g G w b</code></li>
+        <li><strong>Search:</strong> <code>/</code> (forward) or <code>?</code> (backward)</li>
+        <li><strong>Select:</strong> <code>Space</code> (char) or <code>V</code> (line)</li>
+        <li><strong>Yank:</strong> <code>Enter</code> (stores in buffer)</li>
+        <li><strong>Paste:</strong> <code>Prefix + ]</code></li>
+      </ul>
+      <div class="card-subhead">Buffer Management CLI</div>
+      <table>
+        <tr><td class="cmd-cell">tmux list-buffers</td><td class="desc-cell">List all copied buffers in RAM</td></tr>
+        <tr><td class="cmd-cell">tmux show-buffer -b 0</td><td class="desc-cell">Display buffer 0 content</td></tr>
+        <tr><td class="cmd-cell">tmux save-buffer -b 0 f</td><td class="desc-cell">Dump buffer 0 to file <code>f</code></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       TMUX CONFIGURATION (.tmux.conf)
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="tmux configuration tmux.conf bindings keys mouse history prefix">
+    <div class="card-title tmux">
+      <span><i class="fa-solid fa-sliders"></i> Tmux Config Optimization</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <pre><code><span class="cm"># Rebind Prefix to Ctrl+a</span>
+<span class="kw">unbind</span> C-b
+<span class="kw">set</span> -g prefix C-a
+<span class="kw">bind</span> C-a send-prefix
+
+<span class="cm"># Easy splits with | and -</span>
+<span class="kw">bind</span> | split-window -h -c <span class="str">"#{pane_current_path}"</span>
+<span class="kw">bind</span> - split-window -v -c <span class="str">"#{pane_current_path}"</span>
+
+<span class="cm"># Vim pane navigation</span>
+<span class="kw">bind</span> h select-pane -L
+<span class="kw">bind</span> j select-pane -D
+<span class="kw">bind</span> k select-pane -U
+<span class="kw">bind</span> l select-pane -R
+
+<span class="cm"># Copy-mode vi bindings</span>
+<span class="kw">setw</span> -g mode-keys vi
+<span class="kw">bind-key</span> -T copy-mode-vi v send-keys -X begin-selection
+<span class="kw">bind-key</span> -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+<span class="cm"># Tweaks</span>
+<span class="kw">set</span> -g base-index <span class="num">1</span>
+<span class="kw">set</span> -g mouse on
+<span class="kw">set</span> -g history-limit <span class="num">100000</span></code></pre>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       GREP SEARCH ENGINE
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="grep recursive search flags context matches inverse pcre matching">
+    <div class="card-title grep">
+      <span><i class="fa-solid fa-magnifying-glass"></i> Grep Pattern Matching</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Flag</th><th>Description / Sysadmin target</th></tr>
+        <tr><td class="cmd-cell">-r / -R</td><td class="desc-cell">Recursive search / Follow symlinks</td></tr>
+        <tr><td class="cmd-cell">-i</td><td class="desc-cell">Case insensitive evaluation</td></tr>
+        <tr><td class="cmd-cell">-v</td><td class="desc-cell">Invert match (exclude lines)</td></tr>
+        <tr><td class="cmd-cell">-c</td><td class="desc-cell">Count matching line totals only</td></tr>
+        <tr><td class="cmd-cell">-l / -L</td><td class="desc-cell">List files with match / files without</td></tr>
+        <tr><td class="cmd-cell">-o</td><td class="desc-cell">Output <strong>only matching segment</strong></td></tr>
+        <tr><td class="cmd-cell">-E</td><td class="desc-cell">Extended Regex (<code>+ ? {} () |</code> unescaped)</td></tr>
+        <tr><td class="cmd-cell">-P</td><td class="desc-cell">Perl Regex (supports <code>\d \w \s</code>, lookaheads)</td></tr>
+        <tr><td class="cmd-cell">-A n / -B n</td><td class="desc-cell">Include <code>n</code> lines <strong>After</strong> / <strong>Before</strong> match</td></tr>
+        <tr><td class="cmd-cell">-C n</td><td class="desc-cell">Include <code>n</code> lines surrounding match context</td></tr>
+        <tr><td class="cmd-cell">--exclude-dir=D</td><td class="desc-cell">Exclude folder name <code>D</code> from search</td></tr>
+      </table>
+      <pre><code><span class="cm"># Regex IP capture from raw access log:</span>
+grep <span class="flag">-oP</span> <span class="str">"\b\d{1,3}(\.\d{1,3}){3}\b"</span> app.log</code></pre>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SED BASICS & IN-PLACE
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="sed stream editor substitution deletion in-place backup regex range address">
+    <div class="card-title sed">
+      <span><i class="fa-solid fa-scissors"></i> Sed Stream Editor</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Basic Operations</div>
+      <table>
+        <tr><th>Pattern / Option</th><th>Action / Result</th></tr>
+        <tr><td class="cmd-cell">-n</td><td class="desc-cell">Suppress printing (used with <code>p</code> to print selected)</td></tr>
+        <tr><td class="cmd-cell">-i</td><td class="desc-cell">In-place edit (GNU: <code>-i</code>, macOS: <code>-i ''</code>)</td></tr>
+        <tr><td class="cmd-cell">-E</td><td class="desc-cell">Extended regex parsing (avoid backslash escapes)</td></tr>
+        <tr><td class="cmd-cell">s/old/new/</td><td class="desc-cell">Replace first occurrence per line</td></tr>
+        <tr><td class="cmd-cell">s/old/new/g</td><td class="desc-cell">Global substitution (replace all per line)</td></tr>
+        <tr><td class="cmd-cell">s/old/new/2</td><td class="desc-cell">Replace only the second match per line</td></tr>
+        <tr><td class="cmd-cell">/pat/d</td><td class="desc-cell">Delete lines containing <code>/pat/</code></td></tr>
+        <tr><td class="cmd-cell">10,20d</td><td class="desc-cell">Delete lines 10 through 20</td></tr>
+      </table>
+      <div class="card-subhead">Line Addressing</div>
+      <table>
+        <tr><td class="cmd-cell">5s/old/new/</td><td class="desc-cell">Run substitution only on line 5</td></tr>
+        <tr><td class="cmd-cell">10,20s/o/n/g</td><td class="desc-cell">Run substitution only on lines 10 to 20</td></tr>
+        <tr><td class="cmd-cell">/begin/,/end/d</td><td class="desc-cell">Delete range between pattern matching markers</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SED HOLD SPACE & LOGIC
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="sed hold space pattern space branching memory loop conditional label file io">
+    <div class="card-title sed">
+      <span><i class="fa-solid fa-code-branch"></i> Sed Logic &amp; Memory</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Pattern Space vs Hold Space Registers</div>
+      <table>
+        <tr><th>Command</th><th>Action / Register flow</th></tr>
+        <tr><td class="cmd-cell">h</td><td class="desc-cell">Pattern ➔ Hold (Copy/overwrite hidden memory)</td></tr>
+        <tr><td class="cmd-cell">H</td><td class="desc-cell">Pattern ➔ Hold (Append to hidden memory with <code>\n</code>)</td></tr>
+        <tr><td class="cmd-cell">g</td><td class="desc-cell">Hold ➔ Pattern (Paste/overwrite active buffer)</td></tr>
+        <tr><td class="cmd-cell">G</td><td class="desc-cell">Hold ➔ Pattern (Append hold buffer to active buffer)</td></tr>
+        <tr><td class="cmd-cell">x</td><td class="desc-cell">Exchange (Swap contents of hold and pattern space)</td></tr>
+      </table>
+      <pre><code><span class="cm"># Reverse file lines (tac equivalent):</span>
+sed <span class="flag">-n</span> <span class="str">'1!G;h;$p'</span> input.txt</code></pre>
+      <div class="card-subhead">Multiline Operations</div>
+      <table>
+        <tr><td class="cmd-cell">N</td><td class="desc-cell">Read next line &amp; append to pattern space with <code>\n</code></td></tr>
+        <tr><td class="cmd-cell">D</td><td class="desc-cell">Delete pattern space up to first <code>\n</code>, restart cycle</td></tr>
+        <tr><td class="cmd-cell">P</td><td class="desc-cell">Print pattern space up to first <code>\n</code></td></tr>
+      </table>
+      <div class="card-subhead">Branching (Flow Control)</div>
+      <table>
+        <tr><td class="cmd-cell">:label</td><td class="desc-cell">Define label bookmark in script</td></tr>
+        <tr><td class="cmd-cell">b label</td><td class="desc-cell">Branch: Unconditional jump to label</td></tr>
+        <tr><td class="cmd-cell">t label</td><td class="desc-cell">Test: Jump to label <strong>only if</strong> last substitute succeeded</td></tr>
+      </table>
+      <pre><code><span class="cm"># Remove HTML tags recursively:</span>
+sed <span class="str">':start; s/&lt;[^&gt;]*&gt;//g; t start'</span></code></pre>
+      <div class="card-subhead">Variables, Files, Inverse</div>
+      <table>
+        <tr><td class="cmd-cell">sed 's/x/'"$V"'/'</td><td class="desc-cell">Safely pass shell variable <code>$V</code> into sed</td></tr>
+        <tr><td class="cmd-cell">/pat/ !p</td><td class="desc-cell">Inverse: Print lines that DO NOT match pattern</td></tr>
+        <tr><td class="cmd-cell">$r f.txt</td><td class="desc-cell">File IO: Read/append <code>f.txt</code> at end of file</td></tr>
+        <tr><td class="cmd-cell">11 q</td><td class="desc-cell">Quit: Exit immediately at line 11 (efficient)</td></tr>
+        <tr><td class="cmd-cell">y/abc/ABC/</td><td class="desc-cell">Translate character classes directly</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       AWK FIELDS & DATA AGGREGATION
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="awk fields records columns variables sum average delimiter filter match pattern">
+    <div class="card-title awk">
+      <span><i class="fa-solid fa-calculator"></i> Awk Fields &amp; Stats</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Built-in Core Variables</div>
+      <table>
+        <tr><th>Variable</th><th>Purpose / Behavior</th></tr>
+        <tr><td class="cmd-cell">$0</td><td class="desc-cell">The entire current record (full line)</td></tr>
+        <tr><td class="cmd-cell">$1 ... $NF</td><td class="desc-cell">Columns split by FS (default whitespace)</td></tr>
+        <tr><td class="cmd-cell">NF</td><td class="desc-cell">Number of Fields in current record (col count)</td></tr>
+        <tr><td class="cmd-cell">NR</td><td class="desc-cell">Number of Records (total line count processed)</td></tr>
+        <tr><td class="cmd-cell">FNR</td><td class="desc-cell">File-specific Record count (resets to 1 per file)</td></tr>
+        <tr><td class="cmd-cell">FS / OFS</td><td class="desc-cell">Field Separator: Input (split) / Output (print comma)</td></tr>
+        <tr><td class="cmd-cell">RS / ORS</td><td class="desc-cell">Record Separator: Input / Output (defaults to <code>\n</code>)</td></tr>
+        <tr><td class="cmd-cell">FILENAME</td><td class="desc-cell">Name of file current line belongs to</td></tr>
+      </table>
+      <div class="card-subhead">Data Parsing Actions</div>
+      <table>
+        <tr><td class="cmd-cell">-F','</td><td class="desc-cell">Specify custom Field delimiter (e.g. CSV comma)</td></tr>
+        <tr><td class="cmd-cell">BEGIN { }</td><td class="desc-cell">Execute block before processing first record</td></tr>
+        <tr><td class="cmd-cell">END { }</td><td class="desc-cell">Execute block after processing final record</td></tr>
+        <tr><td class="cmd-cell">$3 &gt; 100</td><td class="desc-cell">Filter: Only run action block if column 3 matches</td></tr>
+        <tr><td class="cmd-cell">/Regex/</td><td class="desc-cell">Filter: Only run action on lines matching regex</td></tr>
+        <tr><td class="cmd-cell">$9 ~ /404/</td><td class="desc-cell">Filter: Column 9 matching pattern 404</td></tr>
+      </table>
+      <pre><code><span class="cm"># Sum column 5:</span>
+awk <span class="str">'{ sum += $5 } END { print sum }'</span>
+<span class="cm"># Average column 5:</span>
+awk <span class="str">'{ s += $5 } END { print s/NR }'</span></code></pre>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       AWK ARRAYS & LOGIC FUNCTIONS
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="awk arrays associative frequency counts if else string functions deduplicate one liners">
+    <div class="card-title awk">
+      <span><i class="fa-solid fa-chart-bar"></i> Awk Arrays &amp; One-Liners</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Associative Arrays (Hash Maps)</div>
+      <pre><code><span class="cm"># Count occurrences of column 1 (e.g. IPs)</span>
+awk <span class="str">'{ hits[$1]++ } END { 
+  for (ip in hits) print ip, hits[ip] 
+}'</span> access.log | sort <span class="flag">-rn</span> <span class="flag">-k2</span></code></pre>
+      <div class="card-subhead">String &amp; Logic Operations</div>
+      <table>
+        <tr><th>Syntax</th><th>Result / Output</th></tr>
+        <tr><td class="cmd-cell">printf "%-10s %d\n"</td><td class="desc-cell">Formatted output (left-align text, integer)</td></tr>
+        <tr><td class="cmd-cell">if(x){a}else{b}</td><td class="desc-cell">Conditionals matching standard C logic</td></tr>
+        <tr><td class="cmd-cell">length($0)</td><td class="desc-cell">Returns total character count of current line</td></tr>
+        <tr><td class="cmd-cell">toupper/tolower</td><td class="desc-cell">Convert string case</td></tr>
+        <tr><td class="cmd-cell">substr($0, start, len)</td><td class="desc-cell">Extract partial substring segment</td></tr>
+      </table>
+      <div class="card-subhead">Standard Sysadmin One-Liners</div>
+      <table>
+        <tr><td class="cmd-cell">!seen[$0]++</td><td class="desc-cell"><strong>Deduplicate</strong> files keeping ordering</td></tr>
+        <tr><td class="cmd-cell">NR % 2 == 0</td><td class="desc-cell">Print only even numbered lines</td></tr>
+        <tr><td class="cmd-cell">length($0) &gt; 80</td><td class="desc-cell">Print lines wider than 80 chars</td></tr>
+        <tr><td class="cmd-cell">NR==10,NR==20</td><td class="desc-cell">Print lines 10 to 20 inclusive</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       JQ STRUCTURAL PARSING
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="jq json parser select filter export csv json keys path nested arrays">
+    <div class="card-title awk">
+      <span><i class="fa-solid fa-code"></i> Jq JSON Processor</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <table>
+        <tr><th>Filter Path</th><th>Action / Target output</th></tr>
+        <tr><td class="cmd-cell">.key</td><td class="desc-cell">Extract value at top-level attribute <code>key</code></td></tr>
+        <tr><td class="cmd-cell">.users[]</td><td class="desc-cell">Iterate/unwrap list elements in array users</td></tr>
+        <tr><td class="cmd-cell">select(.role == "x")</td><td class="desc-cell">Filter elements where field matches <code>x</code></td></tr>
+        <tr><td class="cmd-cell">-r</td><td class="desc-cell">Raw output (removes surrounding quotes)</td></tr>
+        <tr><td class="cmd-cell">[@csv]</td><td class="desc-cell">Convert array elements into standard CSV format</td></tr>
+      </table>
+      <pre><code><span class="cm"># Filter and fetch nested field:</span>
+jq <span class="str">'.users[] | select(.role=="admin") | .email'</span>
+<span class="cm"># Convert JSON items to CSV:</span>
+jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @csv'</span> &gt; f.csv</code></pre>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       VIM CURSOR MOVEMENT & JUMP LISTS
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="vim cursor navigation jumps changes lists search word cursor buffer">
+    <div class="card-title vim">
+      <span><i class="fa-solid fa-compass"></i> Vim Jumps &amp; Navigation</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Jump List Coordinates</div>
+      <table>
+        <tr><th>Command</th><th>Target Navigation / Mnemonic</th></tr>
+        <tr><td class="cmd-cell">Ctrl + o</td><td class="desc-cell">Jump cursor to <strong>older</strong> coordinate position</td></tr>
+        <tr><td class="cmd-cell">Ctrl + i</td><td class="desc-cell">Jump cursor to <strong>newer</strong> coordinate position</td></tr>
+        <tr><td class="cmd-cell">g;</td><td class="desc-cell">Jump backward to older <strong>edit</strong> location</td></tr>
+        <tr><td class="cmd-cell">g,</td><td class="desc-cell">Jump forward to newer <strong>edit</strong> location</td></tr>
+        <tr><td class="cmd-cell">'' (two single quotes)</td><td class="desc-cell">Jump back to the line before last jump action</td></tr>
+        <tr><td class="cmd-cell">`` (two backticks)</td><td class="desc-cell">Jump back to exact coordinates before last jump</td></tr>
+        <tr><td class="cmd-cell">:jumps / :changes</td><td class="desc-cell">View entire jumps stack / edit change history</td></tr>
+      </table>
+      <div class="card-subhead">Search Navigation</div>
+      <table>
+        <tr><td class="cmd-cell">* / #</td><td class="desc-cell">Find next / previous occurrence of word under cursor</td></tr>
+        <tr><td class="cmd-cell">/pattern\c</td><td class="desc-cell">Case-insensitive search (using <code>\c</code> override)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       VIM TEXT OBJECTS & COMPOSITION
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="vim text objects composition inner around word tag block change delete yank uppercase">
+    <div class="card-title vim">
+      <span><i class="fa-solid fa-cubes"></i> Vim Text Objects</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Target Operators (change, delete, yank, format)</div>
+      <table>
+        <tr><th>Key</th><th>Inner (<code>i</code>) / Around (<code>a</code>) Target</th></tr>
+        <tr><td class="cmd-cell">w / W</td><td class="desc-cell">Word / Word (whitespace inclusive)</td></tr>
+        <tr><td class="cmd-cell">s / p</td><td class="desc-cell">Sentence / Paragraph blocks</td></tr>
+        <tr><td class="cmd-cell">" / ' / `</td><td class="desc-cell">Double / Single / Backtick quotes</td></tr>
+        <tr><td class="cmd-cell">{ or B</td><td class="desc-cell">Braces (curly bracket block)</td></tr>
+        <tr><td class="cmd-cell">( or b</td><td class="desc-cell">Parentheses block</td></tr>
+        <tr><td class="cmd-cell">[</td><td class="desc-cell">Square brackets block</td></tr>
+        <tr><td class="cmd-cell">t</td><td class="desc-cell">HTML/XML tag wrappers (e.g. <code>&lt;div&gt;&lt;/div&gt;</code>)</td></tr>
+      </table>
+      <div class="card-subhead">Composition Examples</div>
+      <table>
+        <tr><td class="cmd-cell">ci"</td><td class="desc-cell"><strong>C</strong>hange <strong>I</strong>nner <strong>"</strong> (clear quotes, enter insert mode)</td></tr>
+        <tr><td class="cmd-cell">da{</td><td class="desc-cell"><strong>D</strong>elete <strong>A</strong>round <strong>{</strong> (delete braces &amp; all contents)</td></tr>
+        <tr><td class="cmd-cell">yt=</td><td class="desc-cell"><strong>Y</strong>ank <strong>T</strong>il <strong>=</strong> (copy everything up to equals sign)</td></tr>
+        <tr><td class="cmd-cell">gUit</td><td class="desc-cell">Convert <strong>I</strong>nner <strong>T</strong>ag text content to UPPERCASE</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       VIM VISUAL BLOCK & REGISTERS
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="vim visual block multi cursor columns registers copy paste system clipboard blackhole expression">
+    <div class="card-title vim">
+      <span><i class="fa-solid fa-clone"></i> Vim Block &amp; Registers</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Visual Block Multi-line (Ctrl + v)</div>
+      <ul class="card-list">
+        <li><strong>Column Prepending:</strong> <code>Ctrl+v</code> select vertical block ➔ <code>I</code> (capital) ➔ Type text ➔ <code>Esc Esc</code></li>
+        <li><strong>Column Appending:</strong> <code>Ctrl+v</code> select block ➔ <code>$</code> (end of line) ➔ <code>A</code> ➔ Type ➔ <code>Esc Esc</code></li>
+        <li><strong>Replace Block:</strong> Select block ➔ <code>c</code> ➔ Type ➔ <code>Esc Esc</code></li>
+        <li><strong>Visual Command Filter:</strong> Select lines visually ➔ <code>:!sort</code> (runs shell sort filter on block)</li>
+      </ul>
+      <div class="card-subhead">Vim Register System (specified with "reg)</div>
+      <table>
+        <tr><th>Register</th><th>Type / Use Case Target</th></tr>
+        <tr><td class="cmd-cell">""</td><td class="desc-cell">Unnamed: default bucket for cut/delete/yank</td></tr>
+        <tr><td class="cmd-cell">"0</td><td class="desc-cell"><strong>Yank buffer</strong>: holds last yanked text (prevents delete/cut overrides)</td></tr>
+        <tr><td class="cmd-cell">"+ / "*</td><td class="desc-cell">System Clipboard interface (syncs with OS clipboard)</td></tr>
+        <tr><td class="cmd-cell">"_</td><td class="desc-cell"><strong>Black hole</strong>: discards deletes entirely (doesn't overwrite registers)</td></tr>
+        <tr><td class="cmd-cell">"/</td><td class="desc-cell">Read-only: contains pattern from last slash search</td></tr>
+        <tr><td class="cmd-cell">". / ":</td><td class="desc-cell">Read-only: last inserted text / last command line</td></tr>
+        <tr><td class="cmd-cell">"=</td><td class="desc-cell"><strong>Expression</strong> register (math calculator: <code>Ctrl+r =5*20</code>)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       VIM MACROS & SEARCH REPLACE
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="vim macros recording search replace regex global command quickfix list search files">
+    <div class="card-title vim">
+      <span><i class="fa-solid fa-arrow-pointer"></i> Vim Automation &amp; Regex</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <div class="card-subhead">Macro Operations</div>
+      <table>
+        <tr><td class="cmd-cell">qa</td><td class="desc-cell">Start recording macro keys inside register <code>a</code></td></tr>
+        <tr><td class="cmd-cell">q</td><td class="desc-cell">Stop macro recording</td></tr>
+        <tr><td class="cmd-cell">@a / @@</td><td class="desc-cell">Play back macro <code>a</code> / Replay last played macro</td></tr>
+        <tr><td class="cmd-cell">100@a</td><td class="desc-cell">Repeat macro playback 100 times sequentially</td></tr>
+        <tr><td class="cmd-cell">:&lt;,&gt;normal @a</td><td class="desc-cell">Execute macro <code>a</code> on all lines in visual selection</td></tr>
+      </table>
+      <div class="card-subhead">In-place Macro Editing</div>
+      <ul class="card-list">
+        <li>1. Paste macro content on new line: <code>"ap</code></li>
+        <li>2. Edit keystrokes manually</li>
+        <li>3. Yank content back into register: select text ➔ <code>"ay$</code></li>
+      </ul>
+      <div class="card-subhead">Regex &amp; Replace (:%s/pat/rep/flags)</td>
+      <table>
+        <tr><td class="cmd-cell">\%V</td><td class="desc-cell">Visual Limit: replacement restricted inside visual bounds</td></tr>
+        <tr><td class="cmd-cell">\v</td><td class="desc-cell">Very Magic: operators do not require escape slashes</td></tr>
+        <tr><td class="cmd-cell">/\(\w\+\)\s\+\1</td><td class="desc-cell">Search query matching duplicate word patterns</td></tr>
+      </table>
+      <div class="card-subhead">The Global Command (:g)</div>
+      <table>
+        <tr><td class="cmd-cell">:g/TODO/d</td><td class="desc-cell">Delete all lines containing string <code>TODO</code></td></tr>
+        <tr><td class="cmd-cell">:v/TODO/d</td><td class="desc-cell">Delete all lines that <strong>do not</strong> contain <code>TODO</code></td></tr>
+        <tr><td class="cmd-cell">:g/P/normal @a</td><td class="desc-cell">Execute macro <code>a</code> on lines matching pattern <code>P</code></td></tr>
+      </table>
+      <div class="card-subhead">Quickfix Workspace Replacements</div>
+      <table>
+        <tr><td class="cmd-cell">:vimgrep /P/ **/*</td><td class="desc-cell">Search workspace files for pattern <code>P</code></td></tr>
+        <tr><td class="cmd-cell">:copen / :cnext</td><td class="desc-cell">Open interactive search list / Jump to next</td></tr>
+        <tr><td class="cmd-cell">:cfdo %s/o/n/g \| up</td><td class="desc-cell">Replace <code>o</code> with <code>n</code> on all matching files &amp; save</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       VIM CONFIGURATION (.vimrc)
+       ════════════════════════════════════════════ -->
+  <div class="card" data-search="vim configuration vimrc mappings custom settings clipboard split search">
+    <div class="card-title vim">
+      <span><i class="fa-solid fa-terminal"></i> Vim Config Setup</span>
+      <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+    </div>
+    <div class="card-body">
+      <pre><code><span class="cm">" Hybrid relative line numbers</span>
+<span class="kw">set</span> number relativenumber
+<span class="kw">set</span> scrolloff=<span class="num">8</span>
+<span class="kw">set</span> splitbelow splitright
+
+<span class="cm">" Tab configuration (4 spaces)</span>
+<span class="kw">set</span> expandtab
+<span class="kw">set</span> shiftwidth=<span class="num">4</span> tabstop=<span class="num">4</span>
+
+<span class="cm">" Intelligent searches</span>
+<span class="kw">set</span> ignorecase smartcase
+<span class="kw">set</span> undofile <span class="cm">" Persistent history</span>
+
+<span class="cm">" Clipboard & Leader map</span>
+<span class="kw">set</span> clipboard=unnamedplus
+<span class="kw">let</span> mapleader = <span class="str">" "</span>
+
+<span class="cm">" Window navigation mappings</span>
+<span class="kw">nnoremap</span> &lt;C-h&gt; &lt;C-w&gt;h
+<span class="kw">nnoremap</span> &lt;C-j&gt; &lt;C-w&gt;j
+<span class="kw">nnoremap</span> &lt;C-k&gt; &lt;C-w&gt;k
+<span class="kw">nnoremap</span> &lt;C-l&gt; &lt;C-w&gt;l
+
+<span class="cm">" Quickfix quick toggle</span>
+<span class="kw">nnoremap</span> &lt;leader&gt;co :copen&lt;CR&gt;
+<span class="kw">nnoremap</span> &lt;leader&gt;cn :cnext&lt;CR&gt;</code></pre>
+    </div>
+  </div>
+
+</div><!-- /columns-container -->
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  Anish Karki · Principal Sysadmin Master Dashboard · <span id="year"></span> · Press <code>Ctrl + P</code> to print PDF
 </div>
 
+<!-- ═══ SCRIPTS ═══ -->
 <script>
+  // Dynamic Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Collapsible cards implementation
+  document.querySelectorAll('.card-title').forEach(header => {
+    header.addEventListener('click', () => {
+      const body = header.nextElementSibling;
+      const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+      
+      if (body.style.display === 'none') {
+        body.style.display = 'block';
+        if (icon) {
+          icon.classList.remove('fa-chevron-up');
+          icon.classList.add('fa-chevron-down');
+        }
+      } else {
+        body.style.display = 'none';
+        if (icon) {
+          icon.classList.remove('fa-chevron-down');
+          icon.classList.add('fa-chevron-up');
+        }
+      }
+    });
+  });
+
+  // Expand / Collapse all toggler
+  let allCollapsed = false;
+  function toggleCollapseAll() {
+    allCollapsed = !allCollapsed;
+    document.querySelectorAll('.card').forEach(card => {
+      const body = card.querySelector('.card-body');
+      const icon = card.querySelector('.card-title i:last-child');
+      if (allCollapsed) {
+        body.style.display = 'none';
+        if (icon) {
+          icon.classList.remove('fa-chevron-down');
+          icon.classList.add('fa-chevron-up');
+        }
+      } else {
+        body.style.display = 'block';
+        if (icon) {
+          icon.classList.remove('fa-chevron-up');
+          icon.classList.add('fa-chevron-down');
+        }
+      }
+    });
+  }
+
+  // Live filter search logic
+  const searchInput = document.getElementById('search');
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase().trim();
+    
+    // Clear previous highlights
+    document.querySelectorAll('.search-match').forEach(el => {
+      el.classList.remove('search-match');
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+      const keywords = card.getAttribute('data-search') || '';
+      const textContent = card.innerText.toLowerCase();
+      
+      if (!term) {
+        card.classList.remove('hidden');
+        return;
+      }
+      
+      if (keywords.includes(term) || textContent.includes(term)) {
+        card.classList.remove('hidden');
+        
+        // Highlight matching table cells
+        card.querySelectorAll('td').forEach(td => {
+          if (td.innerText.toLowerCase().includes(term)) {
+            td.classList.add('search-match');
+          }
+        });
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
 </script>
 
 </body>
