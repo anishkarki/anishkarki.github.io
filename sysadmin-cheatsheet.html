@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sysadmin All-in-One Cheatsheet | Anish Karki</title>
+  <meta name="description" content="Ultra-compact single-page sysadmin cheatsheet covering Bash, Tmux, Vim, Grep, Sed, and Awk.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════
+       SCREEN THEME: Dark, dense, PDF-like
+       ═══════════════════════════════════════════════════ */
+    :root {
+      --bg: #0c0e14;
+      --bg2: #141721;
+      --bg3: #1a1e2e;
+      --border: #2a2f45;
+      --text: #c8cdd8;
+      --text-dim: #8891a5;
+      --accent: #60a5fa;
+      --accent2: #a78bfa;
+      --green: #6ee7b7;
+      --orange: #fbbf24;
+      --pink: #f472b6;
+      --red: #f87171;
+      --cyan: #22d3ee;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      font-size: 11px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.35;
+      padding: 12px 16px;
+      min-height: 100vh;
+    }
+
+    /* ─── Header ─── */
+    .sheet-header {
+      text-align: center;
+      padding: 6px 0 10px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .sheet-header h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .sheet-header .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+    .sheet-header .pill {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── Multi-column layout ─── */
+    .columns {
+      column-count: 3;
+      column-gap: 14px;
+      column-rule: 1px solid var(--border);
+    }
+
+    /* ─── Sections ─── */
+    .section {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 5px 8px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-title.bash   { background: linear-gradient(90deg, #1e3a5f, var(--bg2)); }
+    .section-title.tmux   { background: linear-gradient(90deg, #1a3340, var(--bg2)); }
+    .section-title.grep   { background: linear-gradient(90deg, #2d1f3d, var(--bg2)); }
+    .section-title.sed    { background: linear-gradient(90deg, #3d2b1f, var(--bg2)); }
+    .section-title.awk    { background: linear-gradient(90deg, #1f3d2b, var(--bg2)); }
+    .section-title.vim    { background: linear-gradient(90deg, #3d1f2b, var(--bg2)); }
+
+    .section-title .icon {
+      font-size: 1rem;
+    }
+
+    /* ─── Tables ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 3px 6px;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    td {
+      padding: 2.5px 6px;
+      border-bottom: 1px solid rgba(42,47,69,0.5);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(96,165,250,0.04); }
+
+    td:first-child {
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--green);
+      font-weight: 600;
+      width: 45%;
+    }
+    td:last-child {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+    }
+
+    /* ─── Inline code ─── */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      background: var(--bg3);
+      color: var(--cyan);
+      padding: 0px 3px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    /* ─── Code blocks ─── */
+    pre {
+      background: #0a0c10;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 6px;
+      margin: 4px 6px 6px;
+      overflow-x: auto;
+      font-size: 0.75rem;
+      line-height: 1.35;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      color: var(--text);
+    }
+    .cm { color: var(--text-dim); }  /* comment */
+    .kw { color: var(--accent); }    /* keyword */
+    .str { color: var(--green); }    /* string */
+    .flag { color: var(--orange); }  /* flag */
+    .var { color: var(--pink); }     /* variable */
+
+    /* ─── Sub-headers inside sections ─── */
+    .sub-head {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent2);
+      padding: 3px 6px 1px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* ─── Compact list ─── */
+    .compact-list {
+      padding: 2px 6px 4px;
+      font-size: 0.78rem;
+    }
+    .compact-list li {
+      list-style: none;
+      padding: 1.5px 0;
+      color: var(--text-dim);
+    }
+    .compact-list li::before {
+      content: "›";
+      color: var(--accent);
+      margin-right: 4px;
+      font-weight: 700;
+    }
+
+    /* ─── Footer ─── */
+    .sheet-footer {
+      text-align: center;
+      padding: 6px 0 2px;
+      margin-top: 8px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.7rem;
+    }
+
+    /* ─── Print button ─── */
+    .print-btn {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      z-index: 100;
+      transition: all 0.2s;
+    }
+    .print-btn:hover {
+      background: var(--accent2);
+      transform: scale(1.05);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       PRINT THEME: Light, compact, single-page A4/Letter
+       ═══════════════════════════════════════════════════ */
+    @media print {
+      :root {
+        --bg: #fff;
+        --bg2: #fff;
+        --bg3: #f5f5f5;
+        --border: #d0d0d0;
+        --text: #1a1a1a;
+        --text-dim: #555;
+        --accent: #1d4ed8;
+        --accent2: #7c3aed;
+        --green: #047857;
+        --orange: #b45309;
+        --pink: #be185d;
+        --red: #dc2626;
+        --cyan: #0e7490;
+      }
+
+      html { font-size: 7.5pt; }
+
+      body {
+        background: #fff;
+        color: #1a1a1a;
+        padding: 4mm;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 4mm;
+      }
+
+      .print-btn { display: none !important; }
+
+      .sheet-header {
+        border-bottom-color: #1d4ed8;
+        padding: 2px 0 4px;
+        margin-bottom: 4px;
+      }
+      .sheet-header h1 { color: #111; }
+      .sheet-header .pill { background: #1d4ed8; color: #fff; }
+
+      .columns {
+        column-gap: 8px;
+      }
+
+      .section {
+        margin-bottom: 4px;
+        border-color: #d0d0d0;
+        box-shadow: none;
+      }
+      .section-title {
+        padding: 2px 5px;
+        font-size: 0.8rem;
+      }
+      .section-title.bash,
+      .section-title.tmux,
+      .section-title.grep,
+      .section-title.sed,
+      .section-title.awk,
+      .section-title.vim {
+        background: #f0f0f0 !important;
+        color: #111;
+      }
+
+      table { font-size: 0.78rem; }
+      th { padding: 1.5px 4px; font-size: 0.7rem; }
+      td { padding: 1.5px 4px; }
+      td:first-child { color: var(--green); }
+
+      code {
+        background: #eee;
+        color: var(--cyan);
+        font-size: 0.75rem;
+      }
+      pre {
+        background: #f5f5f5 !important;
+        border-color: #ccc;
+        padding: 2px 4px;
+        margin: 2px 4px 4px;
+        font-size: 0.7rem;
+      }
+      pre code { color: #333; }
+
+      .sheet-footer {
+        margin-top: 3px;
+        padding: 2px 0;
+      }
+    }
+
+    /* ─── Responsive: narrow screens ─── */
+    @media screen and (max-width: 1200px) {
+      .columns { column-count: 2; }
+    }
+    @media screen and (max-width: 768px) {
+      .columns { column-count: 1; }
+      html { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()" title="Print / Save as PDF">🖨️ Print PDF</button>
+
+<!-- ═══ HEADER ═══ -->
+<div class="sheet-header">
+  <h1>⚡ Sysadmin All-in-One Cheatsheet</h1>
+  <span class="pill">Single Page</span>
+</div>
+
+<div class="columns">
+
+  <!-- ════════════════════════════════════════════
+       BASH CLI & JOB CONTROL
+       ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title bash"><span class="icon">⌨️</span> Bash CLI &amp; Job Control</div>
+    <table>
+      <tr><th>Shortcut / Command</th><th>Action</th></tr>
+      <tr><td>Ctrl+a / Ctrl+e</td><td>Jump to <b>start</b> / <b>end</b> of line</td></tr>
+      <tr><td>Ctrl+u / Ctrl+k</td><td>Cut to <b>start</b> / <b>end</b> of line</td></tr>
+      <tr><td>Ctrl+w / Alt+d</td><td>Cut word <b>backward</b> / <b>forward</b></td></tr>
+      <tr><td>Ctrl+y</td><td>Paste (yank) last cut buffer</td></tr>
+      <tr><td>Ctrl+r / Ctrl+g</td><td>Reverse search history / Exit search</td></tr>
+      <tr><td>!!</td><td>Re-run entire last command (<code>sudo !!</code>)</td></tr>
+      <tr><td>!$</td><td>Last argument of previous command</td></tr>
+      <tr><td>!* / !:n</td><td>All args / n-th arg of previous command</td></tr>
+      <tr><td>^old^new^</td><td>Quick-fix: rerun last cmd replacing old→new</td></tr>
+      <tr><td>Ctrl+z / fg %n / bg %n</td><td>Suspend / Resume foreground / background</td></tr>
+      <tr><td>disown -h %n</td><td>Keep job running after shell exit</td></tr>
+      <tr><td>cmd &gt; f 2&gt;&amp;1 / cmd |&amp; cmd2</td><td>Redirect both stdout+stderr / Pipe both</td></tr>
+      <tr><td>cmd &lt;(other_cmd)</td><td>Process substitution (treat output as file)</td></tr>
+      <tr><td>(cd dir &amp;&amp; cmd)</td><td>Run in subshell (no dir change)</td></tr>
+    </table>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       TMUX
+       ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title tmux"><span class="icon">⚡</span> Tmux (Prefix = Ctrl+b)</div>
+    <div class="sub-head">Sessions &amp; Windows</div>
+    <table>
+      <tr><th>Key / Command</th><th>Action</th></tr>
+      <tr><td>tmux new -s name</td><td>Create named session</td></tr>
+      <tr><td>tmux attach -t name</td><td>Attach to session</td></tr>
+      <tr><td>tmux ls / kill-session -t</td><td>List sessions / Kill session</td></tr>
+      <tr><td>Prefix d / Prefix $</td><td>Detach / Rename session</td></tr>
+      <tr><td>Prefix s / Prefix w</td><td>Session list / Window list</td></tr>
+      <tr><td>Prefix c / Prefix ,</td><td>Create window / Rename window</td></tr>
+      <tr><td>Prefix p / Prefix n</td><td>Previous / Next window</td></tr>
+    </table>
+    <div class="sub-head">Panes &amp; Layouts</div>
+    <table>
+      <tr><td>Prefix % / Prefix "</td><td>Split vertical / horizontal</td></tr>
+      <tr><td>Prefix o / Prefix x</td><td>Cycle pane / Kill pane</td></tr>
+      <tr><td>Prefix z / Prefix !</td><td>Zoom pane / Break to window</td></tr>
+      <tr><td>Prefix Space</td><td>Cycle layouts</td></tr>
+    </table>
+    <div class="sub-head">Sync &amp; Copy Mode</div>
+    <table>
+      <tr><td>:setw synchronize-panes on</td><td>Type in <b>all panes</b> simultaneously</td></tr>
+      <tr><td>Prefix [</td><td>Enter copy/scroll mode (vi keys)</td></tr>
+      <tr><td>/ or ? → Space → Enter</td><td>Search → Select → Yank</td></tr>
+      <tr><td>Prefix ]</td><td>Paste yanked buffer</td></tr>
+      <tr><td>tmux list-buffers</td><td>List all paste buffers</td></tr>
+      <tr><td>tmux save-buffer -b 0 f.txt</td><td>Save buffer 0 to file</td></tr>
+    </table>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       GREP
+       ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title grep"><span class="icon">🔍</span> Grep</div>
+    <table>
+      <tr><th>Flag</th><th>Action</th></tr>
+      <tr><td>-r / -R</td><td>Recursive (R follows symlinks)</td></tr>
+      <tr><td>-i / -v / -c</td><td>Case-insensitive / Invert / Count</td></tr>
+      <tr><td>-l / -L</td><td>Files with match / Files without</td></tr>
+      <tr><td>-o</td><td>Print only matching part</td></tr>
+      <tr><td>-E / -P</td><td>Extended regex / Perl regex (<code>\d \w \s</code>)</td></tr>
+      <tr><td>-A n / -B n / -C n</td><td>Lines after / before / around match</td></tr>
+      <tr><td>--exclude-dir={.git,vendor}</td><td>Skip directories in recursive search</td></tr>
+    </table>
+    <pre><code><span class="cm"># Extract IPs from logs</span>
+grep <span class="flag">-oP</span> <span class="str">"\b\d{1,3}(\.\d{1,3}){3}\b"</span> access.log
+<span class="cm"># Recursive search excluding dirs</span>
+grep <span class="flag">-r</span> <span class="flag">--exclude-dir</span>=node_modules <span class="str">"pattern"</span> /etc/</code></pre>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SED
+       ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title sed"><span class="icon">🌊</span> Sed</div>
+    <table>
+      <tr><th>Command</th><th>Action</th></tr>
+      <tr><td>s/old/new/</td><td>Replace first match per line</td></tr>
+      <tr><td>s/old/new/g</td><td>Replace <b>all</b> matches per line</td></tr>
+      <tr><td>-i (GNU) / -i '' (BSD)</td><td>In-place file edit</td></tr>
+      <tr><td>5s/old/new/</td><td>Replace only on line 5</td></tr>
+      <tr><td>10,20s/old/new/g</td><td>Replace in line range 10–20</td></tr>
+      <tr><td>/pat/s/old/new/g</td><td>Replace on lines matching <code>/pat/</code></td></tr>
+      <tr><td>/pat/d</td><td>Delete lines matching pattern</td></tr>
+      <tr><td>5d / 10,20d</td><td>Delete line 5 / Delete range 10–20</td></tr>
+      <tr><td>-E 's/(.*)\s(.*)/\2 \1/'</td><td>Capture groups: swap two words</td></tr>
+    </table>
+    <pre><code><span class="cm"># Reverse lines (tac equivalent)</span>
+sed <span class="flag">-n</span> <span class="str">'1!G;h;$p'</span> file
+<span class="cm"># Double-space a file</span>
+sed <span class="str">'G'</span> file</code></pre>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       AWK
+       ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title awk"><span class="icon">📊</span> Awk</div>
+    <div class="sub-head">Built-in Variables</div>
+    <ul class="compact-list">
+      <li><code>$0</code> entire line · <code>$1..$NF</code> fields · <code>NF</code> field count</li>
+      <li><code>NR</code> line number (global) · <code>FNR</code> line number (per-file)</li>
+      <li><code>FS/OFS</code> input/output field separator · <code>RS/ORS</code> record separators</li>
+    </ul>
+    <table>
+      <tr><th>Command</th><th>Action</th></tr>
+      <tr><td>-F',' '{print $1, $NF}'</td><td>Parse CSV: first &amp; last column</td></tr>
+      <tr><td>'$5 > 90'</td><td>Filter: lines where col 5 &gt; 90</td></tr>
+      <tr><td>'{s+=$5} END {print s/NR}'</td><td>Average of column 5</td></tr>
+      <tr><td>'{ip[$1]++} END {for(k in ip) print k,ip[k]}'</td><td>Frequency count (e.g. hits per IP)</td></tr>
+      <tr><td>'!seen[$0]++'</td><td>Deduplicate lines (preserve order)</td></tr>
+      <tr><td>'NR==10,NR==20'</td><td>Print lines 10 through 20</td></tr>
+      <tr><td>BEGIN{OFS=","} {print $1,$2}</td><td>Change output separator to comma</td></tr>
+    </table>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       VIM
+       ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title vim"><span class="icon">📝</span> Vim</div>
+    <div class="sub-head">Navigation &amp; Jumps</div>
+    <table>
+      <tr><th>Command</th><th>Action</th></tr>
+      <tr><td>Ctrl+o / Ctrl+i</td><td>Jump backward / forward in jump list</td></tr>
+      <tr><td>g; / g,</td><td>Jump backward / forward in change list</td></tr>
+      <tr><td>* / #</td><td>Search word under cursor forward / backward</td></tr>
+    </table>
+    <div class="sub-head">Visual Block &amp; Registers</div>
+    <table>
+      <tr><td>Ctrl+v → I/A → type → Esc Esc</td><td>Multi-line column insert / append</td></tr>
+      <tr><td>"0p</td><td>Paste from <b>yank register</b> (safe from deletes)</td></tr>
+      <tr><td>"+y / "+p</td><td>Copy / Paste to <b>system clipboard</b></td></tr>
+      <tr><td>"_d</td><td>Delete to <b>black hole</b> (don't overwrite registers)</td></tr>
+      <tr><td>"Ay (uppercase)</td><td><b>Append</b> to named register a</td></tr>
+    </table>
+    <div class="sub-head">Macros &amp; Global Commands</div>
+    <table>
+      <tr><td>qa → actions → q / @a / @@</td><td>Record / Play / Replay last macro</td></tr>
+      <tr><td>"ap → edit → 0"ay$</td><td>Edit macro contents in buffer</td></tr>
+      <tr><td>:g/pat/d</td><td>Delete all lines matching <code>/pat/</code></td></tr>
+      <tr><td>:v/pat/d</td><td>Delete all lines <b>NOT</b> matching <code>/pat/</code></td></tr>
+      <tr><td>:g/pat/s/old/new/g</td><td>Substitute only on matching lines</td></tr>
+      <tr><td>:cfdo %s/old/new/g | update</td><td>Replace across all quickfix files &amp; save</td></tr>
+    </table>
+  </div>
+
+</div><!-- /columns -->
+
+<div class="sheet-footer">
+  Anish Karki · Principal Sysadmin Cheatsheet · <span id="year"></span> · Print with Ctrl+P or click 🖨️
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

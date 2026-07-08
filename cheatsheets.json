@@ -180,5 +180,24 @@
     "date": "2026-07-08T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/principal-sysadmin.md"
+  },
+  {
+    "id": 12,
+    "title": "Sysadmin All-in-One 1-Page Cheatsheet",
+    "description": "Ultra-dense single-page quick reference containing the absolute core operations for Vim, Tmux, Bash, Awk, Sed, and Grep. Optimized for printing on a single sheet of paper.",
+    "category": "shell",
+    "tags": [
+      "Vim",
+      "Tmux",
+      "Bash",
+      "Awk",
+      "Sed",
+      "Grep",
+      "Sysadmin",
+      "All-in-One"
+    ],
+    "date": "2026-07-08T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/sysadmin-all-in-one.md"
   }
 ]
