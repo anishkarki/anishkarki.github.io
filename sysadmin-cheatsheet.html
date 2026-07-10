@@ -1224,333 +1224,334 @@ grep <span class="flag">-A</span> <span class="num">10</span> <span class="str">
     </div>
 
     <!-- ════════════════════════════════════════════
-       SED BASICS & SUBSTITUTIONS
+       SED BASICS & REPLACEMENTS
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="sed stream editor substitution deletion in-place backup regex range address scopes delimiters matched string">
+      data-search="sed stream editor substitution deletion in-place backup regex range address scopes delimiters matched string print head tail syntax">
       <div class="card-title sed">
-        <span><i class="fa-solid fa-scissors"></i> Sed Basic Stream Editing</span>
+        <span><i class="fa-solid fa-scissors"></i> Sed Stream Editing Basics</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
-        <div class="card-subhead">Global Options</div>
+        <div class="card-subhead">Syntax: <code>sed [options] 'address command' input_file</code></div>
+        <div class="card-subhead">Core CLI Options</div>
         <table>
           <tr>
             <th>Option</th>
-            <th>Action Description</th>
+            <th>Effect / System Platform Difference</th>
           </tr>
           <tr>
             <td class="cmd-cell">-n</td>
-            <td class="desc-cell">Silent: suppress printing output by default (use with <code>p</code>)</td>
+            <td class="desc-cell">Suppress default stdout printing (use with <code>p</code> command)</td>
           </tr>
           <tr>
             <td class="cmd-cell">-i</td>
-            <td class="desc-cell">In-place edit (GNU: <code>-i</code>, macOS/BSD: <code>-i ''</code>)</td>
+            <td class="desc-cell">In-place edit: GNU: <code>-i</code> | macOS/BSD: <code>-i ''</code></td>
           </tr>
           <tr>
             <td class="cmd-cell">-E / -r</td>
-            <td class="desc-cell">Extended regex parsing (prevents escaping brackets/braces)</td>
+            <td class="desc-cell">Use Extended Regular Expressions (avoids escaping parenthesis/braces)</td>
           </tr>
         </table>
-        <div class="card-subhead">Substitutions (s/old/new/flags)</div>
+        <div class="card-subhead">String Substitutions (s/pattern/replacement/flags)</div>
         <table>
           <tr>
-            <th>Pattern Script</th>
-            <th>Resulting Action</th>
-          </tr>
-          <tr>
             <td class="cmd-cell">s/old/new/</td>
-            <td class="desc-cell">Replace first occurrence of <code>old</code> with <code>new</code> per line</td>
+            <td class="desc-cell">Replace only the <strong>first</strong> match of <code>old</code> on each line</td>
           </tr>
           <tr>
             <td class="cmd-cell">s/old/new/g</td>
-            <td class="desc-cell">Global: Replace all occurrences of <code>old</code> with <code>new</code> per line
-            </td>
+            <td class="desc-cell">Replace <strong>all</strong> matches of <code>old</code> globally on each line</td>
           </tr>
           <tr>
             <td class="cmd-cell">s/old/new/2</td>
-            <td class="desc-cell">Replace only the second occurrence of <code>old</code> on each line</td>
+            <td class="desc-cell">Replace only the <strong>second</strong> match of <code>old</code> on each line</td>
           </tr>
           <tr>
-            <td class="cmd-cell">s:path1:path2:g</td>
-            <td class="desc-cell">Use custom delimiter (resolves leaning toothpick syndrome)</td>
+            <td class="cmd-cell">s/old/new/gi</td>
+            <td class="desc-cell">Case-insensitive global substitution</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">s:http://:https://:g</td>
+            <td class="desc-cell">Custom delimiter (avoids escaping forward slashes in paths)</td>
           </tr>
           <tr>
             <td class="cmd-cell">s/old/[&amp;]/g</td>
-            <td class="desc-cell">Matched reference: <code>&amp;</code> refers to entire matched text segment</td>
+            <td class="desc-cell">Refer to matched segments: <code>&amp;</code> represents the text matched by pattern</td>
           </tr>
         </table>
-        <div class="card-subhead">Line Deletions (d) &amp; Prints (p)</div>
+        <div class="card-subhead">Printing (p) &amp; Deleting (d) Lines</div>
         <table>
           <tr>
-            <td class="cmd-cell">/error/d</td>
-            <td class="desc-cell">Delete all lines matching <code>error</code></td>
+            <td class="cmd-cell">5d</td>
+            <td class="desc-cell">Delete line 5 of the file</td>
           </tr>
           <tr>
-            <td class="cmd-cell">1,5d</td>
-            <td class="desc-cell">Delete line 1 through 5 inclusive</td>
+            <td class="cmd-cell">2,5d</td>
+            <td class="desc-cell">Delete lines 2 through 5 inclusive</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">1!d</td>
+            <td class="desc-cell">Delete all lines <strong>except</strong> line 1 (keeps header row)</td>
           </tr>
           <tr>
             <td class="cmd-cell">/^$/d</td>
-            <td class="desc-cell">Delete all empty/blank lines</td>
+            <td class="desc-cell">Delete all completely blank lines</td>
           </tr>
           <tr>
-            <td class="cmd-cell">-n '/success/p'</td>
-            <td class="desc-cell">Print only lines matching <code>success</code></td>
+            <td class="cmd-cell">/^[[:space:]]*$/d</td>
+            <td class="desc-cell">Delete all blank lines including those with spaces/tabs</td>
           </tr>
           <tr>
-            <td class="cmd-cell">-n '1,10p'</td>
-            <td class="desc-cell">Print first 10 lines (simulate <code>head -n 10</code>)</td>
+            <td class="cmd-cell">sed -n '/pat/p'</td>
+            <td class="desc-cell">Filter print: output only lines matching <code>pat</code> (grep equivalent)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">sed -n '5,10p'</td>
+            <td class="desc-cell">Print line range: output lines 5 to 10 inclusive</td>
           </tr>
         </table>
       </div>
     </div>
 
     <!-- ════════════════════════════════════════════
-       SED ADDRESS SCALING & HOLD REGISTER
+       SED ADVANCED SCRIPTING & LOGIC
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="sed hold space pattern space branching memory loop conditional label file io multiline variables logic append insert change print line number transform">
+      data-search="sed hold space pattern space branching memory loop conditional label file io multiline variables logic append insert change print line number backreference">
       <div class="card-title sed">
-        <span><i class="fa-solid fa-code-branch"></i> Sed Logic &amp; Memory</span>
+        <span><i class="fa-solid fa-code-branch"></i> Sed Logic &amp; Advanced Operations</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
-        <div class="card-subhead">Advanced Addressing &amp; Backreferences</div>
+        <div class="card-subhead">Addressing &amp; Backreferences</div>
         <table>
           <tr>
             <td class="cmd-cell">10,20s/x/y/g</td>
-            <td class="desc-cell">Run substitution only between lines 10 and 20</td>
+            <td class="desc-cell">Run substitution only within lines 10 to 20</td>
           </tr>
           <tr>
-            <td class="cmd-cell">/^Sec/s/x/y/g</td>
-            <td class="desc-cell">Run substitution only on lines beginning with <code>Sec</code></td>
+            <td class="cmd-cell">/^Server/s/Enabled/Disabled/</td>
+            <td class="desc-cell">Substitute only on lines starting with string <code>Server</code></td>
           </tr>
           <tr>
-            <td class="cmd-cell">\_/usr/bin_s_..._..._</td>
-            <td class="desc-cell">Delimited pattern address match for filesystem paths</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">s/\([a-z]\) \([a-z]\)/\2 \1/</td>
-            <td class="desc-cell">Backreference groups: swap two strings (e.g. hello world)</td>
+            <td class="cmd-cell">s/\([0-9]\+\)ms/\1s/g</td>
+            <td class="desc-cell">Backreference group: capture matches via <code>\(..\)</code> and paste via <code>\1</code></td>
           </tr>
         </table>
-        <div class="card-subhead">Pattern Register vs Hold Register Memory</div>
+        <div class="card-subhead">Line Insertion &amp; Appending</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">1i\header_line</td>
+            <td class="desc-cell">Prepend: insert text row before line 1</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">3a\footer_line</td>
+            <td class="desc-cell">Append: insert text row after line 3</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">/Pattern/i\text</td>
+            <td class="desc-cell">Insert text line immediately before line matching <code>Pattern</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">c\new_text</td>
+            <td class="desc-cell">Replace/change matching line completely with <code>new_text</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">/Pattern/r file.txt</td>
+            <td class="desc-cell">Read external file content and insert it below pattern match</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">/Pattern/ =</td>
+            <td class="desc-cell">Print matching line number instead of content</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Hold Space &amp; Multiline Cycles (Memory)</div>
         <table>
           <tr>
             <td class="cmd-cell">h / H</td>
-            <td class="desc-cell">Pattern ➔ Hold: Overwrite hold space / Append with <code>\n</code></td>
+            <td class="desc-cell">Copy/Append pattern space buffer to background Hold space</td>
           </tr>
           <tr>
             <td class="cmd-cell">g / G</td>
-            <td class="desc-cell">Hold ➔ Pattern: Overwrite pattern space / Append with <code>\n</code></td>
+            <td class="desc-cell">Copy/Append background Hold space back into active Pattern space</td>
           </tr>
           <tr>
             <td class="cmd-cell">x</td>
-            <td class="desc-cell">Exchange: Swap contents of pattern and hold spaces</td>
+            <td class="desc-cell">Exchange: swap contents of pattern space and hold space</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">N; s/\n/ /</td>
+            <td class="desc-cell">Multiline: read next line, append to active line, replace newline with space</td>
           </tr>
         </table>
-        <pre><code><span class="cm"># Double space file:</span>
+        <pre><code><span class="cm"># Double-space a file:</span>
 sed <span class="str">'G'</span> input.txt
-<span class="cm"># Reverse file lines (tac equivalent):</span>
+<span class="cm"># Reverse file lines (simulate tac command):</span>
 sed <span class="flag">-n</span> <span class="str">'1!G;h;$p'</span> input.txt</code></pre>
-        <div class="card-subhead">Multiline Cycles &amp; Loops</div>
+        <div class="card-subhead">Conditional Branching &amp; Loops</div>
         <table>
           <tr>
-            <td class="cmd-cell">N</td>
-            <td class="desc-cell">Next: read next line, append to pattern space with <code>\n</code></td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">D / P</td>
-            <td class="desc-cell">Delete first line of buffer / Print first line of buffer</td>
-          </tr>
-          <tr>
             <td class="cmd-cell">:label</td>
-            <td class="desc-cell">Branching: Define target bookmark in script</td>
+            <td class="desc-cell">Define bookmark tag <code>label</code> inside script</td>
           </tr>
           <tr>
             <td class="cmd-cell">b label</td>
-            <td class="desc-cell">Branch: Unconditional jump to label bookmark</td>
+            <td class="desc-cell">Branch: jump unconditionally to bookmark tag <code>label</code></td>
           </tr>
           <tr>
             <td class="cmd-cell">t label</td>
-            <td class="desc-cell">Test: Jump to label <strong>only if</strong> last substitute command succeeded</td>
-          </tr>
-        </table>
-        <pre><code><span class="cm"># Join adjacent pairs of lines:</span>
-sed <span class="str">'N; s/\n/ /'</span> input.txt</code></pre>
-        <div class="card-subhead">Variables, File IO, Append &amp; Line Numbers</div>
-        <table>
-          <tr>
-            <td class="cmd-cell">sed 's/u/'"$V"'/'</td>
-            <td class="desc-cell">Variables: Safely concat shell variables in script</td>
+            <td class="desc-cell">Test: jump to <code>label</code> <strong>only if</strong> last substitution succeeded</td>
           </tr>
           <tr>
-            <td class="cmd-cell">/pat/ !{ s/a/b/; }</td>
-            <td class="desc-cell">Block: Run commands on lines NOT matching <code>pat</code></td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">$r footer.txt</td>
-            <td class="desc-cell">File IO: read/append file content at end line (<code>$</code>)</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">/INCLUDE/ {r f; d}</td>
-            <td class="desc-cell">Include pattern: read file <code>f</code>, delete placeholder</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">i\ text / a\ text</td>
-            <td class="desc-cell">Insert line before match / Append line after match</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">c\ text</td>
-            <td class="desc-cell">Change matching line to new custom text line</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">/pat/ =</td>
-            <td class="desc-cell">Print matching line number (used to locate targets)</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">$=</td>
-            <td class="desc-cell">Count total lines in file (simulates <code>wc -l</code>)</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">y/abc/ABC/</td>
-            <td class="desc-cell">Transform character classes (translate character list)</td>
+            <td class="cmd-cell">sed 's/old/'"$VAR"'/'</td>
+            <td class="desc-cell">Bash Variables: Concat shell parameters inside sed block</td>
           </tr>
         </table>
       </div>
     </div>
 
     <!-- ════════════════════════════════════════════
-       AWK FIELDS & DATA AGGREGATION
+       AWK LOG PARSING & FIELD FILTERING
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="awk fields records columns variables sum average delimiter filter match pattern calculations math stats csv separator">
+      data-search="awk fields records columns variables sum average delimiter filter match pattern calculations math stats csv separator log parsing print">
       <div class="card-title awk">
-        <span><i class="fa-solid fa-calculator"></i> Awk Fields &amp; Stats</span>
+        <span><i class="fa-solid fa-calculator"></i> Awk Log Parsing &amp; Fields</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
+        <div class="card-subhead">Syntax: <code>awk [options] 'pattern { action }' input_file</code></div>
         <div class="card-subhead">Built-in Core Variables</div>
         <table>
           <tr>
             <th>Variable</th>
-            <th>Purpose / Behavior</th>
+            <th>Mnemonic / Target Value Reference</th>
           </tr>
           <tr>
             <td class="cmd-cell">$0</td>
-            <td class="desc-cell">The entire current record (full line text)</td>
+            <td class="desc-cell">Entire line record contents</td>
           </tr>
           <tr>
             <td class="cmd-cell">$1 ... $NF</td>
-            <td class="desc-cell">Columns split by FS (default whitespace separator)</td>
+            <td class="desc-cell">Specific column field values (separated by FS)</td>
           </tr>
           <tr>
             <td class="cmd-cell">NF</td>
-            <td class="desc-cell">Number of Fields in current record (column count)</td>
+            <td class="desc-cell">Number of Fields (column count of current line)</td>
           </tr>
           <tr>
             <td class="cmd-cell">NR</td>
-            <td class="desc-cell">Number of Records (total lines processed globally)</td>
+            <td class="desc-cell">Number of Records (total lines processed across streams)</td>
           </tr>
           <tr>
             <td class="cmd-cell">FNR</td>
-            <td class="desc-cell">File-specific Record count (resets to 1 per file)</td>
+            <td class="desc-cell">File Record number (resets to 1 for each new input file)</td>
           </tr>
           <tr>
             <td class="cmd-cell">FS / OFS</td>
-            <td class="desc-cell">Field Separator: Input (parser split) / Output (join values)</td>
+            <td class="desc-cell">Field Separator: Input split delimiter / Output join delimiter</td>
           </tr>
           <tr>
             <td class="cmd-cell">RS / ORS</td>
-            <td class="desc-cell">Record Separator: Input (line endings) / Output (print ending)</td>
+            <td class="desc-cell">Record Separator: Input row breaker / Output print breaker</td>
           </tr>
           <tr>
             <td class="cmd-cell">FILENAME</td>
-            <td class="desc-cell">Name of the file currently being processed</td>
+            <td class="desc-cell">Current active file name string</td>
           </tr>
         </table>
-        <div class="card-subhead">Data Parsing Actions</div>
+        <div class="card-subhead">Data Filtering &amp; Formatting</div>
         <table>
           <tr>
             <td class="cmd-cell">-F','</td>
-            <td class="desc-cell">Specify custom Field delimiter (e.g. CSV parser)</td>
+            <td class="desc-cell">Define custom Input delimiter separator (CSV mode)</td>
           </tr>
           <tr>
-            <td class="cmd-cell">BEGIN { }</td>
-            <td class="desc-cell">Execute block before processing first record</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">END { }</td>
-            <td class="desc-cell">Execute block after processing final record</td>
+            <td class="cmd-cell">BEGIN { FS=":" }</td>
+            <td class="desc-cell">Define delimiter inside block before reading files</td>
           </tr>
           <tr>
             <td class="cmd-cell">$3 &gt; 100</td>
-            <td class="desc-cell">Filter: Only run action block if column 3 matches bounds</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">/Regex/</td>
-            <td class="desc-cell">Filter: Only run action on lines matching pattern</td>
+            <td class="desc-cell">Conditional filter: check if numeric column 3 exceeds 100</td>
           </tr>
           <tr>
             <td class="cmd-cell">$9 ~ /404/</td>
-            <td class="desc-cell">Filter: Column 9 matching pattern 404 (errors)</td>
+            <td class="desc-cell">Pattern check: column 9 matches regex pattern <code>404</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">$9 !~ /200/</td>
+            <td class="desc-cell">Exclusion check: column 9 does not match <code>200</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">NR==5,NR==10</td>
+            <td class="desc-cell">Filter print: target line index ranges 5 to 10 inclusive</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">print $1, $NF</td>
+            <td class="desc-cell">Output column 1 and last column separated by OFS</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">printf "%-10s %d"</td>
+            <td class="desc-cell">Format stdout layout (10-wide string, integer value)</td>
           </tr>
         </table>
-        <pre><code><span class="cm"># Sum column 5:</span>
-awk <span class="str">'{ sum += $5 } END { print sum }'</span> stats.log
-<span class="cm"># Average column 5:</span>
-awk <span class="str">'{ s += $5 } END { print s/NR }'</span> stats.log</code></pre>
       </div>
     </div>
 
     <!-- ════════════════════════════════════════════
-       AWK ARRAYS & LOGIC FUNCTIONS
+       AWK DATA AGGREGATION & HASH MAPS
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="awk arrays associative frequency counts if else string functions deduplicate one liners printf formatting multifile fnr">
+      data-search="awk arrays associative frequency counts if else string functions deduplicate one liners printf formatting multifile loop condition math stats">
       <div class="card-title awk">
-        <span><i class="fa-solid fa-chart-bar"></i> Awk Arrays &amp; Logic</span>
+        <span><i class="fa-solid fa-chart-bar"></i> Awk Arrays &amp; Aggregations</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
+        <div class="card-subhead">Arithmetic Logs Aggregations</div>
+        <pre><code><span class="cm"># Sum column 5:</span>
+awk '{ sum += $5 } END { print sum }' file.log
+<span class="cm"># Average column 5:</span>
+awk '{ s += $5 } END { print s/NR }' file.log
+<span class="cm"># Find Min/Max of column 1:</span>
+awk 'NR==1 {min=max=$1} 
+     $1&gt;max {max=$1} 
+     $1&lt;min {min=$1} 
+     END {print "Min:", min, "Max:", max}'</code></pre>
         <div class="card-subhead">Associative Arrays (Hash Maps)</div>
-        <pre><code><span class="cm"># Count occurrences of column 1 (e.g. IPs)</span>
-awk <span class="str">'{ hits[$1]++ } END { 
+        <pre><code><span class="cm"># Count frequency of column 1 (e.g. log IPs):</span>
+awk '{ hits[$1]++ } END { 
   for (ip in hits) print ip, hits[ip] 
-}'</span> access.log | sort <span class="flag">-rn</span> <span class="flag">-k2</span></code></pre>
-        <div class="card-subhead">String &amp; Logic Operations</div>
+}' access.log | sort -rn -k2</code></pre>
+        <div class="card-subhead">Flow Control &amp; String Actions</div>
         <table>
           <tr>
-            <th>Syntax</th>
-            <th>Result / Output</th>
-          </tr>
-          <tr>
-            <td class="cmd-cell">printf "%-10s %d\n"</td>
-            <td class="desc-cell">Formatted output (left-align text width 10, integer)</td>
-          </tr>
-          <tr>
             <td class="cmd-cell">if(x){a}else{b}</td>
-            <td class="desc-cell">Conditionals matching standard C logic blocks</td>
+            <td class="desc-cell">Standard conditional blocks</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">for(i=1;i&lt;=NF;i++)</td>
+            <td class="desc-cell">Field Loop: iterate through every column in the current row</td>
           </tr>
           <tr>
             <td class="cmd-cell">length($0)</td>
-            <td class="desc-cell">Returns total character count of current record</td>
+            <td class="desc-cell">Count total character length of active line</td>
           </tr>
           <tr>
-            <td class="cmd-cell">toupper / tolower</td>
-            <td class="desc-cell">Convert string case directly</td>
+            <td class="cmd-cell">substr($1, start, len)</td>
+            <td class="desc-cell">Extract substring from field 1 (e.g. date prefix)</td>
           </tr>
           <tr>
-            <td class="cmd-cell">substr($0, start, len)</td>
-            <td class="desc-cell">Extract partial substring from record</td>
+            <td class="cmd-cell">tolower / toupper</td>
+            <td class="desc-cell">Convert string letters case directly</td>
           </tr>
         </table>
         <div class="card-subhead">Standard Sysadmin One-Liners</div>
         <table>
           <tr>
             <td class="cmd-cell">!seen[$0]++</td>
-            <td class="desc-cell"><strong>Deduplicate</strong> files keeping original ordering</td>
+            <td class="desc-cell"><strong>Deduplicate</strong> stream rows keeping initial order</td>
           </tr>
           <tr>
             <td class="cmd-cell">NR % 2 == 0</td>
@@ -1558,15 +1559,11 @@ awk <span class="str">'{ hits[$1]++ } END {
           </tr>
           <tr>
             <td class="cmd-cell">length($0) &gt; 80</td>
-            <td class="desc-cell">Print lines wider than 80 chars (check code bounds)</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">NR==10,NR==20</td>
-            <td class="desc-cell">Print lines 10 to 20 inclusive</td>
+            <td class="desc-cell">Filter print lines exceeding 80 characters</td>
           </tr>
           <tr>
             <td class="cmd-cell">'{print FILENAME ":" $0}'</td>
-            <td class="desc-cell">Label multi-file input streams with file name labels</td>
+            <td class="desc-cell">Prefix records with active source filename prefix</td>
           </tr>
         </table>
       </div>
@@ -1615,136 +1612,237 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
     </div>
 
     <!-- ════════════════════════════════════════════
-       VIM CURSOR MOVEMENT & JUMP LISTS
+       VIM BASIC MOVEMENT & SCROLLING
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="vim cursor navigation jumps changes lists search word cursor buffer lines position coordinates history split screen window tabs pane vertical horizontal resize vsplit vs sp">
+      data-search="vim basic movement cursor navigation scroll word line end start search match find scroll page offset marks coordinates screen relative slow fast">
       <div class="card-title vim">
-        <span><i class="fa-solid fa-compass"></i> Vim Jumps &amp; Navigation</span>
+        <span><i class="fa-solid fa-compass"></i> Vim Movement &amp; Scrolling</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
-        <div class="card-subhead">Jump List Coordinates</div>
+        <div class="card-subhead">Move Slow (Character-by-Character)</div>
         <table>
           <tr>
-            <th>Command</th>
-            <th>Target Navigation / Mnemonic</th>
+            <th>Key</th>
+            <th>Movement Direction</th>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl + o</td>
-            <td class="desc-cell">Jump cursor to <strong>older</strong> coordinate position in history</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">Ctrl + i</td>
-            <td class="desc-cell">Jump cursor to <strong>newer</strong> coordinate position in history (Tab)</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">g;</td>
-            <td class="desc-cell">Jump backward to older <strong>edit/change</strong> location</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">g,</td>
-            <td class="desc-cell">Jump forward to newer <strong>edit/change</strong> location</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">'' (two single quotes)</td>
-            <td class="desc-cell">Jump back to the line before last jump action</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">`` (two backticks)</td>
-            <td class="desc-cell">Jump back to exact character coordinates before last jump</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">:jumps</td>
-            <td class="desc-cell">View entire jumps history stack list</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">:changes</td>
-            <td class="desc-cell">View change history list for active buffer</td>
+            <td class="cmd-cell">h / j / k / l</td>
+            <td class="desc-cell">Move: <strong>Left</strong> / <strong>Down</strong> / <strong>Up</strong> / <strong>Right</strong></td>
           </tr>
         </table>
-        <div class="card-subhead">Search Navigation</div>
+        <div class="card-subhead">Move Fast (Word Jumps)</div>
         <table>
           <tr>
-            <td class="cmd-cell">* / #</td>
-            <td class="desc-cell">Find next / previous occurrence of word under cursor</td>
+            <th>Key</th>
+            <th>Mnemonic / Jumping behavior</th>
           </tr>
           <tr>
-            <td class="cmd-cell">/pattern\c</td>
-            <td class="desc-cell">Case-insensitive search (using <code>\c</code> override flag)</td>
+            <td class="cmd-cell">w / b</td>
+            <td class="desc-cell">Jump to start of <strong>next</strong> / <strong>previous</strong> word</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">e / ge</td>
+            <td class="desc-cell">Jump to end of <strong>next</strong> / <strong>previous</strong> word</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">W / B / E</td>
+            <td class="desc-cell">Whitespace-delimited word jumps (ignores punctuation/symbols)</td>
           </tr>
         </table>
-        <div class="card-subhead">Window Splits &amp; Tabs</div>
+        <div class="card-subhead">Move Fast (Screen Scrolling)</div>
         <table>
           <tr>
-            <td class="cmd-cell">:sp [f] / Ctrl+w s</td>
-            <td class="desc-cell">Split window horizontally [opening file <code>f</code>]</td>
+            <td class="cmd-cell">Ctrl + d / u</td>
+            <td class="desc-cell">Scroll page: <strong>Down</strong> / <strong>Up</strong> by half-screen</td>
           </tr>
           <tr>
-            <td class="cmd-cell">:vs [f] / Ctrl+w v</td>
-            <td class="desc-cell">Split window vertically [opening file <code>f</code>]</td>
+            <td class="cmd-cell">Ctrl + f / b</td>
+            <td class="desc-cell">Scroll page: <strong>Down</strong> / <strong>Up</strong> by full-screen</td>
           </tr>
           <tr>
-            <td class="cmd-cell">:new / :vnew</td>
-            <td class="desc-cell">Open new empty horizontal / vertical split</td>
+            <td class="cmd-cell">Ctrl + e / y</td>
+            <td class="desc-cell">Scroll screen: <strong>Down</strong> / <strong>Up</strong> one line (cursor stays)</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl+w h / j / k / l</td>
-            <td class="desc-cell">Move cursor focus left / down / up / right split</td>
+            <td class="cmd-cell">zz / zt / zb</td>
+            <td class="desc-cell">Recenter screen / Line to <strong>Top</strong> / Line to <strong>Bottom</strong></td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl+w w / Ctrl+w Ctrl+w</td>
-            <td class="desc-cell">Cycle focus between active window splits</td>
+            <td class="cmd-cell">H / M / L</td>
+            <td class="desc-cell">Jump to screen coordinates: <strong>High</strong> / <strong>Middle</strong> / <strong>Low</strong> line</td>
+          </tr>
+        </table>
+        <div class="card-subhead">File-wide Jumps &amp; Marks</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">gg / G</td>
+            <td class="desc-cell">Go to start of file (line 1) / Go to end of file (EOF)</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl+w r / x</td>
-            <td class="desc-cell">Rotate window layouts / Swap active pane with next</td>
+            <td class="cmd-cell">{num}G / :{num}</td>
+            <td class="desc-cell">Go to line number <code>{num}</code> (e.g. <code>42G</code> or <code>:42</code>)</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl+w T</td>
-            <td class="desc-cell">Break active pane out into a new separate tab</td>
+            <td class="cmd-cell">%</td>
+            <td class="desc-cell">Jump to matching brace, bracket, or parenthesis</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl+w =</td>
-            <td class="desc-cell">Resize all splits to be equal in width and height</td>
+            <td class="cmd-cell">m{a-z}</td>
+            <td class="desc-cell">Set local mark <code>{a-z}</code> at cursor coordinate</td>
           </tr>
           <tr>
-            <td class="cmd-cell">:resize +5 / -5</td>
-            <td class="desc-cell">Increase / decrease active split height by 5</td>
+            <td class="cmd-cell">`{a-z} / '{a-z}</td>
+            <td class="desc-cell">Jump to mark <code>{a-z}</code> coordinate / start of line</td>
           </tr>
           <tr>
-            <td class="cmd-cell">:vertical resize +5 / -5</td>
-            <td class="desc-cell">Increase / decrease active split width by 5</td>
+            <td class="cmd-cell">`` / ''</td>
+            <td class="desc-cell">Jump back to exact position / line before last jump</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Inline Search &amp; Finding</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">f{char} / F{char}</td>
+            <td class="desc-cell">Find <code>{char}</code> forward / backward in current line</td>
           </tr>
           <tr>
-            <td class="cmd-cell">:only / Ctrl+w o</td>
-            <td class="desc-cell">Close all other windows except the active one</td>
+            <td class="cmd-cell">t{char} / T{char}</td>
+            <td class="desc-cell">Find up to (til) <code>{char}</code> forward / backward</td>
           </tr>
           <tr>
-            <td class="cmd-cell">:tabnew / :tabclose</td>
-            <td class="desc-cell">Open new empty tab / Close current active tab</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">gt / gT</td>
-            <td class="desc-cell">Go to next tab / previous tab</td>
+            <td class="cmd-cell">; / ,</td>
+            <td class="desc-cell">Repeat last inline search / repeat in opposite direction</td>
           </tr>
         </table>
       </div>
     </div>
 
-
     <!-- ════════════════════════════════════════════
-       VIM TEXT OBJECTS & COMPOSITION
+       VIM EDITING & OPERATIONS
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="vim text objects composition inner around word tag block change delete yank uppercase bracket paren brace">
+      data-search="vim editing insert mode delete operators yank copy paste undo redo change case increment decrement count replacement modifiers join text">
       <div class="card-title vim">
-        <span><i class="fa-solid fa-cubes"></i> Vim Text Objects</span>
+        <span><i class="fa-solid fa-pen-to-square"></i> Vim Editing &amp; Operations</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
-        <div class="card-subhead">Syntax format: [operator] [count] [text-object]</div>
-        <div class="card-subhead">Target Operators (change, delete, yank, uppercase)</div>
+        <div class="card-subhead">Entering Insert &amp; New Line Modes</div>
+        <table>
+          <tr>
+            <th>Key</th>
+            <th>Insert Mode Action / Target</th>
+          </tr>
+          <tr>
+            <td class="cmd-cell">i / a</td>
+            <td class="desc-cell">Insert <strong>before</strong> / Append <strong>after</strong> cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">I / A</td>
+            <td class="desc-cell">Insert at <strong>start</strong> / Append at <strong>end</strong> of active line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">o / O</td>
+            <td class="desc-cell">Open (insert) new line: <strong>below</strong> / <strong>above</strong> current line (enters insert)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">r{char} / R</td>
+            <td class="desc-cell">Replace single char under cursor / Enter Replace mode</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Deletions, Yanks &amp; Cuts (Operators)</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">x / X</td>
+            <td class="desc-cell">Delete character: <strong>under</strong> / <strong>before</strong> cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">dw</td>
+            <td class="desc-cell">Cut/Delete word from cursor to start of next word</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">diw / daw</td>
+            <td class="desc-cell">Cut <strong>inner word</strong> (keeps space) / Cut <strong>around word</strong> (removes space)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">dd / yy</td>
+            <td class="desc-cell">Delete (cut) entire active line / Yank (copy) entire line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">d$ / D</td>
+            <td class="desc-cell">Delete (cut) from cursor to end of the line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">d0 / d^</td>
+            <td class="desc-cell">Delete (cut) from cursor to start / first non-blank character of line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">c{motion}</td>
+            <td class="desc-cell">Change: delete range and enter insert (e.g. <code>cc</code>, <code>cw</code>, <code>C</code>)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">s / S</td>
+            <td class="desc-cell">Substitute character / Substitute entire active line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">p / P</td>
+            <td class="desc-cell">Paste yank buffer: <strong>after</strong> / <strong>before</strong> cursor position</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Undo, Redo &amp; Repeat</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">u / U</td>
+            <td class="desc-cell">Undo last change / Undo all changes on current line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl + r</td>
+            <td class="desc-cell">Redo last undone modification</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">.</td>
+            <td class="desc-cell">Repeat last editing modification/action</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Text Mutations &amp; Arithmetic</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">~</td>
+            <td class="desc-cell">Toggle case of character under cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">g~{motion}</td>
+            <td class="desc-cell">Toggle case of characters in <code>{motion}</code> range</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">gu / gU</td>
+            <td class="desc-cell">Convert range to: <strong>lowercase</strong> / <strong>uppercase</strong></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl + a / x</td>
+            <td class="desc-cell">Increment / Decrement integer under cursor by 1</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">J</td>
+            <td class="desc-cell">Join active line with the line below it</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+       VIM TEXT OBJECTS & VISUAL BLOCK
+       ════════════════════════════════════════════ -->
+    <div class="card"
+      data-search="vim text objects visual mode block selection inner around sentence paragraph tag quotes brackets column prepending formatting filter shell sort jq">
+      <div class="card-title vim">
+        <span><i class="fa-solid fa-cubes"></i> Vim Text Objects &amp; Visual</span>
+        <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+      </div>
+      <div class="card-body">
+        <div class="card-subhead">Syntax format: [operator] [count] [i/a] [object]</div>
         <table>
           <tr>
             <th>Key Object</th>
@@ -1763,70 +1861,268 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
             <td class="desc-cell">Double / Single / Backtick quotes</td>
           </tr>
           <tr>
-            <td class="cmd-cell">{ or B</td>
-            <td class="desc-cell">Braces (curly bracket block <code>{...}</code>)</td>
+            <td class="cmd-cell">{ or B / ( or b</td>
+            <td class="desc-cell">Curly braces <code>{...}</code> / Parentheses block <code>(...)</code></td>
           </tr>
           <tr>
-            <td class="cmd-cell">( or b</td>
-            <td class="desc-cell">Parentheses block <code>(...)</code></td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">[</td>
-            <td class="desc-cell">Square brackets block <code>[...]</code></td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">t</td>
-            <td class="desc-cell">HTML/XML tag wrappers (e.g. <code>&lt;div&gt;&lt;/div&gt;</code>)</td>
+            <td class="cmd-cell">[ / t</td>
+            <td class="desc-cell">Square brackets <code>[...]</code> / HTML/XML tag wrappers</td>
           </tr>
         </table>
-        <div class="card-subhead">Composition Examples</div>
+        <div class="card-subhead">Visual Selection Modes</div>
         <table>
           <tr>
-            <td class="cmd-cell">ci"</td>
-            <td class="desc-cell"><strong>C</strong>hange <strong>I</strong>nner <strong>"</strong> (clear inside
-              quotes, enter insert mode)</td>
+            <td class="cmd-cell">v / V</td>
+            <td class="desc-cell">Enter visual mode: <strong>character-wise</strong> / <strong>line-wise</strong></td>
           </tr>
           <tr>
-            <td class="cmd-cell">da{</td>
-            <td class="desc-cell"><strong>D</strong>elete <strong>A</strong>round <strong>{</strong> (delete braces
-              &amp; all contents)</td>
+            <td class="cmd-cell">Ctrl + v</td>
+            <td class="desc-cell">Enter <strong>Block-wise</strong> visual mode (columns)</td>
           </tr>
           <tr>
-            <td class="cmd-cell">yt=</td>
-            <td class="desc-cell"><strong>Y</strong>ank <strong>T</strong>il <strong>=</strong> (copy everything up to
-              equals sign)</td>
+            <td class="cmd-cell">o</td>
+            <td class="desc-cell">Switch cursor to other end of visual selection</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Visual Block Column Actions</div>
+        <ul class="card-list">
+          <li><strong>Column Prepend:</strong> <code>Ctrl+v</code> select vertical block ➔ <code>I</code> ➔ Type text ➔ <code>Esc Esc</code></li>
+          <li><strong>Column Append:</strong> <code>Ctrl+v</code> select block ➔ <code>$</code> ➔ <code>A</code> ➔ Type text ➔ <code>Esc Esc</code></li>
+          <li><strong>Replace Block:</strong> Select block ➔ <code>c</code> ➔ Type text ➔ <code>Esc Esc</code></li>
+          <li><strong>External Sort:</strong> Select visual lines ➔ <code>:!sort</code> (runs shell sort filter)</li>
+          <li><strong>Format JSON Block:</strong> Select visual lines ➔ <code>:!jq .</code> (runs JSON parser formatting)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+       VIM SEARCH, REGEX & REPLACE
+       ════════════════════════════════════════════ -->
+    <div class="card"
+      data-search="vim search regex find replace substitute magic visual limit boundary duplicate words global command matching exclusion target replacement">
+      <div class="card-title vim">
+        <span><i class="fa-solid fa-magnifying-glass"></i> Vim Search &amp; Replace</span>
+        <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+      </div>
+      <div class="card-body">
+        <div class="card-subhead">Pattern Searching &amp; Finding</div>
+        <table>
+          <tr>
+            <th>Key</th>
+            <th>Search &amp; Highlight Action</th>
           </tr>
           <tr>
-            <td class="cmd-cell">gUit</td>
-            <td class="desc-cell">Convert <strong>I</strong>nner <strong>T</strong>ag text content to UPPERCASE</td>
+            <td class="cmd-cell">/{pattern}</td>
+            <td class="desc-cell">Search forward for <code>{pattern}</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">?{pattern}</td>
+            <td class="desc-cell">Search backward for <code>{pattern}</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">n / N</td>
+            <td class="desc-cell">Jump to next match in direction / opposite direction</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">* / #</td>
+            <td class="desc-cell">Find next / previous occurrence of word under cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">/\c{pat} / /\C{pat}</td>
+            <td class="desc-cell">Force search: <strong>case-insensitive</strong> / <strong>case-sensitive</strong></td>
+          </tr>
+        </table>
+        <div class="card-subhead">Search Match &amp; Cursor Highlights</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">:set hlsearch / nohlsearch</td>
+            <td class="desc-cell">Enable / Disable search match highlighting permanently</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:nohlsearch / :nohl</td>
+            <td class="desc-cell">Clear current match highlights (until next search)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:set cursorline / nocursorline</td>
+            <td class="desc-cell">Highlight active line under cursor / Disable highlight</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Substitution &amp; Replace (:%s/pat/rep/flags)</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">:%s/old/new/g</td>
+            <td class="desc-cell">Replace all <code>old</code> with <code>new</code> globally in file</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:s/old/new/g</td>
+            <td class="desc-cell">Replace globally in current active line only</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:%s/old/new/gc</td>
+            <td class="desc-cell">Confirm each replacement instance interactively</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">\%V</td>
+            <td class="desc-cell">Selection Boundary: <code>:%s/\%Vold/new/g</code> (restrict to visual)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">\v</td>
+            <td class="desc-cell">Very Magic: operators do not require escape (e.g. <code>\v(a|b)</code>)</td>
+          </tr>
+        </table>
+        <div class="card-subhead">The Global Command (:g/pat/cmd)</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">:g/TODO/d</td>
+            <td class="desc-cell">Delete all lines containing string <code>TODO</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:v/DEBUG/d</td>
+            <td class="desc-cell">Inverse: Delete all lines that <strong>do not</strong> match <code>DEBUG</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:g/DEBUG/normal @a</td>
+            <td class="desc-cell">Execute macro <code>a</code> on lines matching pattern <code>DEBUG</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:g/TODO/t $</td>
+            <td class="desc-cell">Find all lines containing <code>TODO</code> and copy (t) to EOF ($)</td>
           </tr>
         </table>
       </div>
     </div>
 
     <!-- ════════════════════════════════════════════
-       VIM VISUAL BLOCK & REGISTERS
+       VIM BUFFERS & SPLITS
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="vim visual block multi cursor columns registers copy paste system clipboard blackhole expression insert calculator selection">
+      data-search="vim buffers quickfix splits tabs windows horizontal vertical resize layouts workspace switch navigation next previous pane tabs">
       <div class="card-title vim">
-        <span><i class="fa-solid fa-clone"></i> Vim Block &amp; Registers</span>
+        <span><i class="fa-solid fa-window-restore"></i> Vim Buffers &amp; Splits</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
-        <div class="card-subhead">Visual Block Multi-line (Ctrl + v)</div>
-        <ul class="card-list">
-          <li><strong>Column Prepending:</strong> <code>Ctrl+v</code> select vertical block ➔ <code>I</code> (capital) ➔
-            Type text ➔ <code>Esc Esc</code></li>
-          <li><strong>Column Appending:</strong> <code>Ctrl+v</code> select block ➔ <code>$</code> (end of line) ➔
-            <code>A</code> ➔ Type ➔ <code>Esc Esc</code></li>
-          <li><strong>Replace Block:</strong> Select block ➔ <code>c</code> ➔ Type ➔ <code>Esc Esc</code></li>
-          <li><strong>Visual Command Filter:</strong> Select lines visually ➔ <code>:!sort</code> (runs shell sort
-            filter on block)</li>
-          <li><strong>Format JSON Block:</strong> Select visual lines ➔ <code>:!jq .</code> (runs JSON parser
-            formatting)</li>
-        </ul>
-        <div class="card-subhead">Vim Register System (specified with "reg)</div>
+        <div class="card-subhead">Multiple Files &amp; Buffers</div>
+        <table>
+          <tr>
+            <th>Command</th>
+            <th>Buffer Action / Target</th>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:ls / :buffers</td>
+            <td class="desc-cell">List all active file buffers in memory</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:b {num} / {name}</td>
+            <td class="desc-cell">Switch buffer by index number / file name</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:bn / :bp</td>
+            <td class="desc-cell">Switch to next buffer / previous buffer</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:bd / :bd!</td>
+            <td class="desc-cell">Delete (close) active buffer / Force close buffer</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl + ^</td>
+            <td class="desc-cell">Toggle between current and last edited buffer</td>
+          </tr>
+        </table>
+        <div class="card-subhead">File Explorer (Built-in Netrw)</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">:Ex / :Explore</td>
+            <td class="desc-cell">Open netrw file explorer in active window</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:Sex / :Vex</td>
+            <td class="desc-cell">Split horizontally / vertically &amp; open explorer</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Enter</td>
+            <td class="desc-cell">Open file or folder under cursor in explorer</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">-% / -d</td>
+            <td class="desc-cell">Create a new file / new directory in explorer</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">R / D</td>
+            <td class="desc-cell">Rename file / Delete file under explorer cursor</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Window Splits (Panes)</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">:sp [f] / Ctrl+w s</td>
+            <td class="desc-cell">Split window horizontally [opening file <code>f</code>]</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:vs [f] / Ctrl+w v</td>
+            <td class="desc-cell">Split window vertically [opening file <code>f</code>]</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl+w h/j/k/l</td>
+            <td class="desc-cell">Move cursor focus left / down / up / right split</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl+w w</td>
+            <td class="desc-cell">Cycle focus between active window splits</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl+w r / x</td>
+            <td class="desc-cell">Rotate window layouts / Swap active pane with next</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl+w T</td>
+            <td class="desc-cell">Break active pane out into a new separate tab</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:only / Ctrl+w o</td>
+            <td class="desc-cell">Close all other windows except the active one</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Split Resizing</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">Ctrl+w =</td>
+            <td class="desc-cell">Resize all splits to be equal in width and height</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:resize +5 / -5</td>
+            <td class="desc-cell">Increase / decrease active split height by 5</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:vertical resize +5</td>
+            <td class="desc-cell">Increase / decrease active split width by 5</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Tab Layouts</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">:tabnew / :tabclose</td>
+            <td class="desc-cell">Open new empty tab / Close current active tab</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">gt / gT</td>
+            <td class="desc-cell">Go to next tab / previous tab</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+       VIM REGISTERS & MACROS
+       ════════════════════════════════════════════ -->
+    <div class="card"
+      data-search="vim registers macros automation history replay paste command line calculations expression blackhole clipboard unnamed recording play visual execution">
+      <div class="card-title vim">
+        <span><i class="fa-solid fa-circle-play"></i> Vim Registers &amp; Macros</span>
+        <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+      </div>
+      <div class="card-body">
+        <div class="card-subhead">Vim Register System (prefix with "reg)</div>
         <table>
           <tr>
             <th>Register</th>
@@ -1838,7 +2134,7 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">"0</td>
-            <td class="desc-cell"><strong>Yank buffer</strong>: holds last yanked text (safe from deletes/changes)</td>
+            <td class="desc-cell">Yank buffer: holds last yanked text (safe from deletes)</td>
           </tr>
           <tr>
             <td class="cmd-cell">"+ / "*</td>
@@ -1846,60 +2142,46 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">"_</td>
-            <td class="desc-cell"><strong>Black hole</strong>: discards deletes/cuts entirely (keeps clipboard safe)
-            </td>
+            <td class="desc-cell">Black hole: discards deletes/cuts entirely (keeps clipboard safe)</td>
           </tr>
           <tr>
             <td class="cmd-cell">"/</td>
             <td class="desc-cell">Read-only: contains pattern query from last search</td>
           </tr>
           <tr>
-            <td class="cmd-cell">". / ":</td>
-            <td class="desc-cell">Read-only: last inserted text / last command line executed</td>
+            <td class="cmd-cell">":</td>
+            <td class="desc-cell">Read-only: last command line executed</td>
           </tr>
           <tr>
             <td class="cmd-cell">"=</td>
-            <td class="desc-cell"><strong>Expression</strong> register (math calculator: <code>Ctrl+r =5*20</code> in
-              insert)</td>
+            <td class="desc-cell">Expression register (insert math: <code>Ctrl+r =5*20</code> in insert)</td>
           </tr>
         </table>
-      </div>
-    </div>
-
-    <!-- ════════════════════════════════════════════
-       VIM MACROS & AUTOMATION
-       ════════════════════════════════════════════ -->
-    <div class="card" data-search="vim macros recording play repeat edit macro visual selection normal line">
-      <div class="card-title vim">
-        <span><i class="fa-solid fa-circle-play"></i> Vim Macros &amp; Automation</span>
-        <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
-      </div>
-      <div class="card-body">
         <div class="card-subhead">Macro Control Key Sequences</div>
         <table>
           <tr>
-            <th>Command</th>
-            <th>Target Action Description</th>
-          </tr>
-          <tr>
-            <td class="cmd-cell">qa</td>
-            <td class="desc-cell">Start recording macro keystrokes inside register <code>a</code></td>
+            <td class="cmd-cell">q{a-z}</td>
+            <td class="desc-cell">Start recording macro keystrokes inside register <code>{a-z}</code></td>
           </tr>
           <tr>
             <td class="cmd-cell">q</td>
             <td class="desc-cell">Stop recording macro sequence</td>
           </tr>
           <tr>
-            <td class="cmd-cell">@a</td>
-            <td class="desc-cell">Play back recorded macro inside register <code>a</code></td>
+            <td class="cmd-cell">@{a-z}</td>
+            <td class="desc-cell">Play back recorded macro inside register <code>{a-z}</code></td>
           </tr>
           <tr>
             <td class="cmd-cell">@@</td>
             <td class="desc-cell">Replay the last executed macro sequence</td>
           </tr>
           <tr>
-            <td class="cmd-cell">100@a</td>
-            <td class="desc-cell">Repeat playback of macro <code>a</code> 100 times sequentially</td>
+            <td class="cmd-cell">{num}@{a-z}</td>
+            <td class="desc-cell">Repeat playback of macro <code>{a-z}</code> <code>{num}</code> times</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:%normal @a</td>
+            <td class="desc-cell">Execute macro <code>a</code> on all lines of the file</td>
           </tr>
           <tr>
             <td class="cmd-cell">:&lt;,&gt;normal @a</td>
@@ -1917,84 +2199,63 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
     </div>
 
     <!-- ════════════════════════════════════════════
-       VIM REGEX & GLOBAL COMMANDS
+       VIM CONFIG & QUICKFIX
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="vim regex replace substitute very magic visual boundary duplicate finder commas global command deletion matching">
+      data-search="vim quickfix workspace search files navigation config mapping settings leader window undo search save quit write shell">
       <div class="card-title vim">
-        <span><i class="fa-solid fa-arrow-pointer"></i> Vim Regex &amp; Global</span>
+        <span><i class="fa-solid fa-sliders"></i> Vim Config &amp; Commands</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
-        <div class="card-subhead">Regex &amp; Replace (:%s/pat/rep/flags)</div>
+        <div class="card-subhead">File &amp; Command Ex Actions</div>
         <table>
           <tr>
-            <td class="cmd-cell"><code>\%V</code></td>
-            <td class="desc-cell">Visual Limit: replacement restricted inside visual boundaries</td>
+            <th>Command</th>
+            <th>Command / Action Description</th>
           </tr>
           <tr>
-            <td class="cmd-cell"><code>\v</code></td>
-            <td class="desc-cell">Very Magic: operators do not require escape slashes</td>
+            <td class="cmd-cell">:w / :w {file}</td>
+            <td class="desc-cell">Write (save) current file / Write to filename <code>{file}</code></td>
           </tr>
           <tr>
-            <td class="cmd-cell"><code>/\(\w\+\)\s\+\1</code></td>
-            <td class="desc-cell">Search duplicate words adjacent to each other</td>
+            <td class="cmd-cell">:q / :q!</td>
+            <td class="desc-cell">Quit file / Quit and discard any unsaved modifications</td>
           </tr>
           <tr>
-            <td class="cmd-cell"><code>:%s/\(\w\+\),\s*\(\w\+\)/\2, \1/g</code></td>
-            <td class="desc-cell">Swap order of two strings separated by a comma</td>
+            <td class="cmd-cell">:wq / :x / ZZ</td>
+            <td class="desc-cell">Write changes and quit file (save and close)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:!{command}</td>
+            <td class="desc-cell">Run external shell <code>{command}</code> (e.g. <code>:!df -h</code>)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:r {file}</td>
+            <td class="desc-cell">Read: insert contents of <code>{file}</code> below cursor line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">:r !{command}</td>
+            <td class="desc-cell">Run shell <code>{command}</code> and insert its stdout below cursor</td>
           </tr>
         </table>
-        <div class="card-subhead">The Global Command (:g/pat/cmd)</div>
-        <table>
-          <tr>
-            <td class="cmd-cell"><code>:g/TODO/d</code></td>
-            <td class="desc-cell">Delete all lines containing string <code>TODO</code></td>
-          </tr>
-          <tr>
-            <td class="cmd-cell"><code>:v/Pattern/d</code></td>
-            <td class="desc-cell">Inverse: Delete all lines that <strong>do not</strong> match <code>Pattern</code></td>
-          </tr>
-          <tr>
-            <td class="cmd-cell"><code>:g/DEBUG/normal @a</code></td>
-            <td class="desc-cell">Execute macro <code>a</code> on lines matching pattern <code>DEBUG</code></td>
-          </tr>
-          <tr>
-            <td class="cmd-cell"><code>:g/TODO/t $</code></td>
-            <td class="desc-cell">Find all lines containing <code>TODO</code> and copy (t) to EOF ($)</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <!-- ════════════════════════════════════════════
-       VIM QUICKFIX & CONFIGURATION
-       ════════════════════════════════════════════ -->
-    <div class="card"
-      data-search="vim quickfix workspace search files navigation config mapping settings leader window undo search">
-      <div class="card-title vim">
-        <span><i class="fa-solid fa-sliders"></i> Vim Quickfix &amp; Config</span>
-        <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
-      </div>
-      <div class="card-body">
         <div class="card-subhead">Workspace-wide Search &amp; Replace</div>
         <table>
           <tr>
-            <td class="cmd-cell"><code>:vimgrep /P/ **/*</code></td>
+            <td class="cmd-cell">:vimgrep /P/ **/*</td>
             <td class="desc-cell">Search workspace files for pattern <code>P</code></td>
           </tr>
           <tr>
-            <td class="cmd-cell"><code>:copen</code> / <code>:cclose</code></td>
+            <td class="cmd-cell">:copen / :cclose</td>
             <td class="desc-cell">Open interactive quickfix search list / Close window</td>
           </tr>
           <tr>
-            <td class="cmd-cell"><code>:cnext</code> / <code>:cprevious</code></td>
+            <td class="cmd-cell">:cnext / :cprev</td>
             <td class="desc-cell">Jump to next / previous search coordinate</td>
           </tr>
           <tr>
-            <td class="cmd-cell"><code>:cfdo %s/o/n/g \| up</code></td>
-            <td class="desc-cell">Replace <code>o</code> with <code>n</code> on all matching files &amp; save (update)
-            </td>
+            <td class="cmd-cell">:cfdo %s/o/n/g | up</td>
+            <td class="desc-cell">Replace <code>o</code> with <code>n</code> on all matching files &amp; save (update)</td>
           </tr>
         </table>
         <div class="card-subhead">High-Performance setup (~/.vimrc)</div>
