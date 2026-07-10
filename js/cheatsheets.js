@@ -117,11 +117,16 @@ function renderCheatsheets() {
   // Apply view class
   container.className = `cheatsheets-container ${currentView === 'list' ? 'list-view' : ''}`;
   
-  // Add click handlers - Navigate to viewer page instead of modal
+  // Add click handlers - Navigate to viewer page or direct URL
   container.querySelectorAll('.cheatsheet-card').forEach(card => {
     card.addEventListener('click', () => {
       const id = parseInt(card.dataset.id);
-      window.location.href = `cheatsheet-viewer.html?id=${id}`;
+      const sheet = cheatsheets.find(s => s.id === id);
+      if (sheet && sheet.url) {
+        window.location.href = sheet.url;
+      } else {
+        window.location.href = `cheatsheet-viewer.html?id=${id}`;
+      }
     });
   });
   

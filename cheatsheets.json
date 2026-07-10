@@ -199,5 +199,24 @@
     "date": "2026-07-08T00:00:00Z",
     "author": "Anish Karki",
     "file": "cheatsheets/sysadmin-all-in-one.md"
+  },
+  {
+    "id": 13,
+    "title": "Principal Sysadmin Dashboard Cheatsheet",
+    "description": "Ultimate comprehensive stream editing, tmux socket session sharing, visual block macro operations, and multi-line grep regex cheatsheet. Highly interactive dark console layout.",
+    "category": "shell",
+    "tags": [
+      "Vim",
+      "Tmux",
+      "Bash",
+      "Awk",
+      "Sed",
+      "Grep",
+      "Sysadmin",
+      "Interactive"
+    ],
+    "date": "2026-07-10T00:00:00Z",
+    "author": "Anish Karki",
+    "url": "sysadmin-cheatsheet.html"
   }
 ]
