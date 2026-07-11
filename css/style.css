@@ -1308,6 +1308,10 @@ body::after {
 /* =====================================================
    FEDORA WORKSTATION GNOME DESKTOP STYLES
    ===================================================== */
+html, body {
+  overflow-x: hidden !important;
+}
+
 body {
   background-color: #0d1e36 !important;
   background-image: 
@@ -1717,4 +1721,87 @@ body {
 /* Compensate card inner headers */
 .quantum-card > *:first-child, .project-card > *:first-child {
   margin-top: 0px;
+}
+
+/* =====================================================
+   MOBILE / IPHONE RESPONSIVENESS OPTIMIZATION FOR GNOME
+   ===================================================== */
+@media screen and (max-width: 576px) {
+  /* GNOME Top Bar Layout adjustments */
+  .gnome-top-bar {
+    height: 32px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+  .gnome-top-bar .active-app-name {
+    display: none !important;
+  }
+  .gnome-top-bar .activities-btn {
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+  .gnome-top-bar .top-bar-center {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  /* GNOME Bottom Dock spacing */
+  .gnome-dock-container {
+    bottom: 6px;
+    width: 95%;
+    max-width: 360px;
+  }
+  .gnome-dock {
+    padding: 6px 8px;
+    gap: 6px;
+    border-radius: 16px;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .gnome-dock .dock-item {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  .gnome-dock .dock-separator {
+    height: 24px;
+    margin: 0 2px;
+  }
+
+  /* System Dropdown Position alignment */
+  .gnome-system-menu {
+    width: calc(100% - 16px);
+    right: 8px;
+    top: 36px;
+    padding: 12px;
+  }
+  .gnome-system-menu .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .gnome-system-menu .menu-btn {
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  /* Activities overlay grids */
+  .gnome-activities-overlay {
+    top: 32px;
+    height: calc(100vh - 32px);
+    padding-top: 4vh;
+  }
+  .gnome-activities-overlay .search-box-container {
+    margin-bottom: 4vh;
+  }
+  .gnome-activities-overlay .app-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .gnome-activities-overlay .app-icon {
+    gap: 6px;
+  }
+  .gnome-activities-overlay .app-icon span {
+    font-size: 11px;
+  }
 }
