@@ -491,5 +491,177 @@
         "file": "08-day-8-cluster-architecture.md"
       }
     ]
+  },
+  "sql_server_admin": {
+    "title": "SQL Server Administration",
+    "description": "Master enterprise SQL Server administration. Learn high availability (AlwaysOn AGs), database engine tuning, backup/recovery protocols, maintenance automation, and security audits.",
+    "difficulty": "advanced",
+    "icon": "fas fa-database",
+    "iconColor": "var(--accent-purple)",
+    "topics": [
+      "AlwaysOn AG",
+      "Engine Tuning",
+      "Security & Audits",
+      "Backup & Recovery",
+      "Agent Automation"
+    ],
+    "chapters": [
+      {
+        "number": 1,
+        "title": "SQL Server Architecture & SQLOS",
+        "description": "Explore SQL Server process model, thread scheduling, memory management, and SQLOS internals.",
+        "duration": "45 min",
+        "file": "01-architecture-sqlos.md"
+      },
+      {
+        "number": 2,
+        "title": "Instance Configuration & Best Practices",
+        "description": "Configuring memory limits, MaxDOP, cost threshold for parallelism, and database files.",
+        "duration": "50 min",
+        "file": "02-instance-configuration.md"
+      },
+      {
+        "number": 3,
+        "title": "Security, Logins, & Auditing",
+        "description": "Implement logins, users, server roles, database permissions, and audit specifications.",
+        "duration": "45 min",
+        "file": "03-security-auditing.md"
+      },
+      {
+        "number": 4,
+        "title": "Backup Strategies & Recovery Models",
+        "description": "Full, differential, and transaction log backup strategies, recovery models, and tail-log restores.",
+        "duration": "60 min",
+        "file": "04-backup-strategies.md"
+      },
+      {
+        "number": 5,
+        "title": "Transaction Log & VLF Architecture",
+        "description": "Deep dive into Write-Ahead Logging, virtual log files (VLFs), and log growth management.",
+        "duration": "50 min",
+        "file": "05-transaction-log.md"
+      },
+      {
+        "number": 6,
+        "title": "Automation with SQL Server Agent & PowerShell",
+        "description": "Automating maintenance plans, database consistency checks, and alert notifications.",
+        "duration": "55 min",
+        "file": "06-automation-agent.md"
+      },
+      {
+        "number": 7,
+        "title": "High Availability with AlwaysOn AG",
+        "description": "Architecting multi-node AlwaysOn Availability Groups, listener configuration, and failover options.",
+        "duration": "75 min",
+        "file": "07-alwayson-ag.md"
+      },
+      {
+        "number": 8,
+        "title": "Query Tuning & DMV Observability",
+        "description": "Analyzing execution plans, index tuning, memory grants, and troubleshooting with Dynamic Management Views.",
+        "duration": "70 min",
+        "file": "08-query-tuning.md"
+      },
+      {
+        "number": 9,
+        "title": "TempDB Configuration & Optimization",
+        "description": "Configuring multiple TempDB data files, resolving allocation bottlenecks, and trace flags.",
+        "duration": "45 min",
+        "file": "09-tempdb-optimization.md"
+      },
+      {
+        "number": 10,
+        "title": "Extended Events & Performance Tracing",
+        "description": "Configuring lightweight profiling sessions using Extended Events (xEvents) and trace sessions.",
+        "duration": "55 min",
+        "file": "10-extended-events.md"
+      },
+      {
+        "number": 11,
+        "title": "Corruption Recovery & Repair Operations",
+        "description": "Detecting physical corruptions, running DBCC CHECKDB, page-level restores, and emergency recovery.",
+        "duration": "60 min",
+        "file": "11-corruption-recovery.md"
+      },
+      {
+        "number": 12,
+        "title": "Enterprise Migration Strategies",
+        "description": "Migrating large scale SQL Server databases with minimal downtime using replication and log shipping.",
+        "duration": "65 min",
+        "file": "12-migration-strategies.md"
+      }
+    ]
+  },
+  "cassandra_mastery": {
+    "title": "Cassandra DB Mastery",
+    "description": "Deep dive into Apache Cassandra architecture, data modeling (CQL), distributed consensus, partition keys, compaction strategies, and cluster scaling.",
+    "difficulty": "advanced",
+    "icon": "fas fa-cubes",
+    "iconColor": "var(--neutron-cyan)",
+    "topics": [
+      "Data Modeling",
+      "Compaction",
+      "Gossip & Consensus",
+      "Architecture",
+      "CQL Tuning"
+    ],
+    "chapters": [
+      {
+        "number": 1,
+        "title": "Distributed Systems & Cassandra Introduction",
+        "description": "Understanding CAP theorem, decentralized masterless architectures, and Cassandra fundamentals.",
+        "duration": "40 min",
+        "file": "01-distributed-fundamentals.md"
+      },
+      {
+        "number": 2,
+        "title": "Architecture: Gossip, Snitches, & Ring Topology",
+        "description": "How Cassandra manages cluster topology, failure detection, data distribution, and snitches.",
+        "duration": "50 min",
+        "file": "02-architecture-ring.md"
+      },
+      {
+        "number": 3,
+        "title": "Cassandra Data Modeling: Query-Driven Design",
+        "description": "Learn to design tables optimized for query access patterns rather than normalization.",
+        "duration": "60 min",
+        "file": "03-data-modeling.md"
+      },
+      {
+        "number": 4,
+        "title": "CQL Fundamentals & Primary/Partition Keys",
+        "description": "Understanding partitioning keys, clustering columns, composite keys, and clustering order.",
+        "duration": "45 min",
+        "file": "04-cql-keys.md"
+      },
+      {
+        "number": 5,
+        "title": "Write & Read Paths Internals (SSTables, Memtables)",
+        "description": "Deep dive into CommitLogs, Memtables, SSTables, Bloom Filters, and Row Caches.",
+        "duration": "55 min",
+        "file": "05-read-write-paths.md"
+      },
+      {
+        "number": 6,
+        "title": "Distributed Consensus & Consistency Levels",
+        "description": "Configuring Tunable Consistency (ONE, QUORUM, ALL), Hinted Handoffs, and Read Repairs.",
+        "duration": "50 min",
+        "file": "06-consistency-tuning.md"
+      },
+      {
+        "number": 7,
+        "title": "Compaction Strategies & Tombstones",
+        "description": "Managing tombstone accumulation and choosing SizeTiered, Leveled, or TimeWindow compaction.",
+        "duration": "60 min",
+        "file": "07-compaction-strategies.md"
+      },
+      {
+        "number": 8,
+        "title": "Troubleshooting & JVM Performance Tuning",
+        "description": "Debugging GC pauses, node recovery with nodetool, schema synchronization, and stress testing.",
+        "duration": "70 min",
+        "file": "08-performance-jvm.md"
+      }
+    ]
   }
 }

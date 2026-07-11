@@ -13,8 +13,8 @@ The website has been completely updated to reflect the latest professional exper
 - **LinkedIn**: Updated to https://www.linkedin.com/in/anish-karki-dba/
 
 ### Work Experience Updates
-- **Database Engineer** at Kyndryl, Melbourne (Remote) (Oct 2024 - Present) — Client: NAB Bank
-- **Data and Database Engineer** at A&S Technology (September 2023 - Present)
+- **Database Engineer** at Kyndryl, Melbourne (Remote) (Oct 2024 - Present) — Client: Major Australian Bank
+- **Founder & Technology Consultant** at A&S Technology, Brisbane (Sep 2024 - Present)
 - **Database Administrator** at Cotiviti Technology, USA (July 2020 - June 2023)
 - **Associate Database Administrator** at Cotiviti Technology, Nepal (July 2018 - July 2020)
 
@@ -25,7 +25,6 @@ The website has been completely updated to reflect the latest professional exper
 ### Certifications Updates
 - Microsoft Azure Database Administrator Associate (DP-300) - 2025
 - Microsoft Azure Administrator Associate (AZ-104) - 2026
-- Microsoft Azure Solutions Architect Expert (AZ-305) - 2026
 - Microsoft Azure Data Fundamentals (DP-900) - 2024
 - Microsoft Security, Compliance, and Identity Fundamentals (SC-900) - 2023
 - Microsoft Power Platform Fundamentals (PL-900) - 2024

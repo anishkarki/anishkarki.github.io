@@ -1,4 +1,4 @@
-# Vim for Principal Engineers
+# Vim for Pros & Engineers
 
 A high-density, advanced Vim reference for masters of the command line. Focuses on speed, composition, automation, macro refactoring, and registers.
 

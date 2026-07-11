@@ -1,4 +1,4 @@
-# Tmux Advanced Cheatsheet (Principal Edition)
+# Tmux Advanced Cheatsheet (Pro Edition)
 
 A high-density reference for terminal multiplexing mastery. Tailored for engineers who live in the terminal and require efficient session survival, complex layouts, scriptability, and instant muscle memory.
 

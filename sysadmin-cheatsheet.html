@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Principal Sysadmin All-in-One Cheatsheet | Anish Karki</title>
+  <title>Basic to Advanced Sysadmin All-in-One Cheatsheet | Anish Karki</title>
   <meta name="description"
     content="Ultimate comprehensive sysadmin cheatsheet containing all commands, configs, and tips from Vim, Tmux, Bash, Sed, Awk, Jq, and Grep. Optimized for desktop viewing and single-page printing.">
   <link
@@ -13,27 +13,27 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* ═══════════════════════════════════════════════════
-       SCREEN THEME: High-density Dark Console
+       SCREEN THEME: Modern Nebula Glassmorphism
        ═══════════════════════════════════════════════════ */
     :root {
-      --bg: #07090e;
-      --bg-card: #0f131a;
-      --bg-code: #05070a;
-      --border: #263040;
-      --border-focus: #4b5e7d;
-      --text: #d1d7e0;
-      --text-muted: #8b9bb0;
+      --bg: #060713;
+      --bg-card: rgba(17, 18, 36, 0.7);
+      --bg-code: rgba(0, 0, 0, 0.35);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: #a855f7;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
       --text-bright: #ffffff;
 
-      --accent: #58a6ff;
-      --accent-dim: #1f4068;
-      --cyan: #39c5db;
-      --green: #56d364;
-      --orange: #f0883e;
-      --pink: #ff7b72;
-      --purple: #bc8cff;
-      --yellow: #e3b341;
-      --red: #ff7b72;
+      --accent: #06b6d4;
+      --accent-dim: rgba(6, 182, 212, 0.15);
+      --cyan: #06b6d4;
+      --green: #10b981;
+      --orange: #f59e0b;
+      --pink: #ec4899;
+      --purple: #a855f7;
+      --yellow: #f59e0b;
+      --red: #ec4899;
     }
 
     * {
@@ -50,8 +50,12 @@
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
       color: var(--text);
-      line-height: 1.35;
+      line-height: 1.4;
       padding: 8px 12px 24px;
       min-height: 100vh;
     }
@@ -61,15 +65,18 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(7, 9, 14, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 6px 12px;
-      margin-bottom: 8px;
+      background: rgba(6, 7, 19, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .brand {
@@ -79,99 +86,106 @@
     }
 
     .brand h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: var(--text-bright);
-      letter-spacing: 0.3px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .brand .badge {
-      background: var(--accent-dim);
-      color: var(--accent);
-      border: 1px solid var(--border);
-      font-size: 0.72rem;
+      background: rgba(168, 85, 247, 0.12);
+      color: var(--purple);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 4px;
+      padding: 2px 8px;
+      border-radius: 20px;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .search-container {
       position: relative;
       flex: 1;
-      max-width: 320px;
+      max-width: 340px;
     }
 
     .search-input {
       width: 100%;
-      background: var(--bg-code);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       color: var(--text-bright);
-      font-size: 0.88rem;
-      padding: 4px 8px 4px 28px;
-      border-radius: 4px;
+      font-size: 0.9rem;
+      padding: 6px 12px 6px 32px;
+      border-radius: 20px;
       font-family: inherit;
       outline: none;
-      transition: all 0.15s;
+      transition: all 0.25s;
     }
 
     .search-input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.15);
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .search-icon {
       position: absolute;
-      left: 8px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-muted);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
 
     .action-group {
       display: flex;
-      gap: 6px;
+      gap: 8px;
     }
 
     .btn {
-      background: var(--bg-card);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--text-normal);
       font-size: 0.85rem;
       font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 4px;
+      padding: 6px 14px;
+      border-radius: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 4px;
-      transition: all 0.15s;
+      gap: 6px;
+      transition: all 0.25s;
       font-family: inherit;
     }
 
     .btn:hover {
-      background: var(--border);
+      background: rgba(255, 255, 255, 0.08);
       color: var(--text-bright);
       border-color: var(--text-muted);
     }
 
     .btn.primary {
-      background: var(--accent);
-      color: var(--bg);
-      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--purple) 0%, var(--accent) 100%);
+      color: var(--text-bright);
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
     }
 
     .btn.primary:hover {
-      background: #79b8ff;
-      border-color: #79b8ff;
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+      transform: translateY(-1px);
     }
 
-    /* ─── Multi-column Layout ─── */
+    /* ─── Grid Layout (Row-wise Flow) ─── */
     .columns-container {
-      column-count: 4;
-      column-gap: 10px;
-      column-rule: 1px solid rgba(38, 48, 64, 0.4);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      align-items: start;
     }
 
     /* ─── Card Section ─── */
@@ -180,17 +194,21 @@
       margin-bottom: 8px;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 5px;
+      border-radius: 8px;
       overflow: hidden;
-      transition: all 0.15s ease-in-out;
+      transition: all 0.25s ease-in-out;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
     }
 
     .card:hover {
       border-color: var(--border-focus);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.15);
     }
 
     .card-title {
-      font-size: 0.95rem;
+      font-size: 0.82rem;
       font-weight: 700;
       padding: 5px 8px;
       color: var(--text-bright);
@@ -199,71 +217,71 @@
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.5px;
       cursor: pointer;
       user-select: none;
     }
 
     .card-title.bash {
-      background: linear-gradient(90deg, #101c2e, var(--bg-card));
-      border-left: 3px solid var(--accent);
+      background: linear-gradient(90deg, rgba(6, 182, 212, 0.12), transparent);
+      border-left: 4px solid var(--accent);
     }
 
     .card-title.tmux {
-      background: linear-gradient(90deg, #0e241b, var(--bg-card));
-      border-left: 3px solid var(--green);
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), transparent);
+      border-left: 4px solid var(--green);
     }
 
     .card-title.grep {
-      background: linear-gradient(90deg, #241c12, var(--bg-card));
-      border-left: 3px solid var(--orange);
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.12), transparent);
+      border-left: 4px solid var(--orange);
     }
 
     .card-title.sed {
-      background: linear-gradient(90deg, #271424, var(--bg-card));
-      border-left: 3px solid var(--purple);
+      background: linear-gradient(90deg, rgba(168, 85, 247, 0.12), transparent);
+      border-left: 4px solid var(--purple);
     }
 
     .card-title.awk {
-      background: linear-gradient(90deg, #142427, var(--bg-card));
-      border-left: 3px solid var(--cyan);
+      background: linear-gradient(90deg, rgba(6, 182, 212, 0.12), transparent);
+      border-left: 4px solid var(--cyan);
     }
 
     .card-title.vim {
-      background: linear-gradient(90deg, #271414, var(--bg-card));
-      border-left: 3px solid var(--pink);
+      background: linear-gradient(90deg, rgba(236, 72, 153, 0.12), transparent);
+      border-left: 4px solid var(--pink);
     }
 
     .card-title span i {
-      margin-right: 4px;
+      margin-right: 6px;
     }
 
     .card-body {
-      padding: 2px 0;
+      padding: 4px 0;
     }
 
     /* ─── Tables ─── */
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.92rem;
+      font-size: 0.78rem;
     }
 
     th {
       text-align: left;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent);
       padding: 3px 6px;
-      background: var(--bg-code);
+      background: rgba(255, 255, 255, 0.01);
       border-bottom: 1px solid var(--border);
-      font-size: 0.8rem;
+      font-size: 0.70rem;
       text-transform: uppercase;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.5px;
     }
 
     td {
       padding: 3px 6px;
-      border-bottom: 1px solid rgba(38, 48, 64, 0.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       vertical-align: top;
       word-break: break-word;
     }
@@ -273,19 +291,160 @@
     }
 
     tr:hover td {
-      background: rgba(88, 166, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     td.cmd-cell {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      color: var(--green);
+      font-size: 0.76rem;
+      color: var(--text-bright);
       font-weight: 600;
-      width: 42%;
+      width: 44%;
+    }
+
+    /* Category Specific Command Cell Colors */
+    .card-title.bash+.card-body td.cmd-cell {
+      color: var(--cyan);
+    }
+
+    .card-title.tmux+.card-body td.cmd-cell {
+      color: var(--green);
+    }
+
+    .card-title.grep+.card-body td.cmd-cell {
+      color: var(--orange);
+    }
+
+    .card-title.sed+.card-body td.cmd-cell {
+      color: var(--purple);
+    }
+
+    .card-title.awk+.card-body td.cmd-cell {
+      color: var(--cyan);
+    }
+
+    .card-title.vim+.card-body td.cmd-cell {
+      color: var(--red);
+    }
+
+    .card-title.cursor+.card-body td.cmd-cell {
+      color: #00ffff;
+    }
+
+    .card-title.vscode+.card-body td.cmd-cell {
+      color: #007acc;
+    }
+
+    /* Category Specific Table Header Colors */
+    .card-title.bash+.card-body th {
+      color: var(--cyan);
+    }
+
+    .card-title.tmux+.card-body th {
+      color: var(--green);
+    }
+
+    .card-title.grep+.card-body th {
+      color: var(--orange);
+    }
+
+    .card-title.sed+.card-body th {
+      color: var(--purple);
+    }
+
+    .card-title.awk+.card-body th {
+      color: var(--cyan);
+    }
+
+    .card-title.vim+.card-body th {
+      color: var(--red);
+    }
+
+    .card-title.cursor+.card-body th {
+      color: #00ffff;
+    }
+
+    .card-title.vscode+.card-body th {
+      color: #007acc;
+    }
+
+    /* Category Specific Hover States */
+    .card:has(.card-title.bash):hover {
+      border-color: var(--cyan);
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+    }
+
+    .card:has(.card-title.tmux):hover {
+      border-color: var(--green);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+    }
+
+    .card:has(.card-title.grep):hover {
+      border-color: var(--orange);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+    }
+
+    .card:has(.card-title.sed):hover {
+      border-color: var(--purple);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.2);
+    }
+
+    .card:has(.card-title.awk):hover {
+      border-color: var(--cyan);
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+    }
+
+    .card:has(.card-title.vim):hover {
+      border-color: var(--red);
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.2);
+    }
+
+    .card:has(.card-title.cursor):hover {
+      border-color: #00ffff;
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.25);
+    }
+
+    .card:has(.card-title.vscode):hover {
+      border-color: #007acc;
+      box-shadow: 0 8px 25px rgba(0, 122, 204, 0.25);
+    }
+
+    /* Row-wise flow ordering: Bash -> Vim -> Tmux -> Others */
+    .card:has(.card-title.bash) {
+      order: 10;
+    }
+
+    .card:has(.card-title.vim) {
+      order: 20;
+    }
+
+    .card:has(.card-title.tmux) {
+      order: 30;
+    }
+
+    .card:has(.card-title.grep) {
+      order: 40;
+    }
+
+    .card:has(.card-title.sed) {
+      order: 50;
+    }
+
+    .card:has(.card-title.awk) {
+      order: 60;
+    }
+
+    .card:has(.card-title.cursor) {
+      order: 70;
+    }
+
+    .card:has(.card-title.vscode) {
+      order: 80;
     }
 
     td.desc-cell {
       color: var(--text-muted);
+      line-height: 1.4;
     }
 
     td.desc-cell strong {
@@ -295,12 +454,12 @@
 
     /* ─── Sub-Headings ─── */
     .card-subhead {
-      font-size: 0.84rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--yellow);
-      padding: 3px 6px 1px;
-      background: rgba(227, 179, 65, 0.05);
-      border-bottom: 1px solid rgba(38, 48, 64, 0.4);
+      padding: 2px 6px;
+      background: rgba(245, 158, 11, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -308,16 +467,16 @@
 
     /* ─── Custom Blocks & Lists ─── */
     .card-list {
-      padding: 3px 6px;
-      font-size: 0.86rem;
+      padding: 2px 6px;
+      font-size: 0.78rem;
       background: var(--bg-code);
     }
 
     .card-list li {
       list-style: none;
-      padding: 1px 0;
+      padding: 3px 0;
       color: var(--text-muted);
-      border-bottom: 1px solid rgba(38, 48, 64, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     .card-list li:last-child {
@@ -327,12 +486,12 @@
     .card-list li::before {
       content: "▪";
       color: var(--accent);
-      margin-right: 4px;
-      font-size: 0.65rem;
+      margin-right: 6px;
+      font-size: 0.7rem;
     }
 
     .card-steps {
-      padding: 4px 8px;
+      padding: 6px 10px;
       font-size: 0.86rem;
       background: var(--bg-code);
     }
@@ -340,9 +499,9 @@
     .card-steps li {
       list-style-type: decimal;
       list-style-position: inside;
-      padding: 2px 0;
+      padding: 3px 0;
       color: var(--text-muted);
-      border-bottom: 1px solid rgba(38, 48, 64, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     .card-steps li:last-child {
@@ -353,12 +512,12 @@
     pre {
       background: var(--bg-code);
       border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 4px 6px;
-      margin: 4px 6px;
+      border-radius: 6px;
+      padding: 6px 10px;
+      margin: 6px 8px;
       overflow-x: auto;
       font-size: 0.82rem;
-      line-height: 1.25;
+      line-height: 1.3;
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -374,9 +533,9 @@
       font-size: 0.82rem;
       background: var(--bg-code);
       color: var(--cyan);
-      padding: 0 2px;
-      border-radius: 2px;
-      border: 1px solid rgba(38, 48, 64, 0.3);
+      padding: 1px 4px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
     }
 
     /* Token highlighting for shell code */
@@ -415,22 +574,60 @@
 
     /* ─── Search Highlight ─── */
     .search-match {
-      background: rgba(227, 179, 65, 0.25);
-      border-bottom: 1px solid var(--yellow);
+      background: rgba(245, 158, 11, 0.25);
+      border-bottom: 1.5px solid var(--yellow);
+      color: var(--text-bright);
     }
 
     .card.hidden {
       display: none !important;
     }
 
+    /* ─── Everyday Section ─── */
+    .everyday-section {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 2px dashed rgba(255, 255, 255, 0.15);
+    }
+
+    .everyday-section .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--yellow);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .everyday-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    @media screen and (max-width: 1200px) {
+      .everyday-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .everyday-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ─── Footer ─── */
     .footer {
       text-align: center;
-      padding: 12px 0 4px;
-      margin-top: 16px;
+      padding: 16px 0 8px;
+      margin-top: 24px;
       border-top: 1px solid var(--border);
       color: var(--text-muted);
-      font-size: 0.84rem;
+      font-size: 0.85rem;
     }
 
     /* ═══════════════════════════════════════════════════
@@ -459,6 +656,7 @@
 
       body {
         background: #ffffff;
+        background-image: none;
         color: #24292f;
         padding: 0;
       }
@@ -482,6 +680,8 @@
         margin-bottom: 5px;
         border-color: #d0d7de;
         box-shadow: none;
+        backdrop-filter: none;
+        background: #ffffff;
       }
 
       .card-title {
@@ -540,19 +740,19 @@
     /* Responsive grid logic for viewports */
     @media screen and (max-width: 1600px) {
       .columns-container {
-        column-count: 3;
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media screen and (max-width: 1200px) {
       .columns-container {
-        column-count: 2;
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media screen and (max-width: 768px) {
       .columns-container {
-        column-count: 1;
+        grid-template-columns: 1fr;
       }
 
       html {
@@ -567,6 +767,9 @@
   <!-- ═══ CONTROLS (Sticky) ═══ -->
   <div class="controls">
     <div class="brand">
+      <a href="cheatsheets.html" class="btn"
+        style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-right: 8px;"><i
+          class="fa-solid fa-arrow-left"></i> Back</a>
       <h1>⚡ Sysadmin All-in-One Dashboard</h1>
       <span class="badge">Master Reference</span>
     </div>
@@ -1277,7 +1480,8 @@ grep <span class="flag">-A</span> <span class="num">10</span> <span class="str">
           </tr>
           <tr>
             <td class="cmd-cell">s/old/[&amp;]/g</td>
-            <td class="desc-cell">Refer to matched segments: <code>&amp;</code> represents the text matched by pattern</td>
+            <td class="desc-cell">Refer to matched segments: <code>&amp;</code> represents the text matched by pattern
+            </td>
           </tr>
         </table>
         <div class="card-subhead">Printing (p) &amp; Deleting (d) Lines</div>
@@ -1336,7 +1540,8 @@ grep <span class="flag">-A</span> <span class="num">10</span> <span class="str">
           </tr>
           <tr>
             <td class="cmd-cell">s/\([0-9]\+\)ms/\1s/g</td>
-            <td class="desc-cell">Backreference group: capture matches via <code>\(..\)</code> and paste via <code>\1</code></td>
+            <td class="desc-cell">Backreference group: capture matches via <code>\(..\)</code> and paste via
+              <code>\1</code></td>
           </tr>
         </table>
         <div class="card-subhead">Line Insertion &amp; Appending</div>
@@ -1401,7 +1606,8 @@ sed <span class="flag">-n</span> <span class="str">'1!G;h;$p'</span> input.txt</
           </tr>
           <tr>
             <td class="cmd-cell">t label</td>
-            <td class="desc-cell">Test: jump to <code>label</code> <strong>only if</strong> last substitution succeeded</td>
+            <td class="desc-cell">Test: jump to <code>label</code> <strong>only if</strong> last substitution succeeded
+            </td>
           </tr>
           <tr>
             <td class="cmd-cell">sed 's/old/'"$VAR"'/'</td>
@@ -1629,7 +1835,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">h / j / k / l</td>
-            <td class="desc-cell">Move: <strong>Left</strong> / <strong>Down</strong> / <strong>Up</strong> / <strong>Right</strong></td>
+            <td class="desc-cell">Move: <strong>Left</strong> / <strong>Down</strong> / <strong>Up</strong> /
+              <strong>Right</strong></td>
           </tr>
         </table>
         <div class="card-subhead">Move Fast (Word Jumps)</div>
@@ -1663,7 +1870,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">Ctrl + e / y</td>
-            <td class="desc-cell">Scroll screen: <strong>Down</strong> / <strong>Up</strong> one line (cursor stays)</td>
+            <td class="desc-cell">Scroll screen: <strong>Down</strong> / <strong>Up</strong> one line (cursor stays)
+            </td>
           </tr>
           <tr>
             <td class="cmd-cell">zz / zt / zb</td>
@@ -1671,7 +1879,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">H / M / L</td>
-            <td class="desc-cell">Jump to screen coordinates: <strong>High</strong> / <strong>Middle</strong> / <strong>Low</strong> line</td>
+            <td class="desc-cell">Jump to screen coordinates: <strong>High</strong> / <strong>Middle</strong> /
+              <strong>Low</strong> line</td>
           </tr>
         </table>
         <div class="card-subhead">File-wide Jumps &amp; Marks</div>
@@ -1745,7 +1954,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">o / O</td>
-            <td class="desc-cell">Open (insert) new line: <strong>below</strong> / <strong>above</strong> current line (enters insert)</td>
+            <td class="desc-cell">Open (insert) new line: <strong>below</strong> / <strong>above</strong> current line
+              (enters insert)</td>
           </tr>
           <tr>
             <td class="cmd-cell">r{char} / R</td>
@@ -1764,7 +1974,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">diw / daw</td>
-            <td class="desc-cell">Cut <strong>inner word</strong> (keeps space) / Cut <strong>around word</strong> (removes space)</td>
+            <td class="desc-cell">Cut <strong>inner word</strong> (keeps space) / Cut <strong>around word</strong>
+              (removes space)</td>
           </tr>
           <tr>
             <td class="cmd-cell">dd / yy</td>
@@ -1780,7 +1991,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">c{motion}</td>
-            <td class="desc-cell">Change: delete range and enter insert (e.g. <code>cc</code>, <code>cw</code>, <code>C</code>)</td>
+            <td class="desc-cell">Change: delete range and enter insert (e.g. <code>cc</code>, <code>cw</code>,
+              <code>C</code>)</td>
           </tr>
           <tr>
             <td class="cmd-cell">s / S</td>
@@ -1788,7 +2000,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">p / P</td>
-            <td class="desc-cell">Paste yank buffer: <strong>after</strong> / <strong>before</strong> cursor position</td>
+            <td class="desc-cell">Paste yank buffer: <strong>after</strong> / <strong>before</strong> cursor position
+            </td>
           </tr>
         </table>
         <div class="card-subhead">Undo, Redo &amp; Repeat</div>
@@ -1886,11 +2099,14 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
         </table>
         <div class="card-subhead">Visual Block Column Actions</div>
         <ul class="card-list">
-          <li><strong>Column Prepend:</strong> <code>Ctrl+v</code> select vertical block ➔ <code>I</code> ➔ Type text ➔ <code>Esc Esc</code></li>
-          <li><strong>Column Append:</strong> <code>Ctrl+v</code> select block ➔ <code>$</code> ➔ <code>A</code> ➔ Type text ➔ <code>Esc Esc</code></li>
+          <li><strong>Column Prepend:</strong> <code>Ctrl+v</code> select vertical block ➔ <code>I</code> ➔ Type text ➔
+            <code>Esc Esc</code></li>
+          <li><strong>Column Append:</strong> <code>Ctrl+v</code> select block ➔ <code>$</code> ➔ <code>A</code> ➔ Type
+            text ➔ <code>Esc Esc</code></li>
           <li><strong>Replace Block:</strong> Select block ➔ <code>c</code> ➔ Type text ➔ <code>Esc Esc</code></li>
           <li><strong>External Sort:</strong> Select visual lines ➔ <code>:!sort</code> (runs shell sort filter)</li>
-          <li><strong>Format JSON Block:</strong> Select visual lines ➔ <code>:!jq .</code> (runs JSON parser formatting)</li>
+          <li><strong>Format JSON Block:</strong> Select visual lines ➔ <code>:!jq .</code> (runs JSON parser
+            formatting)</li>
         </ul>
       </div>
     </div>
@@ -2255,7 +2471,8 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
           </tr>
           <tr>
             <td class="cmd-cell">:cfdo %s/o/n/g | up</td>
-            <td class="desc-cell">Replace <code>o</code> with <code>n</code> on all matching files &amp; save (update)</td>
+            <td class="desc-cell">Replace <code>o</code> with <code>n</code> on all matching files &amp; save (update)
+            </td>
           </tr>
         </table>
         <div class="card-subhead">High-Performance setup (~/.vimrc)</div>
@@ -2294,7 +2511,7 @@ jq <span class="flag">-r</span> <span class="str">'.items[] | [.id, .name] | @cs
        ════════════════════════════════════════════ -->
     <div class="card"
       data-search="cursor ai prompt engineering shortcuts composer context files docs git folders privacy ignore costar agent prompt">
-      <div class="card-title vim"
+      <div class="card-title cursor"
         style="background: linear-gradient(90deg, #161b22, var(--bg-card)); border-left: 3px solid #00ffff;">
         <span><i class="fa-solid fa-robot"></i> Cursor AI &amp; Prompting</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
@@ -2380,7 +2597,7 @@ secrets/</code></pre>
        ════════════════════════════════════════════ -->
     <div class="card"
       data-search="vscode editor navigation split pane window multiscreen jumps shortcuts definition references symbol">
-      <div class="card-title vim"
+      <div class="card-title vscode"
         style="background: linear-gradient(90deg, #1e1e1e, var(--bg-card)); border-left: 3px solid #007acc;">
         <span><i class="fa-solid fa-code"></i> VSCode Editor &amp; Jumps</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
@@ -2504,6 +2721,134 @@ secrets/</code></pre>
 
   </div><!-- /columns-container -->
 
+  <!-- ═══ EVERYDAY ESSENTIALS ═══ -->
+  <div class="everyday-section">
+    <h2 class="section-title"><i class="fa-solid fa-star me-2"></i> Everyday Essentials</h2>
+    <div class="everyday-grid">
+      <!-- Card 1: Tmux & Vim Interactive Loops -->
+      <div class="card" data-search="everyday tmux windows horizontal panes toggle mouse view copy scroll mode netrw explorer vertical split side by side insert before after word copy line syntax highlight">
+        <div class="card-title tmux">
+          <span><i class="fa-solid fa-terminal"></i> Tmux &amp; Vim Dev Loops</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-subhead">Tmux Environment Setup</div>
+          <table>
+            <tr><td class="cmd-cell">Ctrl + b ➔ c</td><td class="desc-cell">Create a new window (2 windows total)</td></tr>
+            <tr><td class="cmd-cell">Ctrl + b ➔ %</td><td class="desc-cell">Split window vertically (side-by-side panes)</td></tr>
+            <tr><td class="cmd-cell">Ctrl + b ➔ "</td><td class="desc-cell">Split window horizontally (2 vertical panes)</td></tr>
+            <tr><td class="cmd-cell">Ctrl + b ➔ :set -g mouse on/off</td><td class="desc-cell">Toggle mouse control (scrolling vs text selection)</td></tr>
+            <tr><td class="cmd-cell">Ctrl + b ➔ [ (Press q to exit)</td><td class="desc-cell">Enter Copy/View Mode (scroll through terminal logs)</td></tr>
+          </table>
+          <div class="card-subhead">Vim Large File Navigation &amp; Editing</div>
+          <table>
+            <tr><td class="cmd-cell">vim .   (or :Ex in editor)</td><td class="desc-cell">Open Netrw folder tree / directory explorer</td></tr>
+            <tr><td class="cmd-cell">Ctrl + d / Ctrl + u</td><td class="desc-cell">Scroll Down / Up half-page (fast file movement)</td></tr>
+            <tr><td class="cmd-cell">:vsp filename</td><td class="desc-cell">Open file in vertical split (side-by-side edit)</td></tr>
+            <tr><td class="cmd-cell">bi / ea</td><td class="desc-cell">Insert <strong>before</strong> word start / <strong>after</strong> word end</td></tr>
+            <tr><td class="cmd-cell">I / A</td><td class="desc-cell">Insert at <strong>start</strong> / <strong>end</strong> of line</td></tr>
+            <tr><td class="cmd-cell">yyp</td><td class="desc-cell">Duplicate current line directly below</td></tr>
+            <tr><td class="cmd-cell">:syntax on/off</td><td class="desc-cell">Toggle syntax highlight (turns off to speed up huge files)</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Card 2: Log Filtering & Searches -->
+      <div class="card" data-search="everyday find replace words sentence file clear highlight first last line jump number grep sed awk log output parsing regex">
+        <div class="card-title grep">
+          <span><i class="fa-solid fa-magnifying-glass"></i> Text Searches &amp; Log Filters</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-subhead">Vim Search &amp; Replace</div>
+          <table>
+            <tr><td class="cmd-cell">/pattern</td><td class="desc-cell">Search and highlight pattern matches</td></tr>
+            <tr><td class="cmd-cell">:noh</td><td class="desc-cell">Clear active search highlights</td></tr>
+            <tr><td class="cmd-cell">:%s/old/new/g</td><td class="desc-cell">Replace <strong>all</strong> occurrences globally in full file</td></tr>
+            <tr><td class="cmd-cell">:s/old/new/g</td><td class="desc-cell">Replace <strong>all</strong> occurrences in current sentence / line</td></tr>
+            <tr><td class="cmd-cell">gg / G</td><td class="desc-cell">Jump to <strong>first line</strong> / <strong>last line</strong> of file</td></tr>
+            <tr><td class="cmd-cell">:123  (or 123G)</td><td class="desc-cell">Jump directly to line number 123</td></tr>
+          </table>
+          <div class="card-subhead">Everyday Shell Log Parsing (Grep, Sed, Awk)</div>
+          <table>
+            <tr><td class="cmd-cell">grep -C 5 "ERROR" log.txt</td><td class="desc-cell">Show match with 5 lines of <strong>Context</strong> (before &amp; after)</td></tr>
+            <tr><td class="cmd-cell">grep -v "DEBUG\|INFO" log.txt</td><td class="desc-cell">Invert match: <strong>exclude</strong> debug and info noise</td></tr>
+            <tr><td class="cmd-cell">grep -c "FATAL" log.txt</td><td class="desc-cell">Fast count occurrences of pattern in huge files</td></tr>
+            <tr><td class="cmd-cell">sed -i 's/old/new/g' conf.txt</td><td class="desc-cell">In-place string substitution (modifies file directly)</td></tr>
+            <tr><td class="cmd-cell">sed -n '50,100p' log.txt</td><td class="desc-cell">Print line range 50 to 100 of output</td></tr>
+            <tr><td class="cmd-cell">awk '{print $1}' log.txt | sort | uniq -c | sort -nr | head</td><td class="desc-cell">Extract 1st col (IPs), count uniques, show top 10</td></tr>
+            <tr><td class="cmd-cell">awk -F',' '$3 &gt; 500 {print $1, $3}' data.csv</td><td class="desc-cell">Extract columns from CSV where col 3 exceeds 500</td></tr>
+          </table>
+          <div class="card-subhead">Splitting Large Files</div>
+          <table>
+            <tr><td class="cmd-cell">split -b 500M huge.log part_</td><td class="desc-cell">Split large log into 500MB chunk files</td></tr>
+            <tr><td class="cmd-cell">split -l 100000 huge.log part_</td><td class="desc-cell">Split large log into 100,000 line chunk files</td></tr>
+            <tr><td class="cmd-cell">split -d -l 50000 huge.log part_</td><td class="desc-cell">Split file with numeric suffixes (part_00, part_01)</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Card 3: Production Git Operations -->
+      <div class="card" data-search="everyday git status parse diff stash pop rebase merge force with lease reset hard tags head origin refs">
+        <div class="card-title vim" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.12), transparent); border-left: 4px solid var(--red);">
+          <span><i class="fa-brands fa-git-alt"></i> Production Git Loops</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-subhead">Branch &amp; Index Syncing</div>
+          <table>
+            <tr><td class="cmd-cell">git status</td><td class="desc-cell">Show status of modified/untracked files</td></tr>
+            <tr><td class="cmd-cell">git diff</td><td class="desc-cell">Show line changes against index/commits</td></tr>
+            <tr><td class="cmd-cell">git stash</td><td class="desc-cell">Temporarily stash active dirty changes</td></tr>
+            <tr><td class="cmd-cell">git stash pop</td><td class="desc-cell">Restore and apply the last stashed changes</td></tr>
+            <tr><td class="cmd-cell">git rebase -i HEAD~5</td><td class="desc-cell">Interactively edit/squash last 5 local commits</td></tr>
+            <tr><td class="cmd-cell">git merge target_branch</td><td class="desc-cell">Merge target branch into current branch</td></tr>
+            <tr><td class="cmd-cell">git reset --hard HEAD</td><td class="desc-cell">Wipe all local uncommitted edits (hard reset)</td></tr>
+          </table>
+          <div class="card-subhead">Pushing, Tags &amp; HEAD Tracking</div>
+          <table>
+            <tr><td class="cmd-cell">git push --force-with-lease</td><td class="desc-cell">Safe force-push (refuses if remote branch moved)</td></tr>
+            <tr><td class="cmd-cell">git tag -a v1.0 -m "msg"</td><td class="desc-cell">Create annotated tag locally on current HEAD</td></tr>
+            <tr><td class="cmd-cell">git tag -d v1.0</td><td class="desc-cell">Delete tag locally</td></tr>
+            <tr><td class="cmd-cell">git push origin :refs/tags/v1.0</td><td class="desc-cell">Delete tag on remote repository</td></tr>
+            <tr><td class="cmd-cell">git rev-parse HEAD</td><td class="desc-cell">Find SHA hash of current HEAD</td></tr>
+            <tr><td class="cmd-cell">git show HEAD</td><td class="desc-cell">View changes and metadata of current HEAD commit</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Card 4: Systems & Ansible Automation -->
+      <div class="card" data-search="everyday systemctl status check daemon service restart reload journalctl log follow logs errors ansible playbooks hosts adhoc syntax">
+        <div class="card-title sed" style="background: linear-gradient(90deg, rgba(168, 85, 247, 0.12), transparent); border-left: 4px solid var(--purple);">
+          <span><i class="fa-solid fa-gears"></i> Systems &amp; Ansible Automation</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-subhead">Systemctl &amp; Journalctl Logs</div>
+          <table>
+            <tr><td class="cmd-cell">systemctl status service_name</td><td class="desc-cell">Check runtime status and active state of service</td></tr>
+            <tr><td class="cmd-cell">systemctl restart service_name</td><td class="desc-cell">Stop and restart a systemd service</td></tr>
+            <tr><td class="cmd-cell">journalctl -u service_name -n 50 --no-pager</td><td class="desc-cell">Print last 50 log lines for a specific service</td></tr>
+            <tr><td class="cmd-cell">journalctl -f -u service_name</td><td class="desc-cell">Follow/tail service logs in real time</td></tr>
+            <tr><td class="cmd-cell">journalctl -p err..emerg -xn 30</td><td class="desc-cell">View last 30 system logs filtered by error priority</td></tr>
+          </table>
+          <div class="card-subhead">Advanced AWK &amp; Log Filter Parsers</div>
+          <table>
+            <tr><td class="cmd-cell">awk -F' ' '$4 &gt;= "12:00:00" &amp;&amp; $4 &lt;= "13:00:00"' log.txt</td><td class="desc-cell">Filter and display log lines matching specific time slot</td></tr>
+            <tr><td class="cmd-cell">awk '/ERROR|critical|failed/ {print NR, $0}' log.txt</td><td class="desc-cell">Parse files and print error lines along with their line numbers</td></tr>
+          </table>
+          <div class="card-subhead">Ansible Ad-Hoc &amp; Playbooks</div>
+          <table>
+            <tr><td class="cmd-cell">ansible all -m ping -i hosts</td><td class="desc-cell">Ping and test SSH connectivity to all remote hosts</td></tr>
+            <tr><td class="cmd-cell">ansible all -a "systemctl status sshd" -i hosts</td><td class="desc-cell">Execute ad-hoc systemctl check across remote servers</td></tr>
+            <tr><td class="cmd-cell">ansible-playbook site.yml --syntax-check</td><td class="desc-cell">Validate playbook syntax without executing it</td></tr>
+            <tr><td class="cmd-cell">ansible-playbook site.yml -i hosts --limit dbservers</td><td class="desc-cell">Run playbook but limit execution to specific host group</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ FOOTER ═══ -->
   <div class="footer">
     Anish Karki · Principal Sysadmin Master Dashboard · <span id="year"></span> · Press <code>Ctrl + P</code> to print
@@ -2514,6 +2859,72 @@ secrets/</code></pre>
   <script>
     // Dynamic Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Cache cards array for fast masonry layout updates
+    const allCards = Array.from(document.querySelectorAll('#columns .card'));
+    const everydayCards = Array.from(document.querySelectorAll('.everyday-grid .card'));
+    const orderMap = {
+      'bash': 10,
+      'vim': 20,
+      'tmux': 30,
+      'grep': 40,
+      'sed': 50,
+      'awk': 60,
+      'cursor': 70,
+      'vscode': 80
+    };
+
+    // Sort cards by order mapping once at start
+    allCards.sort((a, b) => {
+      const titleA = a.querySelector('.card-title');
+      const titleB = b.querySelector('.card-title');
+      const classA = titleA ? Array.from(titleA.classList).find(c => orderMap[c]) : '';
+      const classB = titleB ? Array.from(titleB.classList).find(c => orderMap[c]) : '';
+      const orderA = orderMap[classA] || 99;
+      const orderB = orderMap[classB] || 99;
+      return orderA - orderB;
+    });
+
+    function layoutMasonry() {
+      const container = document.getElementById('columns');
+      if (!container) return;
+
+      const width = window.innerWidth;
+      let numCols = 4;
+      if (width <= 768) numCols = 1;
+      else if (width <= 1200) numCols = 2;
+      else if (width <= 1600) numCols = 3;
+
+      // Clear container but keep references intact
+      container.innerHTML = '';
+
+      // Create columns
+      const colElements = [];
+      for (let i = 0; i < numCols; i++) {
+        const col = document.createElement('div');
+        col.className = 'masonry-col';
+        container.appendChild(col);
+        colElements.push(col);
+      }
+
+      // Distribute only visible cards
+      let visibleIndex = 0;
+      allCards.forEach(card => {
+        if (!card.classList.contains('hidden')) {
+          const colTarget = visibleIndex % numCols;
+          colElements[colTarget].appendChild(card);
+          visibleIndex++;
+        } else {
+          // Keep hidden cards in the root container so they can be filtered back
+          container.appendChild(card);
+        }
+      });
+    }
+
+    // Call layout initially and on resize
+    window.addEventListener('load', layoutMasonry);
+    window.addEventListener('resize', layoutMasonry);
+    document.addEventListener('DOMContentLoaded', layoutMasonry);
 
     // Collapsible cards implementation
     document.querySelectorAll('.card-title').forEach(header => {
@@ -2534,6 +2945,7 @@ secrets/</code></pre>
             icon.classList.add('fa-chevron-up');
           }
         }
+        layoutMasonry();
       });
     });
 
@@ -2541,7 +2953,7 @@ secrets/</code></pre>
     let allCollapsed = false;
     function toggleCollapseAll() {
       allCollapsed = !allCollapsed;
-      document.querySelectorAll('.card').forEach(card => {
+      const collapseItem = card => {
         const body = card.querySelector('.card-body');
         const icon = card.querySelector('.card-title i:last-child');
         if (allCollapsed) {
@@ -2557,7 +2969,10 @@ secrets/</code></pre>
             icon.classList.add('fa-chevron-down');
           }
         }
-      });
+      };
+      allCards.forEach(collapseItem);
+      everydayCards.forEach(collapseItem);
+      layoutMasonry();
     }
 
     // Live filter search logic
@@ -2570,7 +2985,7 @@ secrets/</code></pre>
         el.classList.remove('search-match');
       });
 
-      document.querySelectorAll('.card').forEach(card => {
+      const filterCard = card => {
         const keywords = card.getAttribute('data-search') || '';
         const textContent = card.innerText.toLowerCase();
 
@@ -2591,7 +3006,12 @@ secrets/</code></pre>
         } else {
           card.classList.add('hidden');
         }
-      });
+      };
+
+      allCards.forEach(filterCard);
+      everydayCards.forEach(filterCard);
+
+      layoutMasonry();
     });
   </script>
 

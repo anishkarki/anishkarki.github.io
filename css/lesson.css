@@ -5,19 +5,19 @@
 
 /* CSS Custom Properties */
 :root {
-  --course-bg-card: rgba(31, 31, 31, 0.9);
-  --course-border: rgba(64, 64, 64, 0.6);
-  --course-accent: #60a5fa;
-  --course-accent-light: #93c5fd;
-  --course-success: #4ade80;
-  --course-warning: #fde047;
-  --course-danger: #f87171;
+  --course-bg-card: rgba(8, 16, 32, 0.88);
+  --course-border: rgba(81, 162, 218, 0.15);
+  --course-accent: #3c6eb4;
+  --course-accent-light: #51a2da;
+  --course-success: #38d39f;
+  --course-warning: #e0aa3e;
+  --course-danger: #1d3b73;
   --course-text-primary: #ffffff;
-  --course-text-secondary: #e5e5e5;
-  --course-text-muted: #d4d4d4;
-  --course-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --course-shadow-hover: 0 20px 60px rgba(96, 165, 250, 0.25);
-  --course-radius: 20px;
+  --course-text-secondary: #f8fafc;
+  --course-text-muted: #cbd5e1;
+  --course-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --course-shadow-hover: 0 15px 35px rgba(81, 162, 218, 0.25);
+  --course-radius: 16px;
   --course-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -28,9 +28,10 @@
 .lessons-hero-section {
   position: relative;
   padding: 140px 0 100px;
-  background: linear-gradient(180deg, 
-    rgba(10, 15, 26, 0.95) 0%, 
-    rgba(17, 24, 39, 0.9) 100%);
+  background: radial-gradient(circle at 10% 20%, rgba(60, 110, 180, 0.18) 0%, transparent 60%),
+              radial-gradient(circle at 90% 80%, rgba(81, 162, 218, 0.15) 0%, transparent 60%),
+              #060c17;
+  border-bottom: 1px solid var(--course-border);
   overflow: hidden;
 }
 
@@ -41,9 +42,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(99, 179, 237, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 50%, rgba(72, 187, 120, 0.06) 0%, transparent 50%);
+  background: none;
   pointer-events: none;
 }
 

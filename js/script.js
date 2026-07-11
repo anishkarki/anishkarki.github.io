@@ -600,3 +600,108 @@ function initializeAllEnhancements() {
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(initializeAllEnhancements, 1000); // Delay for better performance
 });
+
+// =====================================================
+// GNOME Desktop Interaction Controls
+// =====================================================
+function toggleActivitiesOverlay() {
+  const overlay = document.getElementById('activitiesOverlay');
+  if (overlay) {
+    overlay.classList.toggle('active');
+    if (overlay.classList.contains('active')) {
+      const searchInput = overlay.querySelector('.gnome-search-input');
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+        filterActivities('');
+      }
+    }
+  }
+}
+
+function toggleSystemMenu(event) {
+  if (event) event.stopPropagation();
+  const menu = document.getElementById('gnomeSystemMenu');
+  if (menu) {
+    menu.classList.toggle('active');
+  }
+}
+
+function filterActivities(query) {
+  const appIcons = document.querySelectorAll('.gnome-activities-overlay .app-icon');
+  appIcons.forEach(icon => {
+    const label = icon.querySelector('.app-label').textContent.toLowerCase();
+    if (label.includes(query.toLowerCase())) {
+      icon.style.display = 'flex';
+    } else {
+      icon.style.display = 'none';
+    }
+  });
+}
+
+function initGnomeClock() {
+  const clockEl = document.getElementById('gnome-clock');
+  if (!clockEl) return;
+  
+  function updateClock() {
+    const now = new Date();
+    const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
+    clockEl.textContent = now.toLocaleDateString('en-US', options);
+  }
+  
+  updateClock();
+  setInterval(updateClock, 30000);
+}
+
+// Wire up global click closures
+document.addEventListener('click', function(event) {
+  const menu = document.getElementById('gnomeSystemMenu');
+  if (menu && menu.classList.contains('active')) {
+    const trigger = document.querySelector('.gnome-status-icons');
+    if (!menu.contains(event.target) && (!trigger || !trigger.contains(event.target))) {
+      menu.classList.remove('active');
+    }
+  }
+});
+
+// Setup after components load
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(() => {
+    initGnomeClock();
+    initGnomeScrollHide();
+    
+    // Enable Bootstrap tooltips on the GNOME dock
+    if (typeof bootstrap !== 'undefined') {
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('.gnome-dock [data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    }
+  }, 1200);
+});
+
+function initGnomeScrollHide() {
+  let lastScrollTop = 0;
+  const delta = 10;
+  
+  window.addEventListener('scroll', function() {
+    const topBar = document.querySelector('.gnome-top-bar');
+    const dockContainer = document.querySelector('.gnome-dock-container');
+    const systemMenu = document.getElementById('gnomeSystemMenu');
+    
+    const st = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (Math.abs(lastScrollTop - st) <= delta) return;
+    
+    if (st > lastScrollTop && st > 50) {
+      if (topBar) topBar.classList.add('scroll-hide');
+      if (dockContainer) dockContainer.classList.add('scroll-hide');
+      if (systemMenu) systemMenu.classList.remove('active');
+    } else {
+      if (topBar) topBar.classList.remove('scroll-hide');
+      if (dockContainer) dockContainer.classList.remove('scroll-hide');
+    }
+    
+    lastScrollTop = st;
+  });
+}

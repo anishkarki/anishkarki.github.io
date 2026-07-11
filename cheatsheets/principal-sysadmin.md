@@ -1,4 +1,4 @@
-# Principal Sysadmin 2-Page Cheatsheet
+# Basic to Advanced Sysadmin 2-Page Cheatsheet
 
 A consolidated, ultra-dense reference for veteran systems administrators. Designed to maximize keyboard uptime, optimize remote multiplexing, and facilitate stream parsing.
 

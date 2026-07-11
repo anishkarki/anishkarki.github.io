@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Vim for Principal Engineers",
+    "title": "Vim for Pros & Engineers",
     "description": "High-density Vim reference targeting Visual Block multi-line editing, jump and change lists, advanced registers, macro refactoring, and regex patterns.",
     "category": "editor",
     "tags": [
@@ -132,7 +132,7 @@
   },
   {
     "id": 9,
-    "title": "Cursor AI & Prompt Engineering (Principal Edition)",
+    "title": "Cursor AI & Prompt Engineering (Pro Edition)",
     "description": "Maximized productivity with Cursor IDE context orchestration, privacy indexing, `.cursorrules` configurations, and Composer multi-file agentic prompting.",
     "category": "editor",
     "tags": [
@@ -164,7 +164,7 @@
   },
   {
     "id": 11,
-    "title": "Principal Sysadmin 2-Page Cheatsheet",
+    "title": "Basic to Advanced Sysadmin 2-Page Cheatsheet",
     "description": "Ultra-dense two-page reference for veteran sysadmins. Covers advanced Vim operations, shell/history magic, Tmux pane synchronization & buffer management, and complex Awk, Sed, and Grep text processing.",
     "category": "shell",
     "tags": [
@@ -202,7 +202,7 @@
   },
   {
     "id": 13,
-    "title": "Principal Sysadmin Dashboard Cheatsheet",
+    "title": "Basic to Advanced Sysadmin Dashboard Cheatsheet",
     "description": "Ultimate comprehensive stream editing, tmux socket session sharing, visual block macro operations, and multi-line grep regex cheatsheet. Highly interactive dark console layout.",
     "category": "shell",
     "tags": [

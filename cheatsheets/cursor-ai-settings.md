@@ -1,4 +1,4 @@
-# Cursor AI & Prompt Engineering (Principal Edition)
+# Cursor AI & Prompt Engineering (Pro Edition)
 
 A comprehensive guide for maximizing productivity with the Cursor IDE. Designed for senior and principal engineers managing large-scale, complex repositories, orchestrating multi-file agents, and configuring custom team-wide rules.
 
