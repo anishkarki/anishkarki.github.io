@@ -1,9 +1,11 @@
 ---
 title: "Autovacuum Baseline Maker: Design Notes"
 date: "2026-07-12"
-category: "Postgresql"
-tags: ["postgresql", "autovacuum", "python", "rich", "devops"]
-excerpt: "Design notes for building a Python-based CLI and Live Rich Dashboard tool to collect, trend, and analyze Postgres autovacuum baselines."
+category: "PostgreSQL Administration"
+tags: ["PostgreSQL", "Autovacuum", "Python", "CLI", "Rich", "SQLite", "Monitoring"]
+excerpt: "Architectural blueprint and design specification for building a Python-based CLI tool and Live Rich Dashboard to collect, analyze, and trend PostgreSQL autovacuum baselines."
+author: "Anish Karki"
+featured: true
 ---
 
 # Autovacuum Baseline Maker: Design Notes
