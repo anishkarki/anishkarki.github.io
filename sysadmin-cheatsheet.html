@@ -2787,6 +2787,8 @@ secrets/</code></pre>
             <tr><td class="cmd-cell">grep -v "DEBUG\|INFO" log.txt</td><td class="desc-cell">Invert match: <strong>exclude</strong> debug and info noise</td></tr>
             <tr><td class="cmd-cell">grep -c "FATAL" log.txt</td><td class="desc-cell">Fast count occurrences of pattern in huge files</td></tr>
             <tr><td class="cmd-cell">sed -i 's/old/new/g' conf.txt</td><td class="desc-cell">In-place string substitution (modifies file directly)</td></tr>
+            <tr><td class="cmd-cell">sed -i '/pattern/d' file.txt</td><td class="desc-cell">Delete all lines matching pattern in-place</td></tr>
+            <tr><td class="cmd-cell">sed -i 's/^regex.*/new_line/' file.txt</td><td class="desc-cell">Replace lines matching regex with a new line in-place</td></tr>
             <tr><td class="cmd-cell">sed -n '50,100p' log.txt</td><td class="desc-cell">Print line range 50 to 100 of output</td></tr>
             <tr><td class="cmd-cell">awk '{print $1}' log.txt | sort | uniq -c | sort -nr | head</td><td class="desc-cell">Extract 1st col (IPs), count uniques, show top 10</td></tr>
             <tr><td class="cmd-cell">awk -F',' '$3 &gt; 500 {print $1, $3}' data.csv</td><td class="desc-cell">Extract columns from CSV where col 3 exceeds 500</td></tr>
