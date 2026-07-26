@@ -8,7 +8,8 @@ High-density, zero-fluff reference for Staff/Principal Engineers and DBAs. Cover
 
 | Section | Focus |
 |:---|:---|
-| [1. Memory & Process Model](#1-memory--process-model) | `shared_buffers`, `work_mem`, `huge_pages`, background daemons |
+| [1.1 Process & Memory Architecture](#11-process--memory-architecture) | Process daemons, `shared_buffers`, double-buffering |
+| [1.2 Deep OS Kernel Memory Tuning](#12-deep-os-kernel-memory-tuning) | Static HugePages, NUMA, dirty writeback, OOM score |
 | [2. Storage Engine Anatomy & Page Layout](#2-storage-engine-anatomy--page-layout) | 8KB page headers, line pointers, TOAST, FSM, Visibility Map |
 | [3. GUCs & Dynamic Hot Altering](#3-gucs--dynamic-hot-altering) | GUC contexts (`postmaster` vs `sighup`), `ALTER SYSTEM`, config paths |
 | [4. Logging Engine Tuning](#4-logging-engine-tuning) | `logging_collector`, slow queries, autovacuum & lock logging |
@@ -25,36 +26,101 @@ High-density, zero-fluff reference for Staff/Principal Engineers and DBAs. Cover
 
 ---
 
-## 1. Memory & Process Model
+## 1.1 Process & Memory Architecture
 
-### Process Hierarchy
-* **`postmaster` (PID 1)**: Master daemon. Listens on TCP/Unix domain socket, forks backends per connection.
-* **`checkpointer`**: Flushes dirty buffers from `shared_buffers` to disk at scheduled intervals or WAL thresholds.
-* **`bgwriter`**: Background writer. Continuously flushes small batches of dirty buffers to smooth out I/O spikes.
-* **`walwriter`**: Flushes WAL buffer records from memory to disk (`pg_wal`).
-* **`autovacuum launcher`**: Spawns `autovacuum worker` processes based on table update/delete churn thresholds.
-* **`archiver`**: Copies completed WAL segment files to long-term storage/S3 (`archive_command`).
-* **`wal sender / receiver`**: Manages streaming physical/logical replication to standby nodes.
+### Process Architecture & Process Hierarchy
+* **`postmaster` (PID 1)**: Core process manager. Binds socket (`5432`), spawns backend workers via `fork()`, handles inter-process signals (`SIGHUP`, `SIGTERM`, `SIGQUIT`).
+* **`checkpointer`**: Issues fsync calls to flush dirty buffers from `shared_buffers` to physical disk storage during scheduled checkpoints or WAL threshold triggers.
+* **`bgwriter`**: Background writer daemon. Flushes small batches of dirty pages to OS page cache to prevent I/O stalls during write-heavy transactions.
+* **`walwriter`**: Writes and flushes WAL buffer logs to disk (`pg_wal`) upon transaction commit (`synchronous_commit = on`).
+* **`autovacuum launcher`**: Parent coordinator daemon. Monitors database churn via `pg_stat` and spawns `autovacuum worker` processes.
+* **`archiver`**: Copies completed 16MB WAL segment files to long-term storage/S3 (`archive_command`).
+* **`wal sender / receiver`**: Streaming replication daemons. `wal sender` streams WAL records from Primary to Standby `wal receiver`.
 
-### Memory Pools & Kernel Rules
+---
+
+### Memory Subsystem & Double Buffering Mechanics
+PostgreSQL utilizes a **Double-Buffering Architecture**: pages reside in process `shared_buffers` and in the OS Kernel Page Cache via standard `read()` / `write()` syscalls.
+
 ```text
-Total System RAM
-├── Shared Memory (shared_buffers ~25% RAM | wal_buffers ~16MB | pg_buffercache)
-├── Kernel OS Page Cache (~50% RAM - PostgreSQL relies heavily on OS filesystem cache)
-└── Work Memory (Local per-process)
-    ├── work_mem (per sort/hash join node per query) -> Max: (work_mem * active_connections * join_nodes)
-    ├── maintenance_work_mem (VACUUM, CREATE INDEX, ALTER TABLE) -> (1GB - 4GB)
-    └── autovacuum_work_mem (per autovacuum worker thread) -> defaults to maintenance_work_mem
++---------------------------------------------------------------------------------------+
+|                                    TOTAL SYSTEM RAM                                   |
++---------------------------------------------------------------------------------------+
+|  shared_buffers (25%-40% RAM)    |  Linux Kernel OS Page Cache (50%-75% RAM)           |
+|  - Clock Sweep Eviction Algo     |  - Caches 8KB relation pages via read()/write()    |
+|  - Shared Buffer Descriptors     |  - Flushed by kernel pdflush/flush threads         |
++----------------------------------+----------------------------------------------------+
+|  Per-Backend Local RAM           |  Static HugePages (Allocated in RAM)               |
+|  - work_mem (Sorts / Hashes)     |  - Reserved 2MB HugePages (Bypasses TLB misses)    |
+|  - maintenance_work_mem          |  - Specified via vm.nr_hugepages                   |
++---------------------------------------------------------------------------------------+
 ```
 
-### Critical OS Kernel Parameters (`/etc/sysctl.conf`)
+* **`shared_buffers`**: Primary shared memory region holding 8KB table/index blocks. Uses a **Clock Sweep Replacement Algorithm** with `usage_count` (0–5) to track page hit frequency.
+* **`effective_cache_size`**: Planner tuning parameter (does NOT allocate memory). Set to total estimated memory available for caching (`shared_buffers` + Linux OS Page Cache $\approx 75\%$ total RAM).
+* **`work_mem`**: Allocated per-sort/hash-join node in a query execution plan. 
+  $$\text{Max Potential Local RAM} = \text{work\_mem} \times \text{max\_connections} \times \text{max\_plan\_nodes}$$
+* **`maintenance_work_mem`**: Memory used for `VACUUM`, `CREATE INDEX`, `ALTER TABLE` operations (set to `1GB - 4GB`).
+* **`autovacuum_work_mem`**: Dedicated memory per autovacuum worker thread (defaults to `maintenance_work_mem`).
+
+---
+
+## 1.2 Deep OS Kernel Memory Tuning
+
+### 1. Linux HugePages (Transparent HugePages `THP` vs Static HugePages)
+* **CRITICAL: Disable Transparent Huge Pages (`THP`)**: THP dynamically allocates 2MB pages, causing **severe latency spikes**, memory compaction stalls (`khugepaged`), and lock contention on database workloads.
+  ```bash
+  # Disable THP permanently in Linux kernel boot parameters:
+  echo never > /sys/kernel/mm/transparent_hugepage/enabled
+  echo never > /sys/kernel/mm/transparent_hugepage/defrag
+  ```
+* **Enable Static Explicit HugePages**: 2MB HugePages eliminate CPU Translation Lookaside Buffer (TLB) page table walk overhead for large `shared_buffers` allocations ($> 32\text{GB}$).
+
+  $$\text{nr\_hugepages} = \left\lceil \frac{\text{shared\_buffers (in KB)}}{2048} \right\rceil + 100$$
+
+  ```ini
+  # /etc/sysctl.d/99-postgresql-hugepages.conf
+  vm.nr_hugepages = 16484 # Example for 32GB shared_buffers
+  ```
+  ```sql
+  -- Force PostgreSQL to require Explicit HugePages at startup (fails fast if misconfigured)
+  ALTER SYSTEM SET huge_pages = 'on';
+  ```
+
+### 2. NUMA (Non-Uniform Memory Access) Topology & Interleaving
+On multi-socket servers, CPU Socket 0 accessing RAM attached to Socket 1 incurs a **Remote NUMA Latency Penalty**.
+* **Disable NUMA Balancing**: Prevents the kernel from randomly migrating memory pages across NUMA nodes.
+  ```ini
+  kernel.numa_balancing = 0
+  vm.zone_reclaim_mode = 0  # Prevents aggressive local page eviction before remote node fetch
+  ```
+* **Launch PostgreSQL with NUMA Interleaving**: Distributes shared memory evenly across all CPU NUMA nodes:
+  ```bash
+  numactl --interleave=all /usr/local/pgsql/bin/postgres -D /usr/local/pgsql/data
+  ```
+
+### 3. Linux Dirty Page Writeback Limits (Preventing I/O Stalls)
+Default Linux writeback rules use percentages (`dirty_ratio = 20`). On a 512GB RAM system, 20% allows **100GB of dirty pages** to accumulate before the kernel forces writeback, causing massive disk I/O freezes!
+* **Use Exact Byte Limits Instead of Percentages**:
+  ```ini
+  # /etc/sysctl.d/99-postgresql-io.conf
+  vm.dirty_background_bytes = 268435456   # 256MB: Background kernel threads flush early
+  vm.dirty_bytes = 1073741824              # 1GB: Max dirty RAM before blocking user writes
+  ```
+
+### 4. Memory Overcommit & OOM Protection
+Prevent the Linux Out-Of-Memory (OOM) Killer from terminating PostgreSQL processes:
 ```ini
-vm.overcommit_memory = 2          # Strict memory allocation (prevents OOM killer panics)
-vm.overcommit_ratio = 80          # Percent of RAM allocated for overcommit
-vm.dirty_background_ratio = 5     # Flush dirty pages to disk early
-vm.dirty_ratio = 10               # Max percentage before blocking write processes
-vm.swappiness = 10                # Avoid aggressive swapping
+vm.overcommit_memory = 2      # Strict refusal of memory overcommit
+vm.overcommit_ratio = 80      # Max % RAM allowed for overcommit: Swap + (RAM * ratio / 100)
+vm.swappiness = 1             # Avoid swap-out of active database pages
 ```
+
+* **Protect Postmaster (PID 1) from OOM Reaper**:
+  ```bash
+  # Adjust OOM score (-1000 disables OOM killer targeting for Postmaster master process)
+  echo -1000 > /proc/$(pgrep -o postgres)/oom_score_adj
+  ```
 
 ---
 
@@ -94,26 +160,58 @@ PostgreSQL stores tables and indexes in fixed 8KB pages (`src/include/storage/bu
 
 ## 3. GUCs & Dynamic Hot Altering
 
-### Inspect Core Paths & Configuration Parameters
+### Grand Unified Configuration (GUC) Context Matrix
+
+| GUC Context | Allowed Reload Method | Description & Key Parameters |
+|:---|:---|:---|
+| **`internal`** | Read-only | Hardcoded at compile time (`block_size = 8192`, `wal_block_size`, `segment_size`). Cannot be modified. |
+| **`postmaster`** | Server Restart | Applied at startup in `postgresql.conf` (`shared_buffers`, `huge_pages`, `max_connections`, `wal_level`, `archive_mode`). |
+| **`sighup`** | `SELECT pg_reload_conf()` | Hot-reloaded live without downtime (`work_mem`, `log_min_duration_statement`, `autovacuum_max_workers`, `max_wal_size`). |
+| **`superuser`** | Live per session | Can be set live by superusers per session/transaction (`SET log_statement = 'all'`, `SET allow_system_table_mods`). |
+| **`user`** | Live per session | Can be set live by any connected user (`SET work_mem = '64MB'`, `SET statement_timeout = '5s'`). |
+
+---
+
+### GUC Precedence Hierarchy (Highest to Lowest Priority)
+1. **Transaction Scope**: `SET LOCAL work_mem = '256MB';` (Scoped strictly inside a `BEGIN ... COMMIT` block, auto-reverts on commit).
+2. **Session Scope**: `SET work_mem = '128MB';` (Persists for the entire client connection lifespan).
+3. **Per-Role in Database**: `ALTER ROLE app_user IN DATABASE prod_db SET statement_timeout = '10s';`
+4. **Per-Role Global**: `ALTER ROLE app_user SET work_mem = '64MB';`
+5. **Per-Database Global**: `ALTER DATABASE prod_db SET search_path = 'app, public';`
+6. **System File Overrides**: `ALTER SYSTEM SET work_mem = '32MB';` (Persisted in `postgresql.auto.conf`).
+7. **Main Configuration File**: `postgresql.conf` / `conf.d/*.conf`.
+
+---
+
+### Hot Altering Parameters (`ALTER SYSTEM`) & Diagnostic Queries
+
 ```sql
+-- 1. Inspect Core Paths & Configuration Parameters
 SELECT name, setting, unit, context, source, sourcefile, sourceline 
 FROM pg_settings 
 WHERE name IN ('data_directory', 'config_file', 'hba_file', 'ident_file', 'log_directory', 'shared_buffers', 'work_mem');
-```
 
-### Hot Altering Parameters (`ALTER SYSTEM`)
-```sql
--- Set parameter globally (persisted in postgresql.auto.conf)
+-- 2. Hot-alter parameters globally (persisted in postgresql.auto.conf)
 ALTER SYSTEM SET work_mem = '128MB';
 ALTER SYSTEM SET log_min_duration_statement = 250; -- ms
 
--- Apply SIGHUP context parameters live without downtime
+-- 3. Apply SIGHUP context parameters live without downtime
 SELECT pg_reload_conf();
 
--- Verify parameters requiring restart vs active
+-- 4. Find all non-default GUC parameters changed from factory default
+SELECT name, setting, unit, source 
+FROM pg_settings 
+WHERE source NOT IN ('default', 'override')
+ORDER BY name;
+
+-- 5. Verify parameters requiring restart vs active
 SELECT name, setting, pending_restart 
 FROM pg_settings 
 WHERE pending_restart = true;
+
+-- 6. Reset an ALTER SYSTEM override back to default
+ALTER SYSTEM RESET work_mem;
+SELECT pg_reload_conf();
 ```
 
 ---
@@ -434,16 +532,52 @@ LEFT JOIN pg_roles r ON r.oid = s.setrole;
 
 ## 12. Storage Engines & Table Access Methods (TAM)
 
-PostgreSQL abstracts its table storage via the **Table Access Method (TAM)** API (`USING <method>`). Default is `heap`.
+PostgreSQL abstracts relation storage via the **Table Access Method (TAM)** API (`src/include/access/tableam.h`). Introduced in PG 12, the `TableAmRoutine` C struct decouples execution/MVCC from the physical on-disk format.
 
-### Inspect Registered Table Access Methods
+```text
+                               +----------------------------------------+
+                               |     PostgreSQL Query Execution Plan    |
+                               +----------------------------------------+
+                                                   |
+                                       +------------------------+
+                                       | TableAmRoutine (C API) |
+                                       +------------------------+
+                                                   |
+        +-----------------------+------------------+-------------------+-----------------------+
+        |                       |                                      |                       |
++---------------+       +---------------+                      +---------------+       +---------------+
+|  heap (MVCC)  |       | zheap (Undo)  |                      | columnar (OLAP|       | OrioleDB (LSM)|
+| 8KB Blocks    |       | In-place      |                      | LZ4 Stripe    |       | Lock-free BTree|
++---------------+       +---------------+                      +---------------+       +---------------+
+```
+
+---
+
+### Storage Engine Architecture Comparison Matrix
+
+| Storage Engine (`USING`) | Physical Layout & Architecture | MVCC & Garbage Collection Mechanism | Best Workload Scenario |
+|:---|:---|:---|:---|
+| **`heap`** (Default) | Fixed 8KB page blocks. Append-only tuple updates. | Creates new tuple version on `UPDATE`. Dead tuples cleaned asynchronously via `VACUUM`. | General OLTP (Balanced read/write concurrency). |
+| **`zheap`** (Undo Log) | 8KB page blocks with in-place tuple updates. | Overwrites existing tuple in-place. Old version moved to **Undo Logs**. **Zero table bloat, no VACUUM needed!** | High-update OLTP (Eliminates table bloat & vacuum latency). |
+| **`columnar`** (Citus/Hydra) | Vectorized columnar compression in Stripes & Chunks. | Immutable compressed chunks. Appends new stripes on write. | Analytical OLAP (`SUM`, `AVG`, columnar aggregations). 10x-100x scan speedup. |
+| **`orioledb`** (B-Tree/LSM) | Direct-I/O lock-free page splitting B-Tree. | Undo-log based MVCC. **Bypasses Linux Page Cache & double-buffering.** | Modern high-throughput NVMe SSD storage engines. |
+
+---
+
+### Inspect Registered Storage Engines & C Handlers (`pg_am`)
 ```sql
-SELECT oid, amname, amhandler, amtype 
+SELECT 
+    oid, 
+    amname, 
+    amhandler::regprocedure AS c_handler,
+    amtype 
 FROM pg_am 
 WHERE amtype = 't';
 ```
 
-### Changing Storage Engines & Access Methods
+---
+
+### Creating & Converting Relation Storage Access Methods
 ```sql
 -- 1. Create table with default HEAP storage engine (MVCC 8KB pages)
 CREATE TABLE transactional_orders (
@@ -451,24 +585,57 @@ CREATE TABLE transactional_orders (
     amount numeric
 ) USING heap;
 
--- 2. Create table with COLUMNAR storage engine (Citus / Hydra columnar extension for OLAP)
+-- 2. Create table with COLUMNAR storage engine (Citus / Hydra extension)
 CREATE TABLE analytics_logs (
     event_time timestamptz,
     user_id bigint,
     payload jsonb
 ) USING columnar;
 
--- 3. Convert existing table storage engine
+-- 3. Convert existing table storage engine (Rewrites table files underneath)
 ALTER TABLE analytics_logs SET ACCESS METHOD heap;
 ```
 
-### Column TOAST Strategy Overrides (`SET STORAGE`)
+---
+
+### Advanced TOAST Internals & LZ4 Compression Tuning (`SET STORAGE`)
+
+TOAST (The Oversized-Attribute Storage Technique) is triggered when a tuple exceeds `2KB` (`TOAST_TUPLE_THRESHOLD`). Large attributes are compressed or moved out-of-line to `pg_toast_<oid>` in `2KB` chunks (`TOAST_MAX_CHUNK_SIZE = 2000` bytes).
+
+#### 1. TOAST Storage Strategies (`ALTER TABLE ... SET STORAGE`)
 ```sql
--- Force column to never compress or move out-of-line
+-- PLAIN: Prevents compression and out-of-line storage (Fixed width inline)
 ALTER TABLE users ALTER COLUMN metadata SET STORAGE PLAIN;
 
--- Allow column to move out-of-line WITHOUT inline compression (Faster slice reads)
+-- EXTERNAL: Moves out-of-line WITHOUT compression (Fast substring slice reads bypassing decompress overhead)
 ALTER TABLE logs ALTER COLUMN raw_payload SET STORAGE EXTERNAL;
+
+-- EXTENDED: Default for text/jsonb (Compresses inline first, moves out-of-line if still > 2KB)
+ALTER TABLE logs ALTER COLUMN payload SET STORAGE EXTENDED;
+
+-- MAIN: Compresses inline first, moves out-of-line ONLY as a last resort
+ALTER TABLE logs ALTER COLUMN diagnostic_trace SET STORAGE MAIN;
+```
+
+#### 2. Per-Column Compression Algorithm Selection (PG 14+ LZ4 vs PGLZ)
+LZ4 provides **5x-10x faster decompression speeds** than legacy `PGLZ` with equivalent compression ratios:
+
+```sql
+-- Set system-wide default TOAST compression algorithm
+ALTER SYSTEM SET default_toast_compression = 'lz4';
+SELECT pg_reload_conf();
+
+-- Override compression engine per-column
+ALTER TABLE user_events ALTER COLUMN event_json SET COMPRESSION lz4;
+ALTER TABLE user_events ALTER COLUMN legacy_xml SET COMPRESSION pglz;
+
+-- Inspect active column compression settings
+SELECT 
+    attname, 
+    attcompression, 
+    attstorage 
+FROM pg_attribute 
+WHERE attrelid = 'user_events'::regclass AND attnum > 0;
 ```
 
 ---

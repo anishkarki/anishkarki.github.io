@@ -76,7 +76,32 @@ function renderContent(markdown) {
   });
   
   // Render markdown
-  content.innerHTML = marked.parse(markdown);
+  const rawHTML = marked.parse(markdown);
+  
+  // Wrap H2 sections in .cs-card containers for multi-column grid layouts
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = rawHTML;
+  
+  const children = Array.from(tempDiv.children);
+  let wrappedHTML = '';
+  let inCard = false;
+  
+  children.forEach((child) => {
+    if (child.tagName === 'H2') {
+      if (inCard) {
+        wrappedHTML += '</section>';
+      }
+      wrappedHTML += '<section class="cs-card">';
+      inCard = true;
+    }
+    wrappedHTML += child.outerHTML;
+  });
+  
+  if (inCard) {
+    wrappedHTML += '</section>';
+  }
+  
+  content.innerHTML = wrappedHTML || rawHTML;
   
   // Generate TOC
   generateTOC();
