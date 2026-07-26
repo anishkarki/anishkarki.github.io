@@ -17,26 +17,37 @@ A dense CLI reference for system engineers and principal developers. Covers adva
 
 ---
 
-## 🟢 Readline Keyboard Shortcuts
+## 🟢 Readline Keyboard Shortcuts (Vi Mode)
 
-Control the shell command prompt without breaking flow.
+Enable Vi mode in Bash with `set -o vi` (or `set editing-mode vi` in `~/.inputrc`).
+Press **`Esc`** to enter Command Mode.
 
-### Cursor Movement
-| Shortcut | Action | Mnemonic |
+### Movement (Command Mode `Esc`)
+| Shortcut | Action | Mnemonic / Description |
 |:---|:---|:---|
-| **`Ctrl + a`** | Move cursor to the **beginning** of the line | **A**lpha (Start) |
-| **`Ctrl + e`** | Move cursor to the **end** of the line | **E**nd |
-| **`Alt + b`** / **`Alt + f`** | Move cursor **back** / **forward** one word | **B**ack / **F**orward |
-| **`Ctrl + b`** / **`Ctrl + f`** | Move cursor **back** / **forward** one character | **B**ackward / **F**orward |
-| **`Ctrl + xx`** | Toggle cursor between start of line and current position | X-axis jump |
+| **`h`** / **`l`** | Move cursor **left** / **right** one character | Standard Vi direction |
+| **`w`** / **`b`** | Move cursor **forward** / **back** one word | **W**ord / **B**ack |
+| **`e`** | Move cursor to **end** of current word | **E**nd of word |
+| **`0`** / **`$`** | Jump cursor to **start** / **end** of line | Line boundaries |
+| **`f{char}`** / **`F{char}`** | Find **next** / **previous** occurrence of `{char}` | **F**ind character |
 
-### Editing & Yanking
-*   **`Ctrl + k`** — **Kill** (cut) text from current cursor to the **end** of the line.
-*   **`Ctrl + u`** — **Undo** (cut) text from cursor to the **start** of the line.
-*   **`Ctrl + w`** — Cut the word **before** the cursor.
-*   **`Alt + d`** — Cut the word **after** the cursor.
-*   **`Ctrl + y`** — **Yank** (paste) the last cut text back into the terminal.
-*   **`Ctrl + _`** — Undo the last keyboard edit.
+### Editing, Deleting & Pasting (Command Mode `Esc`)
+*   **`i`** / **`a`** — Insert **before** / Append **after** cursor (returns to Insert mode).
+*   **`I`** / **`A`** — Insert at **start** / Append at **end** of line.
+*   **`x`** / **`X`** — Delete character **under** / **before** cursor.
+*   **`dw`** / **`db`** — Cut word **after** / **before** cursor.
+*   **`D`** / **`d0`** — Cut text from cursor to **end** / **start** of line.
+*   **`dd`** / **`C`** — Cut **entire line** / Change to end of line.
+*   **`p`** / **`P`** — Paste last cut buffer **after** / **before** cursor.
+*   **`u`** / **`~`** — **Undo** last edit / Toggle character case.
+*   **`v`** — **Open current line in Vim** (`$EDITOR`) for complex editing.
+
+### History Navigation (Command Mode `Esc`)
+*   **`k`** / **`j`** — Move to **previous** (older) / **next** (newer) command in history.
+*   **`/pattern`** — Search history **backward** for `pattern` (press `Enter` to edit, `n`/`N` for next/prev match).
+*   **`?pattern`** — Search history **forward** for `pattern`.
+*   **`G`** — Jump to most **recent** command line.
+*   **`Ctrl + r`** — Interactive reverse incremental history search.
 
 ---
 
@@ -180,3 +191,73 @@ set -o xtrace    # (set -x) Print commands to stderr before executing (debug mod
     ```bash
     diff <(curl -s api.com/v1) <(curl -s api.com/v2)
     ```
+
+---
+
+## 🚨 God-Tier Production Debugging & Emergency Incident Response
+
+Essential production survival commands for debugging live systems under load.
+
+### 1. Memory & OOM Killer Audits
+* **Audit Kernel OOM Kills (with real human-readable timestamps):**
+  ```bash
+  dmesg -T | grep -i oom
+  journalctl -k -g "Out of memory" --no-pager
+  ```
+* **Top Memory Consumers by Fair PSS (Proportional Set Size):**
+  ```bash
+  smem -r -k -s pss | head -15
+  ```
+* **Inspect Real Available RAM & Kernel Slab Leaks:**
+  ```bash
+  cat /proc/meminfo | grep -E "MemAvailable|SUnreclaim"
+  ```
+
+### 2. Disk Space Leaks & File Lock Locks
+* **Find Hidden Disk Leaks (Deleted files held open by active PIDs):**
+  ```bash
+  lsof | grep deleted
+  ```
+* **Truncate & Reclaim Space from Deleted Open File Descriptor (without restart!):**
+  ```bash
+  > /proc/$PID/fd/$FD
+  ```
+* **Identify / Kill Processes Blocking Partition Unmount:**
+  ```bash
+  fuser -v /mountpoint
+  fuser -k -9 -m /mountpoint
+  ```
+* **Real-time Disk Bottleneck & I/O Wait Latency Audit:**
+  ```bash
+  iostat -xz 1 5   # (%util at 100% or high await indicates disk bottleneck)
+  ```
+
+### 3. CPU Bottlenecks & System Call Profiling
+* **Per-Process CPU & Disk I/O Breakdown:**
+  ```bash
+  pidstat -u 1 5   # Per-process CPU usage
+  pidstat -d 1 5   # Per-process Disk Read/Write rates
+  ```
+* **Syscall Summary Histogram (Find which system call is hanging the process):**
+  ```bash
+  strace -c -p <PID>
+  ```
+* **Live System Call Data Preview (Trace open files & sockets):**
+  ```bash
+  strace -fp <PID> -e trace=file,network -s 512
+  ```
+* **Live Function-Level C/Java Profiler (Without restarting app):**
+  ```bash
+  perf top -p <PID>
+  ```
+
+### 4. Network Queues & HTTP Latency Profiling
+* **Socket Queue Backlog Audit (Non-zero Recv-Q/Send-Q = Application thread pool backlog):**
+  ```bash
+  ss -tulpn
+  ss -s
+  ```
+* **Pinpoint Exact HTTP Latency Bottlenecks (DNS vs TLS vs Backend TTFB):**
+  ```bash
+  curl -ivs -o /dev/null -w "DNS: %{time_namelookup}s | TLS: %{time_appconnect}s | TTFB: %{time_starttransfer}s | Total: %{time_total}s\n" https://example.com
+  ```

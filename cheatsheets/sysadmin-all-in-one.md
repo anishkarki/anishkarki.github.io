@@ -4,14 +4,17 @@ A ultra-condensed single-page reference of core operations for systems administr
 
 ---
 
-### ⌨️ Bash CLI & Job Control
+### ⌨️ Bash CLI (Vi Mode) & Job Control
 | Shortcut / Command | Action / Sysadmin Use-Case |
 | :--- | :--- |
-| `Ctrl + a` / `Ctrl + e` | Jump cursor to **beginning** / **end** of current command line. |
-| `Ctrl + u` / `Ctrl + k` | Cut text from cursor to the **start** / **end** of the line. |
-| `Ctrl + w` / `Ctrl + y` | Cut one word **backward** / Paste (**yank**) last cut buffer at cursor. |
+| `set -o vi` | Enable **Vi Editing Mode** in current Bash session. |
+| `Esc` -> `h` / `l` / `w` / `b` | Command mode navigation: cursor **left** / **right** / **word forward** / **word back**. |
+| `Esc` -> `0` / `$` | Jump cursor to **beginning** / **end** of current command line. |
+| `Esc` -> `D` / `d0` / `dd` | Cut text from cursor to **end** / **start** / **entire line**. |
+| `Esc` -> `dw` / `p` / `u` / `v` | Cut word forward / Paste yank buffer / Undo edit / **Edit line in Vim** (`$EDITOR`). |
+| `Esc` -> `k` / `j` / `/pat` | History navigation: **previous** command / **next** command / **search backward** for `pat`. |
 | `!!` / `!$` | Re-run **entire last command** / Insert **last argument** of previous command. |
-| `^old^new^` | Quick correction: Run last command, replacing `old` with `new`. |
+| `^old^new` | Quick correction: Run last command, replacing `old` with `new`. |
 | `Ctrl + z` | Suspend current foreground process (sends `SIGTSTP`). |
 | `jobs -l` / `fg %1` / `bg %1` | List jobs with PIDs / Resume job 1 in **foreground** / **background**. |
 | `disown -h %1` | Keep background job 1 running even after exiting parent shell. |

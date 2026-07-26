@@ -788,80 +788,138 @@
   <div class="columns-container" id="columns">
 
     <!-- ════════════════════════════════════════════
-       BASH KEYBOARD SHORTCUTS
+       BASH KEYBOARD SHORTCUTS (VI MODE)
        ════════════════════════════════════════════ -->
-    <div class="card" data-search="bash cli prompt shortcuts readline cursor editing kill yank line movement undo edit">
+    <div class="card" data-search="bash cli prompt shortcuts readline cursor editing kill yank line movement undo edit vi mode escape normal command">
       <div class="card-title bash">
-        <span><i class="fa-solid fa-keyboard"></i> Bash Line Editing</span>
+        <span><i class="fa-solid fa-keyboard"></i> Bash Line Editing (Vi Mode)</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
+        <div class="card-subhead">Enable Vi Mode</div>
+        <pre><code><span class="cm"># Enable Vi keybindings in current terminal session:</span>
+set -o vi
+<span class="cm"># Make permanent in ~/.inputrc:</span>
+set editing-mode vi</code></pre>
+        <div class="card-subhead">Command Mode (Press Esc) — Movement</div>
         <table>
           <tr>
-            <th>Key Binding</th>
+            <th>Key</th>
             <th>Action / Mnemonic</th>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl + a</td>
-            <td class="desc-cell">Jump cursor to <strong>start</strong> of line (Alpha)</td>
+            <td class="cmd-cell">h / l</td>
+            <td class="desc-cell">Cursor <strong>left</strong> / <strong>right</strong> 1 character</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl + e</td>
-            <td class="desc-cell">Jump cursor to <strong>end</strong> of line (End)</td>
+            <td class="cmd-cell">w / b</td>
+            <td class="desc-cell">Jump <strong>forward</strong> / <strong>backward</strong> 1 word</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Alt + b / f</td>
-            <td class="desc-cell">Move cursor <strong>backward</strong> / <strong>forward</strong> 1 word</td>
+            <td class="cmd-cell">e</td>
+            <td class="desc-cell">Jump cursor to <strong>end</strong> of current word</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl + b / f</td>
-            <td class="desc-cell">Cursor back / forward 1 char</td>
+            <td class="cmd-cell">0 / ^</td>
+            <td class="desc-cell">Jump cursor to <strong>start</strong> / first non-blank char</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl + xx</td>
-            <td class="desc-cell">Toggle cursor between start &amp; current (X-axis)</td>
+            <td class="cmd-cell">$</td>
+            <td class="desc-cell">Jump cursor to <strong>end</strong> of current line</td>
           </tr>
           <tr>
-            <td class="cmd-cell">Ctrl + k</td>
-            <td class="desc-cell">Cut text from cursor to the <strong>end</strong> of line</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">Ctrl + u</td>
-            <td class="desc-cell">Cut text from cursor to the <strong>start</strong> of line</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">Ctrl + w</td>
-            <td class="desc-cell">Cut word <strong>before</strong> cursor</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">Alt + d</td>
-            <td class="desc-cell">Cut word <strong>after</strong> cursor</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">Ctrl + y</td>
-            <td class="desc-cell">Paste (<strong>yank</strong>) last cut buffer</td>
-          </tr>
-          <tr>
-            <td class="cmd-cell">Ctrl + _</td>
-            <td class="desc-cell">Undo last keyboard edit</td>
+            <td class="cmd-cell">f{char} / F{char}</td>
+            <td class="desc-cell">Find <strong>next</strong> / <strong>previous</strong> char in line</td>
           </tr>
         </table>
-        <div class="card-subhead">Check/Fix: Force Emacs Mode</div>
-        <pre><code><span class="cm"># Run this command in your Linux terminal to force Emacs mode:</span>
-set -o emacs</code></pre>
+        <div class="card-subhead">Command Mode (Press Esc) — Editing &amp; Cut/Paste</div>
+        <table>
+          <tr>
+            <th>Key</th>
+            <th>Action / Editing Operation</th>
+          </tr>
+          <tr>
+            <td class="cmd-cell">i / a</td>
+            <td class="desc-cell">Insert <strong>before</strong> / Append <strong>after</strong> cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">I / A</td>
+            <td class="desc-cell">Insert at <strong>start</strong> / Append at <strong>end</strong> of line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">x / X</td>
+            <td class="desc-cell">Delete char <strong>under</strong> / <strong>before</strong> cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">dw / db</td>
+            <td class="desc-cell">Cut word <strong>after</strong> / <strong>before</strong> cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">D / d0</td>
+            <td class="desc-cell">Cut text from cursor to <strong>end</strong> / <strong>start</strong> of line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">dd / C</td>
+            <td class="desc-cell">Cut <strong>entire line</strong> / Change to end of line</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">p / P</td>
+            <td class="desc-cell">Paste last cut/yanked buffer <strong>after</strong> / <strong>before</strong> cursor</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">u / ~</td>
+            <td class="desc-cell"><strong>Undo</strong> edit / Toggle character case</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">v</td>
+            <td class="desc-cell"><strong>Edit in Vim</strong> (open line in <code>$EDITOR</code>)</td>
+          </tr>
+        </table>
       </div>
     </div>
 
     <!-- ════════════════════════════════════════════
-       BASH HISTORY BANG COMMANDS
+       BASH HISTORY (VI & BANGS)
        ════════════════════════════════════════════ -->
     <div class="card"
-      data-search="bash history bang commands arguments rerun substitution typo index first argument last argument">
+      data-search="bash history vi navigation search bang commands arguments rerun substitution typo index first argument last argument">
       <div class="card-title bash">
-        <span><i class="fa-solid fa-clock-rotate-left"></i> Bash History (Bangs)</span>
+        <span><i class="fa-solid fa-clock-rotate-left"></i> Bash History (Vi &amp; Bangs)</span>
         <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
       </div>
       <div class="card-body">
+        <div class="card-subhead">Vi History Navigation (Press Esc)</div>
+        <table>
+          <tr>
+            <th>Key / Cmd</th>
+            <th>History Search / Navigation</th>
+          </tr>
+          <tr>
+            <td class="cmd-cell">k / j</td>
+            <td class="desc-cell">Navigate to <strong>previous</strong> (older) / <strong>next</strong> command</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">/pattern</td>
+            <td class="desc-cell">Search history <strong>backward</strong> for <code>pattern</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">?pattern</td>
+            <td class="desc-cell">Search history <strong>forward</strong> for <code>pattern</code></td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">n / N</td>
+            <td class="desc-cell">Repeat history search in <strong>same</strong> / <strong>opposite</strong> direction</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">G</td>
+            <td class="desc-cell">Jump to most <strong>recent</strong> command in history</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">Ctrl + r</td>
+            <td class="desc-cell">Interactive <strong>reverse incremental search</strong></td>
+          </tr>
+        </table>
+        <div class="card-subhead">History Bang Commands</div>
         <table>
           <tr>
             <th>Bang Code</th>
@@ -899,6 +957,25 @@ set -o emacs</code></pre>
           <tr>
             <td class="cmd-cell">^old^new</td>
             <td class="desc-cell">Re-run last cmd replacing <code>old</code> with <code>new</code> (fix typo)</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Prod Shell Controls &amp; History Safety</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">shopt -s histverify</td>
+            <td class="desc-cell">Load bang expansion (<code>!!</code>, <code>!$</code>) onto prompt for review before executing</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">HISTTIMEFORMAT="%F %T "</td>
+            <td class="desc-cell">Timestamp history output (<code>YYYY-MM-DD HH:MM:SS</code>) for incident post-mortems</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">stty -ixon</td>
+            <td class="desc-cell">Disable terminal <code>Ctrl+s</code> freeze / <code>Ctrl+q</code> unfreeze locking</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">fc -l -20 / fc -s old=new</td>
+            <td class="desc-cell">List last 20 commands / re-execute substituting <code>old</code> with <code>new</code></td>
           </tr>
         </table>
       </div>
@@ -1044,8 +1121,16 @@ diff <span class="flag">&lt;(</span>curl -s api.com/v1<span class="flag">)</span
             <td class="desc-cell">Run command immune to hangups, logging to <code>nohup.out</code></td>
           </tr>
         </table>
-        <div class="card-subhead">System Tracing &amp; Ports</div>
+        <div class="card-subhead">Process Inspection &amp; System Tracing</div>
         <table>
+          <tr>
+            <td class="cmd-cell">pgrep -fl pattern</td>
+            <td class="desc-cell">Find matching processes with PIDs &amp; full command line arguments</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">pkill -f pattern</td>
+            <td class="desc-cell">Signal/kill all processes matching target command string</td>
+          </tr>
           <tr>
             <td class="cmd-cell">lsof -i :8080</td>
             <td class="desc-cell">Show process listening on port 8080</td>
@@ -1057,6 +1142,14 @@ diff <span class="flag">&lt;(</span>curl -s api.com/v1<span class="flag">)</span
           <tr>
             <td class="cmd-cell">strace -p $PID -f -e trace=network,openat</td>
             <td class="desc-cell">Trace network &amp; openat system calls for PID</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">bpftrace -e 'tracepoint:syscalls:sys_enter_* {@[probe]=count()}'</td>
+            <td class="desc-cell"><strong>Linux eBPF (DTrace equivalent)</strong>: trace kernel syscall probes</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">dtrace -n 'syscall:::entry {@[execname]=count()}'</td>
+            <td class="desc-cell"><strong>Native DTrace (macOS/BSD)</strong>: aggregate syscalls per executable</td>
           </tr>
           <tr>
             <td class="cmd-cell">pstree -aps $PID</td>
@@ -1088,6 +1181,83 @@ diff <span class="flag">&lt;(</span>curl -s api.com/v1<span class="flag">)</span
           <tr>
             <td class="cmd-cell">SIGCONT (18)</td>
             <td class="desc-cell">Resume execution of suspended STOP process</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+       PRODUCTION EMERGENCY DEBUGGING & INCIDENT RESPONSE
+       ════════════════════════════════════════════ -->
+    <div class="card"
+      data-search="emergency prod incident production firefighting oom disk space leaks deleted files socket backlog latency strace perf pidstat iostat smem lock freeze memory oom-killer process debugging profiling">
+      <div class="card-title bash" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.12), transparent); border-left: 4px solid var(--pink);">
+        <span><i class="fa-solid fa-fire-extinguisher"></i> Emergency Prod Debugging</span>
+        <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+      </div>
+      <div class="card-body">
+        <div class="card-subhead">Memory &amp; OOM Killer Audits</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">dmesg -T | grep -i oom</td>
+            <td class="desc-cell">Audit kernel OOM kills with real timestamps (<code>-T</code>)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">smem -r -k -s pss | head -10</td>
+            <td class="desc-cell">List top memory consumers by <strong>PSS</strong> (Proportional Set Size)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">cat /proc/meminfo | grep -E "MemAvailable|SUnreclaim"</td>
+            <td class="desc-cell">Check real available RAM &amp; kernel slab memory leaks</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Disk Space Leaks &amp; File Locks</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">lsof | grep deleted</td>
+            <td class="desc-cell">Find open file descriptors holding space of deleted files</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">&gt; /proc/$PID/fd/$FD</td>
+            <td class="desc-cell">Truncate open deleted file to 0 bytes without stopping process</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">fuser -v /mountpoint</td>
+            <td class="desc-cell">Identify processes blocking partition unmount or file locks</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">iostat -xz 1 5</td>
+            <td class="desc-cell">Monitor disk utilization (<code>%util</code>) &amp; I/O wait latency (<code>await</code>)</td>
+          </tr>
+        </table>
+        <div class="card-subhead">CPU Bottlenecks &amp; Syscall Tracing</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">pidstat -u 1 5 / -d 1 5</td>
+            <td class="desc-cell">Per-process CPU &amp; disk I/O breakdown (find thread hogging CPU)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">strace -c -p $PID</td>
+            <td class="desc-cell">Syscall summary histogram (find which syscall is hanging process)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">strace -fp $PID -e trace=file,network -s 512</td>
+            <td class="desc-cell">Live trace file/network syscalls with string preview</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">perf top -p $PID</td>
+            <td class="desc-cell">Real-time function-level C/Java profiler without restarting app</td>
+          </tr>
+        </table>
+        <div class="card-subhead">Network Queues &amp; Latency Bottlenecks</div>
+        <table>
+          <tr>
+            <td class="cmd-cell">ss -tulpn / ss -s</td>
+            <td class="desc-cell">Audit socket queues (non-zero <code>Recv-Q</code> = app thread backlog)</td>
+          </tr>
+          <tr>
+            <td class="cmd-cell">curl -ivs -o /dev/null -w "DNS: %{time_namelookup}s \| TLS: %{time_appconnect}s \| TTFB: %{time_starttransfer}s \| Total: %{time_total}s\n" $URL</td>
+            <td class="desc-cell">Pinpoint exact HTTP latency delay (DNS vs TLS vs backend TTFB)</td>
           </tr>
         </table>
       </div>
@@ -1421,6 +1591,16 @@ tmux attach-session -t <span class="var">$S</span></code></pre>
             <td class="cmd-cell">--exclude-dir=D</td>
             <td class="desc-cell">Exclude folder patterns (e.g. <code>--exclude-dir={.git,vendor}</code>)</td>
           </tr>
+        </table>
+        <div class="card-subhead">Basic Regex Anchors &amp; Character Classes</div>
+        <table>
+          <tr><td class="cmd-cell">^ / $ / \b</td><td class="desc-cell">Start of line / End of line / Word boundary anchors</td></tr>
+          <tr><td class="cmd-cell">. / \d / \w / \s</td><td class="desc-cell">Any char / Digit <code>[0-9]</code> / Word char <code>[a-zA-Z0-9_]</code> / Whitespace</td></tr>
+          <tr><td class="cmd-cell">\D / \W / \S</td><td class="desc-cell">Non-digit / Non-word char / Non-whitespace char</td></tr>
+          <tr><td class="cmd-cell">* / + / ?</td><td class="desc-cell">Match 0 or more / 1 or more / 0 or 1 (optional match)</td></tr>
+          <tr><td class="cmd-cell">{n} / {n,m}</td><td class="desc-cell">Match exactly <code>n</code> times / Range <code>n</code> to <code>m</code> times</td></tr>
+          <tr><td class="cmd-cell">[abc] / [^abc]</td><td class="desc-cell">Match any char in set / Match any char NOT in set</td></tr>
+          <tr><td class="cmd-cell">(group) / a|b</td><td class="desc-cell">Capturing group (referenced via <code>\1</code>) / Alternation (OR)</td></tr>
         </table>
         <pre><code><span class="cm"># PCRE: Extract IP addresses from access log:</span>
 grep <span class="flag">-oP</span> <span class="str">"\b\d{1,3}(\.\d{1,3}){3}\b"</span> access.log
@@ -2805,26 +2985,27 @@ secrets/</code></pre>
         </div>
       </div>
 
-      <!-- Card 3: Production Git Operations -->
-      <div class="card" data-search="everyday git status parse diff stash pop rebase merge force with lease reset hard tags head origin refs">
+      <!-- Card 3: Production Git Operations & Workflow -->
+      <div class="card" data-search="everyday git status parse diff stash pop rebase merge force with lease reset hard tags head origin refs squash commits soft reset">
         <div class="card-title vim" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.12), transparent); border-left: 4px solid var(--red);">
-          <span><i class="fa-brands fa-git-alt"></i> Production Git Loops</span>
+          <span><i class="fa-brands fa-git-alt"></i> Production Git Operations</span>
           <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
         </div>
         <div class="card-body">
-          <div class="card-subhead">Branch &amp; Index Syncing</div>
+          <div class="card-subhead">Branch, Squash &amp; Index Syncing</div>
           <table>
             <tr><td class="cmd-cell">git status</td><td class="desc-cell">Show status of modified/untracked files</td></tr>
             <tr><td class="cmd-cell">git diff</td><td class="desc-cell">Show line changes against index/commits</td></tr>
             <tr><td class="cmd-cell">git stash</td><td class="desc-cell">Temporarily stash active dirty changes</td></tr>
             <tr><td class="cmd-cell">git stash pop</td><td class="desc-cell">Restore and apply the last stashed changes</td></tr>
-            <tr><td class="cmd-cell">git rebase -i HEAD~5</td><td class="desc-cell">Interactively edit/squash last 5 local commits</td></tr>
+            <tr><td class="cmd-cell">git rebase -i HEAD~5</td><td class="desc-cell">Interactively edit/squash last 5 local commits (pick vs squash/fixup)</td></tr>
+            <tr><td class="cmd-cell">git reset --soft HEAD~3 &amp;&amp; git commit -m "msg"</td><td class="desc-cell"><strong>Squash Commits</strong>: reset last 3 commits into 1 single staged commit</td></tr>
             <tr><td class="cmd-cell">git merge target_branch</td><td class="desc-cell">Merge target branch into current branch</td></tr>
             <tr><td class="cmd-cell">git reset --hard HEAD</td><td class="desc-cell">Wipe all local uncommitted edits (hard reset)</td></tr>
           </table>
           <div class="card-subhead">Pushing, Tags &amp; HEAD Tracking</div>
           <table>
-            <tr><td class="cmd-cell">git push --force-with-lease</td><td class="desc-cell">Safe force-push (refuses if remote branch moved)</td></tr>
+            <tr><td class="cmd-cell">git push origin my-branch --force-with-lease</td><td class="desc-cell"><strong>Safe Force-Push</strong> after rebase/squash (refuses if remote moved)</td></tr>
             <tr><td class="cmd-cell">git tag -a v1.0 -m "msg"</td><td class="desc-cell">Create annotated tag locally on current HEAD</td></tr>
             <tr><td class="cmd-cell">git tag -d v1.0</td><td class="desc-cell">Delete tag locally</td></tr>
             <tr><td class="cmd-cell">git push origin :refs/tags/v1.0</td><td class="desc-cell">Delete tag on remote repository</td></tr>
@@ -2834,7 +3015,37 @@ secrets/</code></pre>
         </div>
       </div>
 
-      <!-- Card 4: Systems & Ansible Automation -->
+      <!-- Card 4: Bash Vi Mode & History Tricks -->
+      <div class="card" data-search="everyday bash vi mode command prompt shortcuts cursor movement editing history bang arguments rerun typo substitution histverify stty fc">
+        <div class="card-title bash">
+          <span><i class="fa-solid fa-keyboard"></i> Bash Vi Mode &amp; History</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-subhead">Bash CLI Vi Mode (Essential Shortcuts)</div>
+          <table>
+            <tr><td class="cmd-cell">set -o vi</td><td class="desc-cell">Enable Vi mode (add <code>set editing-mode vi</code> to <code>~/.inputrc</code>)</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ h / l / w / b</td><td class="desc-cell">Cursor left, right, word forward, word back</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ 0 / $</td><td class="desc-cell">Jump cursor to <strong>start</strong> / <strong>end</strong> of line</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ i / a / I / A</td><td class="desc-cell">Insert before, append after, insert at start, append at end</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ x / X</td><td class="desc-cell">Delete char <strong>under</strong> / <strong>before</strong> cursor</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ dw / db / dd</td><td class="desc-cell">Cut word after / before cursor / cut entire line</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ D / d0 / p / u</td><td class="desc-cell">Cut to end / start of line / paste buffer / undo edit</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ v</td><td class="desc-cell"><strong>Edit in Vim</strong> (open line in <code>$EDITOR</code>)</td></tr>
+          </table>
+          <div class="card-subhead">Bash History &amp; Bang Expansion Tricks</div>
+          <table>
+            <tr><td class="cmd-cell">!! / !$ / !^</td><td class="desc-cell">Re-run <strong>last cmd</strong> / last argument / first argument</td></tr>
+            <tr><td class="cmd-cell">!* / !string</td><td class="desc-cell">Insert all arguments / run last command starting with string</td></tr>
+            <tr><td class="cmd-cell">^old^new</td><td class="desc-cell">Re-run last command replacing <code>old</code> with <code>new</code> (fix typo)</td></tr>
+            <tr><td class="cmd-cell">Esc ➔ k / j / /pattern</td><td class="desc-cell">Previous / next command in history / search backward</td></tr>
+            <tr><td class="cmd-cell">shopt -s histverify</td><td class="desc-cell">Load bang expansions onto prompt for review before execute</td></tr>
+            <tr><td class="cmd-cell">stty -ixon / fc</td><td class="desc-cell">Disable <code>Ctrl+S</code> terminal lock / edit &amp; re-run in Vim</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Card 5: Systems & Ansible Automation -->
       <div class="card" data-search="everyday systemctl status check daemon service restart reload journalctl log follow logs errors ansible playbooks hosts adhoc syntax">
         <div class="card-title sed" style="background: linear-gradient(90deg, rgba(168, 85, 247, 0.12), transparent); border-left: 4px solid var(--purple);">
           <span><i class="fa-solid fa-gears"></i> Systems &amp; Ansible Automation</span>
@@ -2860,6 +3071,55 @@ secrets/</code></pre>
             <tr><td class="cmd-cell">ansible all -a "systemctl status sshd" -i hosts</td><td class="desc-cell">Execute ad-hoc systemctl check across remote servers</td></tr>
             <tr><td class="cmd-cell">ansible-playbook site.yml --syntax-check</td><td class="desc-cell">Validate playbook syntax without executing it</td></tr>
             <tr><td class="cmd-cell">ansible-playbook site.yml -i hosts --limit dbservers</td><td class="desc-cell">Run playbook but limit execution to specific host group</td></tr>
+          </table>
+          <div class="card-subhead">Essential Production Regex Patterns</div>
+          <table>
+            <tr><td class="cmd-cell">\b\d{1,3}(\.\d{1,3}){3}\b</td><td class="desc-cell"><strong>IPv4 Address</strong>: Extract IP addresses from access/system logs</td></tr>
+            <tr><td class="cmd-cell">\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}</td><td class="desc-cell"><strong>ISO Timestamp</strong>: Match date-time strings (<code>2026-07-26T14:00:00</code>)</td></tr>
+            <tr><td class="cmd-cell">\b(404|500|502|503|504)\b</td><td class="desc-cell"><strong>HTTP Errors</strong>: Filter 4xx/5xx web server response status codes</td></tr>
+            <tr><td class="cmd-cell">([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}</td><td class="desc-cell"><strong>MAC Address</strong>: Match NIC hardware addresses (e.g. <code>00:1A:2B:3C:4D:5E</code>)</td></tr>
+            <tr><td class="cmd-cell">[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}</td><td class="desc-cell"><strong>UUID / GUID</strong>: Extract request tracing IDs across microservices</td></tr>
+          </table>
+          <div class="card-subhead">Basic Regex Anchors &amp; Character Classes</div>
+          <table>
+            <tr><td class="cmd-cell">^ / $ / \b</td><td class="desc-cell">Start of line / End of line / Word boundary anchors</td></tr>
+            <tr><td class="cmd-cell">. / \d / \w / \s</td><td class="desc-cell">Any char / Digit <code>[0-9]</code> / Word char <code>[a-zA-Z0-9_]</code> / Whitespace</td></tr>
+            <tr><td class="cmd-cell">\D / \W / \S</td><td class="desc-cell">Non-digit / Non-word char / Non-whitespace char</td></tr>
+            <tr><td class="cmd-cell">* / + / ?</td><td class="desc-cell">Match 0 or more / 1 or more / 0 or 1 (optional match)</td></tr>
+            <tr><td class="cmd-cell">{n} / {n,m}</td><td class="desc-cell">Match exactly <code>n</code> times / Range <code>n</code> to <code>m</code> times</td></tr>
+            <tr><td class="cmd-cell">[abc] / [^abc]</td><td class="desc-cell">Match any char in set / Match any char NOT in set</td></tr>
+            <tr><td class="cmd-cell">(group) / a|b</td><td class="desc-cell">Capturing group (referenced via <code>\1</code>) / Alternation (OR)</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Card 6: Emergency Debugging & Tracing -->
+      <div class="card" data-search="everyday pgrep pkill dtrace bpftrace strace oom deleted files disk leak lsof fuser pidstat perf emergency process tracing logs">
+        <div class="card-title bash" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.12), transparent); border-left: 4px solid var(--pink);">
+          <span><i class="fa-solid fa-fire-extinguisher"></i> Emergency Debugging &amp; Tracing</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.6rem"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-subhead">Process Inspection (Pgrep &amp; Pkill)</div>
+          <table>
+            <tr><td class="cmd-cell">pgrep -fl pattern</td><td class="desc-cell">Find active processes by name/pattern showing PIDs &amp; full command args</td></tr>
+            <tr><td class="cmd-cell">pkill -f pattern</td><td class="desc-cell">Kill all processes matching target pattern</td></tr>
+            <tr><td class="cmd-cell">pstree -aps $PID</td><td class="desc-cell">Show full parentage process tree and arguments</td></tr>
+          </table>
+          <div class="card-subhead">Kernel &amp; Dynamic Tracing (BPF / DTrace / Strace)</div>
+          <table>
+            <tr><td class="cmd-cell">bpftrace -e 'tracepoint:syscalls:sys_enter_* {@[probe]=count()}'</td><td class="desc-cell"><strong>Linux eBPF (DTrace equivalent)</strong>: count syscalls system-wide in real time</td></tr>
+            <tr><td class="cmd-cell">dtrace -n 'syscall:::entry {@[execname]=count()}'</td><td class="desc-cell"><strong>Native DTrace (macOS/BSD)</strong>: aggregate system calls per process</td></tr>
+            <tr><td class="cmd-cell">strace -c -p $PID</td><td class="desc-cell">Syscall summary histogram (find hanging or CPU-burning syscall)</td></tr>
+            <tr><td class="cmd-cell">strace -fp $PID -e trace=file,network -s 512</td><td class="desc-cell">Live trace file opens &amp; socket traffic for running process</td></tr>
+          </table>
+          <div class="card-subhead">OOM Kills, Disk Leaks &amp; Backlog</div>
+          <table>
+            <tr><td class="cmd-cell">dmesg -T | grep -i oom</td><td class="desc-cell">Audit kernel OOM kills with human-readable timestamps</td></tr>
+            <tr><td class="cmd-cell">lsof | grep deleted</td><td class="desc-cell">Find open file descriptors holding disk space of deleted files</td></tr>
+            <tr><td class="cmd-cell">&gt; /proc/$PID/fd/$FD</td><td class="desc-cell">Instantly truncate deleted file to 0 bytes without restarting service</td></tr>
+            <tr><td class="cmd-cell">ss -tulpn</td><td class="desc-cell">Audit socket queues (non-zero <code>Recv-Q</code> = app thread backlog)</td></tr>
+            <tr><td class="cmd-cell">curl -ivs -o /dev/null -w "DNS: %{time_namelookup}s \| TLS: %{time_appconnect}s \| TTFB: %{time_starttransfer}s \| Total: %{time_total}s\n" $URL</td><td class="desc-cell">Pinpoint exact HTTP latency delay (DNS vs TLS vs backend TTFB)</td></tr>
           </table>
         </div>
       </div>
