@@ -218,5 +218,24 @@
     "date": "2026-07-10T00:00:00Z",
     "author": "Anish Karki",
     "url": "sysadmin-cheatsheet.html"
+  },
+  {
+    "id": 14,
+    "title": "Ultimate PostgreSQL Architecture & Administration Cheatsheet",
+    "description": "Principal-grade PostgreSQL reference covering database architecture, configuration auditing, logging customization, Materialized Views (MVs), Table Sampling Methods (TSM), essential extensions, and god-tier diagnostic queries.",
+    "category": "database",
+    "tags": [
+      "PostgreSQL",
+      "Database",
+      "SQL",
+      "Architecture",
+      "Performance",
+      "Extensions",
+      "TSM",
+      "Materialized Views"
+    ],
+    "date": "2026-07-26T00:00:00Z",
+    "author": "Anish Karki",
+    "file": "cheatsheets/postgres-cheatsheet.md"
   }
 ]
