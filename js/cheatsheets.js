@@ -1,21 +1,54 @@
-// Cheatsheet Management System
+// Developer Command Center & Cheatsheet Management System
 document.addEventListener('DOMContentLoaded', function() {
   initializeCheatsheetSystem();
-  initializeSearchFunctionality();
-  initializeCategoryFiltering();
+  initializeSearchAndTagFilter();
+  initializeCategoryTabs();
   initializeViewToggle();
-  initializeModal();
 });
 
-// Data storage
+// State management
 let cheatsheets = [];
 let filteredCheatsheets = [];
 let currentCategory = 'all';
+let currentTag = '';
+let searchQuery = '';
 let currentPage = 1;
 let itemsPerPage = 9;
 let currentView = 'grid';
 
-// Initialize the main system
+// Category icon map
+const categoryIcons = {
+  shell: 'fa-terminal',
+  devops: 'fa-infinity',
+  editor: 'fa-edit',
+  database: 'fa-database',
+  cloud: 'fa-cloud',
+  programming: 'fa-code'
+};
+
+// Complexity badge map
+const complexityBadges = {
+  editor: 'ESSENTIAL',
+  devops: 'PRODUCTION',
+  shell: 'ADVANCED',
+  database: 'HIGH-PERF',
+  cloud: 'ENTERPRISE'
+};
+
+// Quick sample commands preview map per cheatsheet
+const codePreviews = {
+  1: ':#,#s/foo/bar/g  # Multi-line block substitute',
+  2: 'terraform plan -out=tfplan && terraform apply tfplan',
+  3: 'python3 -m venv venv && source venv/bin/activate',
+  4: 'Ctrl + Shift + L  # Select all occurrences of current selection',
+  5: 'git log --oneline --graph --all --decorate',
+  6: 'awk \'{print $1, $4}\' access.log | sort | uniq -c',
+  7: 'SELECT pg_size_pretty(pg_database_size(current_database()));',
+  8: 'sed -i \'s/old_val/new_val/g\' *.conf',
+  9: 'tmux new-session -s dev \\; split-window -h'
+};
+
+// Initialize system
 function initializeCheatsheetSystem() {
   loadCheatsheets()
     .then(data => {
@@ -27,429 +60,303 @@ function initializeCheatsheetSystem() {
     })
     .catch(error => {
       console.error('Error loading cheatsheets:', error);
-      showError('Failed to load cheatsheets.');
+      showEmptyState();
     });
 }
 
-// Load cheatsheets from JSON
 async function loadCheatsheets() {
   try {
     const response = await fetch('cheatsheets.json');
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } catch (error) {
-    console.error('Could not load cheatsheets.json:', error);
+    console.error('Could not fetch cheatsheets.json:', error);
     throw error;
   }
 }
 
-// Process cheatsheet data
 function processCheatsheets(data) {
   cheatsheets = data.map(sheet => ({
     ...sheet,
     date: new Date(sheet.date || Date.now())
   }));
-  
-  // Sort by date (newest first)
+
   cheatsheets.sort((a, b) => b.date - a.date);
   filteredCheatsheets = [...cheatsheets];
-  
-  updateCategoryCounts();
-  updateStats();
+
+  updateCounts();
   renderCheatsheets();
 }
 
-// Update category counts
-function updateCategoryCounts() {
-  const categories = {};
+function updateCounts() {
+  const counts = { all: cheatsheets.length, shell: 0, devops: 0, editor: 0, database: 0, cloud: 0 };
   
-  cheatsheets.forEach(sheet => {
-    categories[sheet.category] = (categories[sheet.category] || 0) + 1;
+  cheatsheets.forEach(s => {
+    if (counts[s.category] !== undefined) counts[s.category]++;
   });
-  
-  const allCountEl = document.getElementById('allCount');
-  const editorCountEl = document.getElementById('editorCount');
-  const shellCountEl = document.getElementById('shellCount');
-  const databaseCountEl = document.getElementById('databaseCount');
-  const devopsCountEl = document.getElementById('devopsCount');
-  const cloudCountEl = document.getElementById('cloudCount');
-  
-  if (allCountEl) allCountEl.textContent = cheatsheets.length;
-  if (editorCountEl) editorCountEl.textContent = categories.editor || 0;
-  if (shellCountEl) shellCountEl.textContent = categories.shell || 0;
-  if (databaseCountEl) databaseCountEl.textContent = categories.database || 0;
-  if (devopsCountEl) devopsCountEl.textContent = categories.devops || 0;
-  if (cloudCountEl) cloudCountEl.textContent = categories.cloud || 0;
-}
 
-// Update stats
-function updateStats() {
+  document.querySelectorAll('[id$="Count"]').forEach(el => {
+    const key = el.id.replace('Count', '');
+    if (counts[key] !== undefined) {
+      el.textContent = counts[key];
+    }
+  });
+
   const totalEl = document.getElementById('totalCheatsheets');
   if (totalEl) totalEl.textContent = cheatsheets.length;
 }
 
-// Render cheatsheets
 function renderCheatsheets() {
   const container = document.getElementById('cheatsheetsContainer');
   if (!container) return;
-  
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const pageItems = filteredCheatsheets.slice(startIndex, endIndex);
-  
-  // Update results count
+  const pageItems = filteredCheatsheets.slice(startIndex, startIndex + itemsPerPage);
+
   const resultsCount = document.getElementById('resultsCount');
   if (resultsCount) resultsCount.textContent = filteredCheatsheets.length;
-  
+
   if (pageItems.length === 0) {
     container.innerHTML = `
-      <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #8b949e;">
-        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
-        <h3 style="color: #c9d1d9;">No cheatsheets found</h3>
-        <p>Try adjusting your search or category filter.</p>
+      <div class="col-12 text-center py-5">
+        <i class="fas fa-search-minus text-muted" style="font-size: 3rem; opacity: 0.5;"></i>
+        <h4 class="mt-3 text-light">No command sheets match your filter</h4>
+        <p class="text-muted">Try clearing your search query or selecting another tag.</p>
+        <button class="btn btn-outline-info rounded-pill px-4" onclick="clearFilters()">Reset All Filters</button>
       </div>
     `;
     return;
   }
-  
-  container.innerHTML = pageItems.map(sheet => createCheatsheetCard(sheet)).join('');
-  
-  // Apply view class
-  container.className = `cheatsheets-container ${currentView === 'list' ? 'list-view' : ''}`;
-  
-  // Add click handlers - Navigate to viewer page or direct URL
-  container.querySelectorAll('.cheatsheet-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const id = parseInt(card.dataset.id);
-      const sheet = cheatsheets.find(s => s.id === id);
-      if (sheet && sheet.url) {
-        window.location.href = sheet.url;
-      } else {
-        window.location.href = `cheatsheet-viewer.html?id=${id}`;
-      }
-    });
-  });
-  
+
+  container.className = `cheatsheets-container ${currentView === 'list' ? 'list-view' : 'grid-view'}`;
+  container.innerHTML = pageItems.map(sheet => createCardHTML(sheet)).join('');
+
   renderPagination();
 }
 
-// Create cheatsheet card HTML
-function createCheatsheetCard(sheet) {
-  const dateStr = sheet.date.toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
-  });
-  
-  const iconMap = {
-    editor: 'fa-edit',
-    shell: 'fa-terminal',
-    database: 'fa-database',
-    devops: 'fa-infinity',
-    cloud: 'fa-cloud'
-  };
-  
-  const icon = iconMap[sheet.category] || 'fa-file-alt';
-  const tags = sheet.tags.slice(0, 3).map(tag => `<span class="card-tag">${tag}</span>`).join('');
-  
+function createCardHTML(sheet) {
+  const catIcon = categoryIcons[sheet.category] || 'fa-scroll';
+  const badgeLabel = complexityBadges[sheet.category] || 'PRO';
+  const previewCode = codePreviews[sheet.id] || `${sheet.tags[0] || 'cmd'} --help`;
+
+  const tagsHTML = sheet.tags.slice(0, 4).map(t => `<span class="card-tag">#${t}</span>`).join('');
+
   return `
     <div class="cheatsheet-card" data-id="${sheet.id}">
-      <div class="card-header">
-        <div class="card-icon">
-          <i class="fas ${icon}"></i>
+      <div>
+        <div class="card-top-row">
+          <span class="card-cat-badge">
+            <i class="fas ${catIcon} me-1"></i>${sheet.category}
+          </span>
+          <span class="card-complexity">${badgeLabel}</span>
         </div>
         <h3 class="card-title">${sheet.title}</h3>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title" style="display: none;">${sheet.title}</h3>
         <p class="card-description">${sheet.description}</p>
-        <div class="card-meta">${tags}</div>
+        
+        <div class="card-code-preview">
+          <code>${previewCode}</code>
+          <button class="copy-mini-btn" onclick="copyCodeSnippet(event, '${escapeQuotes(previewCode)}')" title="Copy Command">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+
+        <div class="card-tags">${tagsHTML}</div>
       </div>
-      <div class="card-footer">
-        <span class="card-date"><i class="far fa-calendar me-1"></i>${dateStr}</span>
-        <span class="card-action">View <i class="fas fa-arrow-right"></i></span>
+
+      <div class="card-footer-actions">
+        <button class="btn-preview-modal" onclick="openQuickViewModal(${sheet.id})">
+          <i class="fas fa-eye me-1"></i> Quick View
+        </button>
+        <a href="cheatsheet-viewer.html?id=${sheet.id}" class="link-full-sheet">
+          Full Sheet <i class="fas fa-arrow-right"></i>
+        </a>
       </div>
     </div>
   `;
 }
 
-// Pagination
-function renderPagination() {
-  const container = document.getElementById('paginationContainer');
-  if (!container) return;
-  
-  const totalPages = Math.ceil(filteredCheatsheets.length / itemsPerPage);
-  
-  if (totalPages <= 1) {
-    container.innerHTML = '';
-    return;
-  }
-  
-  let html = '';
-  
-  // Previous button
-  html += `<button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">
-    <i class="fas fa-chevron-left"></i>
-  </button>`;
-  
-  // Page numbers
-  for (let i = 1; i <= totalPages; i++) {
-    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-      html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-    } else if (i === currentPage - 2 || i === currentPage + 2) {
-      html += `<span class="page-btn" style="cursor: default;">...</span>`;
-    }
-  }
-  
-  // Next button
-  html += `<button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">
-    <i class="fas fa-chevron-right"></i>
-  </button>`;
-  
-  container.innerHTML = html;
-  
-  // Add click handlers
-  container.querySelectorAll('.page-btn[data-page]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const page = parseInt(btn.dataset.page);
-      if (page >= 1 && page <= totalPages) {
-        currentPage = page;
-        renderCheatsheets();
-        window.scrollTo({ top: 400, behavior: 'smooth' });
-      }
-    });
-  });
+function escapeQuotes(str) {
+  return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
 
-// Search functionality
-function initializeSearchFunctionality() {
-  const searchInput = document.getElementById('searchInput');
-  if (!searchInput) return;
-  
-  let debounceTimer;
-  
-  searchInput.addEventListener('input', (e) => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      filterCheatsheets();
-    }, 300);
-  });
-}
-
-// Category filtering
-function initializeCategoryFiltering() {
-  const categoryItems = document.querySelectorAll('.category-item');
-  
-  categoryItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      categoryItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      
-      currentCategory = item.dataset.category;
-      currentPage = 1;
-      filterCheatsheets();
-    });
-  });
-}
-
-// Filter cheatsheets
 function filterCheatsheets() {
-  const searchInput = document.getElementById('searchInput');
-  const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-  
   filteredCheatsheets = cheatsheets.filter(sheet => {
-    // Category filter
-    const categoryMatch = currentCategory === 'all' || sheet.category === currentCategory;
+    const matchesCategory = (currentCategory === 'all' || sheet.category === currentCategory);
     
-    // Search filter
-    const searchMatch = !searchTerm || 
-      sheet.title.toLowerCase().includes(searchTerm) ||
-      sheet.description.toLowerCase().includes(searchTerm) ||
-      sheet.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+    const matchesTag = !currentTag || sheet.tags.some(t => t.toLowerCase() === currentTag.toLowerCase());
     
-    return categoryMatch && searchMatch;
+    const q = searchQuery.toLowerCase();
+    const matchesSearch = !q || (
+      sheet.title.toLowerCase().includes(q) ||
+      sheet.description.toLowerCase().includes(q) ||
+      sheet.category.toLowerCase().includes(q) ||
+      sheet.tags.some(t => t.toLowerCase().includes(q))
+    );
+
+    return matchesCategory && matchesTag && matchesSearch;
   });
-  
+
   currentPage = 1;
   renderCheatsheets();
 }
 
-// View toggle
-function initializeViewToggle() {
-  const viewBtns = document.querySelectorAll('.view-btn');
-  
-  viewBtns.forEach(btn => {
+function initializeSearchAndTagFilter() {
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      filterCheatsheets();
+    });
+  }
+
+  // Quick tag pill buttons
+  document.querySelectorAll('.tag-pill').forEach(btn => {
     btn.addEventListener('click', () => {
-      viewBtns.forEach(b => b.classList.remove('active'));
+      const tag = btn.dataset.tag;
+      if (currentTag === tag) {
+        currentTag = '';
+        btn.classList.remove('active');
+      } else {
+        document.querySelectorAll('.tag-pill').forEach(b => b.classList.remove('active'));
+        currentTag = tag;
+        btn.classList.add('active');
+      }
+      filterCheatsheets();
+    });
+  });
+}
+
+function initializeCategoryTabs() {
+  document.querySelectorAll('.cat-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      
+      currentCategory = btn.dataset.category;
+      filterCheatsheets();
+    });
+  });
+}
+
+function initializeViewToggle() {
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       currentView = btn.dataset.view;
       renderCheatsheets();
     });
   });
 }
 
-// Modal functionality
-function initializeModal() {
-  const modal = document.getElementById('cheatsheetModal');
-  const closeBtn = document.getElementById('closeModal');
-  const overlay = modal?.querySelector('.modal-overlay');
-  const copyBtn = document.getElementById('copyAllBtn');
-  const printBtn = document.getElementById('printBtn');
+function clearFilters() {
+  currentCategory = 'all';
+  currentTag = '';
+  searchQuery = '';
   
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-  }
-  
-  if (overlay) {
-    overlay.addEventListener('click', closeModal);
-  }
-  
-  // Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) searchInput.value = '';
+
+  document.querySelectorAll('.cat-tab').forEach((btn, i) => {
+    btn.classList.toggle('active', i === 0);
   });
-  
-  // Copy all button
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      const modalBody = document.getElementById('modalBody');
-      const text = modalBody.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-        setTimeout(() => {
-          copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-        }, 2000);
-      });
-    });
-  }
-  
-  // Print button
-  if (printBtn) {
-    printBtn.addEventListener('click', () => {
-      window.print();
-    });
-  }
+  document.querySelectorAll('.tag-pill').forEach(b => b.classList.remove('active'));
+
+  filterCheatsheets();
 }
 
-// Open modal with cheatsheet content
-async function openModal(sheet) {
+function renderPagination() {
+  const container = document.getElementById('paginationContainer');
+  if (!container) return;
+
+  const totalPages = Math.ceil(filteredCheatsheets.length / itemsPerPage);
+  if (totalPages <= 1) {
+    container.innerHTML = '';
+    return;
+  }
+
+  let html = `<div class="btn-group me-2" role="group">`;
+  for (let i = 1; i <= totalPages; i++) {
+    html += `
+      <button type="button" class="btn btn-outline-info ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">
+        ${i}
+      </button>
+    `;
+  }
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function goToPage(page) {
+  currentPage = page;
+  renderCheatsheets();
+  window.scrollTo({ top: 350, behavior: 'smooth' });
+}
+
+// Quick Preview Modal
+async function openQuickViewModal(id) {
+  const sheet = cheatsheets.find(s => s.id === id);
+  if (!sheet) return;
+
   const modal = document.getElementById('cheatsheetModal');
   const modalTitle = document.getElementById('modalTitle');
+  const modalCategory = document.getElementById('modalCategory');
   const modalBody = document.getElementById('modalBody');
-  
-  if (!modal || !modalTitle || !modalBody) return;
-  
-  modalTitle.textContent = sheet.title;
-  modalBody.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><p>Loading content...</p></div>';
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  
+  const openFullBtn = document.getElementById('openFullBtn');
+
+  if (modalTitle) modalTitle.textContent = sheet.title;
+  if (modalCategory) modalCategory.textContent = sheet.category.toUpperCase();
+  if (openFullBtn) openFullBtn.onclick = () => window.location.href = `cheatsheet-viewer.html?id=${sheet.id}`;
+
+  if (modalBody) {
+    modalBody.innerHTML = `<div class="text-center py-4"><div class="spinner-border text-info" role="status"></div></div>`;
+  }
+
+  if (modal) modal.classList.add('active');
+
   try {
-    const response = await fetch(sheet.file);
-    if (!response.ok) throw new Error('Failed to load file');
+    const res = await fetch(sheet.file);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const mdText = await res.text();
     
-    const markdown = await response.text();
-    
-    // Configure marked for better rendering
-    marked.setOptions({
-      gfm: true,
-      breaks: true,
-      headerIds: true
-    });
-    
-    modalBody.innerHTML = marked.parse(markdown);
-    
-    // Add copy buttons to code blocks
-    addCodeCopyButtons(modalBody);
-    
-  } catch (error) {
-    console.error('Error loading cheatsheet:', error);
-    modalBody.innerHTML = `
-      <div style="text-align: center; padding: 2rem; color: #8b949e;">
-        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; color: #f85149;"></i>
-        <h3 style="color: #c9d1d9;">Failed to load content</h3>
-        <p>Please try again later.</p>
-      </div>
-    `;
+    if (modalBody && typeof marked !== 'undefined') {
+      modalBody.innerHTML = marked.parse(mdText);
+      // Attach copy handlers to pre/code tags in modal
+      modalBody.querySelectorAll('pre').forEach(pre => {
+        pre.style.cursor = 'pointer';
+        pre.title = 'Click to copy code block';
+        pre.onclick = () => copyCodeSnippet(null, pre.innerText);
+      });
+    }
+  } catch (err) {
+    if (modalBody) {
+      modalBody.innerHTML = `<p class="text-danger">Could not load preview content. Please click "Open Full Sheet".</p>`;
+    }
   }
 }
 
-// Add copy buttons to code blocks
-function addCodeCopyButtons(container) {
-  container.querySelectorAll('pre').forEach(pre => {
-    const copyBtn = document.createElement('button');
-    copyBtn.className = 'code-copy-btn';
-    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-    copyBtn.style.cssText = `
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: #30363d;
-      border: none;
-      border-radius: 4px;
-      color: #8b949e;
-      padding: 4px 8px;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.2s;
-    `;
-    
-    pre.style.position = 'relative';
-    pre.appendChild(copyBtn);
-    
-    pre.addEventListener('mouseenter', () => copyBtn.style.opacity = '1');
-    pre.addEventListener('mouseleave', () => copyBtn.style.opacity = '0');
-    
-    copyBtn.addEventListener('click', () => {
-      const code = pre.querySelector('code')?.textContent || pre.textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-        copyBtn.style.color = '#58a6ff';
-        setTimeout(() => {
-          copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-          copyBtn.style.color = '#8b949e';
-        }, 2000);
-      });
-    });
+function closeCheatsheetModal() {
+  const modal = document.getElementById('cheatsheetModal');
+  if (modal) modal.classList.remove('active');
+}
+
+// Copy Code Snippet Toast Logic
+function copyCodeSnippet(event, text) {
+  if (event) event.stopPropagation();
+
+  navigator.clipboard.writeText(text).then(() => {
+    showCopyToast('Command copied to clipboard!');
+  }).catch(err => {
+    console.error('Failed to copy code snippet:', err);
   });
 }
 
-// Close modal
-function closeModal() {
-  const modal = document.getElementById('cheatsheetModal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
-
-// Show empty state
-function showEmptyState() {
-  const container = document.getElementById('cheatsheetsContainer');
-  if (container) {
-    container.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #8b949e;">
-        <i class="fas fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
-        <h3 style="color: #c9d1d9;">No cheatsheets yet</h3>
-        <p>Cheatsheets will appear here once added.</p>
-      </div>
-    `;
-  }
-}
-
-// Show error
-function showError(message) {
-  const container = document.getElementById('cheatsheetsContainer');
-  if (container) {
-    container.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #8b949e;">
-        <i class="fas fa-exclamation-circle" style="font-size: 3rem; margin-bottom: 1rem; color: #f85149;"></i>
-        <h3 style="color: #c9d1d9;">Error</h3>
-        <p>${message}</p>
-      </div>
-    `;
+function showCopyToast(msg) {
+  const toast = document.getElementById('copyToast');
+  if (toast) {
+    toast.innerHTML = `<i class="fas fa-check-circle me-2 text-success"></i> ${msg}`;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
   }
 }

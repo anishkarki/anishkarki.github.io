@@ -602,106 +602,76 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // =====================================================
-// GNOME Desktop Interaction Controls
+// Modern Header Navigation & Quick Search Controls
 // =====================================================
-function toggleActivitiesOverlay() {
-  const overlay = document.getElementById('activitiesOverlay');
-  if (overlay) {
-    overlay.classList.toggle('active');
-    if (overlay.classList.contains('active')) {
-      const searchInput = overlay.querySelector('.gnome-search-input');
-      if (searchInput) {
-        searchInput.value = '';
-        searchInput.focus();
-        filterActivities('');
+function setupNavbar() {
+  const header = document.getElementById('mainHeader');
+  
+  // Scroll header glass shadow effect
+  window.addEventListener('scroll', function() {
+    if (header) {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
       }
     }
-  }
-}
-
-function toggleSystemMenu(event) {
-  if (event) event.stopPropagation();
-  const menu = document.getElementById('gnomeSystemMenu');
-  if (menu) {
-    menu.classList.toggle('active');
-  }
-}
-
-function filterActivities(query) {
-  const appIcons = document.querySelectorAll('.gnome-activities-overlay .app-icon');
-  appIcons.forEach(icon => {
-    const label = icon.querySelector('.app-label').textContent.toLowerCase();
-    if (label.includes(query.toLowerCase())) {
-      icon.style.display = 'flex';
-    } else {
-      icon.style.display = 'none';
-    }
+    highlightActiveNavOnScroll();
   });
+
+  highlightActiveNavOnScroll();
 }
 
-function initGnomeClock() {
-  const clockEl = document.getElementById('gnome-clock');
-  if (!clockEl) return;
-  
-  function updateClock() {
-    const now = new Date();
-    const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
-    clockEl.textContent = now.toLocaleDateString('en-US', options);
+function toggleMobileMenu() {
+  const drawer = document.getElementById('mobileNavDrawer');
+  if (drawer) {
+    drawer.classList.toggle('active');
+    document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
   }
-  
-  updateClock();
-  setInterval(updateClock, 30000);
 }
 
-// Wire up global click closures
-document.addEventListener('click', function(event) {
-  const menu = document.getElementById('gnomeSystemMenu');
-  if (menu && menu.classList.contains('active')) {
-    const trigger = document.querySelector('.gnome-status-icons');
-    if (!menu.contains(event.target) && (!trigger || !trigger.contains(event.target))) {
-      menu.classList.remove('active');
-    }
+function toggleQuickSearchModal() {
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.focus();
+    searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else {
+    window.location.href = 'cheatsheets.html';
+  }
+}
+
+// Global Ctrl+K / Cmd+K Shortcut
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    toggleQuickSearchModal();
   }
 });
 
-// Setup after components load
-document.addEventListener("DOMContentLoaded", function() {
-  setTimeout(() => {
-    initGnomeClock();
-    initGnomeScrollHide();
-    
-    // Enable Bootstrap tooltips on the GNOME dock
-    if (typeof bootstrap !== 'undefined') {
-      const tooltipTriggerList = [].slice.call(document.querySelectorAll('.gnome-dock [data-bs-toggle="tooltip"]'));
-      tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-      });
-    }
-  }, 1200);
-});
-
-function initGnomeScrollHide() {
-  let lastScrollTop = 0;
-  const delta = 10;
+function highlightActiveNavOnScroll() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.desktop-nav .nav-item, .mobile-nav-links a');
   
-  window.addEventListener('scroll', function() {
-    const topBar = document.querySelector('.gnome-top-bar');
-    const dockContainer = document.querySelector('.gnome-dock-container');
-    const systemMenu = document.getElementById('gnomeSystemMenu');
+  let currentSectionId = '';
+  const scrollPosition = window.scrollY + 100;
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
     
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (Math.abs(lastScrollTop - st) <= delta) return;
-    
-    if (st > lastScrollTop && st > 50) {
-      if (topBar) topBar.classList.add('scroll-hide');
-      if (dockContainer) dockContainer.classList.add('scroll-hide');
-      if (systemMenu) systemMenu.classList.remove('active');
-    } else {
-      if (topBar) topBar.classList.remove('scroll-hide');
-      if (dockContainer) dockContainer.classList.remove('scroll-hide');
+    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+      currentSectionId = section.getAttribute('id');
     }
-    
-    lastScrollTop = st;
   });
-}
+
+  if (currentSectionId) {
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && href.includes('#' + currentSectionId)) {
+        link.classList.add('active');
+      } else if (href && href.includes('#') && !href.endsWith('#' + currentSectionId)) {
+        link.classList.remove('active');
+      }
+    });
+  }
+}

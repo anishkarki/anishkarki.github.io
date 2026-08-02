@@ -1,111 +1,71 @@
-<!-- GNOME Top Bar -->
-<div class="gnome-top-bar">
-  <div class="top-bar-left">
-    <button class="activities-btn" onclick="toggleActivitiesOverlay()"><svg class="fedora-logo-inline" viewBox="0 0 120 120" style="width: 14px; height: 14px; fill: currentColor; margin-right: 6px; vertical-align: -2px;"><path d="M60 0C26.9 0 0 26.9 0 60s26.9 60 60 60 60-26.9 60-60S93.1 0 60 0zm22.4 56.4H69v-9.5c0-4.6 3.7-8.3 8.3-8.3h3.6V29H72.6c-9.8 0-17.8 8-17.8 17.8v9.5H46v9.6h8.8v25.2c0 9.8 8 17.8 17.8 17.8h8.3V99.3h-3.6c-4.6 0-8.3-3.7-8.3-8.3V66H82.4v-9.6z"/></svg>Activities</button>
-    <span class="active-app-name"><i class="fas fa-terminal me-1"></i> anish@fedora:~</span>
-  </div>
-  <div class="top-bar-center" id="gnome-clock">
-    Sat Jul 11 19:28
-  </div>
-  <div class="top-bar-right">
-    <div class="gnome-status-icons" onclick="toggleSystemMenu(event)">
-      <i class="fas fa-volume-up"></i>
-      <i class="fas fa-wifi-slash"></i>
+<!-- Modern Glassmorphic Top Navigation Header (Project Pages) -->
+<header class="modern-navbar-header" id="mainHeader">
+  <div class="navbar-container">
+    <!-- Brand Logo -->
+    <a href="index.html#home" class="nav-brand">
+      <div class="brand-icon-wrapper">
+        <i class="fas fa-terminal"></i>
+      </div>
+      <span class="brand-title">anish<span class="brand-accent">.karki</span></span>
+      <span class="brand-badge"><i class="fab fa-fedora"></i> dev</span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="desktop-nav">
+      <a href="index.html#home" class="nav-item"><i class="fas fa-home me-1"></i> Home</a>
+      <a href="index.html#about" class="nav-item"><i class="fas fa-user me-1"></i> About</a>
+      <a href="index.html#experience" class="nav-item"><i class="fas fa-briefcase me-1"></i> Experience</a>
+      <a href="index.html#skills" class="nav-item"><i class="fas fa-code me-1"></i> Skills</a>
+      <a href="index.html#projects" class="nav-item"><i class="fas fa-folder me-1"></i> Projects</a>
+      <a href="blog.html" class="nav-item"><i class="fas fa-newspaper me-1"></i> Blog</a>
+      <a href="cheatsheets.html" class="nav-item accent-link"><i class="fas fa-bolt me-1"></i> Cheatsheets</a>
+      <a href="lessons.html" class="nav-item"><i class="fas fa-book me-1"></i> Lessons</a>
+      <a href="index.html#contact" class="nav-item"><i class="fas fa-envelope me-1"></i> Contact</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="nav-actions">
+      <button class="nav-search-trigger" id="quickSearchBtn" onclick="toggleQuickSearchModal()" title="Search Cheatsheets & Site (Ctrl+K)">
+        <i class="fas fa-search"></i>
+        <span class="search-text">Search...</span>
+        <kbd class="search-shortcut">⌘K</kbd>
+      </button>
+      <a href="https://github.com/anishkarki" target="_blank" rel="noopener" class="nav-github-btn" title="GitHub Profile">
+        <i class="fab fa-github"></i>
+      </a>
+      <button class="mobile-toggle-btn" id="mobileToggleBtn" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
     </div>
   </div>
-</div>
+</header>
 
-<!-- GNOME Activities Overlay (App Grid) -->
-<div class="gnome-activities-overlay" id="activitiesOverlay">
-  <div class="search-box-container">
-    <input type="text" class="gnome-search-input" placeholder="Type to search..." onkeyup="filterActivities(this.value)">
-  </div>
-  <div class="app-grid">
-    <a href="index.html#home" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper home-icon"><i class="fas fa-home"></i></div>
-      <span class="app-label">Home</span>
-    </a>
-    <a href="blog.html" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper blog-icon"><i class="fas fa-blog"></i></div>
-      <span class="app-label">Blog</span>
-    </a>
-    <a href="cheatsheets.html" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper cheatsheets-icon"><i class="fas fa-scroll"></i></div>
-      <span class="app-label">Cheatsheets</span>
-    </a>
-    <a href="lessons.html" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper lessons-icon"><i class="fas fa-book"></i></div>
-      <span class="app-label">Lessons</span>
-    </a>
-    <a href="index.html#about" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper user-icon"><i class="fas fa-user"></i></div>
-      <span class="app-label">About</span>
-    </a>
-    <a href="index.html#experience" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper exp-icon"><i class="fas fa-briefcase"></i></div>
-      <span class="app-label">Experience</span>
-    </a>
-    <a href="index.html#skills" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper skills-icon"><i class="fas fa-code"></i></div>
-      <span class="app-label">Skills</span>
-    </a>
-    <a href="index.html#projects" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper projects-icon"><i class="fas fa-folder"></i></div>
-      <span class="app-label">Projects</span>
-    </a>
-    <a href="index.html#contact" class="app-icon" onclick="toggleActivitiesOverlay()">
-      <div class="icon-wrapper contact-icon"><i class="fas fa-envelope"></i></div>
-      <span class="app-label">Contact</span>
-    </a>
-  </div>
-</div>
-
-<!-- GNOME Bottom Dock (Dash to Dock) -->
-<div class="gnome-dock-container">
-  <div class="gnome-dock">
-    <a href="index.html#home" class="dock-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Home">
-      <div class="dock-icon home-icon"><i class="fas fa-home"></i></div>
-    </a>
-    <a href="blog.html" class="dock-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Blog">
-      <div class="dock-icon blog-icon"><i class="fas fa-blog"></i></div>
-    </a>
-    <a href="cheatsheets.html" class="dock-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Cheatsheets">
-      <div class="dock-icon cheatsheets-icon"><i class="fas fa-scroll"></i></div>
-    </a>
-    <a href="lessons.html" class="dock-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Lessons">
-      <div class="dock-icon lessons-icon"><i class="fas fa-book"></i></div>
-    </a>
-    <a href="index.html#contact" class="dock-item" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact">
-      <div class="dock-icon contact-icon"><i class="fas fa-envelope"></i></div>
-    </a>
-    <div class="dock-separator"></div>
-    <button class="dock-item apps-icon" onclick="toggleActivitiesOverlay()" data-bs-toggle="tooltip" data-bs-placement="top" title="Show Applications">
-      <div class="dock-icon"><i class="fas fa-th"></i></div>
-    </button>
-  </div>
-</div>
-
-<!-- GNOME System Dropdown Menu -->
-<div class="gnome-system-menu" id="gnomeSystemMenu">
-  <div class="menu-sliders">
-    <div class="slider-row">
-      <i class="fas fa-volume-up"></i>
-      <input type="range" class="menu-slider" min="0" max="100" value="80">
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div class="mobile-drawer-backdrop" onclick="toggleMobileMenu()"></div>
+  <div class="mobile-drawer-content">
+    <div class="mobile-drawer-header">
+      <a href="index.html#home" class="nav-brand" onclick="toggleMobileMenu()">
+        <i class="fas fa-terminal me-2"></i>anish<span class="brand-accent">.karki</span>
+      </a>
+      <button class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
-    <div class="slider-row">
-      <i class="fas fa-sun"></i>
-      <input type="range" class="menu-slider" min="0" max="100" value="90">
+    <div class="mobile-drawer-body">
+      <nav class="mobile-nav-links">
+        <a href="index.html#home" onclick="toggleMobileMenu()"><i class="fas fa-home"></i> Home</a>
+        <a href="index.html#about" onclick="toggleMobileMenu()"><i class="fas fa-user"></i> About</a>
+        <a href="index.html#experience" onclick="toggleMobileMenu()"><i class="fas fa-briefcase"></i> Experience</a>
+        <a href="index.html#skills" onclick="toggleMobileMenu()"><i class="fas fa-code"></i> Skills</a>
+        <a href="index.html#projects" onclick="toggleMobileMenu()"><i class="fas fa-folder"></i> Projects</a>
+        <a href="blog.html" onclick="toggleMobileMenu()"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="cheatsheets.html" onclick="toggleMobileMenu()" class="highlight"><i class="fas fa-bolt"></i> Cheatsheets</a>
+        <a href="lessons.html" onclick="toggleMobileMenu()"><i class="fas fa-book"></i> Lessons</a>
+        <a href="index.html#contact" onclick="toggleMobileMenu()"><i class="fas fa-envelope"></i> Contact</a>
+      </nav>
     </div>
-  </div>
-  <div class="menu-grid">
-    <div class="menu-btn active"><i class="fas fa-wifi"></i><span>Fedora-WiFi</span></div>
-    <div class="menu-btn active"><i class="fas fa-bluetooth"></i><span>Bluetooth</span></div>
-    <div class="menu-btn"><i class="fas fa-moon"></i><span>Night Light</span></div>
-    <div class="menu-btn"><i class="fas fa-plane"></i><span>Airplane</span></div>
-  </div>
-  <div class="menu-footer">
-    <button class="footer-icon-btn"><i class="fas fa-cog"></i></button>
-    <button class="footer-icon-btn"><i class="fas fa-lock"></i></button>
-    <button class="footer-icon-btn text-danger" onclick="window.location.reload()"><i class="fas fa-redo"></i></button>
   </div>
 </div>
