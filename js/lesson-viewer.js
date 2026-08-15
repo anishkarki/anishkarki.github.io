@@ -131,6 +131,14 @@ function loadMarkdownContent(courseKey, fileName, course) {
       const contentEl = document.getElementById('lesson-content');
       contentEl.innerHTML = marked.parse(markdown);
       
+      // Execute inline script tags in markdown content
+      contentEl.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+      });
+      
       // Apply syntax highlighting to all code blocks
       if (typeof hljs !== 'undefined') {
         contentEl.querySelectorAll('pre code').forEach((block) => {
