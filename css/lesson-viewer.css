@@ -1084,4 +1084,212 @@
   to {
     stroke-dashoffset: -20;
   }
-}
+}
+
+/* =====================================================
+   POSTGRESQL ARCHITECTURE & PAGE SIMULATOR STYLES
+   ===================================================== */
+.pg-arch-dashboard {
+  background: #0b1528;
+  border: 1px solid rgba(81, 162, 218, 0.2);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 30px 0;
+  color: #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.pg-arch-dashboard .controls-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(81, 162, 218, 0.15);
+}
+
+.pg-arch-dashboard .dash-btn {
+  padding: 9px 16px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  color: #ffffff;
+}
+
+.pg-arch-dashboard .dash-btn.btn-query { background: #1d4ed8; border-color: #3b82f6; }
+.pg-arch-dashboard .dash-btn.btn-query:hover:not(:disabled) { background: #3b82f6; box-shadow: 0 0 12px rgba(59, 130, 246, 0.4); }
+
+.pg-arch-dashboard .dash-btn.btn-write { background: #1b8a5a; border-color: #24b878; }
+.pg-arch-dashboard .dash-btn.btn-write:hover:not(:disabled) { background: #24b878; box-shadow: 0 0 12px rgba(36, 184, 120, 0.4); }
+
+.pg-arch-dashboard .dash-btn.btn-checkpoint { background: #b45309; border-color: #f59e0b; }
+.pg-arch-dashboard .dash-btn.btn-checkpoint:hover:not(:disabled) { background: #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
+
+.pg-arch-dashboard .dash-btn.btn-vacuum { background: #6d28d9; border-color: #8b5cf6; }
+.pg-arch-dashboard .dash-btn.btn-vacuum:hover:not(:disabled) { background: #8b5cf6; box-shadow: 0 0 12px rgba(139, 92, 246, 0.4); }
+
+.pg-arch-dashboard .dash-btn.btn-inspect { background: #0e7490; border-color: #06b6d4; }
+.pg-arch-dashboard .dash-btn.btn-inspect:hover:not(:disabled) { background: #06b6d4; box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); }
+
+.pg-arch-dashboard .dash-btn.btn-reset { background: transparent; border-color: #475569; }
+.pg-arch-dashboard .dash-btn.btn-reset:hover:not(:disabled) { background: rgba(255, 255, 255, 0.08); }
+
+.pg-arch-dashboard .dash-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pg-arch-dashboard .visuals-wrapper {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #060c17;
+  margin-bottom: 20px;
+  border: 1px solid rgba(81, 162, 218, 0.15);
+}
+
+.pg-arch-dashboard .dashboard-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* PageInspect Visual Block */
+.pg-page-inspector-box {
+  background: #040914;
+  border: 1px solid rgba(81, 162, 218, 0.2);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.pg-page-inspector-box h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #51a2da;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pg-page-layout-bar {
+  display: flex;
+  width: 100%;
+  height: 48px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.pg-page-layout-bar .bar-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pg-page-layout-bar .seg-header { background: #1e3a8a; color: #93c5fd; width: 14%; }
+.pg-page-layout-bar .seg-pointers { background: #0369a1; color: #bae6fd; width: 16%; }
+.pg-page-layout-bar .seg-free { background: #1e293b; color: #94a3b8; width: 34%; border-left: 1px dashed rgba(255,255,255,0.2); border-right: 1px dashed rgba(255,255,255,0.2); }
+.pg-page-layout-bar .seg-tuples { background: #065f46; color: #a7f3d0; width: 30%; }
+.pg-page-layout-bar .seg-special { background: #701a75; color: #f5d0fe; width: 6%; }
+
+.pg-page-grid-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.pg-detail-card {
+  background: #0b1528;
+  border: 1px solid rgba(81, 162, 218, 0.15);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.pg-detail-card .card-title {
+  color: #51a2da;
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pg-detail-card .prop-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  color: #cbd5e1;
+}
+
+.pg-detail-card .prop-val {
+  font-weight: 600;
+  color: #38d39f;
+}
+
+.pg-detail-card .prop-val.warn {
+  color: #e0aa3e;
+}
+
+.pg-detail-card .prop-val.danger {
+  color: #ef4444;
+}
+
+/* Log Panel */
+.pg-arch-dashboard .log-panel {
+  background: #020617;
+  border: 1px solid rgba(81, 162, 218, 0.15);
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  overflow: hidden;
+}
+
+.pg-arch-dashboard .log-title {
+  background: #0f172a;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: #51a2da;
+  border-bottom: 1px solid rgba(81, 162, 218, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pg-arch-dashboard .log-content {
+  padding: 12px 16px;
+  height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pg-arch-dashboard .log-line { line-height: 1.5; color: #cbd5e1; }
+.pg-arch-dashboard .log-time { color: #64748b; margin-right: 6px; }
+.pg-arch-dashboard .log-line.client { color: #38bdf8; }
+.pg-arch-dashboard .log-line.backend { color: #818cf8; }
+.pg-arch-dashboard .log-line.memory { color: #34d399; }
+.pg-arch-dashboard .log-line.wal { color: #fbbf24; }
+.pg-arch-dashboard .log-line.disk { color: #f472b6; }
+.pg-arch-dashboard .log-line.checkpoint { color: #fb923c; font-weight: 600; }
+.pg-arch-dashboard .log-line.vacuum { color: #c084fc; font-weight: 600; }
+.pg-arch-dashboard .log-line.system { color: #51a2da; }
+
