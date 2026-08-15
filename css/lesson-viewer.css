@@ -824,3 +824,264 @@
     border: 1px solid #ddd;
   }
 }
+
+/* =====================================================
+   HORIZONDB INTERACTIVE SIMULATOR STYLES
+   ===================================================== */
+.horizondb-interactive-dashboard {
+  background: #0b1528;
+  border: 1px solid rgba(81, 162, 218, 0.2);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 30px 0;
+  color: #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.horizondb-interactive-dashboard .controls-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(81, 162, 218, 0.15);
+}
+
+.horizondb-interactive-dashboard .dash-btn {
+  padding: 10px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  color: #ffffff;
+}
+
+.horizondb-interactive-dashboard .dash-btn.btn-success {
+  background: #1b8a5a;
+  border-color: #24b878;
+}
+.horizondb-interactive-dashboard .dash-btn.btn-success:hover:not(:disabled) {
+  background: #24b878;
+  box-shadow: 0 0 12px rgba(36, 184, 120, 0.4);
+}
+
+.horizondb-interactive-dashboard .dash-btn.btn-primary {
+  background: #1d4ed8;
+  border-color: #3b82f6;
+}
+.horizondb-interactive-dashboard .dash-btn.btn-primary:hover:not(:disabled) {
+  background: #3b82f6;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+.horizondb-interactive-dashboard .dash-btn.btn-secondary {
+  background: #334155;
+  border-color: #475569;
+}
+.horizondb-interactive-dashboard .dash-btn.btn-secondary:hover:not(:disabled) {
+  background: #475569;
+}
+
+.horizondb-interactive-dashboard .dash-btn.btn-danger {
+  background: #991b1b;
+  border-color: #ef4444;
+}
+.horizondb-interactive-dashboard .dash-btn.btn-danger:hover:not(:disabled) {
+  background: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+.horizondb-interactive-dashboard .dash-btn.btn-outline {
+  background: transparent;
+  border-color: #475569;
+}
+.horizondb-interactive-dashboard .dash-btn.btn-outline:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.horizondb-interactive-dashboard .dash-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.horizondb-interactive-dashboard .visuals-wrapper {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #060c17;
+  margin-bottom: 20px;
+  border: 1px solid rgba(81, 162, 218, 0.15);
+}
+
+.horizondb-interactive-dashboard .dashboard-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Log Panel */
+.horizondb-interactive-dashboard .log-panel {
+  background: #020617;
+  border: 1px solid rgba(81, 162, 218, 0.15);
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  overflow: hidden;
+}
+
+.horizondb-interactive-dashboard .log-title {
+  background: #0f172a;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: #51a2da;
+  border-bottom: 1px solid rgba(81, 162, 218, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.horizondb-interactive-dashboard .log-content {
+  padding: 12px 16px;
+  height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.horizondb-interactive-dashboard .log-line {
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.horizondb-interactive-dashboard .log-time {
+  color: #64748b;
+  margin-right: 6px;
+}
+
+.horizondb-interactive-dashboard .log-line.system { color: #51a2da; }
+.horizondb-interactive-dashboard .log-line.primary { color: #38d39f; }
+.horizondb-interactive-dashboard .log-line.standby { color: #51a2da; }
+.horizondb-interactive-dashboard .log-line.storage { color: #e0aa3e; }
+.horizondb-interactive-dashboard .log-line.error { color: #ef4444; font-weight: 600; }
+
+/* SVG Node and Connection Styling */
+.horizondb-interactive-dashboard .node-card {
+  fill: #0b1528;
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+.horizondb-interactive-dashboard .node-card.stroke-default {
+  stroke: #cbd5e1;
+}
+
+.horizondb-interactive-dashboard .node-card.active-primary {
+  stroke: #38d39f;
+  filter: drop-shadow(0 0 6px rgba(56, 211, 159, 0.3));
+}
+
+.horizondb-interactive-dashboard .node-card.active-standby {
+  stroke: #51a2da;
+}
+
+.horizondb-interactive-dashboard .node-card.active-storage {
+  stroke: #e0aa3e;
+}
+
+.horizondb-interactive-dashboard .node-card.crashed {
+  stroke: #ef4444;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.5));
+  animation: shake 0.5s infinite;
+}
+
+.horizondb-interactive-dashboard .node-card.provisioning {
+  stroke: #64748b;
+  stroke-dasharray: 4, 4;
+  animation: rotateBorder 2s linear infinite;
+}
+
+.horizondb-interactive-dashboard .node-text-title {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #ffffff;
+}
+
+.horizondb-interactive-dashboard .node-text-sub {
+  font-size: 9px;
+  fill: #cbd5e1;
+}
+
+.horizondb-interactive-dashboard .node-text-status {
+  font-size: 8px;
+  font-weight: 600;
+  fill: #64748b;
+}
+
+.horizondb-interactive-dashboard .conn-line {
+  fill: none;
+  stroke: #1e293b;
+  stroke-width: 2;
+  stroke-dasharray: 4, 4;
+  transition: all 0.3s ease;
+}
+
+.horizondb-interactive-dashboard .conn-line.active-write {
+  stroke: #38d39f;
+  stroke-width: 2.5;
+  stroke-dasharray: 6, 4;
+  animation: flow 0.8s linear infinite;
+  opacity: 1;
+}
+
+.horizondb-interactive-dashboard .conn-line.active-read {
+  stroke: #51a2da;
+  stroke-width: 2.5;
+  stroke-dasharray: 6, 4;
+  animation: flow 0.8s linear infinite;
+  opacity: 1;
+}
+
+.horizondb-interactive-dashboard .conn-line.active-pubsub {
+  stroke: #ff4d4d;
+  stroke-width: 2.5;
+  stroke-dasharray: 6, 4;
+  animation: flow 0.8s linear infinite;
+  opacity: 1;
+}
+
+.horizondb-interactive-dashboard .conn-line.active-storage {
+  stroke: #e0aa3e;
+  stroke-width: 2.5;
+  stroke-dasharray: 6, 4;
+  animation: flow 0.8s linear infinite;
+  opacity: 1;
+}
+
+.horizondb-interactive-dashboard .conn-line.crashed {
+  stroke: rgba(239, 68, 68, 0.2);
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-2px, -1px); }
+  20%, 40%, 60%, 80% { transform: translate(2px, 1px); }
+}
+
+@keyframes rotateBorder {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
