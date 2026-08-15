@@ -197,13 +197,16 @@ Interact with the real-time simulation below to see how client connections, work
 <div class="prop-row"><span>Status:</span><span id="prop-page-status" class="prop-val">IN SHARED BUFFERS</span></div>
 </div>
 </div>
+<div id="arch-step-indicator" class="arch-step-indicator">
+<span id="arch-step-badge" class="step-badge"><i class="fas fa-info-circle"></i> SYSTEM IDLE</span>
+<span id="arch-step-text">Click any action above to trace the step-by-step data &amp; process flow</span>
 </div>
 
 <div class="visuals-wrapper">
-<svg id="pg-arch-svg" viewBox="0 0 960 520" class="dashboard-svg">
+<svg id="pg-arch-svg" viewBox="0 0 980 540" class="dashboard-svg">
 <defs>
-<filter id="glow-p" x="-30%" y="-30%" width="160%" height="160%">
-<feGaussianBlur stdDeviation="4" result="blur" />
+<filter id="glow-p" x="-40%" y="-40%" width="180%" height="180%">
+<feGaussianBlur stdDeviation="5" result="blur" />
 <feComposite in="SourceGraphic" in2="blur" operator="over" />
 </filter>
 <linearGradient id="client-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -224,150 +227,181 @@ Interact with the real-time simulation below to see how client connections, work
 </linearGradient>
 </defs>
 
-<!-- Connections -->
-<path id="conn-client-backend" class="conn-line" d="M 120 250 L 190 250" />
-<path id="conn-backend-localmem" class="conn-line" d="M 260 210 L 260 150" />
-<path id="conn-backend-shmem" class="conn-line" d="M 330 250 L 400 250" />
-<path id="conn-shmem-walwriter" class="conn-line" d="M 680 190 L 760 140" />
-<path id="conn-walwriter-disk" class="conn-line" d="M 850 160 L 850 370" />
-<path id="conn-shmem-bgwriter" class="conn-line" d="M 680 130 L 760 80" />
-<path id="conn-shmem-checkpointer" class="conn-line" d="M 680 250 L 760 210" />
-<path id="conn-checkpointer-disk" class="conn-line" d="M 850 240 L 850 370" />
-<path id="conn-vacuum-shmem" class="conn-line" d="M 760 270 L 680 320" />
-<path id="conn-vacuum-disk" class="conn-line" d="M 850 290 L 850 370" />
-<path id="conn-backend-disk" class="conn-line" d="M 260 290 Q 260 480 750 430" />
+<!-- ================= CLEAR CONNECTION LINES ================= -->
+<!-- 1. Client <-> Backend -->
+<path id="conn-client-backend" class="conn-line" d="M 130 255 L 195 255" />
+<text x="162" y="247" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">TCP 5432</text>
 
+<!-- 2. Backend <-> Local Memory -->
+<path id="conn-backend-localmem" class="conn-line" d="M 265 208 L 265 155" />
+<text x="290" y="185" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">work_mem</text>
+
+<!-- 3. Backend <-> Shared Memory -->
+<path id="conn-backend-shmem" class="conn-line" d="M 335 255 L 410 255" />
+<text x="372" y="247" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">IPC / Buffers</text>
+
+<!-- 4. Backend <-> Disk Direct (Cache Miss) -->
+<path id="conn-backend-disk" class="conn-line" d="M 265 303 Q 265 520 760 360" />
+<text x="350" y="505" font-size="8" font-weight="600" fill="#f472b6" text-anchor="middle">Cache Miss Read (base/)</text>
+
+<!-- 5. WAL Buffers <-> WALWriter -->
+<path id="conn-shmem-walwriter" class="conn-line" d="M 690 305 L 760 125" />
+
+<!-- 6. WALWriter <-> pg_wal Disk -->
+<path id="conn-walwriter-disk" class="conn-line" d="M 850 148 L 850 395" />
+<text x="880" y="270" font-size="8" font-weight="600" fill="#fbbf24" text-anchor="middle">WAL fsync</text>
+
+<!-- 7. Shared Buffers <-> BGWriter -->
+<path id="conn-shmem-bgwriter" class="conn-line" d="M 690 140 L 760 60" />
+
+<!-- 8. Shared Buffers <-> Checkpointer -->
+<path id="conn-shmem-checkpointer" class="conn-line" d="M 690 175 L 760 190" />
+
+<!-- 9. Checkpointer <-> Storage (base/ & pg_control) -->
+<path id="conn-checkpointer-disk" class="conn-line" d="M 850 213 L 850 460" />
+<text x="895" y="235" font-size="8" font-weight="600" fill="#fb923c" text-anchor="middle">Sync &amp; Control</text>
+
+<!-- 10. Autovacuum <-> Shared Buffers -->
+<path id="conn-vacuum-shmem" class="conn-line" d="M 760 255 L 690 220" />
+
+<!-- 11. Autovacuum <-> Disk (FSM/VM) -->
+<path id="conn-vacuum-disk" class="conn-line" d="M 850 278 L 850 360" />
+<text x="890" y="325" font-size="8" font-weight="600" fill="#c084fc" text-anchor="middle">Prune &amp; Map</text>
+
+
+<!-- ================= COMPONENT NODES ================= -->
 <!-- 1. CLIENT TIER -->
-<g transform="translate(20, 205)">
-<rect class="node-card stroke-default" width="100" height="90" rx="8" fill="url(#client-grad)" />
-<text x="50" y="30" class="node-text-title" text-anchor="middle">Client App</text>
-<text x="50" y="50" class="node-text-sub" text-anchor="middle">libpq / TCP 5432</text>
-<text id="txt-client-state" x="50" y="75" class="node-text-status" fill="#38d39f" text-anchor="middle">IDLE / READY</text>
+<g id="node-client" transform="translate(20, 210)">
+<rect id="rect-client" class="node-card stroke-default" width="110" height="90" rx="8" fill="url(#client-grad)" />
+<text x="55" y="30" class="node-text-title" text-anchor="middle">Client App</text>
+<text x="55" y="50" class="node-text-sub" text-anchor="middle">libpq / TCP 5432</text>
+<text id="txt-client-state" x="55" y="75" class="node-text-status" fill="#38d39f" text-anchor="middle">IDLE / READY</text>
 </g>
 
-<!-- 2. LOCAL BACKEND & MEMORY TIER -->
-<g transform="translate(190, 45)">
-<rect class="node-card" width="140" height="105" rx="8" fill="url(#process-grad)" stroke="#818cf8" />
+<!-- 2. LOCAL MEMORY TIER -->
+<g id="node-localmem" transform="translate(195, 45)">
+<rect id="rect-localmem" class="node-card" width="140" height="110" rx="8" fill="url(#process-grad)" stroke="#818cf8" />
 <text x="70" y="24" class="node-text-title" fill="#c7d2fe" text-anchor="middle">Local Memory</text>
-<text x="70" y="44" class="node-text-sub" text-anchor="middle">work_mem (4MB)</text>
-<text x="70" y="64" class="node-text-sub" text-anchor="middle">maint_work_mem (64MB)</text>
-<text x="70" y="84" class="node-text-sub" text-anchor="middle">temp_buffers (8MB)</text>
+<text x="70" y="46" class="node-text-sub" text-anchor="middle">work_mem (4MB)</text>
+<text x="70" y="68" class="node-text-sub" text-anchor="middle">maint_work_mem (64MB)</text>
+<text x="70" y="90" class="node-text-sub" text-anchor="middle">temp_buffers (8MB)</text>
 </g>
 
-<g id="node-backend" transform="translate(190, 205)">
+<!-- 3. BACKEND WORKER PROCESS -->
+<g id="node-backend" transform="translate(195, 210)">
 <rect id="rect-backend" class="node-card stroke-default" width="140" height="90" rx="8" fill="url(#process-grad)" />
 <text x="70" y="30" class="node-text-title" fill="#c7d2fe" text-anchor="middle">Backend Worker</text>
 <text x="70" y="50" class="node-text-sub" text-anchor="middle">PID: 4128 (Forked)</text>
 <text id="txt-backend-status" x="70" y="75" class="node-text-status" fill="#818cf8" text-anchor="middle">WAITING QUERY</text>
 </g>
 
-<!-- 3. SHARED MEMORY SEGMENT (GLOBAL IPC) -->
-<g transform="translate(400, 30)">
-<rect class="node-card stroke-default" width="280" height="460" rx="12" fill="url(#shmem-grad)" stroke="#38d39f" stroke-width="1.5" />
+<!-- 4. SHARED MEMORY SEGMENT (GLOBAL IPC) -->
+<g id="node-shmem" transform="translate(410, 30)">
+<rect id="rect-shmem" class="node-card stroke-default" width="280" height="470" rx="12" fill="url(#shmem-grad)" stroke="#38d39f" stroke-width="1.5" />
 <text x="140" y="26" class="node-text-title" fill="#6ee7b7" text-anchor="middle">Shared Memory (Global IPC)</text>
 <text x="140" y="42" class="node-text-sub" fill="#94a3b8" text-anchor="middle">shared_buffers = 4GB | wal_buffers = 16MB</text>
 
 <!-- Shared Buffers Sub-Card -->
-<g transform="translate(15, 60)">
-<rect width="250" height="175" rx="8" fill="#041b16" stroke="#34d399" stroke-width="1" />
+<g id="node-shared-buffers" transform="translate(15, 60)">
+<rect id="rect-shared-buffers" width="250" height="180" rx="8" fill="#041b16" stroke="#34d399" stroke-width="1" />
 <text x="125" y="22" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">Shared Buffers (8 KB Pool)</text>
 
 <!-- Buffer Page Slots -->
 <g id="buf-slot-0" transform="translate(15, 35)">
-<rect id="rect-slot-0" width="105" height="55" rx="4" fill="#0f2922" stroke="#38d39f" />
+<rect id="rect-slot-0" width="105" height="58" rx="4" fill="#0f2922" stroke="#38d39f" />
 <text x="52" y="22" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">Page 0 (Heap)</text>
-<text id="txt-slot-0" x="52" y="40" font-size="8" font-weight="600" fill="#38d39f" text-anchor="middle">CLEAN</text>
+<text id="txt-slot-0" x="52" y="42" font-size="8" font-weight="600" fill="#38d39f" text-anchor="middle">CLEAN</text>
 </g>
 
 <g id="buf-slot-1" transform="translate(130, 35)">
-<rect id="rect-slot-1" width="105" height="55" rx="4" fill="#0f2922" stroke="#38d39f" />
+<rect id="rect-slot-1" width="105" height="58" rx="4" fill="#0f2922" stroke="#38d39f" />
 <text x="52" y="22" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">Page 1 (Heap)</text>
-<text id="txt-slot-1" x="52" y="40" font-size="8" font-weight="600" fill="#38d39f" text-anchor="middle">CLEAN</text>
+<text id="txt-slot-1" x="52" y="42" font-size="8" font-weight="600" fill="#38d39f" text-anchor="middle">CLEAN</text>
 </g>
 
-<g id="buf-slot-2" transform="translate(15, 105)">
-<rect id="rect-slot-2" width="105" height="55" rx="4" fill="#0b1728" stroke="#64748b" />
+<g id="buf-slot-2" transform="translate(15, 108)">
+<rect id="rect-slot-2" width="105" height="58" rx="4" fill="#0b1728" stroke="#64748b" />
 <text x="52" y="22" font-size="9" font-weight="700" fill="#cbd5e1" text-anchor="middle">Page 2 (Heap)</text>
-<text id="txt-slot-2" x="52" y="40" font-size="8" font-weight="600" fill="#64748b" text-anchor="middle">EMPTY</text>
+<text id="txt-slot-2" x="52" y="42" font-size="8" font-weight="600" fill="#64748b" text-anchor="middle">EMPTY</text>
 </g>
 
-<g id="buf-slot-3" transform="translate(130, 105)">
-<rect id="rect-slot-3" width="105" height="55" rx="4" fill="#0f2922" stroke="#38d39f" />
+<g id="buf-slot-3" transform="translate(130, 108)">
+<rect id="rect-slot-3" width="105" height="58" rx="4" fill="#0f2922" stroke="#38d39f" />
 <text x="52" y="22" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">Page 3 (Index)</text>
-<text id="txt-slot-3" x="52" y="40" font-size="8" font-weight="600" fill="#38d39f" text-anchor="middle">CACHED</text>
+<text id="txt-slot-3" x="52" y="42" font-size="8" font-weight="600" fill="#38d39f" text-anchor="middle">CACHED</text>
 </g>
 </g>
 
 <!-- WAL Buffers Sub-Card -->
-<g transform="translate(15, 250)">
-<rect width="250" height="60" rx="8" fill="#1f1807" stroke="#fbbf24" stroke-width="1" />
+<g id="node-wal-buffers" transform="translate(15, 255)">
+<rect id="rect-wal-buffers" width="250" height="60" rx="8" fill="#1f1807" stroke="#fbbf24" stroke-width="1" />
 <text x="125" y="22" font-size="10" font-weight="700" fill="#fbbf24" text-anchor="middle">WAL Buffers (Ring Buffer)</text>
-<text id="txt-walbuf-status" x="125" y="42" font-size="8" font-weight="600" fill="#cbd5e1" text-anchor="middle">LSN: 0/16A2F40 • 0 Pending Records</text>
+<text id="txt-walbuf-status" x="125" y="44" font-size="8" font-weight="600" fill="#cbd5e1" text-anchor="middle">LSN: 0/16A2F40 • 0 Pending Records</text>
 </g>
 
 <!-- Lock Manager & ProcArray -->
-<g transform="translate(15, 325)">
-<rect width="250" height="55" rx="8" fill="#0c1d38" stroke="#60a5fa" stroke-width="1" />
+<g id="node-lock-mgr" transform="translate(15, 330)">
+<rect id="rect-lock-mgr" width="250" height="58" rx="8" fill="#0c1d38" stroke="#60a5fa" stroke-width="1" />
 <text x="125" y="22" font-size="10" font-weight="700" fill="#93c5fd" text-anchor="middle">Lock Manager &amp; ProcArray</text>
-<text x="125" y="40" font-size="8" fill="#cbd5e1" text-anchor="middle">Active Snapshots &amp; Table Locks</text>
+<text x="125" y="42" font-size="8" fill="#cbd5e1" text-anchor="middle">Active Snapshots &amp; Table Locks</text>
 </g>
 
 <!-- CLOG / pg_xact Buffer -->
-<g transform="translate(15, 395)">
-<rect width="250" height="50" rx="8" fill="#18132b" stroke="#c084fc" stroke-width="1" />
+<g id="node-clog-buf" transform="translate(15, 403)">
+<rect id="rect-clog-buf" width="250" height="52" rx="8" fill="#18132b" stroke="#c084fc" stroke-width="1" />
 <text x="125" y="20" font-size="10" font-weight="700" fill="#d8b4fe" text-anchor="middle">CLOG Buffer (pg_xact Cache)</text>
 <text id="txt-clog-status" x="125" y="38" font-size="8" font-weight="600" fill="#cbd5e1" text-anchor="middle">XID: 1002 • COMMITTED</text>
 </g>
 </g>
 
-<!-- 4. BACKGROUND PROCESSES TIER -->
-<g transform="translate(750, 30)">
+<!-- 5. BACKGROUND PROCESSES TIER -->
+<g id="node-bgwriter" transform="translate(760, 35)">
 <rect id="rect-bgwriter" class="node-card stroke-default" width="180" height="48" rx="6" fill="#0b1728" />
 <text x="90" y="20" class="node-text-title" fill="#93c5fd" text-anchor="middle">Background Writer</text>
 <text x="90" y="36" class="node-text-status" fill="#64748b" text-anchor="middle">Proactive page scrubber</text>
 </g>
 
-<g transform="translate(750, 95)">
+<g id="node-walwriter" transform="translate(760, 100)">
 <rect id="rect-walwriter" class="node-card stroke-default" width="180" height="48" rx="6" fill="#1c1607" />
 <text x="90" y="20" class="node-text-title" fill="#fde047" text-anchor="middle">WAL Writer</text>
 <text x="90" y="36" class="node-text-status" fill="#eab308" text-anchor="middle">WAL fsync engine</text>
 </g>
 
-<g transform="translate(750, 160)">
+<g id="node-checkpointer" transform="translate(760, 165)">
 <rect id="rect-checkpointer" class="node-card stroke-default" width="180" height="48" rx="6" fill="#241407" />
 <text x="90" y="20" class="node-text-title" fill="#fb923c" text-anchor="middle">Checkpointer</text>
 <text id="txt-checkpoint-status" x="90" y="36" class="node-text-status" fill="#f97316" text-anchor="middle">Syncs dirty pages to disk</text>
 </g>
 
-<g transform="translate(750, 225)">
+<g id="node-vacuum" transform="translate(760, 230)">
 <rect id="rect-vacuum" class="node-card stroke-default" width="180" height="48" rx="6" fill="#1f102e" />
 <text x="90" y="20" class="node-text-title" fill="#c084fc" text-anchor="middle">Autovacuum Worker</text>
 <text id="txt-vacuum-status" x="90" y="36" class="node-text-status" fill="#a855f7" text-anchor="middle">FSM/VM &amp; Dead tuple pruner</text>
 </g>
 
-<!-- 5. ON-DISK STORAGE TIER ($PGDATA) -->
-<g transform="translate(750, 310)">
-<rect class="node-card stroke-default" width="180" height="180" rx="10" fill="url(#disk-grad)" stroke="#f472b6" stroke-width="1.5" />
+<!-- 6. ON-DISK STORAGE TIER ($PGDATA) -->
+<g id="node-disk-tier" transform="translate(760, 305)">
+<rect id="rect-disk-tier" class="node-card stroke-default" width="180" height="195" rx="10" fill="url(#disk-grad)" stroke="#f472b6" stroke-width="1.5" />
 <text x="90" y="24" class="node-text-title" fill="#f472b6" text-anchor="middle">Storage Tier ($PGDATA)</text>
 
-<g transform="translate(10, 38)">
-<rect id="disk-base" width="160" height="30" rx="4" fill="#0f172a" stroke="#cbd5e1" stroke-width="0.8" />
-<text x="80" y="19" font-size="8" font-weight="600" fill="#cbd5e1" text-anchor="middle">base/16384/24576 (Table)</text>
+<g id="disk-row-base" transform="translate(10, 36)">
+<rect id="disk-base" width="160" height="32" rx="4" fill="#0f172a" stroke="#cbd5e1" stroke-width="0.8" />
+<text x="80" y="20" font-size="8" font-weight="600" fill="#cbd5e1" text-anchor="middle">base/16384/24576 (Table)</text>
 </g>
 
-<g transform="translate(10, 74)">
-<rect id="disk-wal" width="160" height="30" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="0.8" />
-<text x="80" y="19" font-size="8" font-weight="600" fill="#fde047" text-anchor="middle">pg_wal/000000010000... (WAL)</text>
+<g id="disk-row-wal" transform="translate(10, 74)">
+<rect id="disk-wal" width="160" height="32" rx="4" fill="#0f172a" stroke="#fbbf24" stroke-width="0.8" />
+<text x="80" y="20" font-size="8" font-weight="600" fill="#fde047" text-anchor="middle">pg_wal/000000010000... (WAL)</text>
 </g>
 
-<g transform="translate(10, 110)">
-<rect id="disk-xact" width="160" height="30" rx="4" fill="#0f172a" stroke="#c084fc" stroke-width="0.8" />
-<text x="80" y="19" font-size="8" font-weight="600" fill="#d8b4fe" text-anchor="middle">pg_xact/0000 (Commit Logs)</text>
+<g id="disk-row-xact" transform="translate(10, 112)">
+<rect id="disk-xact" width="160" height="32" rx="4" fill="#0f172a" stroke="#c084fc" stroke-width="0.8" />
+<text x="80" y="20" font-size="8" font-weight="600" fill="#d8b4fe" text-anchor="middle">pg_xact/0000 (Commit Logs)</text>
 </g>
 
-<g transform="translate(10, 144)">
-<rect id="disk-control" width="160" height="26" rx="4" fill="#0f172a" stroke="#fb923c" stroke-width="0.8" />
-<text id="txt-control-lsn" x="80" y="17" font-size="8" font-weight="700" fill="#fb923c" text-anchor="middle">pg_control [LSN: 0/16A2F40]</text>
+<g id="disk-row-control" transform="translate(10, 150)">
+<rect id="disk-control" width="160" height="30" rx="4" fill="#0f172a" stroke="#fb923c" stroke-width="0.8" />
+<text id="txt-control-lsn" x="80" y="19" font-size="8" font-weight="700" fill="#fb923c" text-anchor="middle">pg_control [LSN: 0/16A2F40]</text>
 </g>
 </g>
 </svg>
@@ -392,6 +426,9 @@ Interact with the real-time simulation below to see how client connections, work
   const logContent = document.getElementById('arch-log-content');
   const svg = document.getElementById('pg-arch-svg');
   const inspectorPanel = document.getElementById('inspector-panel');
+  const stepIndicator = document.getElementById('arch-step-indicator');
+  const stepBadge = document.getElementById('arch-step-badge');
+  const stepText = document.getElementById('arch-step-text');
 
   if (!btnQuery || !svg || !logContent) return;
 
@@ -403,13 +440,17 @@ Interact with the real-time simulation below to see how client connections, work
       const gain = audioCtx.createGain();
       osc.type = type;
       osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.025, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start();
       osc.stop(audioCtx.currentTime + duration);
     } catch(e) {}
+  }
+
+  function sleep(ms) {
+    return new Promise(function(resolve) { setTimeout(resolve, ms); });
   }
 
   let state = {
@@ -422,6 +463,22 @@ Interact with the real-time simulation below to see how client connections, work
     freeSpace: 7840
   };
 
+  function setStep(stepNum, totalSteps, title, description) {
+    if (stepIndicator && stepBadge && stepText) {
+      stepIndicator.classList.add('active-flow');
+      stepBadge.innerHTML = '<i class="fas fa-play"></i> STEP ' + stepNum + ' OF ' + totalSteps;
+      stepText.innerHTML = '<strong>' + title + ':</strong> ' + description;
+    }
+  }
+
+  function clearStep(summary) {
+    if (stepIndicator && stepBadge && stepText) {
+      stepIndicator.classList.remove('active-flow');
+      stepBadge.innerHTML = '<i class="fas fa-check-circle text-success"></i> COMPLETED';
+      stepText.innerHTML = summary || 'Action finished successfully. Ready for next command.';
+    }
+  }
+
   function log(message, type) {
     type = type || 'system';
     const timestamp = new Date().toLocaleTimeString();
@@ -430,6 +487,15 @@ Interact with the real-time simulation below to see how client connections, work
     line.innerHTML = '<span class="log-time">[' + timestamp + ']</span> ' + message;
     logContent.appendChild(line);
     logContent.scrollTop = logContent.scrollHeight;
+  }
+
+  function highlightNode(nodeId, glowClass, duration) {
+    const el = document.getElementById(nodeId);
+    if (!el) return;
+    el.classList.add('node-highlight', glowClass);
+    setTimeout(function() {
+      el.classList.remove('node-highlight', glowClass);
+    }, duration || 1200);
   }
 
   function activatePath(pathId, styleClass) {
@@ -452,7 +518,7 @@ Interact with the real-time simulation below to see how client connections, work
       }
       const pathLength = pathElement.getTotalLength();
       const packet = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      packet.setAttribute("r", "6");
+      packet.setAttribute("r", "7.5");
       packet.setAttribute("fill", color);
       packet.setAttribute("filter", "url(#glow-p)");
       svg.appendChild(packet);
@@ -505,184 +571,267 @@ Interact with the real-time simulation below to see how client connections, work
     }
   }
 
-  // 1. SELECT QUERY ACTION
+  // 1. SELECT QUERY ACTION (Slow, Smooth 4-Step Flow)
   async function handleQuery() {
     if (state.busy) return;
     state.busy = true;
-    playBeep(520, 'sine', 0.1);
-
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = true;
 
+    // Step 1: Client to Backend
+    setStep(1, 4, "Client Query Dispatch", "Client sends SQL text over TCP socket to forked Backend Worker process (PID 4128).");
+    playBeep(520, 'sine', 0.15);
+    highlightNode('rect-client', 'glow-blue', 1400);
+    highlightNode('rect-backend', 'glow-blue', 1400);
     log("Client sends query: SELECT * FROM demo_page WHERE id = 1;", "client");
     activatePath('conn-client-backend', 'active-read');
-    await animatePacket('conn-client-backend', '#38bdf8', 400);
+    await animatePacket('conn-client-backend', '#38bdf8', 1200);
     deactivatePath('conn-client-backend', 'active-read');
+    await sleep(700);
 
+    // Step 2: Backend & Local Memory
+    setStep(2, 4, "Parsing & work_mem Allocation", "Backend worker parses, plans query, and inspects local work_mem allocation.");
+    playBeep(640, 'sine', 0.15);
+    highlightNode('rect-backend', 'glow-blue', 1400);
+    highlightNode('rect-localmem', 'glow-blue', 1400);
     log("[BACKEND (PID 4128)] Query parsed, rewritten & planned. Checking local work_mem...", "backend");
     activatePath('conn-backend-localmem', 'active-read');
-    await animatePacket('conn-backend-localmem', '#818cf8', 350);
+    await animatePacket('conn-backend-localmem', '#818cf8', 1000);
     deactivatePath('conn-backend-localmem', 'active-read');
+    await sleep(700);
 
+    // Step 3: Shared Buffers Lookup / Disk Fetch
+    setStep(3, 4, "Shared Buffers Hash Lookup", "Backend searches Shared Buffers hash table. If cache miss, reads 8 KB block from disk.");
+    playBeep(720, 'sine', 0.15);
+    highlightNode('rect-backend', 'glow-green', 1400);
+    highlightNode('rect-shared-buffers', 'glow-green', 1400);
     log("[BACKEND] Checking Shared Buffers hash table for Block 0 (Heap relation 24576)...", "memory");
     activatePath('conn-backend-shmem', 'active-read');
-    await animatePacket('conn-backend-shmem', '#34d399', 400);
+    await animatePacket('conn-backend-shmem', '#34d399', 1100);
     deactivatePath('conn-backend-shmem', 'active-read');
+    await sleep(600);
 
     if (state.slot2State === 'EMPTY') {
-      log("[SHARED_BUFFERS] Buffer Cache Miss! Pinning slot 2 and requesting Block 2 from disk...", "memory");
-      activatePath('conn-backend-disk', 'active-storage');
-      await animatePacket('conn-backend-disk', '#f472b6', 700);
-      deactivatePath('conn-backend-disk', 'active-storage');
+      log("[SHARED_BUFFERS] Buffer Cache Miss! Pinning slot 2 and reading block from on-disk data file base/16384/24576...", "memory");
+      highlightNode('disk-base', 'glow-pink', 1500);
+      activatePath('conn-backend-disk', 'active-disk');
+      await animatePacket('conn-backend-disk', '#f472b6', 1400);
+      deactivatePath('conn-backend-disk', 'active-disk');
 
-      log("[STORAGE (base/)] Read 8192 bytes from disk filenode 24576 into Shared Buffers Slot 2.", "disk");
+      log("[STORAGE (base/)] 8192 bytes loaded into Shared Buffers Slot 2.", "disk");
       state.slot2State = 'PINNED';
       updateSlotUI(2, 'PINNED');
-      playBeep(700, 'triangle', 0.1);
-
-      await new Promise(function(resolve) { setTimeout(resolve, 500); });
+      playBeep(800, 'triangle', 0.15);
+      await sleep(800);
       state.slot2State = 'CLEAN';
       updateSlotUI(2, 'CLEAN');
     } else {
-      log("[SHARED_BUFFERS] Cache Hit! Page 0 found in buffer pool. Incrementing buffer usage count.", "memory");
+      log("[SHARED_BUFFERS] Cache Hit! Page 0 found in RAM. Pinning page and incrementing usage count.", "memory");
       updateSlotUI(0, 'PINNED');
-      playBeep(880, 'sine', 0.08);
-      await new Promise(function(resolve) { setTimeout(resolve, 400); });
+      playBeep(880, 'sine', 0.12);
+      await sleep(800);
       updateSlotUI(0, 'CLEAN');
     }
+    await sleep(600);
 
+    // Step 4: Result Delivery
+    setStep(4, 4, "MVCC Filtering & Result Delivery", "Backend verifies active transaction snapshot and returns tuple to Client.");
+    playBeep(920, 'sine', 0.15);
+    highlightNode('rect-backend', 'glow-green', 1300);
+    highlightNode('rect-client', 'glow-green', 1300);
     log("[BACKEND] Row versions verified with active MVCC snapshot. Returning result rows to client.", "backend");
     activatePath('conn-client-backend', 'active-read');
-    await animatePacket('conn-client-backend', '#38d39f', 400, true);
+    await animatePacket('conn-client-backend', '#38d39f', 1200, true);
     deactivatePath('conn-client-backend', 'active-read');
 
-    log("Client received 1 row in 0.42 ms.", "client");
+    log("Client received result: (id=1, name='Alice') in 0.38 ms.", "client");
+    clearStep("SELECT query finished. Buffer page pinned, verified against MVCC snapshot, and returned to client.");
+
     state.busy = false;
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = false;
   }
 
-  // 2. WRITE / UPDATE ACTION
+  // 2. WRITE / UPDATE ACTION (Slow, Smooth 5-Step Flow)
   async function handleWrite() {
     if (state.busy) return;
     state.busy = true;
-    playBeep(440, 'sine', 0.1);
-
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = true;
     state.xid++;
     state.lsnNum += 0x1000;
     const lsnHex = '0/' + state.lsnNum.toString(16).toUpperCase();
 
-    log("Client initiates transaction: UPDATE demo_page SET name = 'Alice Updated' WHERE id = 1;", "client");
+    // Step 1: Client to Backend
+    setStep(1, 5, "Client Write Transaction", "Client initiates UPDATE statement. Backend acquires RowExclusiveLock in Lock Manager.");
+    playBeep(440, 'sine', 0.15);
+    highlightNode('rect-client', 'glow-green', 1400);
+    highlightNode('rect-backend', 'glow-green', 1400);
+    log("Client initiates write: UPDATE demo_page SET name = 'Alice Updated' WHERE id = 1;", "client");
     activatePath('conn-client-backend', 'active-write');
-    await animatePacket('conn-client-backend', '#38d39f', 400);
+    await animatePacket('conn-client-backend', '#34d399', 1200);
     deactivatePath('conn-client-backend', 'active-write');
+    await sleep(800);
 
-    log("[BACKEND] Acquired RowExclusiveLock in Lock Manager. Assigned Transaction ID: " + state.xid, "backend");
-    log("[SHARED_BUFFERS] Modified Page 1 in memory. Marked Page 1 as DIRTY (Requires disk sync).", "memory");
+    // Step 2: Shared Buffers Dirtying
+    setStep(2, 5, "Buffer Modification (DIRTY Page)", "Backend writes new tuple version into Page 1 and sets buffer status to DIRTY.");
+    playBeep(330, 'sawtooth', 0.18);
+    highlightNode('rect-backend', 'glow-yellow', 1400);
+    highlightNode('rect-shared-buffers', 'glow-yellow', 1400);
+    log("[SHARED_BUFFERS] Page 1 modified in RAM. Set buffer status flag to DIRTY (BM_DIRTY = true).", "memory");
     state.slot1State = 'DIRTY';
     state.deadTuples += 64;
     state.freeSpace = Math.max(7000, state.freeSpace - 64);
     updateSlotUI(1, 'DIRTY');
-    playBeep(320, 'sawtooth', 0.15);
+    activatePath('conn-backend-shmem', 'active-write');
+    await animatePacket('conn-backend-shmem', '#34d399', 1000);
+    deactivatePath('conn-backend-shmem', 'active-write');
+    await sleep(800);
 
-    log("[WAL] Generated WAL record with LSN " + lsnHex + " staged in WAL Buffers ring.", "wal");
+    // Step 3: WAL Staging
+    setStep(3, 5, "WAL Record Staged in Memory", "Backend creates WAL record with LSN " + lsnHex + " in in-memory WAL Buffers ring.");
+    playBeep(520, 'triangle', 0.15);
+    highlightNode('rect-wal-buffers', 'glow-yellow', 1400);
     document.getElementById('txt-walbuf-status').textContent = 'LSN: ' + lsnHex + ' • 1 Pending Record';
+    log("[WAL_BUFFERS] Generated WAL change record staged in ring buffer (LSN " + lsnHex + ").", "wal");
+    await sleep(800);
 
-    log("[WAL_WRITER] WAL Writer flushed log record from memory to pg_wal/000000010000000000000001.", "wal");
-    activatePath('conn-shmem-walwriter', 'active-storage');
-    activatePath('conn-walwriter-disk', 'active-storage');
-    await animatePacket('conn-shmem-walwriter', '#fbbf24', 400);
-    await animatePacket('conn-walwriter-disk', '#fbbf24', 500);
-    deactivatePath('conn-shmem-walwriter', 'active-storage');
-    deactivatePath('conn-walwriter-disk', 'active-storage');
+    // Step 4: WALWriter Disk Sync
+    setStep(4, 5, "WALWriter Disk Sync (fsync)", "WALWriter flushes log record to physical disk (pg_wal/) to guarantee durability.");
+    playBeep(580, 'sine', 0.15);
+    highlightNode('rect-walwriter', 'glow-yellow', 1400);
+    highlightNode('disk-wal', 'glow-yellow', 1400);
+    log("[WAL_WRITER] Flushing WAL buffer to pg_wal/000000010000000000000001 and executing fsync().", "wal");
+    activatePath('conn-shmem-walwriter', 'active-wal');
+    await animatePacket('conn-shmem-walwriter', '#fbbf24', 1000);
+    deactivatePath('conn-shmem-walwriter', 'active-wal');
 
-    log("[CLOG (pg_xact)] Setting 2-bit commit flag for XID " + state.xid + " -> COMMITTED.", "memory");
+    activatePath('conn-walwriter-disk', 'active-wal');
+    await animatePacket('conn-walwriter-disk', '#fbbf24', 1100);
+    deactivatePath('conn-walwriter-disk', 'active-wal');
+    await sleep(800);
+
+    // Step 5: CLOG & Commit Ack
+    setStep(5, 5, "CLOG Commit & Client Confirmation", "Backend sets 2-bit commit flag in CLOG (pg_xact) and sends commit confirmation.");
+    playBeep(680, 'sine', 0.15);
+    highlightNode('rect-clog-buf', 'glow-purple', 1400);
+    highlightNode('rect-client', 'glow-green', 1400);
     document.getElementById('txt-clog-status').textContent = 'XID: ' + state.xid + ' • COMMITTED';
+    log("[CLOG (pg_xact)] Setting 2-bit commit flag for XID " + state.xid + " -> COMMITTED.", "memory");
 
-    log("[BACKEND] Transaction COMMITTED. Writing ack to client.", "backend");
     activatePath('conn-client-backend', 'active-write');
-    await animatePacket('conn-client-backend', '#38d39f', 400, true);
+    await animatePacket('conn-client-backend', '#38d39f', 1200, true);
     deactivatePath('conn-client-backend', 'active-write');
 
-    // Update inspector values
     document.getElementById('prop-lsn').textContent = lsnHex;
     document.getElementById('page-lsn-badge').textContent = 'LSN: ' + lsnHex;
     document.getElementById('prop-dead-count').textContent = state.deadTuples + ' bytes (Dead)';
     document.getElementById('prop-fsm').textContent = state.freeSpace + ' Bytes';
 
+    clearStep("Write transaction committed. WAL synced to pg_wal/, CLOG marked COMMITTED, and Shared Buffer Page 1 remains DIRTY until next checkpoint.");
     state.busy = false;
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = false;
   }
 
-  // 3. CHECKPOINT ACTION
+  // 3. CHECKPOINT ACTION (Slow, Smooth 4-Step Flow)
   async function handleCheckpoint() {
     if (state.busy) return;
     state.busy = true;
-    playBeep(260, 'triangle', 0.2);
-
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = true;
 
-    log("[CHECKPOINTER] Checkpoint triggered (checkpoint_timeout / explicit CHECKPOINT command).", "checkpoint");
-    log("[CHECKPOINTER] Scanning Shared Buffers for dirty pages. Found Page 1 marked DIRTY.", "checkpoint");
+    // Step 1: Checkpoint Initiated
+    setStep(1, 4, "Checkpointer Initiates Checkpoint", "Checkpointer background process wakes up on checkpoint interval or explicit command.");
+    playBeep(260, 'triangle', 0.2);
+    highlightNode('rect-checkpointer', 'glow-orange', 1400);
+    log("[CHECKPOINTER] Checkpoint orchestrator awakened. Creating checkpoint REDO barrier.", "checkpoint");
+    await sleep(800);
 
-    activatePath('conn-shmem-checkpointer', 'active-storage');
-    await animatePacket('conn-shmem-checkpointer', '#fb923c', 500);
-    deactivatePath('conn-shmem-checkpointer', 'active-storage');
+    // Step 2: Scan Dirty Buffers
+    setStep(2, 4, "Gathering Dirty Pages", "Checkpointer scans Shared Buffers and marks dirty Page 1 for writing.");
+    playBeep(380, 'sine', 0.15);
+    highlightNode('rect-shared-buffers', 'glow-orange', 1400);
+    highlightNode('rect-checkpointer', 'glow-orange', 1400);
+    log("[CHECKPOINTER] Scanning Shared Buffers. Identified dirty Page 1 scheduled for disk flush.", "checkpoint");
+    activatePath('conn-shmem-checkpointer', 'active-checkpoint');
+    await animatePacket('conn-shmem-checkpointer', '#fb923c', 1100);
+    deactivatePath('conn-shmem-checkpointer', 'active-checkpoint');
+    await sleep(800);
 
-    log("[CHECKPOINTER] Writing dirty Page 1 to disk: base/16384/24576 and issuing fsync().", "disk");
-    activatePath('conn-checkpointer-disk', 'active-storage');
-    await animatePacket('conn-checkpointer-disk', '#f472b6', 600);
-    deactivatePath('conn-checkpointer-disk', 'active-storage');
+    // Step 3: Flush to Table Storage
+    setStep(3, 4, "Disk Flush (base/ filenode)", "Checkpointer writes dirty Page 1 into base/16384/24576 and issues fsync().");
+    playBeep(480, 'sine', 0.15);
+    highlightNode('disk-base', 'glow-orange', 1400);
+    log("[CHECKPOINTER] Writing dirty Page 1 to disk: base/16384/24576 and issuing kernel fsync().", "disk");
+    activatePath('conn-checkpointer-disk', 'active-checkpoint');
+    await animatePacket('conn-checkpointer-disk', '#fb923c', 1200);
+    deactivatePath('conn-checkpointer-disk', 'active-checkpoint');
 
     state.slot1State = 'CLEAN';
     updateSlotUI(1, 'CLEAN');
     playBeep(650, 'sine', 0.15);
+    await sleep(800);
 
+    // Step 4: Synchronize pg_control
     const lsnHex = '0/' + state.lsnNum.toString(16).toUpperCase();
-    log("[CHECKPOINTER] Updating pg_control with new Checkpoint LSN: " + lsnHex + " (REDO Point synchronized).", "checkpoint");
+    setStep(4, 4, "Synchronize pg_control", "Checkpointer writes the latest Checkpoint LSN (" + lsnHex + ") into pg_control.");
+    playBeep(560, 'triangle', 0.15);
+    highlightNode('disk-control', 'glow-orange', 1400);
     document.getElementById('txt-control-lsn').textContent = 'pg_control [LSN: ' + lsnHex + ']';
     document.getElementById('txt-walbuf-status').textContent = 'LSN: ' + lsnHex + ' • 0 Pending Records';
+    log("[CHECKPOINTER] Checkpoint completed. Updated pg_control with synchronized REDO point: " + lsnHex, "checkpoint");
 
-    log("[CHECKPOINTER] Checkpoint completed successfully. All dirty shared buffers flushed to disk.", "checkpoint");
-
+    clearStep("Checkpoint completed. All dirty shared buffers flushed to disk, and pg_control updated.");
     state.busy = false;
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = false;
   }
 
-  // 4. AUTOVACUUM ACTION
+  // 4. AUTOVACUUM ACTION (Slow, Smooth 4-Step Flow)
   async function handleVacuum() {
     if (state.busy) return;
     state.busy = true;
-    playBeep(350, 'sine', 0.15);
-
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = true;
 
+    // Step 1: Autovacuum Spawned
+    setStep(1, 4, "Autovacuum Worker Spawned", "Autovacuum launcher spawns dedicated worker process for table 'demo_page'.");
+    playBeep(350, 'sine', 0.15);
+    highlightNode('rect-vacuum', 'glow-purple', 1400);
     log("[AUTOVACUUM] Autovacuum worker started for relation 'demo_page' (filenode 24576).", "vacuum");
-    log("[AUTOVACUUM] Scanning heap blocks for dead row versions generated by UPDATEs...", "vacuum");
+    await sleep(800);
 
-    activatePath('conn-vacuum-shmem', 'active-pubsub');
-    await animatePacket('conn-vacuum-shmem', '#c084fc', 500);
-    deactivatePath('conn-vacuum-shmem', 'active-pubsub');
+    // Step 2: Scan Heap & Detect Dead Tuples
+    setStep(2, 4, "Scanning 8 KB Heap Blocks", "Worker scans Shared Buffers and table pages to identify obsolete dead row versions.");
+    playBeep(450, 'sine', 0.15);
+    highlightNode('rect-shared-buffers', 'glow-purple', 1400);
+    highlightNode('rect-vacuum', 'glow-purple', 1400);
+    log("[AUTOVACUUM] Scanning heap blocks for dead row versions created by UPDATE statements...", "vacuum");
+    activatePath('conn-vacuum-shmem', 'active-vacuum');
+    await animatePacket('conn-vacuum-shmem', '#c084fc', 1100);
+    deactivatePath('conn-vacuum-shmem', 'active-vacuum');
+    await sleep(800);
 
+    // Step 3: Defragment Page
+    setStep(3, 4, "Pruning Dead Tuples & Compacting", "Worker prunes dead tuple slots and defragments the 8 KB page.");
+    playBeep(580, 'sine', 0.15);
     if (state.deadTuples > 0) {
-      log("[AUTOVACUUM] Pruned " + state.deadTuples + " bytes of dead tuples. Defragmenting 8 KB block.", "vacuum");
+      log("[AUTOVACUUM] Pruned " + state.deadTuples + " bytes of dead tuples. Reclaiming free space.", "vacuum");
       state.freeSpace += state.deadTuples;
       state.deadTuples = 0;
     } else {
-      log("[AUTOVACUUM] No dead tuples found. Free space already optimal.", "vacuum");
+      log("[AUTOVACUUM] Zero dead tuples found. Free space already optimal.", "vacuum");
     }
+    await sleep(800);
 
-    log("[AUTOVACUUM] Updating Free Space Map (24576_fsm) and Visibility Map (24576_vm).", "vacuum");
-    activatePath('conn-vacuum-disk', 'active-storage');
-    await animatePacket('conn-vacuum-disk', '#c084fc', 500);
-    deactivatePath('conn-vacuum-disk', 'active-storage');
+    // Step 4: Update FSM & VM
+    setStep(4, 4, "Update Free Space & Visibility Maps", "Worker updates 24576_fsm (Free Space Map) and 24576_vm (Visibility Map).");
+    playBeep(680, 'sine', 0.15);
+    highlightNode('disk-base', 'glow-purple', 1400);
+    log("[AUTOVACUUM] Writing updated block metrics to Free Space Map (_fsm) and Visibility Map (_vm).", "vacuum");
+    activatePath('conn-vacuum-disk', 'active-vacuum');
+    await animatePacket('conn-vacuum-disk', '#c084fc', 1100);
+    deactivatePath('conn-vacuum-disk', 'active-vacuum');
 
-    playBeep(580, 'sine', 0.15);
     document.getElementById('prop-dead-count').textContent = '0 bytes (Clean)';
     document.getElementById('prop-fsm').textContent = state.freeSpace + ' Bytes (Optimal)';
     document.getElementById('prop-vm').textContent = 'All-Visible: TRUE';
 
-    log("[AUTOVACUUM] Vacuum finished. Table visibility map set to All-Visible (Index-Only Scans enabled).", "vacuum");
-
+    clearStep("Autovacuum finished. Dead row versions pruned, FSM updated, and Visibility Map set to All-Visible for Index-Only Scans.");
     state.busy = false;
     btnQuery.disabled = btnWrite.disabled = btnCheckpoint.disabled = btnVacuum.disabled = false;
   }
@@ -730,6 +879,7 @@ Interact with the real-time simulation below to see how client connections, work
     document.getElementById('prop-dead-count').textContent = '0 bytes';
     document.getElementById('prop-fsm').textContent = '7840 Bytes (95%)';
 
+    clearStep("Cluster architecture and buffer pool reset to initial baseline state.");
     log("[POSTMASTER] Cluster state and shared buffer pool reset to initial baseline.", "system");
   }
 
